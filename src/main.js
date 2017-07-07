@@ -10,6 +10,10 @@ import $ from 'jquery';
 import VueResource from 'vue-resource';
 import VeeValidate, { Validator } from 'vee-validate';
 import messages from './assets/js/zh_CN';
+// 引入echarts
+import echarts from 'echarts';
+
+Vue.prototype.$echarts = echarts;
 
 Validator.updateDictionary({
   zh_CN: {
