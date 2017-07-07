@@ -160,7 +160,7 @@
               <p>与会人员：</p>
             </div></el-col>
             <el-col :span="21"><div>
-              <el-select class="block" v-model="publishmeeting.spgParticipants" multiple filterable placeholder="请选择">
+              <el-select class="block" v-model="person" multiple filterable placeholder="请选择">
                 <el-option-group
                   v-for="group in allPerson"
                   :key="group.depname"
@@ -267,7 +267,7 @@
       <div class="issue_sub" v-show="show_first">
         <div class="btn">
           <el-row class="el_row">
-            <el-col :span="4"><div><el-button class="el_btn" type="primary" @click="test">下一步</el-button></div></el-col>
+            <el-col :span="4"><div><el-button class="el_btn" type="primary" @click="next">下一步</el-button></div></el-col>
           </el-row>
         </div>
       </div>
@@ -444,7 +444,6 @@
             }],
           value: '',
           value7: [],
-          person: [], // 安排酒店的人员
           people: [],  // 会务人员
           value5: [],
           phone: '',
@@ -576,6 +575,7 @@
             }
           ], // 工作首页会议列表
           allPerson: [], //  全部人员
+          person: [],  //  所选与会人
           //  发布-编辑会议的json
           publishmeeting: {
             meetingName: '贝投科技年度表彰大会',
@@ -664,22 +664,23 @@
 
       watch: {
         // 只要 meeting.person 改变，这个函数就会执行
-        meeting: {
+        publishmeeting: {
           handler: function() {
-            console.log(this.meeting.person);
-            //  选人数据传递
-            let personLength = this.meeting.person.length;
-            let length = this.person.length;
-            this.person.splice(0, length);
-            for (let i = 0; i < personLength; i++) {
-              let newPerson = {label: this.meeting.person[i]};
-              this.person.push(newPerson);
-            }
+            console.log('监听1');
+//            console.log(this.meeting.person);
+//            //  选人数据传递
+//            let personLength = this.meeting.person.length;
+//            let length = this.person.length;
+//            this.person.splice(0, length);
+//            for (let i = 0; i < personLength; i++) {
+//              let newPerson = {label: this.meeting.person[i]};
+//              this.person.push(newPerson);
+//            }
             //   手机号验证
-            let people = this.meeting.people;
+            let people = this.publishmeeting.spgConferenceStaffs;
             let number = people.length;
             for (let i = 0; i < number; i++) {
-              let phone = people[i].phone;
+              let phone = people[i].phoneNumber;
               let length = phone.length;
               if (length > 10) {
                 let myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
@@ -692,6 +693,26 @@
             }
           },
           deep: true
+        },
+        person: {
+          handler: function() {
+            console.log('监听2');
+            //  选择人员ID  与门店匹配
+            let allPerson = this.allPerson;
+            let length = allPerson.length;
+            let choosePerson = this.person;
+            for (let x = 0; x < choosePerson.length; x++) {
+              for (let i = 0; i < length; i++) {
+                for (let y = 0; y < allPerson[i].sysUnits.length; y++) {
+                  if (allPerson[i].sysUnits[y].parid === choosePerson[x]) {
+                    this.publishmeeting.spgParticipants[x] = {parid: choosePerson[x], belongsShop: allPerson[i].depname};
+                    console.log(this.publishmeeting);
+                    console.log(this.person);
+                  }
+                }
+              }
+            }
+          }
         }
       },
 
@@ -717,7 +738,7 @@
           }
         },
         test() {
-          console.log(this.publishmeeting);
+          console.log(this.publishmeeting.spgConferenceStaffs[2].phoneNumber.length);
         },
         addStep() { // 添加日程 按钮
           console.log(this.publishmeeting.spgPrograms);
@@ -774,6 +795,7 @@
             console.log('startTime');
           } else if (!this.check(this.publishmeeting.endTime)) {
             //  没填会议结束时间
+            console.log('endTime');
           } else if (this.publishmeeting.spgParticipants.length === 0) {
             //  没选择人员
             console.log('person');
@@ -833,7 +855,7 @@
           let sch = value;
           let num = 0;
           for (let i = 0; i < sch.length; i++) {
-            if (sch[i].stime !== '' && sch[i].etime !== '' && sch[i].name !== '' && sch[i].address !== '') {
+            if (sch[i].startTime !== '' && sch[i].endTime !== '' && sch[i].programName !== '' && sch[i].programAddress !== '') {
               num = num + 1;
             }
           }
@@ -847,7 +869,7 @@
           let hotel = value;
           let num = 0;
           for (let i = 0; i < hotel.length; i++) {
-            if (hotel[i].name !== '' && hotel[i].address !== '') {
+            if (hotel[i].hotelName !== '' && hotel[i].hotelAddress !== '') {
               num = num + 1;
             }
           }
@@ -861,7 +883,7 @@
           let people = value;
           let num = 0;
           for (let i = 0; i < people.length; i++) {
-            if (people[i].name !== '' && people[i].phone.length > 10 && people[i].remark !== '') {
+            if (people[i].name !== '' && people[i].phoneNumber.length > 10 && people[i].remarks !== '') {
               num = num + 1;
             }
           }
