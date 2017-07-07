@@ -1,0 +1,130 @@
+{
+  "returnCode": "B0000",
+  "message": "sucess",
+  "date": "2017-07-05 16:38:31",
+  "result": {
+    "meeting": {
+      "meetingId": "1",
+      "meetingName": "集团1季度总结大会",
+      "startTime": "2017-06-26 10:00",
+      "endTime": "2017-06-28 10:00",
+      "meetingRequest": "可能下雨,自备雨伞",
+      "spgParticipants": [
+        {
+          "parciId": "1",
+          "userId": 530,
+          "meetingId": "1",
+          "belongsArea": null,
+          "belongsShop": "广州分公司",
+          "phoneNumber": null,
+          "remarks": null
+        },
+        {
+          "parciId": "2",
+          "userId": 543,
+          "meetingId": "1",
+          "belongsArea": null,
+          "belongsShop": "广州分公司",
+          "phoneNumber": null,
+          "remarks": null
+        }
+      ],
+      "spgPrograms": [
+        {
+          "programId": "1",
+          "meetingId": "1",
+          "programName": "晚餐",
+          "startTime": "2017-06-26 20:00",
+          "endTime": "2017-06-26 22:00",
+          "programAddress": "滨江凯旋大酒店",
+          "remarks": "请带好身份证"
+        },
+        {
+          "programId": "2",
+          "meetingId": "1",
+          "programName": "会议",
+          "startTime": "2017-06-27 10:00",
+          "endTime": "2017-06-27 12:00",
+          "programAddress": "万银国际会议中心",
+          "remarks": "请带好入场牌"
+        },
+        {
+          "programId": "3",
+          "meetingId": "1",
+          "programName": "总结会议",
+          "startTime": "2017-06-27 16:00",
+          "endTime": "2017-06-27 18:00",
+          "programAddress": "万象国际会展中心",
+          "remarks": "请做好笔记"
+        },
+        {
+          "programId": "4",
+          "meetingId": "1",
+          "programName": "离场",
+          "startTime": "2017-06-28 10:00",
+          "endTime": "2017-06-28 10:00",
+          "programAddress": "珂卡夫总部大楼前",
+          "remarks": "请带好行李,准备离场"
+        }
+      ],
+      "spgHotels": [
+        {
+          "hotelId": "1",
+          "meetingId": "1",
+          "hotelName": "如家",
+          "hotelAddress": "民心路12号"
+        },
+        {
+          "hotelId": "2",
+          "meetingId": "1",
+          "hotelName": "7天",
+          "hotelAddress": "江锦路20号"
+        }
+      ],
+      "spgConferenceStaffs": [
+        {
+          "cfId": "1",
+          "meetingId": "1",
+          "name": "玉米汁",
+          "phoneNumber": "1234567890",
+          "remarks": "晚餐"
+        },
+        {
+          "cfId": "2",
+          "meetingId": "1",
+          "name": "候雨晨",
+          "phoneNumber": "1234567890",
+          "remarks": "会议"
+        },
+        {
+          "cfId": "3",
+          "meetingId": "1",
+          "name": "玉米汁",
+          "phoneNumber": "1234567890",
+          "remarks": "总结会议"
+        },
+        {
+          "cfId": "4",
+          "meetingId": "1",
+          "name": "何立峰",
+          "phoneNumber": "1234567890",
+          "remarks": "离场"
+        },
+        {
+          "cfId": "5",
+          "meetingId": "1",
+          "name": "陈诚",
+          "phoneNumber": "1234567890",
+          "remarks": "如家"
+        },
+        {
+          "cfId": "6",
+          "meetingId": "1",
+          "name": "陈诚",
+          "phoneNumber": "1234567890",
+          "remarks": "7天"
+        }
+      ]
+    }
+  }
+}

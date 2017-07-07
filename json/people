@@ -1,0 +1,5836 @@
+{
+    "returnCode": "B0000",
+    "message": "sucess",
+    "date": "2017-07-07 10:59:02",
+    "result": {
+        "participants": [
+            {
+                "depid": 152,
+                "depname": "杭州何文广",
+                "sysUnits": [
+                    {
+                        "parid": 153,
+                        "jbonum": "2001AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 154,
+                "depname": "半山毛叶根",
+                "sysUnits": [
+                    {
+                        "parid": 155,
+                        "jbonum": "2002AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 156,
+                "depname": "萧山许雅刘",
+                "sysUnits": [
+                    {
+                        "parid": 157,
+                        "jbonum": "2003AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 158,
+                "depname": "临平张小华",
+                "sysUnits": [
+                    {
+                        "parid": 159,
+                        "jbonum": "2004AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 160,
+                "depname": "萧山方小姐",
+                "sysUnits": [
+                    {
+                        "parid": 161,
+                        "jbonum": "2005AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 162,
+                "depname": "长兴余爱云",
+                "sysUnits": [
+                    {
+                        "parid": 163,
+                        "jbonum": "2006AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 164,
+                "depname": "南湖林美丹",
+                "sysUnits": [
+                    {
+                        "parid": 165,
+                        "jbonum": "2007AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 166,
+                "depname": "高新吴仪",
+                "sysUnits": [
+                    {
+                        "parid": 167,
+                        "jbonum": "2008AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 168,
+                "depname": "象山袁丽红",
+                "sysUnits": [
+                    {
+                        "parid": 169,
+                        "jbonum": "2009AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 170,
+                "depname": "慈溪冯妙恩",
+                "sysUnits": [
+                    {
+                        "parid": 171,
+                        "jbonum": "2010AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 172,
+                "depname": "余姚陈红梅",
+                "sysUnits": [
+                    {
+                        "parid": 173,
+                        "jbonum": "2011AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 174,
+                "depname": "诸暨吴宝贵",
+                "sysUnits": [
+                    {
+                        "parid": 175,
+                        "jbonum": "2012AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 176,
+                "depname": "路桥蒋先生",
+                "sysUnits": [
+                    {
+                        "parid": 177,
+                        "jbonum": "2013AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 178,
+                "depname": "乐清黄淑芳",
+                "sysUnits": [
+                    {
+                        "parid": 179,
+                        "jbonum": "2014AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 180,
+                "depname": "义乌余东平",
+                "sysUnits": [
+                    {
+                        "parid": 181,
+                        "jbonum": "2015AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 182,
+                "depname": "桥下阿敏",
+                "sysUnits": [
+                    {
+                        "parid": 183,
+                        "jbonum": "2016AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 184,
+                "depname": "新桥黄国和",
+                "sysUnits": [
+                    {
+                        "parid": 185,
+                        "jbonum": "2017AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 186,
+                "depname": "龙湾朱晓光",
+                "sysUnits": [
+                    {
+                        "parid": 187,
+                        "jbonum": "2018AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 188,
+                "depname": "龙湾龚继华",
+                "sysUnits": [
+                    {
+                        "parid": 189,
+                        "jbonum": "2019AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 397,
+                "depname": "广州分公司",
+                "sysUnits": [
+                    {
+                        "parid": 450,
+                        "jbonum": "FGD06102",
+                        "uname": "陈燕丽"
+                    },
+                    {
+                        "parid": 1570,
+                        "jbonum": "FGD06803",
+                        "uname": "邱超连"
+                    },
+                    {
+                        "parid": 1558,
+                        "jbonum": "FGD07403",
+                        "uname": "张朝红"
+                    },
+                    {
+                        "parid": 1563,
+                        "jbonum": "FGD06001",
+                        "uname": "李菲菲"
+                    },
+                    {
+                        "parid": 1555,
+                        "jbonum": "FGD07504",
+                        "uname": "陈建莲"
+                    },
+                    {
+                        "parid": 429,
+                        "jbonum": "FGD01902",
+                        "uname": "凌英"
+                    },
+                    {
+                        "parid": 398,
+                        "jbonum": "FGD001",
+                        "uname": "潘次锐"
+                    },
+                    {
+                        "parid": 510,
+                        "jbonum": "FGD03803",
+                        "uname": "黎朝洪"
+                    },
+                    {
+                        "parid": 1565,
+                        "jbonum": "FGD07801",
+                        "uname": "蔡碧霞"
+                    },
+                    {
+                        "parid": 1585,
+                        "jbonum": "FGD06405",
+                        "uname": "蔡柳芳"
+                    },
+                    {
+                        "parid": 424,
+                        "jbonum": "FGD01901",
+                        "uname": "谭思敏"
+                    },
+                    {
+                        "parid": 1569,
+                        "jbonum": "FGD06802",
+                        "uname": "狄燕丽"
+                    },
+                    {
+                        "parid": 527,
+                        "jbonum": "FGD05101",
+                        "uname": "谢小静"
+                    },
+                    {
+                        "parid": 543,
+                        "jbonum": "FGD07303",
+                        "uname": "黄惠娇"
+                    },
+                    {
+                        "parid": 530,
+                        "jbonum": "FGD05103",
+                        "uname": "陈文玉"
+                    },
+                    {
+                        "parid": 405,
+                        "jbonum": "2004A",
+                        "uname": "珠海"
+                    },
+                    {
+                        "parid": 579,
+                        "jbonum": "FGD05903",
+                        "uname": "苏静怡"
+                    },
+                    {
+                        "parid": 504,
+                        "jbonum": "FGD01802",
+                        "uname": "区小珍"
+                    },
+                    {
+                        "parid": 519,
+                        "jbonum": "FGD03201",
+                        "uname": "姚志金"
+                    },
+                    {
+                        "parid": 560,
+                        "jbonum": "FGD06301",
+                        "uname": "胡海霞"
+                    },
+                    {
+                        "parid": 479,
+                        "jbonum": "FGD05504",
+                        "uname": "张雯娜"
+                    },
+                    {
+                        "parid": 1591,
+                        "jbonum": "FGD01006",
+                        "uname": "张耀尹"
+                    },
+                    {
+                        "parid": 1539,
+                        "jbonum": "GDSP03",
+                        "uname": "南亚珍"
+                    },
+                    {
+                        "parid": 610,
+                        "jbonum": "FGD05204",
+                        "uname": "陈均珍"
+                    },
+                    {
+                        "parid": 439,
+                        "jbonum": "FGD01909",
+                        "uname": "杨毛琼"
+                    },
+                    {
+                        "parid": 426,
+                        "jbonum": "3013AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 404,
+                        "jbonum": "3003AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 1654,
+                        "jbonum": "FGD01913",
+                        "uname": "郑思敏"
+                    },
+                    {
+                        "parid": 488,
+                        "jbonum": "FGD04404",
+                        "uname": "李叶玲"
+                    },
+                    {
+                        "parid": 468,
+                        "jbonum": "FGD05401",
+                        "uname": "吴秀兰"
+                    },
+                    {
+                        "parid": 1651,
+                        "jbonum": "FGD03008",
+                        "uname": "零勤爱"
+                    },
+                    {
+                        "parid": 495,
+                        "jbonum": "FGD02404",
+                        "uname": "陈景翠"
+                    },
+                    {
+                        "parid": 1518,
+                        "jbonum": "GDCW03",
+                        "uname": "罗金平"
+                    },
+                    {
+                        "parid": 1670,
+                        "jbonum": "FGD05408",
+                        "uname": "陈换发"
+                    },
+                    {
+                        "parid": 415,
+                        "jbonum": "3008AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 602,
+                        "jbonum": "FGD05301",
+                        "uname": "肖文霞"
+                    },
+                    {
+                        "parid": 549,
+                        "jbonum": "FGD05703",
+                        "uname": "蓝子萍"
+                    },
+                    {
+                        "parid": 568,
+                        "jbonum": "FGD06304",
+                        "uname": "韩丽"
+                    },
+                    {
+                        "parid": 400,
+                        "jbonum": "3001AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 473,
+                        "jbonum": "FGD05405",
+                        "uname": "崔明云"
+                    },
+                    {
+                        "parid": 1508,
+                        "jbonum": "FGDCWB",
+                        "uname": "财务部"
+                    },
+                    {
+                        "parid": 1553,
+                        "jbonum": "FGD07502",
+                        "uname": "蓝子萍"
+                    },
+                    {
+                        "parid": 484,
+                        "jbonum": "FGD07004",
+                        "uname": "邝淑君"
+                    },
+                    {
+                        "parid": 474,
+                        "jbonum": "FGD05406",
+                        "uname": "梁爱珍"
+                    },
+                    {
+                        "parid": 1579,
+                        "jbonum": "FGD07604",
+                        "uname": "刘燕"
+                    },
+                    {
+                        "parid": 1650,
+                        "jbonum": "FGD05107",
+                        "uname": "彭姣"
+                    },
+                    {
+                        "parid": 1709,
+                        "jbonum": "FGD03809",
+                        "uname": "彭淑芳"
+                    },
+                    {
+                        "parid": 428,
+                        "jbonum": "3014AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 1572,
+                        "jbonum": "FGD07005",
+                        "uname": "宋春苗"
+                    },
+                    {
+                        "parid": 475,
+                        "jbonum": "FGD05407",
+                        "uname": "黄俊梅"
+                    },
+                    {
+                        "parid": 1506,
+                        "jbonum": "FGDQDB",
+                        "uname": "渠道部"
+                    },
+                    {
+                        "parid": 1560,
+                        "jbonum": "FGD07405",
+                        "uname": "曾秋秋"
+                    },
+                    {
+                        "parid": 409,
+                        "jbonum": "2006A",
+                        "uname": "佛山"
+                    },
+                    {
+                        "parid": 526,
+                        "jbonum": "FGD02104",
+                        "uname": "刘美娟"
+                    },
+                    {
+                        "parid": 529,
+                        "jbonum": "FGD05102",
+                        "uname": "赵玲艳"
+                    },
+                    {
+                        "parid": 550,
+                        "jbonum": "FGD05704",
+                        "uname": "覃彩虹"
+                    },
+                    {
+                        "parid": 1571,
+                        "jbonum": "FGD06804",
+                        "uname": "吴锦玲"
+                    },
+                    {
+                        "parid": 557,
+                        "jbonum": "FGD05004",
+                        "uname": "刘霞"
+                    },
+                    {
+                        "parid": 1592,
+                        "jbonum": "FGD05707",
+                        "uname": "杨彩云"
+                    },
+                    {
+                        "parid": 1703,
+                        "jbonum": "FGD07105",
+                        "uname": "孙阳阳"
+                    },
+                    {
+                        "parid": 1517,
+                        "jbonum": "GDCW02",
+                        "uname": "李秋韵"
+                    },
+                    {
+                        "parid": 544,
+                        "jbonum": "FGD07304",
+                        "uname": "鲁江艳"
+                    },
+                    {
+                        "parid": 434,
+                        "jbonum": "FGD01904",
+                        "uname": "刘心怡"
+                    },
+                    {
+                        "parid": 1552,
+                        "jbonum": "FGD07501",
+                        "uname": "莫业娜"
+                    },
+                    {
+                        "parid": 401,
+                        "jbonum": "2002A",
+                        "uname": "深圳"
+                    },
+                    {
+                        "parid": 1577,
+                        "jbonum": "FGD07602",
+                        "uname": "骆弟维"
+                    },
+                    {
+                        "parid": 592,
+                        "jbonum": "FGD02903",
+                        "uname": "龚红梅"
+                    },
+                    {
+                        "parid": 1516,
+                        "jbonum": "GDCW01",
+                        "uname": "陈锦荣"
+                    },
+                    {
+                        "parid": 1541,
+                        "jbonum": "GDYY01",
+                        "uname": "陈丽清"
+                    },
+                    {
+                        "parid": 1556,
+                        "jbonum": "FGD07401",
+                        "uname": "张霞"
+                    },
+                    {
+                        "parid": 503,
+                        "jbonum": "FGD01801",
+                        "uname": "刘艳婷"
+                    },
+                    {
+                        "parid": 1704,
+                        "jbonum": "FGD07901",
+                        "uname": "李菲菲"
+                    },
+                    {
+                        "parid": 538,
+                        "jbonum": "FGD07202",
+                        "uname": "张金玲"
+                    },
+                    {
+                        "parid": 593,
+                        "jbonum": "FGD01601",
+                        "uname": "陈帆"
+                    },
+                    {
+                        "parid": 1647,
+                        "jbonum": "FGD05006",
+                        "uname": "廖明娟"
+                    },
+                    {
+                        "parid": 1599,
+                        "jbonum": "FGD01912",
+                        "uname": "魏彩峰"
+                    },
+                    {
+                        "parid": 604,
+                        "jbonum": "FGD05302",
+                        "uname": "蒋雪梅"
+                    },
+                    {
+                        "parid": 423,
+                        "jbonum": "3012AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 441,
+                        "jbonum": "FGD05801",
+                        "uname": "施丁文"
+                    },
+                    {
+                        "parid": 1671,
+                        "jbonum": "FGD07406",
+                        "uname": "麦萍"
+                    },
+                    {
+                        "parid": 524,
+                        "jbonum": "FGD02102",
+                        "uname": "冯银卿"
+                    },
+                    {
+                        "parid": 435,
+                        "jbonum": "FGD01905",
+                        "uname": "严雯欣"
+                    },
+                    {
+                        "parid": 1652,
+                        "jbonum": "FGD06705",
+                        "uname": "何霞"
+                    },
+                    {
+                        "parid": 536,
+                        "jbonum": "FGD06704",
+                        "uname": "袁志飞"
+                    },
+                    {
+                        "parid": 1595,
+                        "jbonum": "FGD06504",
+                        "uname": "晏彧晴"
+                    },
+                    {
+                        "parid": 609,
+                        "jbonum": "FGD05203",
+                        "uname": "赵姨"
+                    },
+                    {
+                        "parid": 570,
+                        "jbonum": "FGD06306",
+                        "uname": "张新敏"
+                    },
+                    {
+                        "parid": 547,
+                        "jbonum": "FGD05701",
+                        "uname": "邓冬梅"
+                    },
+                    {
+                        "parid": 408,
+                        "jbonum": "3005AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 1536,
+                        "jbonum": "GDJL01",
+                        "uname": "魏刚"
+                    },
+                    {
+                        "parid": 425,
+                        "jbonum": "2013A",
+                        "uname": "韶关"
+                    },
+                    {
+                        "parid": 443,
+                        "jbonum": "FGD05802",
+                        "uname": "李彩霞"
+                    },
+                    {
+                        "parid": 449,
+                        "jbonum": "FGD06101",
+                        "uname": "尹小艳"
+                    },
+                    {
+                        "parid": 1557,
+                        "jbonum": "FGD07402",
+                        "uname": "戴芳元"
+                    },
+                    {
+                        "parid": 512,
+                        "jbonum": "FGD03805",
+                        "uname": "陈慧晶"
+                    },
+                    {
+                        "parid": 515,
+                        "jbonum": "FGD03703",
+                        "uname": "陈玲"
+                    },
+                    {
+                        "parid": 514,
+                        "jbonum": "FGD03702",
+                        "uname": "米珍兰"
+                    },
+                    {
+                        "parid": 556,
+                        "jbonum": "FGD05003",
+                        "uname": "阳小丹"
+                    },
+                    {
+                        "parid": 516,
+                        "jbonum": "FGD03704",
+                        "uname": "董小瑜"
+                    },
+                    {
+                        "parid": 431,
+                        "jbonum": "2015A",
+                        "uname": "汕头"
+                    },
+                    {
+                        "parid": 1768,
+                        "jbonum": "2198730564",
+                        "uname": "贝友科技"
+                    },
+                    {
+                        "parid": 588,
+                        "jbonum": "FGD03005",
+                        "uname": "周小军"
+                    },
+                    {
+                        "parid": 1575,
+                        "jbonum": "FGD01605",
+                        "uname": "李芙蓉"
+                    },
+                    {
+                        "parid": 407,
+                        "jbonum": "2005A",
+                        "uname": "肇庆"
+                    },
+                    {
+                        "parid": 478,
+                        "jbonum": "FGD05503",
+                        "uname": "黄连玉"
+                    },
+                    {
+                        "parid": 1561,
+                        "jbonum": "FGD05904",
+                        "uname": "袁泽芳"
+                    },
+                    {
+                        "parid": 1707,
+                        "jbonum": "FGD03807",
+                        "uname": "张冬菊"
+                    },
+                    {
+                        "parid": 1596,
+                        "jbonum": "FGD03006",
+                        "uname": "冯润娇"
+                    },
+                    {
+                        "parid": 402,
+                        "jbonum": "3002AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 1543,
+                        "jbonum": "GDYY03",
+                        "uname": "廖家羽"
+                    },
+                    {
+                        "parid": 1548,
+                        "jbonum": "FGDW05",
+                        "uname": "广州中转仓"
+                    },
+                    {
+                        "parid": 471,
+                        "jbonum": "FGD05403",
+                        "uname": "苏小兰"
+                    },
+                    {
+                        "parid": 1576,
+                        "jbonum": "FGD07601",
+                        "uname": "龙革嫦"
+                    },
+                    {
+                        "parid": 1538,
+                        "jbonum": "GDSP02",
+                        "uname": "何婷"
+                    },
+                    {
+                        "parid": 542,
+                        "jbonum": "FGD07302",
+                        "uname": "陈颜蓉"
+                    },
+                    {
+                        "parid": 617,
+                        "jbonum": "FGD07103",
+                        "uname": "吴彩虹"
+                    },
+                    {
+                        "parid": 584,
+                        "jbonum": "FGD03003",
+                        "uname": "廖家羽"
+                    },
+                    {
+                        "parid": 615,
+                        "jbonum": "FGD07101",
+                        "uname": "吴观连"
+                    },
+                    {
+                        "parid": 1564,
+                        "jbonum": "FGD07701",
+                        "uname": "丁淡芸"
+                    },
+                    {
+                        "parid": 1573,
+                        "jbonum": "FGD06805",
+                        "uname": "宋春苗"
+                    },
+                    {
+                        "parid": 1545,
+                        "jbonum": "FGDW02",
+                        "uname": "广州次品仓"
+                    },
+                    {
+                        "parid": 548,
+                        "jbonum": "FGD05702",
+                        "uname": "莫业娜"
+                    },
+                    {
+                        "parid": 1587,
+                        "jbonum": "FGD06407",
+                        "uname": "何育华"
+                    },
+                    {
+                        "parid": 1562,
+                        "jbonum": "FGD05905",
+                        "uname": "粟超玲"
+                    },
+                    {
+                        "parid": 1583,
+                        "jbonum": "FGD06403",
+                        "uname": "陶雪梅"
+                    },
+                    {
+                        "parid": 520,
+                        "jbonum": "FGD03202",
+                        "uname": "汪树珍"
+                    },
+                    {
+                        "parid": 1600,
+                        "jbonum": "FGD05906",
+                        "uname": "林思敏"
+                    },
+                    {
+                        "parid": 448,
+                        "jbonum": "FGD05806",
+                        "uname": "覃桂菊"
+                    },
+                    {
+                        "parid": 1657,
+                        "jbonum": "FGD05807",
+                        "uname": "郭丽萍"
+                    },
+                    {
+                        "parid": 1505,
+                        "jbonum": "FGDSPB",
+                        "uname": "商品部"
+                    },
+                    {
+                        "parid": 411,
+                        "jbonum": "2007A",
+                        "uname": "清远"
+                    },
+                    {
+                        "parid": 555,
+                        "jbonum": "FGD05002",
+                        "uname": "熊湘湘"
+                    },
+                    {
+                        "parid": 498,
+                        "jbonum": "FGD06203",
+                        "uname": "朱秀芬"
+                    },
+                    {
+                        "parid": 499,
+                        "jbonum": "FGD06204",
+                        "uname": "陆水有"
+                    },
+                    {
+                        "parid": 416,
+                        "jbonum": "2009A",
+                        "uname": "惠州"
+                    },
+                    {
+                        "parid": 1653,
+                        "jbonum": "FGD05708",
+                        "uname": "陈海燕"
+                    },
+                    {
+                        "parid": 558,
+                        "jbonum": "FGD05005",
+                        "uname": "黄海霞"
+                    },
+                    {
+                        "parid": 1648,
+                        "jbonum": "FGD07104",
+                        "uname": "刘小清"
+                    },
+                    {
+                        "parid": 399,
+                        "jbonum": "2001A",
+                        "uname": "广州"
+                    },
+                    {
+                        "parid": 1708,
+                        "jbonum": "FGD03808",
+                        "uname": "张燕"
+                    },
+                    {
+                        "parid": 525,
+                        "jbonum": "FGD02103",
+                        "uname": "韩瑞燕"
+                    },
+                    {
+                        "parid": 534,
+                        "jbonum": "FGD06702",
+                        "uname": "冯秋菊"
+                    },
+                    {
+                        "parid": 508,
+                        "jbonum": "FGD03802",
+                        "uname": "李妹少"
+                    },
+                    {
+                        "parid": 436,
+                        "jbonum": "FGD01906",
+                        "uname": "但浩英"
+                    },
+                    {
+                        "parid": 540,
+                        "jbonum": "FGD07301",
+                        "uname": "赵素珍"
+                    },
+                    {
+                        "parid": 573,
+                        "jbonum": "FGD06502",
+                        "uname": "叶嘉慧"
+                    },
+                    {
+                        "parid": 420,
+                        "jbonum": "2011A",
+                        "uname": "潮州"
+                    },
+                    {
+                        "parid": 403,
+                        "jbonum": "2003A",
+                        "uname": "东莞"
+                    },
+                    {
+                        "parid": 506,
+                        "jbonum": "FGD01804",
+                        "uname": "李根英"
+                    },
+                    {
+                        "parid": 614,
+                        "jbonum": "FGD06603",
+                        "uname": "林冬晴"
+                    },
+                    {
+                        "parid": 1532,
+                        "jbonum": "FGDRSB",
+                        "uname": "人事部"
+                    },
+                    {
+                        "parid": 600,
+                        "jbonum": "FGD01003",
+                        "uname": "陈彩云"
+                    },
+                    {
+                        "parid": 451,
+                        "jbonum": "FGD06103",
+                        "uname": "林志姗"
+                    },
+                    {
+                        "parid": 553,
+                        "jbonum": "FGD05706",
+                        "uname": "李兴玲"
+                    },
+                    {
+                        "parid": 421,
+                        "jbonum": "3011AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 1542,
+                        "jbonum": "GDYY02",
+                        "uname": "彭珍珍"
+                    },
+                    {
+                        "parid": 417,
+                        "jbonum": "3009AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 531,
+                        "jbonum": "FGD05104",
+                        "uname": "吴秀连"
+                    },
+                    {
+                        "parid": 412,
+                        "jbonum": "3007AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 446,
+                        "jbonum": "FGD05805",
+                        "uname": "李永秋"
+                    },
+                    {
+                        "parid": 1656,
+                        "jbonum": "FGD05305",
+                        "uname": "梁玉玲"
+                    },
+                    {
+                        "parid": 1559,
+                        "jbonum": "FGD07404",
+                        "uname": "农葵"
+                    },
+                    {
+                        "parid": 598,
+                        "jbonum": "FGD01002",
+                        "uname": "林少红"
+                    },
+                    {
+                        "parid": 1589,
+                        "jbonum": "FGD05105",
+                        "uname": "黄淑娟"
+                    },
+                    {
+                        "parid": 606,
+                        "jbonum": "FGD05304",
+                        "uname": "罗素爽"
+                    },
+                    {
+                        "parid": 418,
+                        "jbonum": "2010A",
+                        "uname": "河源"
+                    },
+                    {
+                        "parid": 589,
+                        "jbonum": "FGD02901",
+                        "uname": "林文红"
+                    },
+                    {
+                        "parid": 472,
+                        "jbonum": "FGD05404",
+                        "uname": "夏敏怡"
+                    },
+                    {
+                        "parid": 476,
+                        "jbonum": "FGD05501",
+                        "uname": "王连芳"
+                    },
+                    {
+                        "parid": 1662,
+                        "jbonum": "FGD06107",
+                        "uname": "朱流华"
+                    },
+                    {
+                        "parid": 1540,
+                        "jbonum": "GDSP04",
+                        "uname": "王新莲"
+                    },
+                    {
+                        "parid": 586,
+                        "jbonum": "FGD03001",
+                        "uname": "蓝桂红"
+                    },
+                    {
+                        "parid": 1519,
+                        "jbonum": "GDSP01",
+                        "uname": "夏娟"
+                    },
+                    {
+                        "parid": 571,
+                        "jbonum": "FGD06501",
+                        "uname": "陈建华"
+                    },
+                    {
+                        "parid": 438,
+                        "jbonum": "FGD01908",
+                        "uname": "王丽丹"
+                    },
+                    {
+                        "parid": 1533,
+                        "jbonum": "GDQD02",
+                        "uname": "王世明"
+                    },
+                    {
+                        "parid": 1686,
+                        "jbonum": "GDYY05",
+                        "uname": "但浩英"
+                    },
+                    {
+                        "parid": 612,
+                        "jbonum": "FGD06602",
+                        "uname": "吴若珊"
+                    },
+                    {
+                        "parid": 494,
+                        "jbonum": "FGD02403",
+                        "uname": "张小凤"
+                    },
+                    {
+                        "parid": 480,
+                        "jbonum": "FGD07001",
+                        "uname": "曾燕美"
+                    },
+                    {
+                        "parid": 422,
+                        "jbonum": "2012A",
+                        "uname": "茂名"
+                    },
+                    {
+                        "parid": 497,
+                        "jbonum": "FGD06202",
+                        "uname": "蒋焕珍"
+                    },
+                    {
+                        "parid": 1507,
+                        "jbonum": "FGDYYB",
+                        "uname": "营运部"
+                    },
+                    {
+                        "parid": 554,
+                        "jbonum": "FGD05001",
+                        "uname": "叶婷"
+                    },
+                    {
+                        "parid": 406,
+                        "jbonum": "3004AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 469,
+                        "jbonum": "FGD05402",
+                        "uname": "桂红梅"
+                    },
+                    {
+                        "parid": 1580,
+                        "jbonum": "FGD07605",
+                        "uname": "张巧云"
+                    },
+                    {
+                        "parid": 427,
+                        "jbonum": "2014A",
+                        "uname": "湛江"
+                    },
+                    {
+                        "parid": 414,
+                        "jbonum": "2008A",
+                        "uname": "中山"
+                    },
+                    {
+                        "parid": 1522,
+                        "jbonum": "GDYY04",
+                        "uname": "唐海燕"
+                    },
+                    {
+                        "parid": 444,
+                        "jbonum": "FGD05803",
+                        "uname": "庄苏南"
+                    },
+                    {
+                        "parid": 1660,
+                        "jbonum": "FGD05505",
+                        "uname": "黄建平"
+                    },
+                    {
+                        "parid": 493,
+                        "jbonum": "FGD02402",
+                        "uname": "禤宇玲"
+                    },
+                    {
+                        "parid": 496,
+                        "jbonum": "FGD06201",
+                        "uname": "李海霞"
+                    },
+                    {
+                        "parid": 574,
+                        "jbonum": "FGD06503",
+                        "uname": "钟颖欣"
+                    },
+                    {
+                        "parid": 1554,
+                        "jbonum": "FGD07503",
+                        "uname": "覃彩虹"
+                    },
+                    {
+                        "parid": 1582,
+                        "jbonum": "FGD06402",
+                        "uname": "张巧云"
+                    },
+                    {
+                        "parid": 486,
+                        "jbonum": "FGD04402",
+                        "uname": "谢敏瑜"
+                    },
+                    {
+                        "parid": 440,
+                        "jbonum": "FGD01910",
+                        "uname": "李华华"
+                    },
+                    {
+                        "parid": 1521,
+                        "jbonum": "GDWL01",
+                        "uname": "许伟"
+                    },
+                    {
+                        "parid": 611,
+                        "jbonum": "FGD06601",
+                        "uname": "韦作琴"
+                    },
+                    {
+                        "parid": 505,
+                        "jbonum": "FGD01803",
+                        "uname": "潘先旭"
+                    },
+                    {
+                        "parid": 587,
+                        "jbonum": "FGD03004",
+                        "uname": "洪赛金"
+                    },
+                    {
+                        "parid": 419,
+                        "jbonum": "3010AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 1590,
+                        "jbonum": "FGD01005",
+                        "uname": "陈思"
+                    },
+                    {
+                        "parid": 452,
+                        "jbonum": "FGD06104",
+                        "uname": "谢金玲"
+                    },
+                    {
+                        "parid": 601,
+                        "jbonum": "FGD01008",
+                        "uname": "刘玉梅"
+                    },
+                    {
+                        "parid": 576,
+                        "jbonum": "FGD05901",
+                        "uname": "刘洁英"
+                    },
+                    {
+                        "parid": 539,
+                        "jbonum": "FGD07203",
+                        "uname": "胡燕玲"
+                    },
+                    {
+                        "parid": 578,
+                        "jbonum": "FGD05902",
+                        "uname": "张淑丽"
+                    },
+                    {
+                        "parid": 552,
+                        "jbonum": "FGD05705",
+                        "uname": "郭康玲"
+                    },
+                    {
+                        "parid": 608,
+                        "jbonum": "FGD05202",
+                        "uname": "陆胜姬"
+                    },
+                    {
+                        "parid": 1568,
+                        "jbonum": "FGD06801",
+                        "uname": "张永升"
+                    },
+                    {
+                        "parid": 1535,
+                        "jbonum": "GDRS01",
+                        "uname": "陈春燕"
+                    },
+                    {
+                        "parid": 1520,
+                        "jbonum": "GDQD01",
+                        "uname": "郭鹏"
+                    },
+                    {
+                        "parid": 437,
+                        "jbonum": "FGD01907",
+                        "uname": "张伟蓉"
+                    },
+                    {
+                        "parid": 605,
+                        "jbonum": "FGD05303",
+                        "uname": "范巧霞"
+                    },
+                    {
+                        "parid": 569,
+                        "jbonum": "FGD06305",
+                        "uname": "黄桃英"
+                    },
+                    {
+                        "parid": 1510,
+                        "jbonum": "FGDWLB",
+                        "uname": "物流部"
+                    },
+                    {
+                        "parid": 1594,
+                        "jbonum": "FGD03806",
+                        "uname": "欧建平"
+                    },
+                    {
+                        "parid": 1509,
+                        "jbonum": "FGDXXB",
+                        "uname": "信息部"
+                    },
+                    {
+                        "parid": 597,
+                        "jbonum": "FGD01001",
+                        "uname": "甘君珊"
+                    },
+                    {
+                        "parid": 537,
+                        "jbonum": "FGD07201",
+                        "uname": "王雪芹"
+                    },
+                    {
+                        "parid": 607,
+                        "jbonum": "FGD05201",
+                        "uname": "田新华"
+                    },
+                    {
+                        "parid": 445,
+                        "jbonum": "FGD05804",
+                        "uname": "谢雨欣"
+                    },
+                    {
+                        "parid": 1649,
+                        "jbonum": "FGD05106",
+                        "uname": "袁肖"
+                    },
+                    {
+                        "parid": 511,
+                        "jbonum": "FGD03804",
+                        "uname": "陈丽娟"
+                    },
+                    {
+                        "parid": 1593,
+                        "jbonum": "FGD02904",
+                        "uname": "邓红梅"
+                    },
+                    {
+                        "parid": 483,
+                        "jbonum": "FGD07003",
+                        "uname": "匡艳"
+                    },
+                    {
+                        "parid": 1584,
+                        "jbonum": "FGD06404",
+                        "uname": "毛晓喜"
+                    },
+                    {
+                        "parid": 1566,
+                        "jbonum": "FGD07802",
+                        "uname": "冯润娇"
+                    },
+                    {
+                        "parid": 1547,
+                        "jbonum": "FGDW03",
+                        "uname": "广州礼品仓"
+                    },
+                    {
+                        "parid": 1586,
+                        "jbonum": "FGD06406",
+                        "uname": "周慧华"
+                    },
+                    {
+                        "parid": 410,
+                        "jbonum": "3006AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 562,
+                        "jbonum": "FGD06303",
+                        "uname": "王亭"
+                    },
+                    {
+                        "parid": 1537,
+                        "jbonum": "GDJL02",
+                        "uname": "王荀"
+                    },
+                    {
+                        "parid": 585,
+                        "jbonum": "FGD03002",
+                        "uname": "刘青新"
+                    },
+                    {
+                        "parid": 545,
+                        "jbonum": "FGD07305",
+                        "uname": "侯红琴"
+                    },
+                    {
+                        "parid": 594,
+                        "jbonum": "FGD01602",
+                        "uname": "陈心英"
+                    },
+                    {
+                        "parid": 1574,
+                        "jbonum": "FGD02405",
+                        "uname": "何舒琦"
+                    },
+                    {
+                        "parid": 1597,
+                        "jbonum": "FGD03007",
+                        "uname": "朱小云"
+                    },
+                    {
+                        "parid": 532,
+                        "jbonum": "FGD06701",
+                        "uname": "徐伟"
+                    },
+                    {
+                        "parid": 1550,
+                        "jbonum": "FGDW06",
+                        "uname": "广州样板仓"
+                    },
+                    {
+                        "parid": 595,
+                        "jbonum": "FGD01603",
+                        "uname": "丘鲜凤"
+                    },
+                    {
+                        "parid": 1504,
+                        "jbonum": "FGDZJB",
+                        "uname": "经理办"
+                    },
+                    {
+                        "parid": 492,
+                        "jbonum": "FGD02401",
+                        "uname": "龙文静"
+                    },
+                    {
+                        "parid": 1581,
+                        "jbonum": "FGD06401",
+                        "uname": "肖雪秀"
+                    },
+                    {
+                        "parid": 501,
+                        "jbonum": "FGD06205",
+                        "uname": "高金妹"
+                    },
+                    {
+                        "parid": 1514,
+                        "jbonum": "10008FGDW01",
+                        "uname": "广州正品仓"
+                    },
+                    {
+                        "parid": 616,
+                        "jbonum": "FGD07102",
+                        "uname": "熊梦婷"
+                    },
+                    {
+                        "parid": 1767,
+                        "jbonum": "157012026",
+                        "uname": "admzsp"
+                    },
+                    {
+                        "parid": 1567,
+                        "jbonum": "FGD07803",
+                        "uname": "刘青新"
+                    },
+                    {
+                        "parid": 1661,
+                        "jbonum": "FGD06106",
+                        "uname": "杨燕平"
+                    },
+                    {
+                        "parid": 507,
+                        "jbonum": "FGD03801",
+                        "uname": "张思园"
+                    },
+                    {
+                        "parid": 1685,
+                        "jbonum": "FGD06604",
+                        "uname": "古小芳"
+                    },
+                    {
+                        "parid": 487,
+                        "jbonum": "FGD04403",
+                        "uname": "高钰瑛"
+                    },
+                    {
+                        "parid": 513,
+                        "jbonum": "FGD03701",
+                        "uname": "蒋大琼"
+                    },
+                    {
+                        "parid": 477,
+                        "jbonum": "FGD05502",
+                        "uname": "何杏葵"
+                    },
+                    {
+                        "parid": 523,
+                        "jbonum": "FGD02101",
+                        "uname": "马潺"
+                    },
+                    {
+                        "parid": 430,
+                        "jbonum": "FGD01903",
+                        "uname": "严霏雯"
+                    },
+                    {
+                        "parid": 1672,
+                        "jbonum": "FGD01914",
+                        "uname": "王裕玲"
+                    },
+                    {
+                        "parid": 1534,
+                        "jbonum": "GDWL02",
+                        "uname": "彭碧霞"
+                    },
+                    {
+                        "parid": 1578,
+                        "jbonum": "FGD07603",
+                        "uname": "杨壹辉"
+                    },
+                    {
+                        "parid": 596,
+                        "jbonum": "FGD01604",
+                        "uname": "谢嘉欣"
+                    },
+                    {
+                        "parid": 591,
+                        "jbonum": "FGD02902",
+                        "uname": "叶剑萍"
+                    },
+                    {
+                        "parid": 1598,
+                        "jbonum": "FGD01911",
+                        "uname": "郑思婷"
+                    },
+                    {
+                        "parid": 1710,
+                        "jbonum": "FGD06706",
+                        "uname": "张肖杰"
+                    },
+                    {
+                        "parid": 1546,
+                        "jbonum": "FGDW04",
+                        "uname": "广州电脑仓"
+                    },
+                    {
+                        "parid": 1588,
+                        "jbonum": "FGD06307",
+                        "uname": "罗琳"
+                    },
+                    {
+                        "parid": 453,
+                        "jbonum": "FGD06105",
+                        "uname": "莫冰文"
+                    },
+                    {
+                        "parid": 522,
+                        "jbonum": "FGD03203",
+                        "uname": "胡笑依"
+                    },
+                    {
+                        "parid": 485,
+                        "jbonum": "FGD04401",
+                        "uname": "陈洁仪"
+                    },
+                    {
+                        "parid": 481,
+                        "jbonum": "FGD07002",
+                        "uname": "谢润霞"
+                    },
+                    {
+                        "parid": 432,
+                        "jbonum": "3015AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 535,
+                        "jbonum": "FGD06703",
+                        "uname": "王庆"
+                    },
+                    {
+                        "parid": 561,
+                        "jbonum": "FGD06302",
+                        "uname": "朱丽君"
+                    }
+                ]
+            },
+            {
+                "depid": 1,
+                "depname": "贝友运营",
+                "sysUnits": [
+                    {
+                        "parid": 18,
+                        "jbonum": "HQ002",
+                        "uname": "HQ002"
+                    },
+                    {
+                        "parid": 1727,
+                        "jbonum": "HQW01",
+                        "uname": "HQW01"
+                    },
+                    {
+                        "parid": 1712,
+                        "jbonum": "HQ003",
+                        "uname": "HQ003"
+                    },
+                    {
+                        "parid": 2,
+                        "jbonum": "HQ001",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 19,
+                "depname": "珂卡芙",
+                "sysUnits": [
+                    {
+                        "parid": 700,
+                        "jbonum": "ZPP001",
+                        "uname": "张俊杰"
+                    },
+                    {
+                        "parid": 1641,
+                        "jbonum": "ZCW010",
+                        "uname": "黄盈盈"
+                    },
+                    {
+                        "parid": 1627,
+                        "jbonum": "ZSM002",
+                        "uname": "扫描员"
+                    },
+                    {
+                        "parid": 1625,
+                        "jbonum": "ZXS002",
+                        "uname": "李明珠"
+                    },
+                    {
+                        "parid": 1635,
+                        "jbonum": "ZCW030",
+                        "uname": "尹庆海"
+                    },
+                    {
+                        "parid": 1629,
+                        "jbonum": "ZGY-3",
+                        "uname": "条码组"
+                    },
+                    {
+                        "parid": 28,
+                        "jbonum": "ZDQ",
+                        "uname": "大区"
+                    },
+                    {
+                        "parid": 1638,
+                        "jbonum": "ZCW033",
+                        "uname": "苏思思"
+                    },
+                    {
+                        "parid": 680,
+                        "jbonum": "ZGY",
+                        "uname": "供应链部"
+                    },
+                    {
+                        "parid": 710,
+                        "jbonum": "Z00007",
+                        "uname": "总部-温州外购仓"
+                    },
+                    {
+                        "parid": 706,
+                        "jbonum": "JJO",
+                        "uname": "蒋总"
+                    },
+                    {
+                        "parid": 1642,
+                        "jbonum": "ZCW011",
+                        "uname": "乐海娟"
+                    },
+                    {
+                        "parid": 25,
+                        "jbonum": "Z00001",
+                        "uname": "总部-成品仓"
+                    },
+                    {
+                        "parid": 704,
+                        "jbonum": "ZSP002",
+                        "uname": "姜蓉蓉"
+                    },
+                    {
+                        "parid": 24,
+                        "jbonum": "ZXX",
+                        "uname": "信息中心"
+                    },
+                    {
+                        "parid": 705,
+                        "jbonum": "ZCB",
+                        "uname": "总裁办"
+                    },
+                    {
+                        "parid": 1515,
+                        "jbonum": "ZXX010",
+                        "uname": "栾家宏"
+                    },
+                    {
+                        "parid": 31,
+                        "jbonum": "ZXX006",
+                        "uname": "胡恩厚"
+                    },
+                    {
+                        "parid": 1628,
+                        "jbonum": "ZXX004",
+                        "uname": "刘威"
+                    },
+                    {
+                        "parid": 676,
+                        "jbonum": "ZSP",
+                        "uname": "商品部"
+                    },
+                    {
+                        "parid": 36,
+                        "jbonum": "ZXX008",
+                        "uname": "沈奇奥"
+                    },
+                    {
+                        "parid": 1640,
+                        "jbonum": "ZCW027",
+                        "uname": "齐竹容"
+                    },
+                    {
+                        "parid": 1800,
+                        "jbonum": "chencheng1604",
+                        "uname": "陈诚"
+                    },
+                    {
+                        "parid": 709,
+                        "jbonum": "Z00006",
+                        "uname": "总部-办公用品仓"
+                    },
+                    {
+                        "parid": 1503,
+                        "jbonum": "ZGY-2",
+                        "uname": "订单组"
+                    },
+                    {
+                        "parid": 1501,
+                        "jbonum": "ZWL001",
+                        "uname": "彭永忠"
+                    },
+                    {
+                        "parid": 708,
+                        "jbonum": "Z00005",
+                        "uname": "总部-电脑仓"
+                    },
+                    {
+                        "parid": 703,
+                        "jbonum": "ZSP001",
+                        "uname": "吴桂梅"
+                    },
+                    {
+                        "parid": 1502,
+                        "jbonum": "ZGY-1",
+                        "uname": "物流组"
+                    },
+                    {
+                        "parid": 702,
+                        "jbonum": "ZJB001",
+                        "uname": "丁洪虎"
+                    },
+                    {
+                        "parid": 33,
+                        "jbonum": "ZXX005",
+                        "uname": "颜克平"
+                    },
+                    {
+                        "parid": 20,
+                        "jbonum": "10008001",
+                        "uname": "郑书鹏"
+                    },
+                    {
+                        "parid": 39,
+                        "jbonum": "Z00003",
+                        "uname": "总部-礼品仓"
+                    },
+                    {
+                        "parid": 1643,
+                        "jbonum": "ZJC",
+                        "uname": "稽查部"
+                    },
+                    {
+                        "parid": 1630,
+                        "jbonum": "ZXX-1",
+                        "uname": "应用维护部"
+                    },
+                    {
+                        "parid": 29,
+                        "jbonum": "ZCW",
+                        "uname": "财务中心"
+                    },
+                    {
+                        "parid": 34,
+                        "jbonum": "ZXX012",
+                        "uname": "李敏"
+                    },
+                    {
+                        "parid": 712,
+                        "jbonum": "Z00009",
+                        "uname": "总部-广州外购仓"
+                    },
+                    {
+                        "parid": 715,
+                        "jbonum": "Z00017",
+                        "uname": "总部-中转仓"
+                    },
+                    {
+                        "parid": 677,
+                        "jbonum": "ZYY",
+                        "uname": "营运部"
+                    },
+                    {
+                        "parid": 698,
+                        "jbonum": "ZGY001",
+                        "uname": "林小蓉"
+                    },
+                    {
+                        "parid": 714,
+                        "jbonum": "Z00015",
+                        "uname": "总部-退货仓"
+                    },
+                    {
+                        "parid": 30,
+                        "jbonum": "ZRL",
+                        "uname": "人力资源中心"
+                    },
+                    {
+                        "parid": 1637,
+                        "jbonum": "ZCW008",
+                        "uname": "林选选"
+                    },
+                    {
+                        "parid": 1636,
+                        "jbonum": "ZCW036",
+                        "uname": "王加盛"
+                    },
+                    {
+                        "parid": 1639,
+                        "jbonum": "ZCW035",
+                        "uname": "陈慧"
+                    },
+                    {
+                        "parid": 697,
+                        "jbonum": "DGY",
+                        "uname": "导购员"
+                    },
+                    {
+                        "parid": 675,
+                        "jbonum": "ZJB",
+                        "uname": "营销总经办"
+                    },
+                    {
+                        "parid": 1644,
+                        "jbonum": "ZJB003",
+                        "uname": "魏金熠"
+                    },
+                    {
+                        "parid": 23,
+                        "jbonum": "ZXX000",
+                        "uname": "季克芳"
+                    },
+                    {
+                        "parid": 679,
+                        "jbonum": "ZPP",
+                        "uname": "品牌部"
+                    },
+                    {
+                        "parid": 713,
+                        "jbonum": "Z00010",
+                        "uname": "总部-广州皮具仓"
+                    },
+                    {
+                        "parid": 1631,
+                        "jbonum": "ZGY-4",
+                        "uname": "扫描组"
+                    },
+                    {
+                        "parid": 1624,
+                        "jbonum": "ZXS005",
+                        "uname": "沈梦妙"
+                    },
+                    {
+                        "parid": 1500,
+                        "jbonum": "ZGY002",
+                        "uname": "林碧石"
+                    },
+                    {
+                        "parid": 699,
+                        "jbonum": "ZRL001",
+                        "uname": "王甜烨"
+                    },
+                    {
+                        "parid": 37,
+                        "jbonum": "ZXX003",
+                        "uname": "叶月呈"
+                    },
+                    {
+                        "parid": 1634,
+                        "jbonum": "ZCW-2",
+                        "uname": "生产财务部"
+                    },
+                    {
+                        "parid": 38,
+                        "jbonum": "Z00002",
+                        "uname": "自产次品仓"
+                    },
+                    {
+                        "parid": 1626,
+                        "jbonum": "ZSM001",
+                        "uname": "谢新容"
+                    },
+                    {
+                        "parid": 22,
+                        "jbonum": "DZ",
+                        "uname": "店长"
+                    },
+                    {
+                        "parid": 1632,
+                        "jbonum": "ZCW032",
+                        "uname": "朱伟"
+                    },
+                    {
+                        "parid": 678,
+                        "jbonum": "ZQD",
+                        "uname": "渠道部"
+                    },
+                    {
+                        "parid": 1633,
+                        "jbonum": "ZCW-1",
+                        "uname": "营销财务部"
+                    },
+                    {
+                        "parid": 707,
+                        "jbonum": "Z00004",
+                        "uname": "总部-货柜仓"
+                    },
+                    {
+                        "parid": 35,
+                        "jbonum": "ZXX013",
+                        "uname": "范会会"
+                    },
+                    {
+                        "parid": 711,
+                        "jbonum": "Z00008",
+                        "uname": "总部-成都外购仓"
+                    },
+                    {
+                        "parid": 701,
+                        "jbonum": "ZQD002",
+                        "uname": "李学能"
+                    }
+                ]
+            },
+            {
+                "depid": 26,
+                "depname": "杭州分公司",
+                "sysUnits": [
+                    {
+                        "parid": 379,
+                        "jbonum": "WZ011",
+                        "uname": "王文玲"
+                    },
+                    {
+                        "parid": 306,
+                        "jbonum": "EHZ07701",
+                        "uname": "廖颖"
+                    },
+                    {
+                        "parid": 86,
+                        "jbonum": "1006AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 41,
+                        "jbonum": "1001AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 251,
+                        "jbonum": "EHZ05301",
+                        "uname": "李娜娜"
+                    },
+                    {
+                        "parid": 311,
+                        "jbonum": "EHZ07601",
+                        "uname": "吴雪琴"
+                    },
+                    {
+                        "parid": 90,
+                        "jbonum": "1008AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 249,
+                        "jbonum": "EHZ05201",
+                        "uname": "李雪琴"
+                    },
+                    {
+                        "parid": 358,
+                        "jbonum": "EHZ09002",
+                        "uname": "杨丽仙"
+                    },
+                    {
+                        "parid": 345,
+                        "jbonum": "EHZ08702",
+                        "uname": "武小亮"
+                    },
+                    {
+                        "parid": 365,
+                        "jbonum": "WZ001",
+                        "uname": "张钦沁"
+                    },
+                    {
+                        "parid": 304,
+                        "jbonum": "EHZ07505",
+                        "uname": "姚文英"
+                    },
+                    {
+                        "parid": 231,
+                        "jbonum": "EHZ04006",
+                        "uname": "徐子越"
+                    },
+                    {
+                        "parid": 299,
+                        "jbonum": "EHZ07404",
+                        "uname": "李文娇"
+                    },
+                    {
+                        "parid": 89,
+                        "jbonum": "1008A",
+                        "uname": "嘉兴"
+                    },
+                    {
+                        "parid": 256,
+                        "jbonum": "EHZ01002",
+                        "uname": "来玲玲"
+                    },
+                    {
+                        "parid": 371,
+                        "jbonum": "WZ042",
+                        "uname": "戴陈双"
+                    },
+                    {
+                        "parid": 284,
+                        "jbonum": "EHZ06802",
+                        "uname": "陈雪华"
+                    },
+                    {
+                        "parid": 396,
+                        "jbonum": "EHZ08402",
+                        "uname": "左艳梅"
+                    },
+                    {
+                        "parid": 268,
+                        "jbonum": "EHZ06001",
+                        "uname": "祝玲"
+                    },
+                    {
+                        "parid": 27,
+                        "jbonum": "EHZ001AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 367,
+                        "jbonum": "WZ098",
+                        "uname": "夏方芳"
+                    },
+                    {
+                        "parid": 82,
+                        "jbonum": "EHZ02",
+                        "uname": "杭州档口仓"
+                    },
+                    {
+                        "parid": 288,
+                        "jbonum": "EHZ06902",
+                        "uname": "李凤凤"
+                    },
+                    {
+                        "parid": 244,
+                        "jbonum": "EHZ04802",
+                        "uname": "杜倩"
+                    },
+                    {
+                        "parid": 242,
+                        "jbonum": "EHZ04404",
+                        "uname": "刘晶"
+                    },
+                    {
+                        "parid": 228,
+                        "jbonum": "EHZ04002",
+                        "uname": "董洁"
+                    },
+                    {
+                        "parid": 303,
+                        "jbonum": "EHZ07504",
+                        "uname": "杨芹"
+                    },
+                    {
+                        "parid": 248,
+                        "jbonum": "EHZ05004",
+                        "uname": "文金玉"
+                    },
+                    {
+                        "parid": 389,
+                        "jbonum": "WZ095",
+                        "uname": "李会"
+                    },
+                    {
+                        "parid": 280,
+                        "jbonum": "EHZ06601",
+                        "uname": "蒋雪华"
+                    },
+                    {
+                        "parid": 333,
+                        "jbonum": "EHZ08204",
+                        "uname": "刘艳"
+                    },
+                    {
+                        "parid": 354,
+                        "jbonum": "EHZ08902",
+                        "uname": "张小丽"
+                    },
+                    {
+                        "parid": 243,
+                        "jbonum": "EHZ04801",
+                        "uname": "蔡梦飞"
+                    },
+                    {
+                        "parid": 222,
+                        "jbonum": "EHZ02101",
+                        "uname": "王玉敏"
+                    },
+                    {
+                        "parid": 349,
+                        "jbonum": "EHZ08803",
+                        "uname": "孙艳丽"
+                    },
+                    {
+                        "parid": 292,
+                        "jbonum": "EHZ07103",
+                        "uname": "何一"
+                    },
+                    {
+                        "parid": 355,
+                        "jbonum": "EHZ08903",
+                        "uname": "贾文文"
+                    },
+                    {
+                        "parid": 338,
+                        "jbonum": "EHZ08501",
+                        "uname": "薛亚男"
+                    },
+                    {
+                        "parid": 271,
+                        "jbonum": "EHZ06201",
+                        "uname": "施慧"
+                    },
+                    {
+                        "parid": 298,
+                        "jbonum": "EHZ07403",
+                        "uname": "文祖霞"
+                    },
+                    {
+                        "parid": 224,
+                        "jbonum": "EHZ02103",
+                        "uname": "石伟丽"
+                    },
+                    {
+                        "parid": 310,
+                        "jbonum": "EHZ07705",
+                        "uname": "高粉粉"
+                    },
+                    {
+                        "parid": 267,
+                        "jbonum": "EHZ05803",
+                        "uname": "蒋秋兰"
+                    },
+                    {
+                        "parid": 43,
+                        "jbonum": "1002AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 230,
+                        "jbonum": "EHZ04005",
+                        "uname": "赵敏敏"
+                    },
+                    {
+                        "parid": 392,
+                        "jbonum": "HZ626",
+                        "uname": "杨季"
+                    },
+                    {
+                        "parid": 326,
+                        "jbonum": "EHZ08003",
+                        "uname": "肖玲玲"
+                    },
+                    {
+                        "parid": 393,
+                        "jbonum": "WZ104",
+                        "uname": "朱允"
+                    },
+                    {
+                        "parid": 339,
+                        "jbonum": "EHZ08502",
+                        "uname": "朱潇潇"
+                    },
+                    {
+                        "parid": 283,
+                        "jbonum": "EHZ06801",
+                        "uname": "姜军铃"
+                    },
+                    {
+                        "parid": 49,
+                        "jbonum": "1005AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 296,
+                        "jbonum": "EHZ07401",
+                        "uname": "梁瑞峰"
+                    },
+                    {
+                        "parid": 370,
+                        "jbonum": "WZ093",
+                        "uname": "李慧慧"
+                    },
+                    {
+                        "parid": 273,
+                        "jbonum": "EHZ06203",
+                        "uname": "肖仕美"
+                    },
+                    {
+                        "parid": 309,
+                        "jbonum": "EHZ07704",
+                        "uname": "张永霞"
+                    },
+                    {
+                        "parid": 359,
+                        "jbonum": "HZ613",
+                        "uname": "李春井"
+                    },
+                    {
+                        "parid": 319,
+                        "jbonum": "EHZ07802",
+                        "uname": "王志娟"
+                    },
+                    {
+                        "parid": 343,
+                        "jbonum": "EHZ08604",
+                        "uname": "朱霞"
+                    },
+                    {
+                        "parid": 318,
+                        "jbonum": "EHZ07801",
+                        "uname": "宋晴晴"
+                    },
+                    {
+                        "parid": 312,
+                        "jbonum": "EHZ07602",
+                        "uname": "严丹"
+                    },
+                    {
+                        "parid": 269,
+                        "jbonum": "EHZ06002",
+                        "uname": "范树杰"
+                    },
+                    {
+                        "parid": 253,
+                        "jbonum": "EHZ04701",
+                        "uname": "胡建秋"
+                    },
+                    {
+                        "parid": 42,
+                        "jbonum": "1002A",
+                        "uname": "宁波"
+                    },
+                    {
+                        "parid": 348,
+                        "jbonum": "EHZ08802",
+                        "uname": "王佩珠"
+                    },
+                    {
+                        "parid": 226,
+                        "jbonum": "EHZ01602",
+                        "uname": "王越"
+                    },
+                    {
+                        "parid": 1524,
+                        "jbonum": "EHZ08103",
+                        "uname": "李巧巧"
+                    },
+                    {
+                        "parid": 261,
+                        "jbonum": "EHZ05101",
+                        "uname": "王敬"
+                    },
+                    {
+                        "parid": 331,
+                        "jbonum": "EHZ08202",
+                        "uname": "王梦洁"
+                    },
+                    {
+                        "parid": 260,
+                        "jbonum": "EHZ05504",
+                        "uname": "陆永秀"
+                    },
+                    {
+                        "parid": 375,
+                        "jbonum": "WZ015",
+                        "uname": "肖辉怀"
+                    },
+                    {
+                        "parid": 286,
+                        "jbonum": "EHZ06804",
+                        "uname": "曹艳梅"
+                    },
+                    {
+                        "parid": 351,
+                        "jbonum": "EHZ08805",
+                        "uname": "李甜甜"
+                    },
+                    {
+                        "parid": 361,
+                        "jbonum": "HZ628",
+                        "uname": "时倩"
+                    },
+                    {
+                        "parid": 1530,
+                        "jbonum": "EHZ09202",
+                        "uname": "杨燕珍"
+                    },
+                    {
+                        "parid": 263,
+                        "jbonum": "EHZ05701",
+                        "uname": "赵娟"
+                    },
+                    {
+                        "parid": 281,
+                        "jbonum": "EHZ06602",
+                        "uname": "饶晓雨"
+                    },
+                    {
+                        "parid": 307,
+                        "jbonum": "EHZ07702",
+                        "uname": "刘肖肖"
+                    },
+                    {
+                        "parid": 325,
+                        "jbonum": "EHZ08002",
+                        "uname": "钱林凤"
+                    },
+                    {
+                        "parid": 229,
+                        "jbonum": "EHZ04003",
+                        "uname": "陈凯丽"
+                    },
+                    {
+                        "parid": 342,
+                        "jbonum": "EHZ08603",
+                        "uname": "常会"
+                    },
+                    {
+                        "parid": 278,
+                        "jbonum": "EHZ06302",
+                        "uname": "吴星儿"
+                    },
+                    {
+                        "parid": 91,
+                        "jbonum": "1009A",
+                        "uname": "湖州"
+                    },
+                    {
+                        "parid": 236,
+                        "jbonum": "EHZ03901",
+                        "uname": "张春梅"
+                    },
+                    {
+                        "parid": 390,
+                        "jbonum": "WZ101",
+                        "uname": "吕小静"
+                    },
+                    {
+                        "parid": 245,
+                        "jbonum": "EHZ05001",
+                        "uname": "赵先允"
+                    },
+                    {
+                        "parid": 366,
+                        "jbonum": "WZ086",
+                        "uname": "王秀林"
+                    },
+                    {
+                        "parid": 300,
+                        "jbonum": "EHZ07501",
+                        "uname": "陈可"
+                    },
+                    {
+                        "parid": 1526,
+                        "jbonum": "EHZ08806",
+                        "uname": "吴盼盼"
+                    },
+                    {
+                        "parid": 1529,
+                        "jbonum": "EHZ09201",
+                        "uname": "李春井"
+                    },
+                    {
+                        "parid": 362,
+                        "jbonum": "EHZ09302",
+                        "uname": "金亚楠"
+                    },
+                    {
+                        "parid": 324,
+                        "jbonum": "EHZ08001",
+                        "uname": "王海侠"
+                    },
+                    {
+                        "parid": 388,
+                        "jbonum": "WZ108",
+                        "uname": "祝小霞"
+                    },
+                    {
+                        "parid": 377,
+                        "jbonum": "WZ087",
+                        "uname": "蔡乐意"
+                    },
+                    {
+                        "parid": 356,
+                        "jbonum": "EHZ08904",
+                        "uname": "王寿燕"
+                    },
+                    {
+                        "parid": 378,
+                        "jbonum": "HZ623",
+                        "uname": "朱红英"
+                    },
+                    {
+                        "parid": 376,
+                        "jbonum": "WZ106",
+                        "uname": "姜秀华"
+                    },
+                    {
+                        "parid": 347,
+                        "jbonum": "EHZ08801",
+                        "uname": "王珊"
+                    },
+                    {
+                        "parid": 350,
+                        "jbonum": "EHZ08804",
+                        "uname": "王春艳"
+                    },
+                    {
+                        "parid": 48,
+                        "jbonum": "1005A",
+                        "uname": "丽水"
+                    },
+                    {
+                        "parid": 353,
+                        "jbonum": "EHZ08901",
+                        "uname": "洪小君"
+                    },
+                    {
+                        "parid": 47,
+                        "jbonum": "1004AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 258,
+                        "jbonum": "EHZ05502",
+                        "uname": "金丽秋"
+                    },
+                    {
+                        "parid": 264,
+                        "jbonum": "EHZ05702",
+                        "uname": "尚宏燕"
+                    },
+                    {
+                        "parid": 257,
+                        "jbonum": "EHZ05501",
+                        "uname": "施艳英"
+                    },
+                    {
+                        "parid": 223,
+                        "jbonum": "EHZ02102",
+                        "uname": "黄燕"
+                    },
+                    {
+                        "parid": 81,
+                        "jbonum": "EHZ01",
+                        "uname": "杭州正品仓"
+                    },
+                    {
+                        "parid": 321,
+                        "jbonum": "EHZ07804",
+                        "uname": "王园园"
+                    },
+                    {
+                        "parid": 352,
+                        "jbonum": "HZ625",
+                        "uname": "吴盼盼"
+                    },
+                    {
+                        "parid": 334,
+                        "jbonum": "EHZ08205",
+                        "uname": "丁平安"
+                    },
+                    {
+                        "parid": 380,
+                        "jbonum": "WZ012",
+                        "uname": "郭燕"
+                    },
+                    {
+                        "parid": 340,
+                        "jbonum": "EHZ08601",
+                        "uname": "陈伟芳"
+                    },
+                    {
+                        "parid": 293,
+                        "jbonum": "EHZ07104",
+                        "uname": "王益会"
+                    },
+                    {
+                        "parid": 383,
+                        "jbonum": "WZ005",
+                        "uname": "孙小燕"
+                    },
+                    {
+                        "parid": 335,
+                        "jbonum": "EHZ08301",
+                        "uname": "徐梅"
+                    },
+                    {
+                        "parid": 302,
+                        "jbonum": "EHZ07503",
+                        "uname": "汪萌"
+                    },
+                    {
+                        "parid": 317,
+                        "jbonum": "EHZ06103",
+                        "uname": "郑春瑜"
+                    },
+                    {
+                        "parid": 329,
+                        "jbonum": "EHZ08104",
+                        "uname": "陈菊菊"
+                    },
+                    {
+                        "parid": 234,
+                        "jbonum": "EHZ04202",
+                        "uname": "张红"
+                    },
+                    {
+                        "parid": 357,
+                        "jbonum": "HZ624",
+                        "uname": "李正丹"
+                    },
+                    {
+                        "parid": 266,
+                        "jbonum": "EHZ05802",
+                        "uname": "郑苏萍"
+                    },
+                    {
+                        "parid": 337,
+                        "jbonum": "EHZ08401",
+                        "uname": "罗公艳"
+                    },
+                    {
+                        "parid": 277,
+                        "jbonum": "EHZ06301",
+                        "uname": "赵婉飞"
+                    },
+                    {
+                        "parid": 346,
+                        "jbonum": "EHZ08703",
+                        "uname": "李利"
+                    },
+                    {
+                        "parid": 270,
+                        "jbonum": "EHZ06003",
+                        "uname": "毛艳侠"
+                    },
+                    {
+                        "parid": 246,
+                        "jbonum": "EHZ05002",
+                        "uname": "何玉"
+                    },
+                    {
+                        "parid": 316,
+                        "jbonum": "EHZ06102",
+                        "uname": "鲍春雨"
+                    },
+                    {
+                        "parid": 322,
+                        "jbonum": "EHZ07805",
+                        "uname": "谢闪闪"
+                    },
+                    {
+                        "parid": 387,
+                        "jbonum": "WZ032",
+                        "uname": "王温丹"
+                    },
+                    {
+                        "parid": 1527,
+                        "jbonum": "EHZ08905",
+                        "uname": "李正丹"
+                    },
+                    {
+                        "parid": 233,
+                        "jbonum": "EHZ04201",
+                        "uname": "梁雅利"
+                    },
+                    {
+                        "parid": 368,
+                        "jbonum": "WZ099",
+                        "uname": "邢玉杰"
+                    },
+                    {
+                        "parid": 374,
+                        "jbonum": "WZ109",
+                        "uname": "龙兴菊"
+                    },
+                    {
+                        "parid": 235,
+                        "jbonum": "EHZ04203",
+                        "uname": "张雯"
+                    },
+                    {
+                        "parid": 240,
+                        "jbonum": "EHZ04402",
+                        "uname": "程小燕"
+                    },
+                    {
+                        "parid": 305,
+                        "jbonum": "EHZ07506",
+                        "uname": "孙艳丽"
+                    },
+                    {
+                        "parid": 297,
+                        "jbonum": "EHZ07402",
+                        "uname": "胡丽娜"
+                    },
+                    {
+                        "parid": 255,
+                        "jbonum": "EHZ01001",
+                        "uname": "刘志芳"
+                    },
+                    {
+                        "parid": 85,
+                        "jbonum": "1006A",
+                        "uname": "金华"
+                    },
+                    {
+                        "parid": 88,
+                        "jbonum": "1007AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 272,
+                        "jbonum": "EHZ06202",
+                        "uname": "吴小芬"
+                    },
+                    {
+                        "parid": 369,
+                        "jbonum": "WZ067",
+                        "uname": "刘钱芳"
+                    },
+                    {
+                        "parid": 45,
+                        "jbonum": "1003AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 287,
+                        "jbonum": "EHZ06901",
+                        "uname": "胡秀玲"
+                    },
+                    {
+                        "parid": 295,
+                        "jbonum": "EHZ07202",
+                        "uname": "陶洪彩"
+                    },
+                    {
+                        "parid": 294,
+                        "jbonum": "EHZ07201",
+                        "uname": "宋晓伶"
+                    },
+                    {
+                        "parid": 372,
+                        "jbonum": "WZ081",
+                        "uname": "王瑞瑞"
+                    },
+                    {
+                        "parid": 252,
+                        "jbonum": "EHZ05302",
+                        "uname": "邓利娟"
+                    },
+                    {
+                        "parid": 44,
+                        "jbonum": "1003A",
+                        "uname": "温州"
+                    },
+                    {
+                        "parid": 232,
+                        "jbonum": "EHZ04007",
+                        "uname": "张丽莎"
+                    },
+                    {
+                        "parid": 394,
+                        "jbonum": "WZ105",
+                        "uname": "简安益"
+                    },
+                    {
+                        "parid": 332,
+                        "jbonum": "EHZ08203",
+                        "uname": "王中莲"
+                    },
+                    {
+                        "parid": 360,
+                        "jbonum": "HZ629",
+                        "uname": "杨燕珍"
+                    },
+                    {
+                        "parid": 313,
+                        "jbonum": "EHZ07603",
+                        "uname": "徐香平"
+                    },
+                    {
+                        "parid": 328,
+                        "jbonum": "EHZ08102",
+                        "uname": "夏迎娣"
+                    },
+                    {
+                        "parid": 239,
+                        "jbonum": "EHZ04401",
+                        "uname": "许玉琳"
+                    },
+                    {
+                        "parid": 265,
+                        "jbonum": "EHZ05801",
+                        "uname": "李萍"
+                    },
+                    {
+                        "parid": 391,
+                        "jbonum": "WZ103",
+                        "uname": "孙芹萍"
+                    },
+                    {
+                        "parid": 327,
+                        "jbonum": "EHZ08101",
+                        "uname": "周艳艳"
+                    },
+                    {
+                        "parid": 250,
+                        "jbonum": "EHZ05202",
+                        "uname": "梁丽"
+                    },
+                    {
+                        "parid": 364,
+                        "jbonum": "EHZ09303",
+                        "uname": "陈远"
+                    },
+                    {
+                        "parid": 1528,
+                        "jbonum": "EHZ09001",
+                        "uname": "杨钊"
+                    },
+                    {
+                        "parid": 238,
+                        "jbonum": "EHZ03903",
+                        "uname": "关玉敏"
+                    },
+                    {
+                        "parid": 384,
+                        "jbonum": "WZ068",
+                        "uname": "李小雪"
+                    },
+                    {
+                        "parid": 323,
+                        "jbonum": "EHZ07806",
+                        "uname": "肖惠文"
+                    },
+                    {
+                        "parid": 241,
+                        "jbonum": "EHZ04403",
+                        "uname": "孟成亚"
+                    },
+                    {
+                        "parid": 341,
+                        "jbonum": "EHZ08602",
+                        "uname": "杨红英"
+                    },
+                    {
+                        "parid": 291,
+                        "jbonum": "EHZ07102",
+                        "uname": "胡章琴"
+                    },
+                    {
+                        "parid": 290,
+                        "jbonum": "EHZ07101",
+                        "uname": "李艳艳"
+                    },
+                    {
+                        "parid": 247,
+                        "jbonum": "EHZ05003",
+                        "uname": "林莎莎"
+                    },
+                    {
+                        "parid": 386,
+                        "jbonum": "WZ035",
+                        "uname": "昌明"
+                    },
+                    {
+                        "parid": 275,
+                        "jbonum": "EHZ06502",
+                        "uname": "陈培花"
+                    },
+                    {
+                        "parid": 336,
+                        "jbonum": "EHZ08303",
+                        "uname": "施晶晶"
+                    },
+                    {
+                        "parid": 276,
+                        "jbonum": "EHZ06503",
+                        "uname": "林连菊"
+                    },
+                    {
+                        "parid": 344,
+                        "jbonum": "EHZ08701",
+                        "uname": "钟孝"
+                    },
+                    {
+                        "parid": 373,
+                        "jbonum": "WZ092",
+                        "uname": "陈艳青"
+                    },
+                    {
+                        "parid": 92,
+                        "jbonum": "1009AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 237,
+                        "jbonum": "EHZ03902",
+                        "uname": "陈艳"
+                    },
+                    {
+                        "parid": 46,
+                        "jbonum": "1004A",
+                        "uname": "余姚"
+                    },
+                    {
+                        "parid": 385,
+                        "jbonum": "HZ594",
+                        "uname": "张梦"
+                    },
+                    {
+                        "parid": 395,
+                        "jbonum": "WZ036",
+                        "uname": "李文飞"
+                    },
+                    {
+                        "parid": 227,
+                        "jbonum": "EHZ04001",
+                        "uname": "陆冰燕"
+                    },
+                    {
+                        "parid": 285,
+                        "jbonum": "EHZ06803",
+                        "uname": "邵侠"
+                    },
+                    {
+                        "parid": 259,
+                        "jbonum": "EHZ05503",
+                        "uname": "谢培培"
+                    },
+                    {
+                        "parid": 225,
+                        "jbonum": "EHZ01601",
+                        "uname": "贾玲玲"
+                    },
+                    {
+                        "parid": 301,
+                        "jbonum": "EHZ07502",
+                        "uname": "林莉莉"
+                    },
+                    {
+                        "parid": 363,
+                        "jbonum": "EHZ09301",
+                        "uname": "李贝"
+                    },
+                    {
+                        "parid": 308,
+                        "jbonum": "EHZ07703",
+                        "uname": "王云"
+                    },
+                    {
+                        "parid": 87,
+                        "jbonum": "1007A",
+                        "uname": "台州"
+                    },
+                    {
+                        "parid": 330,
+                        "jbonum": "EHZ08201",
+                        "uname": "张盼盼"
+                    },
+                    {
+                        "parid": 93,
+                        "jbonum": "1010A",
+                        "uname": "绍兴"
+                    },
+                    {
+                        "parid": 94,
+                        "jbonum": "1010AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 382,
+                        "jbonum": "WZ014",
+                        "uname": "张梅"
+                    },
+                    {
+                        "parid": 262,
+                        "jbonum": "EHZ05102",
+                        "uname": "任飞宁"
+                    },
+                    {
+                        "parid": 1531,
+                        "jbonum": "EHZ09203",
+                        "uname": "时倩"
+                    },
+                    {
+                        "parid": 381,
+                        "jbonum": "WZ013",
+                        "uname": "冯俊"
+                    },
+                    {
+                        "parid": 274,
+                        "jbonum": "EHZ06501",
+                        "uname": "蔡亚女"
+                    },
+                    {
+                        "parid": 254,
+                        "jbonum": "EHZ04702",
+                        "uname": "王志利"
+                    },
+                    {
+                        "parid": 282,
+                        "jbonum": "EHZ06603",
+                        "uname": "董天天"
+                    },
+                    {
+                        "parid": 315,
+                        "jbonum": "EHZ06101",
+                        "uname": "雷兰兰"
+                    },
+                    {
+                        "parid": 40,
+                        "jbonum": "1001A",
+                        "uname": "杭州"
+                    },
+                    {
+                        "parid": 1525,
+                        "jbonum": "EHZ08302",
+                        "uname": "贾玉花"
+                    },
+                    {
+                        "parid": 289,
+                        "jbonum": "EHZ06903",
+                        "uname": "戴珊霞"
+                    },
+                    {
+                        "parid": 320,
+                        "jbonum": "EHZ07803",
+                        "uname": "霍小翠"
+                    },
+                    {
+                        "parid": 279,
+                        "jbonum": "EHZ06303",
+                        "uname": "楼晔萍"
+                    }
+                ]
+            },
+            {
+                "depid": 1043,
+                "depname": "济宁办事处",
+                "sysUnits": [
+                    {
+                        "parid": 1482,
+                        "jbonum": "JN9017",
+                        "uname": "郭春"
+                    },
+                    {
+                        "parid": 1477,
+                        "jbonum": "JN9012",
+                        "uname": "顾克颜"
+                    },
+                    {
+                        "parid": 1239,
+                        "jbonum": "7004A",
+                        "uname": "临沂"
+                    },
+                    {
+                        "parid": 1467,
+                        "jbonum": "JN9002",
+                        "uname": "杜燕茹"
+                    },
+                    {
+                        "parid": 1470,
+                        "jbonum": "JN9005",
+                        "uname": "宫宝环"
+                    },
+                    {
+                        "parid": 1469,
+                        "jbonum": "JN9004",
+                        "uname": "王田田"
+                    },
+                    {
+                        "parid": 1236,
+                        "jbonum": "7001A",
+                        "uname": "济宁"
+                    },
+                    {
+                        "parid": 1492,
+                        "jbonum": "JN9027",
+                        "uname": "刘艳春"
+                    },
+                    {
+                        "parid": 1485,
+                        "jbonum": "JN9020",
+                        "uname": "褚路"
+                    },
+                    {
+                        "parid": 1489,
+                        "jbonum": "JN9024",
+                        "uname": "张亚青"
+                    },
+                    {
+                        "parid": 1468,
+                        "jbonum": "JN9003",
+                        "uname": "李红瑞"
+                    },
+                    {
+                        "parid": 1490,
+                        "jbonum": "JN9025",
+                        "uname": "吴珊珊"
+                    },
+                    {
+                        "parid": 1484,
+                        "jbonum": "JN9019",
+                        "uname": "王春花"
+                    },
+                    {
+                        "parid": 1488,
+                        "jbonum": "JN9023",
+                        "uname": "王亭亭"
+                    },
+                    {
+                        "parid": 1471,
+                        "jbonum": "JN9006",
+                        "uname": "段冬梅"
+                    },
+                    {
+                        "parid": 1479,
+                        "jbonum": "JN9014",
+                        "uname": "路则伟"
+                    },
+                    {
+                        "parid": 1238,
+                        "jbonum": "7003A",
+                        "uname": "枣庄"
+                    },
+                    {
+                        "parid": 1475,
+                        "jbonum": "JN9010",
+                        "uname": "李晶"
+                    },
+                    {
+                        "parid": 1237,
+                        "jbonum": "7002A",
+                        "uname": "菏泽"
+                    },
+                    {
+                        "parid": 1466,
+                        "jbonum": "JN9001",
+                        "uname": "张明双"
+                    },
+                    {
+                        "parid": 1493,
+                        "jbonum": "JN9028",
+                        "uname": "卞伟伟"
+                    },
+                    {
+                        "parid": 1486,
+                        "jbonum": "JN9021",
+                        "uname": "张南南"
+                    },
+                    {
+                        "parid": 1473,
+                        "jbonum": "JN9008",
+                        "uname": "鲁艳"
+                    },
+                    {
+                        "parid": 1487,
+                        "jbonum": "JN9022",
+                        "uname": "刘艳"
+                    },
+                    {
+                        "parid": 1478,
+                        "jbonum": "JN9013",
+                        "uname": "陈文玲"
+                    },
+                    {
+                        "parid": 1481,
+                        "jbonum": "JN9016",
+                        "uname": "李腾"
+                    },
+                    {
+                        "parid": 1483,
+                        "jbonum": "JN9018",
+                        "uname": "任金燕"
+                    },
+                    {
+                        "parid": 1491,
+                        "jbonum": "JN9026",
+                        "uname": "王娇"
+                    },
+                    {
+                        "parid": 1476,
+                        "jbonum": "JN9011",
+                        "uname": "刘静"
+                    },
+                    {
+                        "parid": 1474,
+                        "jbonum": "JN9009",
+                        "uname": "杨燕"
+                    },
+                    {
+                        "parid": 1480,
+                        "jbonum": "JN9015",
+                        "uname": "陆晴"
+                    },
+                    {
+                        "parid": 1472,
+                        "jbonum": "JN9007",
+                        "uname": "郭向向"
+                    }
+                ]
+            },
+            {
+                "depid": 1044,
+                "depname": "徐州分公司",
+                "sysUnits": [
+                    {
+                        "parid": 1425,
+                        "jbonum": "XZ0017",
+                        "uname": "王芳"
+                    },
+                    {
+                        "parid": 1370,
+                        "jbonum": "8002A",
+                        "uname": "淮北"
+                    },
+                    {
+                        "parid": 1449,
+                        "jbonum": "XZ0041",
+                        "uname": "张迎"
+                    },
+                    {
+                        "parid": 1416,
+                        "jbonum": "XZ0008",
+                        "uname": "孙茹"
+                    },
+                    {
+                        "parid": 1434,
+                        "jbonum": "XZ0026",
+                        "uname": "张晨"
+                    },
+                    {
+                        "parid": 1429,
+                        "jbonum": "XZ0021",
+                        "uname": "王晴"
+                    },
+                    {
+                        "parid": 1422,
+                        "jbonum": "XZ0014",
+                        "uname": "祝焕"
+                    },
+                    {
+                        "parid": 1409,
+                        "jbonum": "XZ0001",
+                        "uname": "张影"
+                    },
+                    {
+                        "parid": 1446,
+                        "jbonum": "XZ0038",
+                        "uname": "仝晶晶"
+                    },
+                    {
+                        "parid": 1424,
+                        "jbonum": "XZ0016",
+                        "uname": "杜倩倩"
+                    },
+                    {
+                        "parid": 1431,
+                        "jbonum": "XZ0023",
+                        "uname": "提文丽"
+                    },
+                    {
+                        "parid": 1418,
+                        "jbonum": "XZ0010",
+                        "uname": "刘溪筱"
+                    },
+                    {
+                        "parid": 1454,
+                        "jbonum": "XZ0046",
+                        "uname": "范敏"
+                    },
+                    {
+                        "parid": 1441,
+                        "jbonum": "XZ0033",
+                        "uname": "郝文"
+                    },
+                    {
+                        "parid": 1455,
+                        "jbonum": "XZ0047",
+                        "uname": "高红梅"
+                    },
+                    {
+                        "parid": 1460,
+                        "jbonum": "XZ0052",
+                        "uname": "熊自红"
+                    },
+                    {
+                        "parid": 1428,
+                        "jbonum": "XZ0020",
+                        "uname": "孟冉"
+                    },
+                    {
+                        "parid": 1421,
+                        "jbonum": "XZ0013",
+                        "uname": "陈晨"
+                    },
+                    {
+                        "parid": 1458,
+                        "jbonum": "XZ0050",
+                        "uname": "张翠"
+                    },
+                    {
+                        "parid": 1419,
+                        "jbonum": "XZ0011",
+                        "uname": "贾领领"
+                    },
+                    {
+                        "parid": 1432,
+                        "jbonum": "XZ0024",
+                        "uname": "杨艳丽"
+                    },
+                    {
+                        "parid": 1417,
+                        "jbonum": "XZ0009",
+                        "uname": "李倩"
+                    },
+                    {
+                        "parid": 1414,
+                        "jbonum": "XZ0006",
+                        "uname": "刘梅"
+                    },
+                    {
+                        "parid": 1427,
+                        "jbonum": "XZ0019",
+                        "uname": "黄优"
+                    },
+                    {
+                        "parid": 1462,
+                        "jbonum": "XZ0054",
+                        "uname": "鲁春艳"
+                    },
+                    {
+                        "parid": 1457,
+                        "jbonum": "XZ0049",
+                        "uname": "张香莲"
+                    },
+                    {
+                        "parid": 1411,
+                        "jbonum": "XZ0003",
+                        "uname": "杨爱枝"
+                    },
+                    {
+                        "parid": 1433,
+                        "jbonum": "XZ0025",
+                        "uname": "邓孝美"
+                    },
+                    {
+                        "parid": 1464,
+                        "jbonum": "XZ0056",
+                        "uname": "马星星"
+                    },
+                    {
+                        "parid": 1423,
+                        "jbonum": "XZ0015",
+                        "uname": "王艳秋"
+                    },
+                    {
+                        "parid": 1465,
+                        "jbonum": "XZ0057",
+                        "uname": "张景景"
+                    },
+                    {
+                        "parid": 1451,
+                        "jbonum": "XZ0043",
+                        "uname": "王惠珍"
+                    },
+                    {
+                        "parid": 1371,
+                        "jbonum": "8003A",
+                        "uname": "宿州"
+                    },
+                    {
+                        "parid": 1442,
+                        "jbonum": "XZ0034",
+                        "uname": "聂红"
+                    },
+                    {
+                        "parid": 1439,
+                        "jbonum": "XZ0031",
+                        "uname": "窦敏"
+                    },
+                    {
+                        "parid": 1443,
+                        "jbonum": "XZ0035",
+                        "uname": "高倩倩"
+                    },
+                    {
+                        "parid": 1413,
+                        "jbonum": "XZ0005",
+                        "uname": "张红"
+                    },
+                    {
+                        "parid": 1369,
+                        "jbonum": "8001A",
+                        "uname": "徐州"
+                    },
+                    {
+                        "parid": 1447,
+                        "jbonum": "XZ0039",
+                        "uname": "张姣姣"
+                    },
+                    {
+                        "parid": 1450,
+                        "jbonum": "XZ0042",
+                        "uname": "刘芹芹"
+                    },
+                    {
+                        "parid": 1461,
+                        "jbonum": "XZ0053",
+                        "uname": "吴珍珍"
+                    },
+                    {
+                        "parid": 1459,
+                        "jbonum": "XZ0051",
+                        "uname": "孙蒙蒙"
+                    },
+                    {
+                        "parid": 1463,
+                        "jbonum": "XZ0055",
+                        "uname": "张莉"
+                    },
+                    {
+                        "parid": 1426,
+                        "jbonum": "XZ0018",
+                        "uname": "杨秀"
+                    },
+                    {
+                        "parid": 1415,
+                        "jbonum": "XZ0007",
+                        "uname": "赵珊"
+                    },
+                    {
+                        "parid": 1420,
+                        "jbonum": "XZ0012",
+                        "uname": "谢倩"
+                    },
+                    {
+                        "parid": 1430,
+                        "jbonum": "XZ0022",
+                        "uname": "吴肖"
+                    },
+                    {
+                        "parid": 1438,
+                        "jbonum": "XZ0030",
+                        "uname": "马丹丹"
+                    },
+                    {
+                        "parid": 1435,
+                        "jbonum": "XZ0027",
+                        "uname": "刘文静"
+                    },
+                    {
+                        "parid": 1412,
+                        "jbonum": "XZ0004",
+                        "uname": "张艳秋"
+                    },
+                    {
+                        "parid": 1436,
+                        "jbonum": "XZ0028",
+                        "uname": "李娇娇"
+                    },
+                    {
+                        "parid": 1440,
+                        "jbonum": "XZ0032",
+                        "uname": "李登蔚"
+                    },
+                    {
+                        "parid": 1410,
+                        "jbonum": "XZ0002",
+                        "uname": "李惠"
+                    },
+                    {
+                        "parid": 1437,
+                        "jbonum": "XZ0029",
+                        "uname": "闫翠翠"
+                    },
+                    {
+                        "parid": 1452,
+                        "jbonum": "XZ0044",
+                        "uname": "李萍"
+                    },
+                    {
+                        "parid": 1453,
+                        "jbonum": "XZ0045",
+                        "uname": "王莉莉"
+                    },
+                    {
+                        "parid": 1444,
+                        "jbonum": "XZ0036",
+                        "uname": "陈雪"
+                    },
+                    {
+                        "parid": 1445,
+                        "jbonum": "XZ0037",
+                        "uname": "高群"
+                    },
+                    {
+                        "parid": 1456,
+                        "jbonum": "XZ0048",
+                        "uname": "王稳"
+                    },
+                    {
+                        "parid": 1448,
+                        "jbonum": "XZ0040",
+                        "uname": "周薇群"
+                    }
+                ]
+            },
+            {
+                "depid": 619,
+                "depname": "潮州吴珊",
+                "sysUnits": [
+                    {
+                        "parid": 620,
+                        "jbonum": "GDCZA1AD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 1523,
+                        "jbonum": "GZCZA101",
+                        "uname": "张丹"
+                    }
+                ]
+            },
+            {
+                "depid": 621,
+                "depname": "东莞张爱枝",
+                "sysUnits": [
+                    {
+                        "parid": 622,
+                        "jbonum": "GDDGA01",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 1726,
+                        "jbonum": "GDDGA201",
+                        "uname": "陈红"
+                    }
+                ]
+            },
+            {
+                "depid": 623,
+                "depname": "黄江江红娥",
+                "sysUnits": [
+                    {
+                        "parid": 624,
+                        "jbonum": "GDDGC2AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 625,
+                "depname": "石排陶祎",
+                "sysUnits": [
+                    {
+                        "parid": 626,
+                        "jbonum": "GDDGC7AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 627,
+                "depname": "东莞李秀琴",
+                "sysUnits": [
+                    {
+                        "parid": 628,
+                        "jbonum": "4005AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 629,
+                "depname": "佛山邓展涛",
+                "sysUnits": [
+                    {
+                        "parid": 630,
+                        "jbonum": "4006AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 631,
+                "depname": "广州刘献英",
+                "sysUnits": [
+                    {
+                        "parid": 632,
+                        "jbonum": "4007AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 633,
+                "depname": "广州黄燕平",
+                "sysUnits": [
+                    {
+                        "parid": 634,
+                        "jbonum": "4008AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 635,
+                "depname": "珠海刘超南",
+                "sysUnits": [
+                    {
+                        "parid": 636,
+                        "jbonum": "4009AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 637,
+                "depname": "广州陈日光",
+                "sysUnits": [
+                    {
+                        "parid": 638,
+                        "jbonum": "4010AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 639,
+                "depname": "茂名梁月荣",
+                "sysUnits": [
+                    {
+                        "parid": 640,
+                        "jbonum": "4011AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 641,
+                "depname": "韶关吴胜根",
+                "sysUnits": [
+                    {
+                        "parid": 642,
+                        "jbonum": "4012AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 643,
+                "depname": "汕头朱益悦",
+                "sysUnits": [
+                    {
+                        "parid": 644,
+                        "jbonum": "4013AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 645,
+                "depname": "深圳林锦东",
+                "sysUnits": [
+                    {
+                        "parid": 646,
+                        "jbonum": "4014AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 647,
+                "depname": "深圳李振平",
+                "sysUnits": [
+                    {
+                        "parid": 648,
+                        "jbonum": "4015AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 649,
+                "depname": "深圳孟艳丽",
+                "sysUnits": [
+                    {
+                        "parid": 650,
+                        "jbonum": "4016AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 651,
+                "depname": "湛江曾小燕",
+                "sysUnits": [
+                    {
+                        "parid": 652,
+                        "jbonum": "4017AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 653,
+                "depname": "肇庆梁梓毅",
+                "sysUnits": [
+                    {
+                        "parid": 654,
+                        "jbonum": "4018AD",
+                        "uname": "管理员"
+                    }
+                ]
+            },
+            {
+                "depid": 681,
+                "depname": "郑州分公司",
+                "sysUnits": [
+                    {
+                        "parid": 761,
+                        "jbonum": "ZZ0602",
+                        "uname": "郭婉婷"
+                    },
+                    {
+                        "parid": 772,
+                        "jbonum": "ZZ0600",
+                        "uname": "李光耀"
+                    },
+                    {
+                        "parid": 810,
+                        "jbonum": "ZZ0543",
+                        "uname": "吕玉侠"
+                    },
+                    {
+                        "parid": 801,
+                        "jbonum": "ZZ0507",
+                        "uname": "石亚娟"
+                    },
+                    {
+                        "parid": 781,
+                        "jbonum": "ZZ0510",
+                        "uname": "常梦杰"
+                    },
+                    {
+                        "parid": 760,
+                        "jbonum": "ZZ0500",
+                        "uname": "汪怡珊"
+                    },
+                    {
+                        "parid": 828,
+                        "jbonum": "ZZ0352",
+                        "uname": "丁玉娇"
+                    },
+                    {
+                        "parid": 735,
+                        "jbonum": "3009A",
+                        "uname": "鹤壁"
+                    },
+                    {
+                        "parid": 802,
+                        "jbonum": "ZZ0539",
+                        "uname": "张雅静"
+                    },
+                    {
+                        "parid": 829,
+                        "jbonum": "ZZ0361",
+                        "uname": "郭小娟"
+                    },
+                    {
+                        "parid": 764,
+                        "jbonum": "ZZ0470",
+                        "uname": "赵笑笑"
+                    },
+                    {
+                        "parid": 791,
+                        "jbonum": "ZZ0583",
+                        "uname": "田焕娟"
+                    },
+                    {
+                        "parid": 818,
+                        "jbonum": "ZZ0611",
+                        "uname": "貌新敏"
+                    },
+                    {
+                        "parid": 727,
+                        "jbonum": "3002A",
+                        "uname": "周口"
+                    },
+                    {
+                        "parid": 732,
+                        "jbonum": "3007A",
+                        "uname": "洛阳"
+                    },
+                    {
+                        "parid": 842,
+                        "jbonum": "ZZ0614",
+                        "uname": "范然然"
+                    },
+                    {
+                        "parid": 869,
+                        "jbonum": "ZZ0594",
+                        "uname": "杨艳苹"
+                    },
+                    {
+                        "parid": 731,
+                        "jbonum": "3006A",
+                        "uname": "商丘"
+                    },
+                    {
+                        "parid": 763,
+                        "jbonum": "ZZ0431",
+                        "uname": "席东亚"
+                    },
+                    {
+                        "parid": 809,
+                        "jbonum": "ZZ0193",
+                        "uname": "蓝小慧"
+                    },
+                    {
+                        "parid": 796,
+                        "jbonum": "ZZ0338",
+                        "uname": "杨宝娟"
+                    },
+                    {
+                        "parid": 823,
+                        "jbonum": "ZZ0438",
+                        "uname": "张曼"
+                    },
+                    {
+                        "parid": 782,
+                        "jbonum": "ZZ0487",
+                        "uname": "张燕玲"
+                    },
+                    {
+                        "parid": 770,
+                        "jbonum": "ZZ0528",
+                        "uname": "常玲玲"
+                    },
+                    {
+                        "parid": 758,
+                        "jbonum": "ZZ0477",
+                        "uname": "邢冰冰"
+                    },
+                    {
+                        "parid": 837,
+                        "jbonum": "ZZ0606",
+                        "uname": "裴夏玲"
+                    },
+                    {
+                        "parid": 812,
+                        "jbonum": "ZZ0608",
+                        "uname": "陈浩"
+                    },
+                    {
+                        "parid": 737,
+                        "jbonum": "3011A",
+                        "uname": "驻马店"
+                    },
+                    {
+                        "parid": 771,
+                        "jbonum": "ZZ0529",
+                        "uname": "田春艳"
+                    },
+                    {
+                        "parid": 841,
+                        "jbonum": "ZZ0613",
+                        "uname": "葛如梦"
+                    },
+                    {
+                        "parid": 783,
+                        "jbonum": "ZZ0550",
+                        "uname": "刘小瑞"
+                    },
+                    {
+                        "parid": 827,
+                        "jbonum": "ZZ0233",
+                        "uname": "张艳敏"
+                    },
+                    {
+                        "parid": 792,
+                        "jbonum": "ZZ0605",
+                        "uname": "郝静"
+                    },
+                    {
+                        "parid": 767,
+                        "jbonum": "ZZ0518",
+                        "uname": "李欢"
+                    },
+                    {
+                        "parid": 787,
+                        "jbonum": "ZZ0343",
+                        "uname": "李学梅"
+                    },
+                    {
+                        "parid": 865,
+                        "jbonum": "ZZ0516",
+                        "uname": "葛林林"
+                    },
+                    {
+                        "parid": 788,
+                        "jbonum": "ZZ0407",
+                        "uname": "朱利红"
+                    },
+                    {
+                        "parid": 822,
+                        "jbonum": "ZZ0428",
+                        "uname": "刘晓"
+                    },
+                    {
+                        "parid": 856,
+                        "jbonum": "ZZ0571",
+                        "uname": "王威威"
+                    },
+                    {
+                        "parid": 833,
+                        "jbonum": "ZZ0286",
+                        "uname": "张艳花"
+                    },
+                    {
+                        "parid": 793,
+                        "jbonum": "ZZ0631",
+                        "uname": "范胜男"
+                    },
+                    {
+                        "parid": 766,
+                        "jbonum": "ZZ0513",
+                        "uname": "李玉华"
+                    },
+                    {
+                        "parid": 859,
+                        "jbonum": "ZZ0626",
+                        "uname": "杨慧"
+                    },
+                    {
+                        "parid": 790,
+                        "jbonum": "ZZ0501",
+                        "uname": "陈方园"
+                    },
+                    {
+                        "parid": 846,
+                        "jbonum": "ZZ0318",
+                        "uname": "刘会芳"
+                    },
+                    {
+                        "parid": 845,
+                        "jbonum": "ZZ0627",
+                        "uname": "张芳芳"
+                    },
+                    {
+                        "parid": 773,
+                        "jbonum": "ZZ0601",
+                        "uname": "张换平"
+                    },
+                    {
+                        "parid": 861,
+                        "jbonum": "ZZ0117",
+                        "uname": "王娟"
+                    },
+                    {
+                        "parid": 736,
+                        "jbonum": "3010A",
+                        "uname": "濮阳"
+                    },
+                    {
+                        "parid": 806,
+                        "jbonum": "ZZ0599",
+                        "uname": "赵雅灵"
+                    },
+                    {
+                        "parid": 824,
+                        "jbonum": "ZZ0479",
+                        "uname": "李玲"
+                    },
+                    {
+                        "parid": 839,
+                        "jbonum": "ZZ0612",
+                        "uname": "周新利"
+                    },
+                    {
+                        "parid": 789,
+                        "jbonum": "ZZ0430",
+                        "uname": "赵瑞洁"
+                    },
+                    {
+                        "parid": 843,
+                        "jbonum": "ZZ0619",
+                        "uname": "柴方娜"
+                    },
+                    {
+                        "parid": 863,
+                        "jbonum": "ZZ0224",
+                        "uname": "马晓婷"
+                    },
+                    {
+                        "parid": 774,
+                        "jbonum": "ZZ0610",
+                        "uname": "张露露"
+                    },
+                    {
+                        "parid": 784,
+                        "jbonum": "ZZ0620",
+                        "uname": "陈艳萍"
+                    },
+                    {
+                        "parid": 825,
+                        "jbonum": "ZZ0116",
+                        "uname": "杨园园"
+                    },
+                    {
+                        "parid": 777,
+                        "jbonum": "ZZ0625",
+                        "uname": "李瑞"
+                    },
+                    {
+                        "parid": 811,
+                        "jbonum": "ZZ0549",
+                        "uname": "石小杰"
+                    },
+                    {
+                        "parid": 862,
+                        "jbonum": "ZZ0125",
+                        "uname": "秦春霞"
+                    },
+                    {
+                        "parid": 805,
+                        "jbonum": "ZZ0576",
+                        "uname": "乔丹凤"
+                    },
+                    {
+                        "parid": 776,
+                        "jbonum": "ZZ0621",
+                        "uname": "周靖"
+                    },
+                    {
+                        "parid": 821,
+                        "jbonum": "ZZ0427",
+                        "uname": "史婷婷"
+                    },
+                    {
+                        "parid": 816,
+                        "jbonum": "ZZ0557",
+                        "uname": "闵艳"
+                    },
+                    {
+                        "parid": 799,
+                        "jbonum": "ZZ0471",
+                        "uname": "文朵朵"
+                    },
+                    {
+                        "parid": 738,
+                        "jbonum": "3012A",
+                        "uname": "南阳"
+                    },
+                    {
+                        "parid": 759,
+                        "jbonum": "ZZ0552",
+                        "uname": "王艳楠"
+                    },
+                    {
+                        "parid": 857,
+                        "jbonum": "ZZ0574",
+                        "uname": "孟冉"
+                    },
+                    {
+                        "parid": 786,
+                        "jbonum": "ZZ0280",
+                        "uname": "林晓芳"
+                    },
+                    {
+                        "parid": 729,
+                        "jbonum": "3004A",
+                        "uname": "安阳"
+                    },
+                    {
+                        "parid": 726,
+                        "jbonum": "3001A",
+                        "uname": "郑州"
+                    },
+                    {
+                        "parid": 868,
+                        "jbonum": "ZZ0546",
+                        "uname": "张媛"
+                    },
+                    {
+                        "parid": 795,
+                        "jbonum": "ZZ0337",
+                        "uname": "王元凤"
+                    },
+                    {
+                        "parid": 800,
+                        "jbonum": "ZZ0481",
+                        "uname": "杨东利"
+                    },
+                    {
+                        "parid": 807,
+                        "jbonum": "ZZ0617",
+                        "uname": "吴培培"
+                    },
+                    {
+                        "parid": 682,
+                        "jbonum": "DZZAD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 835,
+                        "jbonum": "ZZ0561",
+                        "uname": "王庆卫"
+                    },
+                    {
+                        "parid": 762,
+                        "jbonum": "ZZ0556",
+                        "uname": "卢亚玲"
+                    },
+                    {
+                        "parid": 864,
+                        "jbonum": "ZZ0309",
+                        "uname": "胡玉珍"
+                    },
+                    {
+                        "parid": 866,
+                        "jbonum": "ZZ0540",
+                        "uname": "孔华云"
+                    },
+                    {
+                        "parid": 836,
+                        "jbonum": "ZZ0573",
+                        "uname": "常新地"
+                    },
+                    {
+                        "parid": 830,
+                        "jbonum": "ZZ0411",
+                        "uname": "张小辉"
+                    },
+                    {
+                        "parid": 780,
+                        "jbonum": "ZZ0630",
+                        "uname": "管家坤"
+                    },
+                    {
+                        "parid": 728,
+                        "jbonum": "3003A",
+                        "uname": "新乡"
+                    },
+                    {
+                        "parid": 819,
+                        "jbonum": "ZZ0624",
+                        "uname": "闫艳娜"
+                    },
+                    {
+                        "parid": 814,
+                        "jbonum": "ZZ0618",
+                        "uname": "鹿亚杰"
+                    },
+                    {
+                        "parid": 844,
+                        "jbonum": "ZZ0623",
+                        "uname": "高田"
+                    },
+                    {
+                        "parid": 734,
+                        "jbonum": "3008A",
+                        "uname": "焦作"
+                    },
+                    {
+                        "parid": 834,
+                        "jbonum": "ZZ0560",
+                        "uname": "刘建星"
+                    },
+                    {
+                        "parid": 808,
+                        "jbonum": "ZZ0341",
+                        "uname": "郑亚娟"
+                    },
+                    {
+                        "parid": 838,
+                        "jbonum": "ZZ0607",
+                        "uname": "师书娟"
+                    },
+                    {
+                        "parid": 858,
+                        "jbonum": "ZZ0575",
+                        "uname": "赵好"
+                    },
+                    {
+                        "parid": 797,
+                        "jbonum": "ZZ0339",
+                        "uname": "王姣姣"
+                    },
+                    {
+                        "parid": 817,
+                        "jbonum": "ZZ0568",
+                        "uname": "谢义香"
+                    },
+                    {
+                        "parid": 831,
+                        "jbonum": "ZZ0416",
+                        "uname": "王倩"
+                    },
+                    {
+                        "parid": 765,
+                        "jbonum": "ZZ0506",
+                        "uname": "高子秋"
+                    },
+                    {
+                        "parid": 847,
+                        "jbonum": "ZZ0591",
+                        "uname": "李小娟"
+                    },
+                    {
+                        "parid": 798,
+                        "jbonum": "ZZ0364",
+                        "uname": "郑敬敬"
+                    },
+                    {
+                        "parid": 757,
+                        "jbonum": "ZZ0226",
+                        "uname": "刘焕玲"
+                    },
+                    {
+                        "parid": 849,
+                        "jbonum": "ZZ0598",
+                        "uname": "马双伊"
+                    },
+                    {
+                        "parid": 769,
+                        "jbonum": "ZZ0522",
+                        "uname": "冯团玲"
+                    },
+                    {
+                        "parid": 775,
+                        "jbonum": "ZZ0615",
+                        "uname": "姬辉辉"
+                    },
+                    {
+                        "parid": 815,
+                        "jbonum": "ZZ0236",
+                        "uname": "王莹红"
+                    },
+                    {
+                        "parid": 779,
+                        "jbonum": "ZZ0629",
+                        "uname": "刘宇"
+                    },
+                    {
+                        "parid": 778,
+                        "jbonum": "ZZ0628",
+                        "uname": "王盼盼"
+                    },
+                    {
+                        "parid": 804,
+                        "jbonum": "ZZ0565",
+                        "uname": "田会晓"
+                    },
+                    {
+                        "parid": 730,
+                        "jbonum": "3005A",
+                        "uname": "开封"
+                    }
+                ]
+            },
+            {
+                "depid": 683,
+                "depname": "青岛办事处",
+                "sysUnits": [
+                    {
+                        "parid": 1204,
+                        "jbonum": "6003A",
+                        "uname": "威海"
+                    },
+                    {
+                        "parid": 684,
+                        "jbonum": "DQGAD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 1202,
+                        "jbonum": "6001A",
+                        "uname": "烟台"
+                    },
+                    {
+                        "parid": 1203,
+                        "jbonum": "6002A",
+                        "uname": "青岛"
+                    }
+                ]
+            },
+            {
+                "depid": 685,
+                "depname": "济南办事处",
+                "sysUnits": [
+                    {
+                        "parid": 1304,
+                        "jbonum": "JN051",
+                        "uname": "徐营营"
+                    },
+                    {
+                        "parid": 1254,
+                        "jbonum": "JN011",
+                        "uname": "王优卫"
+                    },
+                    {
+                        "parid": 1276,
+                        "jbonum": "JN027",
+                        "uname": "修倩倩"
+                    },
+                    {
+                        "parid": 1036,
+                        "jbonum": "5004A",
+                        "uname": "潍坊"
+                    },
+                    {
+                        "parid": 1362,
+                        "jbonum": "JN102",
+                        "uname": "刘敏"
+                    },
+                    {
+                        "parid": 1282,
+                        "jbonum": "JN033",
+                        "uname": "贾传燕"
+                    },
+                    {
+                        "parid": 1321,
+                        "jbonum": "JN065",
+                        "uname": "高红艳"
+                    },
+                    {
+                        "parid": 1307,
+                        "jbonum": "JN054",
+                        "uname": "马彦伟"
+                    },
+                    {
+                        "parid": 1331,
+                        "jbonum": "JN075",
+                        "uname": "李荣荣"
+                    },
+                    {
+                        "parid": 1244,
+                        "jbonum": "JN005",
+                        "uname": "张东雪"
+                    },
+                    {
+                        "parid": 1039,
+                        "jbonum": "5007A",
+                        "uname": "莱芜"
+                    },
+                    {
+                        "parid": 1357,
+                        "jbonum": "JN098",
+                        "uname": "王俊然"
+                    },
+                    {
+                        "parid": 1337,
+                        "jbonum": "JN080",
+                        "uname": "王晓倩"
+                    },
+                    {
+                        "parid": 1291,
+                        "jbonum": "JN041",
+                        "uname": "郝文莉"
+                    },
+                    {
+                        "parid": 1327,
+                        "jbonum": "JN071",
+                        "uname": "张乐娟"
+                    },
+                    {
+                        "parid": 1263,
+                        "jbonum": "JN019",
+                        "uname": "张瑞瑞"
+                    },
+                    {
+                        "parid": 1356,
+                        "jbonum": "JN097",
+                        "uname": "齐玉梅"
+                    },
+                    {
+                        "parid": 1038,
+                        "jbonum": "5006A",
+                        "uname": "滨州"
+                    },
+                    {
+                        "parid": 1245,
+                        "jbonum": "JN006",
+                        "uname": "张灵灵"
+                    },
+                    {
+                        "parid": 1315,
+                        "jbonum": "JN060",
+                        "uname": "周霞"
+                    },
+                    {
+                        "parid": 1366,
+                        "jbonum": "JN106",
+                        "uname": "郑旭辉"
+                    },
+                    {
+                        "parid": 1352,
+                        "jbonum": "JN094",
+                        "uname": "庞肃"
+                    },
+                    {
+                        "parid": 1265,
+                        "jbonum": "JN021",
+                        "uname": "楚燕飞"
+                    },
+                    {
+                        "parid": 1299,
+                        "jbonum": "JN047",
+                        "uname": "晚孝连"
+                    },
+                    {
+                        "parid": 1243,
+                        "jbonum": "JN004",
+                        "uname": "李霞"
+                    },
+                    {
+                        "parid": 1279,
+                        "jbonum": "JN030",
+                        "uname": "王桂红"
+                    },
+                    {
+                        "parid": 1306,
+                        "jbonum": "JN053",
+                        "uname": "付志秀"
+                    },
+                    {
+                        "parid": 1343,
+                        "jbonum": "JN085",
+                        "uname": "于宝荣"
+                    },
+                    {
+                        "parid": 1256,
+                        "jbonum": "JN013",
+                        "uname": "赵丽"
+                    },
+                    {
+                        "parid": 1325,
+                        "jbonum": "JN069",
+                        "uname": "郝爱英"
+                    },
+                    {
+                        "parid": 1351,
+                        "jbonum": "JN093",
+                        "uname": "唐婷婷"
+                    },
+                    {
+                        "parid": 1034,
+                        "jbonum": "5002A",
+                        "uname": "泰安"
+                    },
+                    {
+                        "parid": 1339,
+                        "jbonum": "JN082",
+                        "uname": "董永花"
+                    },
+                    {
+                        "parid": 1330,
+                        "jbonum": "JN074",
+                        "uname": "王小杰"
+                    },
+                    {
+                        "parid": 1293,
+                        "jbonum": "JN043",
+                        "uname": "李欢欢"
+                    },
+                    {
+                        "parid": 1296,
+                        "jbonum": "JN045",
+                        "uname": "王静王静"
+                    },
+                    {
+                        "parid": 1247,
+                        "jbonum": "JN008",
+                        "uname": "王小红"
+                    },
+                    {
+                        "parid": 1303,
+                        "jbonum": "JN050",
+                        "uname": "张同元"
+                    },
+                    {
+                        "parid": 1301,
+                        "jbonum": "JN049",
+                        "uname": "张雯"
+                    },
+                    {
+                        "parid": 1319,
+                        "jbonum": "JN064",
+                        "uname": "白惠凤"
+                    },
+                    {
+                        "parid": 1284,
+                        "jbonum": "JN035",
+                        "uname": "胡翠娜"
+                    },
+                    {
+                        "parid": 1295,
+                        "jbonum": "JN044",
+                        "uname": "晏为霞"
+                    },
+                    {
+                        "parid": 1242,
+                        "jbonum": "JN003",
+                        "uname": "柴德香"
+                    },
+                    {
+                        "parid": 1252,
+                        "jbonum": "JN009",
+                        "uname": "薛春红"
+                    },
+                    {
+                        "parid": 1329,
+                        "jbonum": "JN073",
+                        "uname": "王佳怡"
+                    },
+                    {
+                        "parid": 1348,
+                        "jbonum": "JN090",
+                        "uname": "巩亚宁"
+                    },
+                    {
+                        "parid": 1289,
+                        "jbonum": "JN039",
+                        "uname": "张玉洁"
+                    },
+                    {
+                        "parid": 1322,
+                        "jbonum": "JN066",
+                        "uname": "代新英"
+                    },
+                    {
+                        "parid": 1344,
+                        "jbonum": "JN086",
+                        "uname": "张莹"
+                    },
+                    {
+                        "parid": 1314,
+                        "jbonum": "JN059",
+                        "uname": "吴有雪"
+                    },
+                    {
+                        "parid": 1300,
+                        "jbonum": "JN048",
+                        "uname": "刘伟莉"
+                    },
+                    {
+                        "parid": 1342,
+                        "jbonum": "JN084",
+                        "uname": "于金玲"
+                    },
+                    {
+                        "parid": 1347,
+                        "jbonum": "JN089",
+                        "uname": "马紫维"
+                    },
+                    {
+                        "parid": 1338,
+                        "jbonum": "JN081",
+                        "uname": "庞海霞"
+                    },
+                    {
+                        "parid": 1262,
+                        "jbonum": "JN018",
+                        "uname": "朱静"
+                    },
+                    {
+                        "parid": 1333,
+                        "jbonum": "JN076",
+                        "uname": "王呈呈"
+                    },
+                    {
+                        "parid": 1354,
+                        "jbonum": "JN096",
+                        "uname": "郑金兰"
+                    },
+                    {
+                        "parid": 1033,
+                        "jbonum": "5001A",
+                        "uname": "济南"
+                    },
+                    {
+                        "parid": 1326,
+                        "jbonum": "JN070",
+                        "uname": "高娟"
+                    },
+                    {
+                        "parid": 1274,
+                        "jbonum": "JN026",
+                        "uname": "吕婷"
+                    },
+                    {
+                        "parid": 1359,
+                        "jbonum": "JN100",
+                        "uname": "陆玲玲"
+                    },
+                    {
+                        "parid": 1258,
+                        "jbonum": "JN014",
+                        "uname": "巩云霞"
+                    },
+                    {
+                        "parid": 1335,
+                        "jbonum": "JN078",
+                        "uname": "孙丽娟"
+                    },
+                    {
+                        "parid": 1309,
+                        "jbonum": "JN055",
+                        "uname": "张安琪"
+                    },
+                    {
+                        "parid": 1310,
+                        "jbonum": "JN056",
+                        "uname": "胡金凤"
+                    },
+                    {
+                        "parid": 1272,
+                        "jbonum": "JN024",
+                        "uname": "赵军"
+                    },
+                    {
+                        "parid": 1253,
+                        "jbonum": "JN010",
+                        "uname": "成芹芹"
+                    },
+                    {
+                        "parid": 1363,
+                        "jbonum": "JN103",
+                        "uname": "张建红"
+                    },
+                    {
+                        "parid": 1260,
+                        "jbonum": "JN016",
+                        "uname": "邓忠露"
+                    },
+                    {
+                        "parid": 1365,
+                        "jbonum": "JN105",
+                        "uname": "张香"
+                    },
+                    {
+                        "parid": 1358,
+                        "jbonum": "JN099",
+                        "uname": "杨聪伟"
+                    },
+                    {
+                        "parid": 1292,
+                        "jbonum": "JN042",
+                        "uname": "赵红"
+                    },
+                    {
+                        "parid": 1364,
+                        "jbonum": "JN104",
+                        "uname": "郭玲玲"
+                    },
+                    {
+                        "parid": 1336,
+                        "jbonum": "JN079",
+                        "uname": "季诚诚"
+                    },
+                    {
+                        "parid": 1345,
+                        "jbonum": "JN087",
+                        "uname": "范玉冰"
+                    },
+                    {
+                        "parid": 1270,
+                        "jbonum": "JN023",
+                        "uname": "郭玲"
+                    },
+                    {
+                        "parid": 1316,
+                        "jbonum": "JN061",
+                        "uname": "袁洪健"
+                    },
+                    {
+                        "parid": 1035,
+                        "jbonum": "5003A",
+                        "uname": "淄博"
+                    },
+                    {
+                        "parid": 1350,
+                        "jbonum": "JN092",
+                        "uname": "潘树青"
+                    },
+                    {
+                        "parid": 1285,
+                        "jbonum": "JN036",
+                        "uname": "王妍"
+                    },
+                    {
+                        "parid": 1334,
+                        "jbonum": "JN077",
+                        "uname": "张庆梅"
+                    },
+                    {
+                        "parid": 1037,
+                        "jbonum": "5005A",
+                        "uname": "东营"
+                    },
+                    {
+                        "parid": 1361,
+                        "jbonum": "JN101",
+                        "uname": "王学辉"
+                    },
+                    {
+                        "parid": 1349,
+                        "jbonum": "JN091",
+                        "uname": "李海洁"
+                    },
+                    {
+                        "parid": 1346,
+                        "jbonum": "JN088",
+                        "uname": "马梦丽"
+                    },
+                    {
+                        "parid": 1328,
+                        "jbonum": "JN072",
+                        "uname": "刘晓"
+                    },
+                    {
+                        "parid": 1311,
+                        "jbonum": "JN057",
+                        "uname": "王延梅"
+                    },
+                    {
+                        "parid": 1241,
+                        "jbonum": "JN002",
+                        "uname": "王娟"
+                    },
+                    {
+                        "parid": 1318,
+                        "jbonum": "JN063",
+                        "uname": "姚娟"
+                    },
+                    {
+                        "parid": 1280,
+                        "jbonum": "JN031",
+                        "uname": "窦本晶"
+                    },
+                    {
+                        "parid": 1317,
+                        "jbonum": "JN062",
+                        "uname": "耿少芳"
+                    },
+                    {
+                        "parid": 1290,
+                        "jbonum": "JN040",
+                        "uname": "王传珍"
+                    },
+                    {
+                        "parid": 1353,
+                        "jbonum": "JN095",
+                        "uname": "张淑杰"
+                    },
+                    {
+                        "parid": 1340,
+                        "jbonum": "JN083",
+                        "uname": "范洪婕"
+                    },
+                    {
+                        "parid": 1324,
+                        "jbonum": "JN068",
+                        "uname": "王丽丽"
+                    },
+                    {
+                        "parid": 1273,
+                        "jbonum": "JN025",
+                        "uname": "张静"
+                    },
+                    {
+                        "parid": 1313,
+                        "jbonum": "JN058",
+                        "uname": "金清芬"
+                    },
+                    {
+                        "parid": 1323,
+                        "jbonum": "JN067",
+                        "uname": "王晓英"
+                    },
+                    {
+                        "parid": 1259,
+                        "jbonum": "JN015",
+                        "uname": "李红丹"
+                    },
+                    {
+                        "parid": 1278,
+                        "jbonum": "JN029",
+                        "uname": "郎粉"
+                    },
+                    {
+                        "parid": 1305,
+                        "jbonum": "JN052",
+                        "uname": "陈美倩"
+                    },
+                    {
+                        "parid": 1287,
+                        "jbonum": "JN037",
+                        "uname": "牛仑仑"
+                    },
+                    {
+                        "parid": 1264,
+                        "jbonum": "JN020",
+                        "uname": "杨爱琴"
+                    },
+                    {
+                        "parid": 1040,
+                        "jbonum": "5008A",
+                        "uname": "聊城"
+                    },
+                    {
+                        "parid": 1277,
+                        "jbonum": "JN028",
+                        "uname": "胡贝贝"
+                    },
+                    {
+                        "parid": 1261,
+                        "jbonum": "JN017",
+                        "uname": "常新园"
+                    },
+                    {
+                        "parid": 1281,
+                        "jbonum": "JN032",
+                        "uname": "朱玉昆"
+                    },
+                    {
+                        "parid": 1267,
+                        "jbonum": "JN022",
+                        "uname": "张蒙蒙"
+                    },
+                    {
+                        "parid": 1297,
+                        "jbonum": "JN046",
+                        "uname": "王静"
+                    },
+                    {
+                        "parid": 1283,
+                        "jbonum": "JN034",
+                        "uname": "李玮"
+                    },
+                    {
+                        "parid": 1255,
+                        "jbonum": "JN012",
+                        "uname": "杨守花"
+                    },
+                    {
+                        "parid": 686,
+                        "jbonum": "DJNAD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 1288,
+                        "jbonum": "JN038",
+                        "uname": "郇潇"
+                    },
+                    {
+                        "parid": 1246,
+                        "jbonum": "JN007",
+                        "uname": "于丽丽"
+                    },
+                    {
+                        "parid": 1240,
+                        "jbonum": "JN001",
+                        "uname": "郑克荣"
+                    }
+                ]
+            },
+            {
+                "depid": 687,
+                "depname": "哈市分公司",
+                "sysUnits": [
+                    {
+                        "parid": 1155,
+                        "jbonum": "HS097",
+                        "uname": "刘治"
+                    },
+                    {
+                        "parid": 1081,
+                        "jbonum": "HS032",
+                        "uname": "高春红"
+                    },
+                    {
+                        "parid": 1086,
+                        "jbonum": "HS037",
+                        "uname": "平立颖"
+                    },
+                    {
+                        "parid": 988,
+                        "jbonum": "4012A",
+                        "uname": "延边"
+                    },
+                    {
+                        "parid": 1116,
+                        "jbonum": "HS064",
+                        "uname": "齐苹"
+                    },
+                    {
+                        "parid": 1158,
+                        "jbonum": "HS100",
+                        "uname": "吕婷"
+                    },
+                    {
+                        "parid": 1104,
+                        "jbonum": "HS053",
+                        "uname": "刘欢"
+                    },
+                    {
+                        "parid": 968,
+                        "jbonum": "4003A",
+                        "uname": "大庆"
+                    },
+                    {
+                        "parid": 1160,
+                        "jbonum": "HS102",
+                        "uname": "李玉华"
+                    },
+                    {
+                        "parid": 1156,
+                        "jbonum": "HS098",
+                        "uname": "许同辉"
+                    },
+                    {
+                        "parid": 1161,
+                        "jbonum": "HS103",
+                        "uname": "窦晓平"
+                    },
+                    {
+                        "parid": 1052,
+                        "jbonum": "HS006",
+                        "uname": "卢丽娟"
+                    },
+                    {
+                        "parid": 1138,
+                        "jbonum": "HS082",
+                        "uname": "王丹"
+                    },
+                    {
+                        "parid": 1115,
+                        "jbonum": "HS063",
+                        "uname": "董艳虹"
+                    },
+                    {
+                        "parid": 1133,
+                        "jbonum": "HS078",
+                        "uname": "张元元"
+                    },
+                    {
+                        "parid": 1142,
+                        "jbonum": "HS086",
+                        "uname": "池月玲"
+                    },
+                    {
+                        "parid": 1121,
+                        "jbonum": "HS067",
+                        "uname": "喻佩佩"
+                    },
+                    {
+                        "parid": 1135,
+                        "jbonum": "HS079",
+                        "uname": "于文艳"
+                    },
+                    {
+                        "parid": 972,
+                        "jbonum": "4007A",
+                        "uname": "沈阳"
+                    },
+                    {
+                        "parid": 1154,
+                        "jbonum": "HS096",
+                        "uname": "缪戈"
+                    },
+                    {
+                        "parid": 1619,
+                        "jbonum": "HS042",
+                        "uname": "王伟义"
+                    },
+                    {
+                        "parid": 1128,
+                        "jbonum": "HS073",
+                        "uname": "杨丹丹"
+                    },
+                    {
+                        "parid": 1083,
+                        "jbonum": "HS034",
+                        "uname": "周海英"
+                    },
+                    {
+                        "parid": 1122,
+                        "jbonum": "HS068",
+                        "uname": "麻东旭"
+                    },
+                    {
+                        "parid": 1076,
+                        "jbonum": "HS027",
+                        "uname": "崔蕾"
+                    },
+                    {
+                        "parid": 1054,
+                        "jbonum": "HS007",
+                        "uname": "杜金荣"
+                    },
+                    {
+                        "parid": 971,
+                        "jbonum": "4006A",
+                        "uname": "佳木斯"
+                    },
+                    {
+                        "parid": 1064,
+                        "jbonum": "HS016",
+                        "uname": "张敏"
+                    },
+                    {
+                        "parid": 1140,
+                        "jbonum": "HS084",
+                        "uname": "李飞"
+                    },
+                    {
+                        "parid": 1070,
+                        "jbonum": "HS022",
+                        "uname": "关宇"
+                    },
+                    {
+                        "parid": 1085,
+                        "jbonum": "HS036",
+                        "uname": "崔月红"
+                    },
+                    {
+                        "parid": 1108,
+                        "jbonum": "HS056",
+                        "uname": "闫晓莉"
+                    },
+                    {
+                        "parid": 1159,
+                        "jbonum": "HS101",
+                        "uname": "万秀娥"
+                    },
+                    {
+                        "parid": 1082,
+                        "jbonum": "HS033",
+                        "uname": "李菲"
+                    },
+                    {
+                        "parid": 1132,
+                        "jbonum": "HS077",
+                        "uname": "石悦"
+                    },
+                    {
+                        "parid": 1618,
+                        "jbonum": "HS041",
+                        "uname": "王艳敏"
+                    },
+                    {
+                        "parid": 1057,
+                        "jbonum": "HS010",
+                        "uname": "杨山山"
+                    },
+                    {
+                        "parid": 1080,
+                        "jbonum": "HS031",
+                        "uname": "王海霞"
+                    },
+                    {
+                        "parid": 1084,
+                        "jbonum": "HS035",
+                        "uname": "宋浩"
+                    },
+                    {
+                        "parid": 1056,
+                        "jbonum": "HS009",
+                        "uname": "王艳"
+                    },
+                    {
+                        "parid": 1125,
+                        "jbonum": "HS070",
+                        "uname": "张薇"
+                    },
+                    {
+                        "parid": 1623,
+                        "jbonum": "HS015",
+                        "uname": "张蕾"
+                    },
+                    {
+                        "parid": 1131,
+                        "jbonum": "HS076",
+                        "uname": "李宏伟"
+                    },
+                    {
+                        "parid": 969,
+                        "jbonum": "4004A",
+                        "uname": "鸡西"
+                    },
+                    {
+                        "parid": 1101,
+                        "jbonum": "HS050",
+                        "uname": "王玉秀"
+                    },
+                    {
+                        "parid": 973,
+                        "jbonum": "4008A",
+                        "uname": "本溪"
+                    },
+                    {
+                        "parid": 1103,
+                        "jbonum": "HS052",
+                        "uname": "吴媛"
+                    },
+                    {
+                        "parid": 1051,
+                        "jbonum": "HS005",
+                        "uname": "孙丽"
+                    },
+                    {
+                        "parid": 1068,
+                        "jbonum": "HS020",
+                        "uname": "张雪婷"
+                    },
+                    {
+                        "parid": 1205,
+                        "jbonum": "HS058",
+                        "uname": "彭千会"
+                    },
+                    {
+                        "parid": 1208,
+                        "jbonum": "HS061",
+                        "uname": "王颖"
+                    },
+                    {
+                        "parid": 1097,
+                        "jbonum": "HS047",
+                        "uname": "罗凤仙"
+                    },
+                    {
+                        "parid": 1123,
+                        "jbonum": "HS069",
+                        "uname": "王丽娜"
+                    },
+                    {
+                        "parid": 966,
+                        "jbonum": "4001A",
+                        "uname": "哈尔滨"
+                    },
+                    {
+                        "parid": 1136,
+                        "jbonum": "HS080",
+                        "uname": "张丽娟"
+                    },
+                    {
+                        "parid": 975,
+                        "jbonum": "4010A",
+                        "uname": "抚顺"
+                    },
+                    {
+                        "parid": 1148,
+                        "jbonum": "HS091",
+                        "uname": "黄秋"
+                    },
+                    {
+                        "parid": 1617,
+                        "jbonum": "HS040",
+                        "uname": "刘甜甜"
+                    },
+                    {
+                        "parid": 688,
+                        "jbonum": "CHSAD",
+                        "uname": "管理员"
+                    },
+                    {
+                        "parid": 1615,
+                        "jbonum": "HS038",
+                        "uname": "张丽影"
+                    },
+                    {
+                        "parid": 1209,
+                        "jbonum": "HS062",
+                        "uname": "张野"
+                    },
+                    {
+                        "parid": 1130,
+                        "jbonum": "HS075",
+                        "uname": "艾欢"
+                    },
+                    {
+                        "parid": 1073,
+                        "jbonum": "HS024",
+                        "uname": "陶珊珊"
+                    },
+                    {
+                        "parid": 1150,
+                        "jbonum": "HS093",
+                        "uname": "唐齐"
+                    },
+                    {
+                        "parid": 967,
+                        "jbonum": "4002A",
+                        "uname": "绥化"
+                    },
+                    {
+                        "parid": 1074,
+                        "jbonum": "HS025",
+                        "uname": "李娜"
+                    },
+                    {
+                        "parid": 1102,
+                        "jbonum": "HS051",
+                        "uname": "王宁"
+                    },
+                    {
+                        "parid": 1621,
+                        "jbonum": "HS013",
+                        "uname": "赵维艳"
+                    },
+                    {
+                        "parid": 1139,
+                        "jbonum": "HS083",
+                        "uname": "李艳"
+                    },
+                    {
+                        "parid": 1066,
+                        "jbonum": "HS018",
+                        "uname": "陈丽英"
+                    },
+                    {
+                        "parid": 1207,
+                        "jbonum": "HS060",
+                        "uname": "沈广新"
+                    },
+                    {
+                        "parid": 1098,
+                        "jbonum": "HS048",
+                        "uname": "刘金玲"
+                    },
+                    {
+                        "parid": 1048,
+                        "jbonum": "HS003",
+                        "uname": "张春会"
+                    },
+                    {
+                        "parid": 1067,
+                        "jbonum": "HS019",
+                        "uname": "马迎迎"
+                    },
+                    {
+                        "parid": 1143,
+                        "jbonum": "HS087",
+                        "uname": "李雪峰"
+                    },
+                    {
+                        "parid": 970,
+                        "jbonum": "4005A",
+                        "uname": "牡丹江"
+                    },
+                    {
+                        "parid": 1055,
+                        "jbonum": "HS008",
+                        "uname": "刘艳霞"
+                    },
+                    {
+                        "parid": 1137,
+                        "jbonum": "HS081",
+                        "uname": "吕鑫"
+                    },
+                    {
+                        "parid": 974,
+                        "jbonum": "4009A",
+                        "uname": "铁岭"
+                    },
+                    {
+                        "parid": 1147,
+                        "jbonum": "HS090",
+                        "uname": "岳忠东"
+                    },
+                    {
+                        "parid": 1079,
+                        "jbonum": "HS030",
+                        "uname": "张济华"
+                    },
+                    {
+                        "parid": 1120,
+                        "jbonum": "HS066",
+                        "uname": "尤欢欢"
+                    },
+                    {
+                        "parid": 1129,
+                        "jbonum": "HS074",
+                        "uname": "汪翠萍"
+                    },
+                    {
+                        "parid": 1095,
+                        "jbonum": "HS045",
+                        "uname": "李艳杰"
+                    },
+                    {
+                        "parid": 1146,
+                        "jbonum": "HS089",
+                        "uname": "包诗瑶"
+                    },
+                    {
+                        "parid": 1107,
+                        "jbonum": "HS055",
+                        "uname": "张红"
+                    },
+                    {
+                        "parid": 1126,
+                        "jbonum": "HS071",
+                        "uname": "周彦平"
+                    },
+                    {
+                        "parid": 1046,
+                        "jbonum": "HS001",
+                        "uname": "刘洋"
+                    },
+                    {
+                        "parid": 1157,
+                        "jbonum": "HS099",
+                        "uname": "许静"
+                    },
+                    {
+                        "parid": 1094,
+                        "jbonum": "HS044",
+                        "uname": "毕亚娟"
+                    },
+                    {
+                        "parid": 1622,
+                        "jbonum": "HS014",
+                        "uname": "王爽"
+                    },
+                    {
+                        "parid": 1050,
+                        "jbonum": "HS004",
+                        "uname": "孙桂艳"
+                    },
+                    {
+                        "parid": 1099,
+                        "jbonum": "HS049",
+                        "uname": "刘波"
+                    },
+                    {
+                        "parid": 1141,
+                        "jbonum": "HS085",
+                        "uname": "刘畅"
+                    },
+                    {
+                        "parid": 1206,
+                        "jbonum": "HS059",
+                        "uname": "盛丹丹"
+                    },
+                    {
+                        "parid": 1093,
+                        "jbonum": "HS043",
+                        "uname": "李卓"
+                    },
+                    {
+                        "parid": 1069,
+                        "jbonum": "HS021",
+                        "uname": "王欢欢"
+                    },
+                    {
+                        "parid": 1149,
+                        "jbonum": "HS092",
+                        "uname": "李珊珊"
+                    },
+                    {
+                        "parid": 1078,
+                        "jbonum": "HS029",
+                        "uname": "高珊珊"
+                    },
+                    {
+                        "parid": 1106,
+                        "jbonum": "HS054",
+                        "uname": "高珊珊"
+                    },
+                    {
+                        "parid": 1145,
+                        "jbonum": "HS088",
+                        "uname": "苏杭"
+                    },
+                    {
+                        "parid": 1109,
+                        "jbonum": "HS057",
+                        "uname": "施小凤"
+                    },
+                    {
+                        "parid": 1096,
+                        "jbonum": "HS046",
+                        "uname": "韦萍"
+                    },
+                    {
+                        "parid": 1620,
+                        "jbonum": "HS012",
+                        "uname": "廉佰荣"
+                    },
+                    {
+                        "parid": 1153,
+                        "jbonum": "HS095",
+                        "uname": "左园"
+                    },
+                    {
+                        "parid": 976,
+                        "jbonum": "4011A",
+                        "uname": "伊春"
+                    },
+                    {
+                        "parid": 1058,
+                        "jbonum": "HS011",
+                        "uname": "李佳"
+                    },
+                    {
+                        "parid": 1072,
+                        "jbonum": "HS023",
+                        "uname": "王丽莹"
+                    },
+                    {
+                        "parid": 1127,
+                        "jbonum": "HS072",
+                        "uname": "刘春影"
+                    },
+                    {
+                        "parid": 1047,
+                        "jbonum": "HS002",
+                        "uname": "吕宏霞"
+                    },
+                    {
+                        "parid": 1077,
+                        "jbonum": "HS028",
+                        "uname": "徐昔阳"
+                    },
+                    {
+                        "parid": 1152,
+                        "jbonum": "HS094",
+                        "uname": "杜丹"
+                    },
+                    {
+                        "parid": 1117,
+                        "jbonum": "HS065",
+                        "uname": "何丹丹"
+                    },
+                    {
+                        "parid": 999,
+                        "jbonum": "4013A",
+                        "uname": "赤峰"
+                    },
+                    {
+                        "parid": 1075,
+                        "jbonum": "HS026",
+                        "uname": "王迎"
+                    },
+                    {
+                        "parid": 1616,
+                        "jbonum": "HS039",
+                        "uname": "孙丽"
+                    },
+                    {
+                        "parid": 1065,
+                        "jbonum": "HS017",
+                        "uname": "杨青"
+                    }
+                ]
+            },
+            {
+                "depid": 1714,
+                "depname": "贝娜庄园",
+                "sysUnits": [
+                    {
+                        "parid": 1715,
+                        "jbonum": "800271753974417",
+                        "uname": "贝娜庄园"
+                    },
+                    {
+                        "parid": 1717,
+                        "jbonum": "800272",
+                        "uname": "贝娜庄园仓库"
+                    },
+                    {
+                        "parid": 1716,
+                        "jbonum": "800271",
+                        "uname": "郑力"
+                    }
+                ]
+            },
+            {
+                "depid": 1719,
+                "depname": "贝娜庄园",
+                "sysUnits": [
+                    {
+                        "parid": 1722,
+                        "jbonum": "12",
+                        "uname": "贝娜庄园仓库"
+                    },
+                    {
+                        "parid": 1720,
+                        "jbonum": "11753974417",
+                        "uname": "贝娜庄园"
+                    },
+                    {
+                        "parid": 1721,
+                        "jbonum": "11",
+                        "uname": "郑力"
+                    }
+                ]
+            },
+            {
+                "depid": 1729,
+                "depname": "罗胡代理商",
+                "sysUnits": [
+                    {
+                        "parid": 1742,
+                        "jbonum": "1000801",
+                        "uname": "3333"
+                    },
+                    {
+                        "parid": 1730,
+                        "jbonum": "100084001",
+                        "uname": "陈生"
+                    },
+                    {
+                        "parid": 1739,
+                        "jbonum": "10008GDQD01",
+                        "uname": "3333"
+                    },
+                    {
+                        "parid": 1738,
+                        "jbonum": "10008004",
+                        "uname": "1234"
+                    },
+                    {
+                        "parid": 1740,
+                        "jbonum": "100081000801",
+                        "uname": "3333"
+                    },
+                    {
+                        "parid": 1737,
+                        "jbonum": "10008003",
+                        "uname": "1234"
+                    },
+                    {
+                        "parid": 1741,
+                        "jbonum": "1000810008001",
+                        "uname": "3333"
+                    }
+                ]
+            },
+            {
+                "depid": 1744,
+                "depname": "上海贝友信息科技",
+                "sysUnits": [
+                    {
+                        "parid": 1745,
+                        "jbonum": "ADMIN",
+                        "uname": "ADMIN"
+                    }
+                ]
+            },
+            {
+                "depid": 1747,
+                "depname": "上海贝友科技信息",
+                "sysUnits": [
+                    {
+                        "parid": 1748,
+                        "jbonum": "ADMIN1",
+                        "uname": "ADMIN1"
+                    }
+                ]
+            },
+            {
+                "depid": 1750,
+                "depname": "上海贝友信息科技1",
+                "sysUnits": [
+                    {
+                        "parid": 1751,
+                        "jbonum": "SFSDF",
+                        "uname": "SFSDF"
+                    }
+                ]
+            },
+            {
+                "depid": 1753,
+                "depname": "3333",
+                "sysUnits": [
+                    {
+                        "parid": 1754,
+                        "jbonum": "ADMIN2",
+                        "uname": "ADMIN2"
+                    }
+                ]
+            },
+            {
+                "depid": 1756,
+                "depname": "高邦服饰",
+                "sysUnits": [
+                    {
+                        "parid": 1757,
+                        "jbonum": "ADMIN4",
+                        "uname": "ADMIN4"
+                    }
+                ]
+            },
+            {
+                "depid": 1759,
+                "depname": "123",
+                "sysUnits": [
+                    {
+                        "parid": 1760,
+                        "jbonum": "123",
+                        "uname": "123"
+                    }
+                ]
+            },
+            {
+                "depid": 1766,
+                "depname": "贝娜庄园",
+                "sysUnits": [
+                    {
+                        "parid": 1770,
+                        "jbonum": "21",
+                        "uname": "21"
+                    }
+                ]
+            },
+            {
+                "depid": 1772,
+                "depname": "上海",
+                "sysUnits": [
+                    {
+                        "parid": 1773,
+                        "jbonum": "WW",
+                        "uname": "上海"
+                    }
+                ]
+            },
+            {
+                "depid": 1775,
+                "depname": "上海军",
+                "sysUnits": [
+                    {
+                        "parid": 1776,
+                        "jbonum": "ADMIN3",
+                        "uname": "郑力"
+                    }
+                ]
+            },
+            {
+                "depid": 1778,
+                "depname": "www",
+                "sysUnits": [
+                    {
+                        "parid": 1779,
+                        "jbonum": "324324",
+                        "uname": "WW"
+                    }
+                ]
+            },
+            {
+                "depid": 1781,
+                "depname": "上海荣生鞋业有限公司",
+                "sysUnits": [
+                    {
+                        "parid": 1782,
+                        "jbonum": "ADMINADMIN",
+                        "uname": "郑荣"
+                    }
+                ]
+            },
+            {
+                "depid": 1785,
+                "depname": "浙江胜达",
+                "sysUnits": [
+                    {
+                        "parid": 1786,
+                        "jbonum": "AA",
+                        "uname": "郑力"
+                    }
+                ]
+            },
+            {
+                "depid": 1790,
+                "depname": "浙江山水鞋业有限公司",
+                "sysUnits": [
+                    {
+                        "parid": 1791,
+                        "jbonum": "23001",
+                        "uname": "郑力"
+                    }
+                ]
+            },
+            {
+                "depid": 1792,
+                "depname": "浙江宏胜",
+                "sysUnits": [
+                    {
+                        "parid": 1793,
+                        "jbonum": "2222",
+                        "uname": "DD"
+                    }
+                ]
+            },
+            {
+                "depid": 1795,
+                "depname": "郑安迪",
+                "sysUnits": [
+                    {
+                        "parid": 1796,
+                        "jbonum": "80002001",
+                        "uname": "郑安迪"
+                    }
+                ]
+            },
+            {
+                "depid": 1798,
+                "depname": "煦捷女鞋",
+                "sysUnits": [
+                    {
+                        "parid": 1799,
+                        "jbonum": "24001",
+                        "uname": "煦捷女鞋"
+                    }
+                ]
+            },
+            {
+                "depid": 1655,
+                "depname": "贵阳（薛孝娒）",
+                "sysUnits": [
+                    {
+                        "parid": 1665,
+                        "jbonum": "GGYW03",
+                        "uname": "贵阳礼品仓"
+                    },
+                    {
+                        "parid": 1664,
+                        "jbonum": "GGYW02",
+                        "uname": "贵阳次品仓"
+                    },
+                    {
+                        "parid": 1667,
+                        "jbonum": "GGYW05",
+                        "uname": "贵阳中转仓"
+                    },
+                    {
+                        "parid": 1666,
+                        "jbonum": "GGYW04",
+                        "uname": "贵阳电脑仓"
+                    },
+                    {
+                        "parid": 1689,
+                        "jbonum": "2018A",
+                        "uname": "铜仁"
+                    },
+                    {
+                        "parid": 1684,
+                        "jbonum": "GYWL01",
+                        "uname": "姚山"
+                    },
+                    {
+                        "parid": 1691,
+                        "jbonum": "2020A",
+                        "uname": "安顺"
+                    },
+                    {
+                        "parid": 1687,
+                        "jbonum": "2016A",
+                        "uname": "贵阳"
+                    },
+                    {
+                        "parid": 1678,
+                        "jbonum": "GGYQDB",
+                        "uname": "渠道部"
+                    },
+                    {
+                        "parid": 1677,
+                        "jbonum": "GGYWLB",
+                        "uname": "物流部"
+                    },
+                    {
+                        "parid": 1681,
+                        "jbonum": "GGYXXB",
+                        "uname": "信息部"
+                    },
+                    {
+                        "parid": 1700,
+                        "jbonum": "GYXX01",
+                        "uname": "周田杰"
+                    },
+                    {
+                        "parid": 1676,
+                        "jbonum": "GGYRSB",
+                        "uname": "人事部"
+                    },
+                    {
+                        "parid": 1668,
+                        "jbonum": "GGYW06",
+                        "uname": "贵阳样板仓"
+                    },
+                    {
+                        "parid": 1702,
+                        "jbonum": "GYYY01",
+                        "uname": "余涛"
+                    },
+                    {
+                        "parid": 1679,
+                        "jbonum": "GGYSPB",
+                        "uname": "商品部"
+                    },
+                    {
+                        "parid": 1706,
+                        "jbonum": "GYSP01",
+                        "uname": "倪勇"
+                    },
+                    {
+                        "parid": 1695,
+                        "jbonum": "2024A",
+                        "uname": "黔东南"
+                    },
+                    {
+                        "parid": 1693,
+                        "jbonum": "2022A",
+                        "uname": "黔南"
+                    },
+                    {
+                        "parid": 1688,
+                        "jbonum": "2017A",
+                        "uname": "遵义"
+                    },
+                    {
+                        "parid": 1663,
+                        "jbonum": "GGYW01",
+                        "uname": "贵阳正品仓"
+                    },
+                    {
+                        "parid": 1683,
+                        "jbonum": "GGYZJB",
+                        "uname": "总经办"
+                    },
+                    {
+                        "parid": 1694,
+                        "jbonum": "2023A",
+                        "uname": "黔西南"
+                    },
+                    {
+                        "parid": 1680,
+                        "jbonum": "GGYYYB",
+                        "uname": "运营部"
+                    },
+                    {
+                        "parid": 1701,
+                        "jbonum": "GYRS01",
+                        "uname": "杜雅娟"
+                    },
+                    {
+                        "parid": 1692,
+                        "jbonum": "2021A",
+                        "uname": "毕节"
+                    },
+                    {
+                        "parid": 1675,
+                        "jbonum": "GGYCWB",
+                        "uname": "财务部"
+                    },
+                    {
+                        "parid": 1690,
+                        "jbonum": "2019A",
+                        "uname": "六盘水"
+                    }
+                ]
+            }
+        ]
+    }
+}

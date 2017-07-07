@@ -1,0 +1,52 @@
+{
+  "spgStaffings": [
+    {
+      "programId": "402809815d16c2ef015d16c3cc070009",
+      "parciId": "402809815d16c2ef015d16c3cc060007",
+      "userId": 530,
+      "seatNumber": "7排6座"
+    },
+    {
+      "programId": "402809815d16c2ef015d16c3cc070009",
+      "parciId": "402809815d16c2ef015d16c3cc070008",
+      "userId": 534,
+      "seatNumber": "9排3座"
+    },
+    {
+      "programId": "402809815d16c2ef015d16c3cc07000a",
+      "parciId": "402809815d16c2ef015d16c3cc060007",
+      "userId": 530,
+      "seatNumber": "8排10座"
+    },
+    {
+      "programId": "402809815d16c2ef015d16c3cc07000a",
+      "parciId": "402809815d16c2ef015d16c3cc070008",
+      "userId": 534,
+      "seatNumber": "2排1座"
+    },
+    {
+      "programId": "402809815d16c2ef015d16c3cc07000b",
+      "parciId": "402809815d16c2ef015d16c3cc060007",
+      "userId": 530,
+      "seatNumber": "7排6座"
+    },
+    {
+      "programId": "402809815d16c2ef015d16c3cc07000b",
+      "parciId": "402809815d16c2ef015d16c3cc070008",
+      "userId": 534,
+      "seatNumber": "7排6座"
+    },
+    {
+      "programId": "402809815d16c2ef015d16c3cc07000c",
+      "parciId": "402809815d16c2ef015d16c3cc060007",
+      "userId": 530,
+      "seatNumber": "无座"
+    },
+    {
+      "programId": "402809815d16c2ef015d16c3cc07000c",
+      "parciId": "402809815d16c2ef015d16c3cc070008",
+      "userId": 534,
+      "seatNumber": "无座"
+    }
+  ]
+}

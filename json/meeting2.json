@@ -1,0 +1,141 @@
+{
+  "meetingId": "2",
+  "meetingName": "代理商新年动员大会",
+  "startTime": "2017-06-26 10:00",
+  "endTime": "2017-06-28 10:00",
+  "meetingRequest": "记录好会议纪要",
+  "spgParticipants": [
+    {
+      "userId": 530,
+      "meetingId": "1",
+      "belongsArea": null,
+      "belongsShop": "广州分公司",
+      "phoneNumber": null,
+      "remarks": null
+    },
+    {
+      "userId": 543,
+      "meetingId": "1",
+      "belongsArea": null,
+      "belongsShop": "广州分公司",
+      "phoneNumber": null,
+      "remarks": null
+    }
+  ],
+  "spgPrograms": [
+    {
+      "programId": "5",
+      "meetingId": "2",
+      "programName": "唱歌",
+      "startTime": "2017-06-29 10:00",
+      "endTime": "2017-07-20 10:00",
+      "programAddress": "上海大剧院",
+      "remarks": "请清好嗓门",
+      "spgStaffings": [
+        {
+          "staffingId": "9",
+          "programId": "5",
+          "userId": 530,
+          "seatNumber": "7排6座"
+        },
+        {
+          "staffingId": "10",
+          "programId": "5",
+          "userId": 534,
+          "seatNumber": "9排3座"
+        }
+      ]
+    },
+    {
+      "programId": "6",
+      "meetingId": "2",
+      "programName": "跳舞",
+      "startTime": "2017-08-01 10:00",
+      "endTime": "2017-08-03 10:00",
+      "programAddress": "上海市民中心",
+      "remarks": "不要穿牛仔裤",
+      "spgStaffings": [
+        {
+          "staffingId": "11",
+          "programId": "6",
+          "userId": 530,
+          "seatNumber": "8排10座"
+        },
+        {
+          "staffingId": "12",
+          "programId": "6",
+          "userId": 534,
+          "seatNumber": "2排1座"
+        }
+      ]
+    }
+  ],
+  "spgHotels": [
+    {
+      "hotelId": "3",
+      "meetingId": "2",
+      "hotelName": "如家",
+      "hotelAddress": "民心路12号",
+      "spgAccommodations": [
+        {
+          "adId": "1",
+          "hotelId": "1",
+          "userId": 530,
+          "roomNumber": 808
+        }
+      ]
+    },
+    {
+      "hotelId": "4",
+      "meetingId": "2",
+      "hotelName": "7天",
+      "hotelAddress": "江锦路20号",
+      "spgAccommodations": [
+        {
+          "adId": "2",
+          "hotelId": "2",
+          "userId": 543,
+          "roomNumber": 606
+        }
+      ]
+    }
+  ],
+  "spgConferenceStaffs": [
+    {
+      "cfId": "7",
+      "meetingId": "2",
+      "name": "玉米汁",
+      "phoneNumber": "1234567890",
+      "programType": "一般日程",
+      "programNo": "5",
+      "remarks": "晚餐"
+    },
+    {
+      "cfId": "8",
+      "meetingId": "2",
+      "name": "候雨晨",
+      "phoneNumber": "1234567890",
+      "programType": "一般日程",
+      "programNo": "6",
+      "remarks": "会议"
+    },
+    {
+      "cfId": "9",
+      "meetingId": "2",
+      "name": "玉米汁",
+      "phoneNumber": "1234567890",
+      "programType": "住宿",
+      "programNo": "3",
+      "remarks": "总结会议"
+    },
+    {
+      "cfId": "10",
+      "meetingId": "2",
+      "name": "何立峰",
+      "phoneNumber": "1234567890",
+      "programType": "住宿",
+      "programNo": "4",
+      "remarks": "离场"
+    }
+  ]
+}

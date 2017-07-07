@@ -1,0 +1,24 @@
+{
+    "returnCode": "B0000",
+    "message": "sucess",
+    "date": "2017-07-07 11:10:31",
+    "result": {
+        "total": 2,
+        "rows": [
+            {
+                "meetingid": "1",
+                "meetingname": "集团1季度总结大会dadasdsadasa",
+                "meetingstate": "已结束",
+                "starttime": "2017-06-26 10:00",
+                "endtime": "2017-06-28 10:00"
+            },
+            {
+                "meetingid": "402809815d16c2ef015d16c3cbd50000",
+                "meetingname": "贝投科技年度表彰大会",
+                "meetingstate": "进行中",
+                "starttime": "2017-07-5 10:00",
+                "endtime": "2017-07-28 10:00"
+            }
+        ]
+    }
+}

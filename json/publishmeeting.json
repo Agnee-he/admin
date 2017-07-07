@@ -1,0 +1,84 @@
+{
+  "meetingName": "贝投科技年度表彰大会",
+  "startTime": "2017-07-5 10:00",
+  "endTime": "2017-07-28 10:00",
+  "meetingRequest": "各位小伙伴自备行李箱，钞票太多拿不了",
+  "spgParticipants": [
+    {
+      "userId": 530,
+      "belongsArea": null,
+      "belongsShop": "广州分公司",
+      "phoneNumber": null,
+      "remarks": null
+    },
+    {
+      "userId": 543,
+      "belongsArea": null,
+      "belongsShop": "广州分公司",
+      "phoneNumber": null,
+      "remarks": null
+    }
+  ],
+  "spgPrograms": [
+    {
+      "programName": "晚餐",
+      "startTime": "2017-07-05 20:00",
+      "endTime": "2017-07-05 22:00",
+      "programAddress": "蜡笔小新大酒店",
+      "remarks": "请带好身份证"
+    },
+    {
+      "programName": "会议",
+      "startTime": "2017-07-06 10:00",
+      "endTime": "2017-07-06 12:00",
+      "programAddress": "万银国际会议中心",
+      "remarks": "请带好入场牌"
+    },
+    {
+      "programName": "总结会议",
+      "startTime": "2017-07-27 16:00",
+      "endTime": "2017-07-27 18:00",
+      "programAddress": "柯南研究室",
+      "remarks": "请做好笔记"
+    },
+    {
+      "programName": "离场",
+      "startTime": "2017-07-28 10:00",
+      "endTime": "2017-07-28 10:00",
+      "programAddress": "珂卡夫总部大楼前",
+      "remarks": "请带好行李,准备离场"
+    }
+  ],
+  "spgHotels": [
+    {
+      "hotelName": "如家",
+      "hotelAddress": "民心路12号"
+    },
+    {
+      "hotelName": "7天",
+      "hotelAddress": "江锦路20号"
+    }
+  ],
+  "spgConferenceStaffs": [
+    {
+      "name": "玉米汁",
+      "phoneNumber": "1234567890",
+      "remarks": "晚餐、总结会议"
+    },
+    {
+      "name": "候雨晨",
+      "phoneNumber": "1234567890",
+      "remarks": "会议"
+    },
+    {
+      "name": "何立峰",
+      "phoneNumber": "1234567890",
+      "remarks": "离场"
+    },
+    {
+      "name": "陈诚",
+      "phoneNumber": "1234567890",
+      "remarks": "如家、7天"
+    }
+  ]
+}
