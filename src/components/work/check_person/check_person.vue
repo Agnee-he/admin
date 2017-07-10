@@ -71,7 +71,7 @@
           <el-button @click="toggleSelection([meeting_person[0],meeting_person[1],meeting_person[2],meeting_person[3],meeting_person[4],meeting_person[5],meeting_person[6],meeting_person[7],meeting_person[8], meeting_person[9]])">全选</el-button>
           <el-button @click="">导出</el-button>
         </div>
-        <paging class="paging"></paging>
+        <paging class="paging"  :total="1"></paging>
       </div>
     </el-row>
   </div>

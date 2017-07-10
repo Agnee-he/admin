@@ -6,13 +6,13 @@
           <el-row>
             <el-col :span="8"><div>
               <div class="input1">
-                <span>搜索会议：</span><el-input class="input" v-model="input" placeholder="请输入内容"></el-input>
+                <span>搜索会议：</span><el-input class="input" v-model="conferenceNamed" placeholder="请输入会议名称"></el-input>
               </div>
               <div class="input2">
                 <div class="block">
                   <span class="demonstration">会议时间：</span>
                   <el-date-picker class="input_date"
-                    v-model="value3"
+                    v-model="conferenceDated"
                     type="daterange"
                     placeholder="选择时间范围">
                   </el-date-picker>
@@ -22,9 +22,9 @@
             <el-col :span="8"><div>
               <div class="input3">
                 <span>会议状态：</span>
-                <el-select v-model="value" placeholder="请选择">
+                <el-select v-model="conferenceStated" placeholder="请选择">
                   <el-option
-                    v-for="item in options"
+                    v-for="item in conferenceState"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
@@ -34,7 +34,7 @@
             </div></el-col>
             <el-col :span="8"><div>
               <div class="btn">
-                <el-button><i class="el-icon-search"></i>搜索</el-button><el-button><i class="el-icon-loading"></i>重置</el-button><el-button @click="editMeetting"><i class="el-icon-plus"></i>发布会议</el-button>
+                <el-button @click="searchMeeting"><i class="el-icon-search"></i>搜索</el-button><el-button @click="test"><i class="el-icon-loading"></i>重置</el-button><el-button @click="editMeetting"><i class="el-icon-plus"></i>发布会议</el-button>
               </div>
             </div></el-col>
           </el-row>
@@ -77,7 +77,7 @@
               <template scope="scope">
                 <el-button
                   size="small"
-                  @click="openCheck">编辑</el-button>
+                  @click="openCheck(scope.row)">编辑</el-button>
                 <!--<el-button-->
                 <!--size="small"-->
                 <!--type="danger"-->
@@ -86,10 +86,17 @@
             </el-table-column>
           </el-table>
           <div style="margin-top: 10px">
-            <el-button @click="toggleSelection([conference[0],conference[1],conference[2],conference[3],conference[4],conference[5],conference[6],conference[7],conference[8], conference[9]])">全选</el-button><el-button><i class="el-icon-delete"></i>删除</el-button>
+            <el-button @click="toggleSelection(conference)">全选</el-button><el-button><i class="el-icon-delete"></i>删除</el-button>
           </div>
           <div class="paging">
-            <paging></paging>
+            <div class="block">
+              <el-pagination
+                :current-page.sync="conferencePage"
+                :page-size="10"
+                layout="total, prev, pager, next"
+                :total="conferenceTotal">
+              </el-pagination>
+            </div>
           </div>
         </div>
       </el-tab-pane>
@@ -328,14 +335,14 @@
           <el-row class="el_row">
             <el-col :span="3"><div class="logo"></div></el-col>
             <el-col :span="13"><div>
-              <p class="title_p">会议名字1</p>
-              <p class="content_p">NO.3333333333333</p>
+              <p class="title_p">{{checkMeeting.meetingName}}</p>
+              <p class="content_p">NO.{{checkMeeting.meetingId}}</p>
             </div></el-col>
             <el-col :span="8"><div>
               <div style="text-align: right">
                 <el-button @click="openEditMeetting"><i class="el-icon-edit"></i>编辑</el-button>
               </div>
-              <p  class="content_p" style="text-align: right"><span>2017-1-1 12:00</span> 发布</p>
+              <p  class="content_p" style="text-align: right"><span>{{checkMeeting.publishTime}}</span> 发布</p>
             </div></el-col>
           </el-row>
         </div>
@@ -346,23 +353,23 @@
         <div class="schedule">
           <div class="top">
             <p>会议日程：</p>
-            <p class="right"><span>xxxxxxxxx</span> 至 <span>xxxxxxxxxxxxx</span></p>
+            <p class="right"><span>{{checkMeeting.startTime}}</span> 至 <span>{{checkMeeting.endTime}}</span></p>
           </div>
           <div class="main">
             <table border="0" cellspacing="1" cellpadding="0" class="table" >
               <tr class="tr1"><th style="width: 50px;">步骤</th><th style="width: 120px;">日程名称</th><th style="width: 180px;">开始时间</th><th style="width: 180px;">结束时间</th><th>地址</th></tr>
             </table>
-            <table v-for="(item, index) in meetting_get" border="0" cellspacing="1" cellpadding="0" class="table" >
+            <table v-for="(item, index) in checkMeeting.spgPrograms" border="0" cellspacing="1" cellpadding="0" class="table" >
               <tr class="tr2" >
                 <td style="width: 50px;background-color: #EFF2F7;">{{index+1}}</td>
-                <td style="width: 120px;">{{item.name}}</td>
-                <td style="width: 180px;">{{item.stime}}</td>
-                <td style="width: 180px;">{{item.etime}}</td>
-                <td  colspan="2" style="overflow: hidden">{{item.address}}</td>
+                <td style="width: 120px;">{{item.programName}}</td>
+                <td style="width: 180px;">{{item.startTime}}</td>
+                <td style="width: 180px;">{{item.endTime}}</td>
+                <td  colspan="2" style="overflow: hidden">{{item.programAddress}}</td>
               </tr>
               <tr class="tr2" >
                 <td style="width: 50px;background-color: #EFF2F7;overflow: hidden">备注</td>
-                <td colspan="4">{{item.remark}}</td>
+                <td colspan="4">{{item.remarks}}</td>
                 <td style="background-color: #EFF2F7;">查看与会人员安排</td></tr>
             </table>
           </div>
@@ -377,14 +384,10 @@
                 <p>联系方式</p>
               </div></el-col>
               <el-col :span="21"><div class="right">
-                <ul>
+                <ul v-for="(item, index) in checkMeeting.spgConferenceStaffs">
                   <li>
-                    <p>xxxx</p>
-                    <p>12345678901</p>
-                  </li>
-                  <li>
-                    <p>xxxx</p>
-                    <p>12345678901</p>
+                    <p>{{item.name}}</p>
+                    <p>{{item.phoneNumber}}</p>
                   </li>
                 </ul>
               </div></el-col>
@@ -392,10 +395,20 @@
           </div>
         </div>
         <div class="request">
-          <p>会议要求：</p>
+          <p>会议要求：{{checkMeeting.meetingRequest}}</p>
         </div>
         <div class="stay">
           <p>住宿安排：</p>
+          <table border="0" cellspacing="1" cellpadding="0" class="table" >
+            <tr class="tr1"><th style="width: 50px;">编号</th><th style="width: 120px;">酒店名称</th><th style="width: 180px;">酒店地址</th></tr>
+          </table>
+          <table v-for="(item, index) in checkMeeting.spgHotels" border="0" cellspacing="1" cellpadding="0" class="table" >
+            <tr class="tr2" >
+              <td style="width: 50px;">{{index+1}}</td>
+              <td style="width: 120px;">{{item.hotelName}}</td>
+              <td style="width: 180px;">{{item.hotelAddress}}</td>
+            </tr>
+          </table>
         </div>
       </el-row>
     </div>
@@ -565,15 +578,27 @@
             }
           ],   // 日程第二步数据结构
           // 分割线
-          conference: [
+          conferenceState: [   //  选择会议状态  三个状态
             {
-              meetingid: '1',
-              meetingname: '集团1季度总结大会',
-              meetingstate: '已结束',
-              starttime: '2017-06-26 10:00',
-              endtime: '2017-06-28 10:00'
+              value: '未开始',
+              label: '未开始'
+            },
+            {
+              value: '进行中',
+              label: '进行中'
+            },
+            {
+              value: '已结束',
+              label: '已结束'
             }
-          ], // 工作首页会议列表
+          ],
+          conferenceNamed: '', // 搜索会议时输入的会议名称
+          conferenceStated: '',  //  选择的会议状态
+          conferenceDated: '',  //  搜索会议时选择的时间
+          conference: [], // 工作首页会议列表
+          conferenceTotal: 0,  // 会议总数
+          conferencePage: 1, //   会议显示第几页
+          checkMeeting: [],  //  查看已发布会议内容
           allPerson: [], //  全部人员
           person: [],  //  所选与会人
           //  发布-编辑会议的json
@@ -655,7 +680,18 @@
           // response.data 为服务端返回的数据
           console.log(response.data.result.participants);
           this.allPerson = response.data.result.participants;
-          console.log(1);
+        }).catch(function (response) {
+          // 出错处理
+          console.log(response);
+        });
+        //  获取工作会议首页 全部会议
+        this.$http.jsonp('http://192.168.199.144:8080/spg/admin/working/allmeeting?page=' + this.conferencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+          // response.data 为服务端返回的数据
+          console.log(response.data.result.rows);
+          this.conference = response.data.result.rows;
+          this.conferenceTotal = response.data.result.total;
+          console.log(this.conferenceTotal);
+          console.log('获取全部会议成功');
         }).catch(function (response) {
           // 出错处理
           console.log(response);
@@ -713,6 +749,22 @@
               }
             }
           }
+        },
+        conferencePage: {
+          handler: function() {
+            //  获取工作会议首页 全部会议
+            this.$http.jsonp('http://192.168.199.144:8080/spg/admin/working/allmeeting?page=' + this.conferencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+              // response.data 为服务端返回的数据
+              console.log(response.data.result.rows);
+              this.conference = response.data.result.rows;
+              this.conferenceTotal = response.data.result.total;
+              console.log(this.conferenceTotal);
+              console.log('获取全部会议成功');
+            }).catch(function (response) {
+              // 出错处理
+              console.log(response);
+            });
+          }
         }
       },
 
@@ -738,7 +790,8 @@
           }
         },
         test() {
-          console.log(this.publishmeeting.spgConferenceStaffs[2].phoneNumber.length);
+          console.log(this.formatDateTime(this.conferenceDated[0]));
+          console.log(this.formatDateTime(this.conferenceDated[1]));
         },
         addStep() { // 添加日程 按钮
           console.log(this.publishmeeting.spgPrograms);
@@ -766,9 +819,81 @@
           }
           this.state = 0;
         },
-        openCheck() {  // 进入会议详情
-          this.show_work = false;
-          this.show_edit = true;
+        formatDateTime(date) { // 格式化时间
+          let y = date.getFullYear();
+          let m = date.getMonth() + 1;
+          m = m < 10 ? ('0' + m) : m;
+          let d = date.getDate();
+          d = d < 10 ? ('0' + d) : d;
+//        let h = date.getHours();
+//        let minute = date.getMinutes();
+//        minute = minute < 10 ? ('0' + minute) : minute;
+          return y + '-' + m + '-' + d;
+        },
+        searchMeeting() {  // 条件查询会议   搜索按钮
+          let startTime = '1900-1-1';
+          let endTime = '3000-1-1';
+//          let startTime = this.formatDateTime(this.conferenceDated[0]);
+//          let endTime = this.formatDateTime(this.conferenceDated[1]);
+          if (this.conferenceDated.length === 2) {
+            startTime = this.formatDateTime(this.conferenceDated[0]);
+            endTime = this.formatDateTime(this.conferenceDated[1]);
+          }
+          console.log(startTime);
+          console.log(endTime);
+//          if (this.conferenceStated.length > 0) {
+//            if (this.conferenceStated === '未开始') {
+//              let time = this.formatDateTime(new Date());
+//              console.log(time);
+//              console.log('未开始');
+//              //  获取工作会议首页 全部会议
+//              this.$http.jsonp('http://192.168.199.144:8080/spg/admin/working/allmeeting?filter_EQS_meetingName=' + this.conferenceNamed + '&filter_GES_startTime=' + time, {jsonp: 'jsonpCallback'}).then(function (response) {
+//                // response.data 为服务端返回的数据
+//                console.log(response.data.result.rows);
+//                this.conference = response.data.result.rows;
+//                this.conferenceTotal = response.data.result.total;
+//                console.log(response.data.result.rows[0].starttime);
+//                console.log(this.conferenceTotal);
+//                console.log('条件查询会议成功');
+//              }).catch(function (response) {
+//                // 出错处理
+//                console.log(response);
+//              });
+//            } else if (this.conferenceStated === '进行中') {
+//              console.log('进行中');
+//            } else if (this.conferenceStated === '已结束') {
+//              console.log('已结束');
+//            }
+//          } else {
+            //  获取工作会议首页 全部会议
+            this.$http.jsonp('http://192.168.199.144:8080/spg/admin/working/allmeeting?filter_EQS_meetingName=' + this.conferenceNamed + '&filter_GES_endTime=' + startTime + '&filter_LES_startTime=' + endTime, {jsonp: 'jsonpCallback'}).then(function (response) {
+              // response.data 为服务端返回的数据
+              console.log(response.data.result.rows);
+              this.conference = response.data.result.rows;
+              this.conferenceTotal = response.data.result.total;
+              console.log(this.conferenceTotal);
+              console.log('时间条件查询会议成功');
+            }).catch(function (response) {
+              // 出错处理
+              console.log(response);
+            });
+//          }
+        },
+        openCheck(row) {  // 进入会议详情
+          console.log(row.meetingid);
+          //  获取工作会议具体内容
+          this.$http.jsonp('http://192.168.199.144:8080/spg/admin/working/getmeeting?mid=' + row.meetingid, {jsonp: 'jsonpCallback'}).then(function (response) {
+            // response.data 为服务端返回的数据
+            console.log('我是opencheck');
+            console.log(response.data.result.meeting);
+            this.checkMeeting = response.data.result.meeting;
+            console.log(this.checkMeeting);
+            this.show_work = false;
+            this.show_edit = true;
+          }).catch(function (response) {
+            // 出错处理
+            console.log(response);
+          });
         },
         closeCheck() {  // 退出会议详情
           this.show_work = true;
@@ -1193,6 +1318,7 @@
               height 82px;
               margin 0;
               padding 0;
+              float left;
               li
                 width 120px;
                 list-style-type none;
@@ -1208,6 +1334,26 @@
       .request
         border-bottom 1px solid #D3DCE6;
         padding-bottom 10px;
+      .stay
+        .table
+          width 100%;
+          text-align center;
+          border 1px solid #E5E9F2;
+          border-collapse collapse;
+          font-size 15px;
+          font-family "PingFang SC";
+          .tr1
+            width 100%;
+            font-weight 100;
+            font-family "PingFang SC";
+            background-color #E5E9F2;
+            height 40px;
+          .tr2
+            width 100%;
+            height 40px;
+            border 1px solid #D3DCE6;
+            &:hover
+              background-color #E5E9F2;
     .staf
       margin-left 30px;
       margin-right 30px;

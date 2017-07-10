@@ -1,8 +1,9 @@
 <template>
   <div class="block">
     <el-pagination
-      :current-page.sync="currentPage1"
-      :page-size="10"
+      :current-page.sync="currentPage"
+      @current-change="handleCurrentChange"
+      :page-size="1"
       layout="total, prev, pager, next"
       :total="total">
     </el-pagination>
@@ -13,15 +14,20 @@
     props: {
       total: {
         type: Number
+      },
+      currentPage: {
+        type: Number
       }
     },
     data() {
       return {
-        currentPage1: 5,
-        currentPage2: 5,
-        currentPage3: 5,
-        currentPage4: 4
       };
+    },
+    methods: {
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+        console.log(this.currentPage);
+      }
     }
   };
 </script>

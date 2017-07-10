@@ -100,7 +100,7 @@
         <el-button @click="toggleSelection([contract[0], contract[1], contract[2], contract[3], contract[4], contract[5], contract[6], contract[7], contract[8], contract[9]])">全选</el-button>
         <el-button @click="">导出</el-button>
       </div>
-      <paging class="paging"></paging>
+      <paging class="paging"  :total="1"></paging>
     </div>
     <checkContract></checkContract>
   </div>
