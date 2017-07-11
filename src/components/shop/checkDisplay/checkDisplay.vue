@@ -1,6 +1,11 @@
 <template>
   <div class="check_display">
     <el-row>
+      <div class="close">
+        <el-row>
+          <el-col :span="24"><div><i @click="closeCheckDisplay" class="el-icon-circle-close"></i></div></el-col>
+        </el-row>
+      </div>
       <div class="top">
         <el-row>
           <el-col :span="3">
@@ -165,6 +170,10 @@
       return {
         value1: 4.5
       };
+    },
+    methods: {
+      closeCheckDisplay() {
+      }
     }
   };
 </script>
@@ -191,7 +200,12 @@
     background-color white;
     box-shadow 0 0 2px #1F2D3D;
     padding 30px;
+    .close
+      margin-top -10px;
+      margin-right -10px;
+      float right;
     .top
+      margin-top 30px;
       padding-bottom  10px;
       height 70px;
       border-bottom 1px solid #D3DCE6;

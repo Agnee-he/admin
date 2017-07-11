@@ -32,7 +32,7 @@
         <div class="main">
           <el-table
             ref="multipleTable"
-            :data="tableData3"
+            :data="display"
             border
             tooltip-effect="dark"
             style="width: 100%"
@@ -43,32 +43,32 @@
               align="center">
             </el-table-column>
             <el-table-column
-              prop="number"
+              prop="id"
               label="编号"
-              width="150"
+              width="80"
               align="center">
             </el-table-column>
             <el-table-column
-              prop="title"
+              prop="displayType"
               label="陈列主题"
               width="150"
               align="center">
             </el-table-column>
             <el-table-column
-              prop="date"
+              prop="startTime"
               label="发布日期"
               sortable
               width="160"
               align="center">
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="shopName"
               label="门店"
-              width="131"
+              width="230"
               align="center">
             </el-table-column>
             <el-table-column
-              prop="evaluation"
+              prop="stars"
               label="陈列考评"
               sortable
               width="120"
@@ -78,7 +78,7 @@
               <template scope="scope">
                 <el-button
                   size="small"
-                  @click="">查看</el-button>
+                  @click="openCheckDisplay(scope.row)">查看</el-button>
                 <!--<el-button-->
                   <!--size="small"-->
                   <!--type="danger"-->
@@ -93,7 +93,14 @@
             <el-button><i class="el-icon-upload2"></i>导出</el-button>
           </div>
           <div class="paging">
-            <paging></paging>
+            <div class="block">
+              <el-pagination
+                :current-page.sync="displayPage"
+                :page-size="10"
+                layout="total, prev, pager, next"
+                :total="displayTotal">
+              </el-pagination>
+            </div>
           </div>
         </div>
       </el-tab-pane>
@@ -691,7 +698,7 @@
     </div>
     <!-- 新增陈列 -->
     <new-display v-show="show_newDisplay"></new-display>
-    <check-display v-show=""></check-display>
+    <check-display v-show="show_checkDisplay"></check-display>
   </div>
 </template>
 <script>
@@ -721,6 +728,7 @@
         show_order: false,  // 门店排班设置
         show_choose5: false, // 新增班次组
         show_newDisplay: false, //  新增陈列页面
+        show_checkDisplay: false,  //  查看陈列页面
         activeName: 'first',
         input1: '',  // 输入框1内容
         input2: '',    // 输入框2内容
@@ -906,7 +914,10 @@
             stime: '',
             etime: ''
           }
-        ]  // 新增班次组 排班设置
+        ],  // 新增班次组 排班设置
+        display: [],   //  陈列首页  陈列列表
+        displayTotal: 0,  // 陈列总数
+        displayPage: 1 //   陈列显示第几页
       };
     },
     created() {
@@ -916,6 +927,17 @@
         this.city_list = response.data.result.城市列表;
       }).catch(function () {
         // 出错处理
+      });
+      //  获取首页陈列列表
+      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/qryDisplays?page=' + this.displayPage +
+        '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+        // response.data 为服务端返回的数据
+        this.display = response.data.result.rows;
+        this.displayTotal = response.data.result.total;
+        console.log(this.display);
+      }).catch(function () {
+        // 出错处理
+        console.log('获取陈列列表失败');
       });
     },
     computed: {
@@ -1015,6 +1037,10 @@
       addDisplay() {
         this.show_store_display = false;
         this.show_newDisplay = true;
+      },
+      openCheckDisplay(row) {
+      	this.show_store_display = false;
+      	this.show_checkDisplay = true;
       }
   },
     components: {
