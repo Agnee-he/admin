@@ -26,7 +26,7 @@
             </div>
           </div>
           <div class="but">
-            <el-button><i class="el-icon-search"></i>搜索</el-button><el-button><i class="el-icon-edit"></i>重置</el-button><el-button><i class="el-icon-plus"></i>新增陈列</el-button>
+            <el-button><i class="el-icon-search"></i>搜索</el-button><el-button><i class="el-icon-edit"></i>重置</el-button><el-button @click="addDisplay"><i class="el-icon-plus"></i>新增陈列</el-button>
           </div>
         </div>
         <div class="main">
@@ -87,7 +87,7 @@
             </el-table-column>
           </el-table>
           <div class="but_select">
-            <el-button @click="toggleSelection([tableData3[0],tableData3[1],tableData3[2],tableData3[3],tableData3[4],tableData3[5],tableData3[6],tableData3[7],tableData3[8], tableData3[9]])">全选</el-button>
+            <el-button @click="toggleSelection(tableData3)">全选</el-button>
             <el-button @click="toggleSelection()">取消选择</el-button>
             <el-button><i class="el-icon-delete"></i>删除</el-button>
             <el-button><i class="el-icon-upload2"></i>导出</el-button>
@@ -690,7 +690,7 @@
       </div>
     </div>
     <!-- 新增陈列 -->
-    <new-display v-show=""></new-display>
+    <new-display v-show="show_newDisplay"></new-display>
     <check-display v-show=""></check-display>
   </div>
 </template>
@@ -720,6 +720,7 @@
         show_order_position: false, // 门店排班查询与操作
         show_order: false,  // 门店排班设置
         show_choose5: false, // 新增班次组
+        show_newDisplay: false, //  新增陈列页面
         activeName: 'first',
         input1: '',  // 输入框1内容
         input2: '',    // 输入框2内容
@@ -1010,6 +1011,10 @@
           console.log(params);
           console.log(response);
         });
+      },
+      addDisplay() {
+        this.show_store_display = false;
+        this.show_newDisplay = true;
       }
   },
     components: {

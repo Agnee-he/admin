@@ -348,7 +348,9 @@
         </div>
         <div class="part">
           <p>参加范围：</p>
-          <span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span><span>xxx大区;</span>
+          <div v-for="item in checkMeetingArea">
+            <span>{{item}};</span>
+          </div>
         </div>
         <div class="schedule">
           <div class="top">
@@ -370,17 +372,17 @@
               <tr class="tr2" >
                 <td style="width: 50px;background-color: #EFF2F7;overflow: hidden">备注</td>
                 <td colspan="4">{{item.remarks}}</td>
-                <td style="background-color: #EFF2F7;">查看与会人员安排</td></tr>
+                <td style=""><el-button>查看与会人员安排</el-button></td></tr>
             </table>
           </div>
         </div>
         <div class="detail">
           <p>会议须知：</p>
-          <div>天气模块</div>
+          <!--<div>天气模块</div>-->
           <div class="people">
             <el-row>
               <el-col :span="3"><div class="left">
-                <p>与会人员</p>
+                <p>会务人员</p>
                 <p>联系方式</p>
               </div></el-col>
               <el-col :span="21"><div class="right">
@@ -599,77 +601,19 @@
           conferenceTotal: 0,  // 会议总数
           conferencePage: 1, //   会议显示第几页
           checkMeeting: [],  //  查看已发布会议内容
+          checkMeetingArea: [], //  查看会议内容内参加会议的大区/门店
           allPerson: [], //  全部人员
           person: [],  //  所选与会人
           //  发布-编辑会议的json
           publishmeeting: {
-            meetingName: '贝投科技年度表彰大会',
+            meetingName: '',
             startTime: '',
             endTime: '',
-            meetingRequest: '各位小伙伴自备行李箱，钞票太多拿不了',
+            meetingRequest: '',
             spgParticipants: [],
-            spgPrograms: [
-            {
-              programName: '晚餐',
-              startTime: '',
-              endTime: '',
-              programAddress: '蜡笔小新大酒店',
-              remarks: '请带好身份证'
-            },
-            {
-              programName: '会议',
-              startTime: '',
-              endTime: '',
-              programAddress: '万银国际会议中心',
-              remarks: '请带好入场牌'
-            },
-            {
-              programName: '总结会议',
-              startTime: '',
-              endTime: '',
-              programAddress: '柯南研究室',
-              remarks: '请做好笔记'
-            },
-            {
-              programName: '离场',
-              startTime: '',
-              endTime: '',
-              programAddress: '珂卡夫总部大楼前',
-              remarks: '请带好行李,准备离场'
-            }
-          ],
-            spgHotels: [
-            {
-              hotelName: '如家',
-              hotelAddress: '民心路12号'
-            },
-            {
-              hotelName: '7天',
-              hotelAddress: '江锦路20号'
-            }
-          ],
-            spgConferenceStaffs: [
-            {
-              name: '玉米汁',
-              phoneNumber: '1234567890',
-              remarks: '晚餐、总结会议'
-            },
-            {
-              name: '候雨晨',
-              phoneNumber: '1234567890',
-              remarks: '会议'
-            },
-            {
-              name: '何立峰',
-              phoneNumber: '1234567890',
-              remarks: '离场'
-            },
-            {
-              name: '陈诚',
-              phoneNumber: '1234567890',
-              remarks: '如家、7天'
-            }
-          ]
+            spgPrograms: [],
+            spgHotels: [],
+            spgConferenceStaffs: []
           }
         };
       },
@@ -678,22 +622,23 @@
         //  获取会议全部人员
         this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/queryEmployees', {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
-          console.log(response.data.result.participants);
           this.allPerson = response.data.result.participants;
+          console.log('拉取人员成功');
         }).catch(function (response) {
           // 出错处理
+          console.log('拉取人员失败');
           console.log(response);
         });
         //  获取工作会议首页 全部会议
-        this.$http.jsonp('http://192.168.199.144:8080/spg/admin/working/allmeeting?page=' + this.conferencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/allmeeting?page=' + this.conferencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
-          console.log(response.data.result.rows);
+//          console.log(response.data.result.rows);
           this.conference = response.data.result.rows;
           this.conferenceTotal = response.data.result.total;
-          console.log(this.conferenceTotal);
           console.log('获取全部会议成功');
         }).catch(function (response) {
           // 出错处理
+          console.log('失败');
           console.log(response);
         });
       },
@@ -721,9 +666,9 @@
               if (length > 10) {
                 let myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
                 if (myreg.test(phone)) {
-                  alert(11);
+                  console.log(11);
                 } else {
-                  alert('请输入正确的手机号');
+                  console.log('请输入正确的手机号');
                 }
               }
             }
@@ -732,7 +677,6 @@
         },
         person: {
           handler: function() {
-            console.log('监听2');
             //  选择人员ID  与门店匹配
             let allPerson = this.allPerson;
             let length = allPerson.length;
@@ -742,8 +686,6 @@
                 for (let y = 0; y < allPerson[i].sysUnits.length; y++) {
                   if (allPerson[i].sysUnits[y].parid === choosePerson[x]) {
                     this.publishmeeting.spgParticipants[x] = {parid: choosePerson[x], belongsShop: allPerson[i].depname};
-                    console.log(this.publishmeeting);
-                    console.log(this.person);
                   }
                 }
               }
@@ -753,7 +695,7 @@
         conferencePage: {
           handler: function() {
             //  获取工作会议首页 全部会议
-            this.$http.jsonp('http://192.168.199.144:8080/spg/admin/working/allmeeting?page=' + this.conferencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+            this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/allmeeting?page=' + this.conferencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
               // response.data 为服务端返回的数据
               console.log(response.data.result.rows);
               this.conference = response.data.result.rows;
@@ -764,6 +706,17 @@
               // 出错处理
               console.log(response);
             });
+          }
+        },
+        checkMeeting: {
+          handler: function () {
+            //  处理参与会议的大区
+            let person = this.checkMeeting.spgParticipants;
+            let length = person.length;
+            for (let i = 0; i < length; i++) {
+              this.checkMeetingArea.push(person[i].belongsShop);
+            }
+            this.checkMeetingArea = this.unique(this.checkMeetingArea);
           }
         }
       },
@@ -841,32 +794,57 @@
           }
           console.log(startTime);
           console.log(endTime);
-//          if (this.conferenceStated.length > 0) {
-//            if (this.conferenceStated === '未开始') {
-//              let time = this.formatDateTime(new Date());
-//              console.log(time);
-//              console.log('未开始');
-//              //  获取工作会议首页 全部会议
-//              this.$http.jsonp('http://192.168.199.144:8080/spg/admin/working/allmeeting?filter_EQS_meetingName=' + this.conferenceNamed + '&filter_GES_startTime=' + time, {jsonp: 'jsonpCallback'}).then(function (response) {
-//                // response.data 为服务端返回的数据
-//                console.log(response.data.result.rows);
-//                this.conference = response.data.result.rows;
-//                this.conferenceTotal = response.data.result.total;
-//                console.log(response.data.result.rows[0].starttime);
-//                console.log(this.conferenceTotal);
-//                console.log('条件查询会议成功');
-//              }).catch(function (response) {
-//                // 出错处理
-//                console.log(response);
-//              });
-//            } else if (this.conferenceStated === '进行中') {
-//              console.log('进行中');
-//            } else if (this.conferenceStated === '已结束') {
-//              console.log('已结束');
-//            }
-//          } else {
+          if (this.conferenceStated.length > 0) {
+            let time = this.formatDateTime(new Date());
+            console.log(time);
+            if (this.conferenceStated === '未开始') {
+              console.log('未开始');
+              //  获取工作会议首页 全部会议
+              this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/allmeeting?filter_EQS_meetingName=' + this.conferenceNamed + '&filter_GES_startTime=' + time, {jsonp: 'jsonpCallback'}).then(function (response) {
+                // response.data 为服务端返回的数据
+                console.log(response.data.result.rows);
+                this.conference = response.data.result.rows;
+                this.conferenceTotal = response.data.result.total;
+                console.log(response.data.result.rows[0].starttime);
+                console.log(this.conferenceTotal);
+                console.log('条件查询会议成功');
+              }).catch(function (response) {
+                // 出错处理
+                console.log(response);
+              });
+            } else if (this.conferenceStated === '进行中') {
+              console.log('进行中');
+              //  获取工作会议首页 全部会议
+              this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/allmeeting?filter_EQS_meetingName=' + this.conferenceNamed + '&filter_LES_startTime=' + time + '&filter_GES_endTime=' + time, {jsonp: 'jsonpCallback'}).then(function (response) {
+                // response.data 为服务端返回的数据
+                console.log(response.data.result.rows);
+                this.conference = response.data.result.rows;
+                this.conferenceTotal = response.data.result.total;
+                console.log(response.data.result.rows[0].starttime);
+                console.log(this.conferenceTotal);
+                console.log('条件查询会议成功');
+              }).catch(function (response) {
+                // 出错处理
+                console.log(response);
+              });
+            } else if (this.conferenceStated === '已结束') {
+              console.log('已结束');
+              this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/allmeeting?filter_EQS_meetingName=' + this.conferenceNamed + '&filter_LES_endTime=' + time, {jsonp: 'jsonpCallback'}).then(function (response) {
+                // response.data 为服务端返回的数据
+                console.log(response.data.result.rows);
+                this.conference = response.data.result.rows;
+                this.conferenceTotal = response.data.result.total;
+                console.log(response.data.result.rows[0].starttime);
+                console.log(this.conferenceTotal);
+                console.log('条件查询会议成功');
+              }).catch(function (response) {
+                // 出错处理
+                console.log(response);
+              });
+            }
+          } else {
             //  获取工作会议首页 全部会议
-            this.$http.jsonp('http://192.168.199.144:8080/spg/admin/working/allmeeting?filter_EQS_meetingName=' + this.conferenceNamed + '&filter_GES_endTime=' + startTime + '&filter_LES_startTime=' + endTime, {jsonp: 'jsonpCallback'}).then(function (response) {
+            this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/allmeeting?filter_EQS_meetingName=' + this.conferenceNamed + '&filter_GES_endTime=' + startTime + '&filter_LES_startTime=' + endTime, {jsonp: 'jsonpCallback'}).then(function (response) {
               // response.data 为服务端返回的数据
               console.log(response.data.result.rows);
               this.conference = response.data.result.rows;
@@ -877,12 +855,12 @@
               // 出错处理
               console.log(response);
             });
-//          }
+          }
         },
         openCheck(row) {  // 进入会议详情
           console.log(row.meetingid);
           //  获取工作会议具体内容
-          this.$http.jsonp('http://192.168.199.144:8080/spg/admin/working/getmeeting?mid=' + row.meetingid, {jsonp: 'jsonpCallback'}).then(function (response) {
+          this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/getmeeting?mid=' + row.meetingid, {jsonp: 'jsonpCallback'}).then(function (response) {
             // response.data 为服务端返回的数据
             console.log('我是opencheck');
             console.log(response.data.result.meeting);
@@ -900,7 +878,22 @@
           this.show_edit = false;
         },
         openEditMeetting() {  // 会议详情 进入 编辑会议
-          this.meetting_second = this.meetting_get;
+//          this.meetting_second = this.meetting_get;
+          this.publishmeeting = this.checkMeeting;
+          // 注入会议人员
+          let person = this.checkMeeting.spgParticipants;
+          let length = person.length;
+          let choosePerson = [];
+          for (let i = 0; i < length; i++) {
+            for (let x = 0; x < this.allPerson.length; x++) {
+              for (let y = 0; y < this.allPerson[x].sysUnits.length; y++) {
+                if (person[i].userId === this.allPerson[x].sysUnits[y].parid) {
+                  choosePerson.push(this.allPerson[x].sysUnits[y].parid);
+                }
+              }
+            }
+          }
+          this.person = choosePerson;
           this.show_edit = false;
           this.show_issue = true;
           this.state = 2;
@@ -1019,6 +1012,16 @@
             console.log('false');
             return false;
           }
+        },
+        unique(array) {  // 数组去重
+          let r = [];
+          for (let i = 0, l = array.length; i < l; i++) {
+            for (let j = i + 1; j < l; j++) {
+              if (array[i] === array[j]) j = ++i;
+            }
+            r.push(array[i]);
+          }
+          return r;
         }
 //        checkPerson(value) {  //  监控发布会议下一步 是否选择人员
 //          if (this.value === 0) {

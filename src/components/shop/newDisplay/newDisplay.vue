@@ -27,7 +27,7 @@
         </el-col>
         <el-col :span="20">
           <div>
-            <el-select class="select" v-model="value5" multiple placeholder="选择地区">
+            <el-select class="select" v-model="newDisplay.shopName" multiple placeholder="选择地区">
               <el-option
                 v-for="item in options"
                 :key="item.label"
@@ -46,7 +46,7 @@
         </el-col>
         <el-col :span="20">
           <div>
-            <el-input class="input" v-model="input" placeholder="请输入陈列名称"></el-input>
+            <el-input class="input" v-model="newDisplay.displayName" placeholder="请输入陈列名称"></el-input>
           </div>
         </el-col>
       </el-row>
@@ -70,13 +70,13 @@
         </el-col>
         <el-col :span="20">
           <div>
-            <el-upload
-              class="upload-demo upload"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :on-preview="handlePreview"
+            <el-upload style="width: 500px;"
+              class="upload-demo"
+              action=""
+              :auto-upload="false"
+              :on-change="handleChange"
               :on-remove="handleRemove"
               :file-list="fileList"
-              :auto-upload="false"
               list-type="picture">
               <el-button size="small" type="primary">点击上传</el-button>
               <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -97,7 +97,7 @@
               type="textarea"
               :rows="2"
               placeholder="请输入内容"
-              v-model="textarea">
+              v-model="newDisplay.displayRemarks">
             </el-input>
           </div>
         </el-col>
@@ -112,7 +112,7 @@
         </el-col>
         <el-col :span="20">
           <div>
-            <el-button class="submit" type="primary">提交</el-button>
+            <el-button class="submit" @click="submitNewDisplay" type="primary">提交</el-button>
           </div>
         </el-col>
       </el-row>
@@ -140,19 +140,39 @@
         checked2: false,
         fileList: [],  // 图片上传列表
         textarea: '',
-        input: ''
+        input: '',
+        newDisplay: { //  添加陈列的整个json
+          displayName: '',
+          displayType: '',
+          shopName: '',
+          displayRemarks: '',
+          displayStandard: []
+        }
       };
     },
 
     methods: {
+      handleChange(file, fileList) {
+        console.log(file, fileList);
+        this.newDisplay.displayStandard = fileList;
+        console.log(this.newDisplay.displayStandard);
+      },
       handleRemove(file, fileList) {
         console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
+        this.newDisplay.displayStandard = fileList;
       },
       test() {
-        console.log(this.fileList);
+        console.log(this.newDisplay.displayStandard);
+      },
+      submitNewDisplay() {
+        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/display/addDisplay', {jsonp: 'jsonpCallback', dataType: 'jsonp', data: this.newDisplay}, {headers: {contentType: 'application/x-www-form-urlencoded'}}).then((response) => {
+          // success callback
+          console.log(1);
+        }, (response) => {
+          // error callback
+          console.log(this.newDisplay);
+          console.log(response);
+        });
       }
     }
   };
