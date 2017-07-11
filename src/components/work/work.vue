@@ -54,7 +54,8 @@
             <el-table-column
               align="center"
               prop="meetingname"
-              label="会议名称">
+              label="会议名称"
+              width="200">
             </el-table-column>
             <el-table-column
               align="center"
@@ -620,7 +621,7 @@
 
       created() {
         //  获取会议全部人员
-        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/queryEmployees', {jsonp: 'jsonpCallback'}).then(function (response) {
+        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/working/queryEmployees', {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           this.allPerson = response.data.result.participants;
           console.log('拉取人员成功');
@@ -630,7 +631,7 @@
           console.log(response);
         });
         //  获取工作会议首页 全部会议
-        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/allmeeting?page=' + this.conferencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/working/allmeeting?page=' + this.conferencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
 //          console.log(response.data.result.rows);
           this.conference = response.data.result.rows;
@@ -694,18 +695,22 @@
         },
         conferencePage: {
           handler: function() {
-            //  获取工作会议首页 全部会议
-            this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/allmeeting?page=' + this.conferencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
-              // response.data 为服务端返回的数据
-              console.log(response.data.result.rows);
-              this.conference = response.data.result.rows;
-              this.conferenceTotal = response.data.result.total;
-              console.log(this.conferenceTotal);
-              console.log('获取全部会议成功');
-            }).catch(function (response) {
-              // 出错处理
-              console.log(response);
-            });
+            if (this.conferenceNamed === '' && this.conferenceStated === '' && this.conferenceDated === '') {
+              //  获取工作会议首页 全部会议
+              this.$http.jsonp('http://120.55.85.65:8088/spg/admin/working/allmeeting?page=' + this.conferencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+                // response.data 为服务端返回的数据
+                console.log(response.data.result.rows);
+                this.conference = response.data.result.rows;
+                this.conferenceTotal = response.data.result.total;
+                console.log(this.conferenceTotal);
+                console.log('获取全部会议成功');
+              }).catch(function (response) {
+                // 出错处理
+                console.log(response);
+              });
+            } else {
+              this.searchMeeting();
+            }
           }
         },
         checkMeeting: {
@@ -786,6 +791,8 @@
         searchMeeting() {  // 条件查询会议   搜索按钮
           let startTime = '1900-1-1';
           let endTime = '3000-1-1';
+          this.conference = [];
+          this.conferenceTotal = 0;
 //          let startTime = this.formatDateTime(this.conferenceDated[0]);
 //          let endTime = this.formatDateTime(this.conferenceDated[1]);
           if (this.conferenceDated.length === 2) {
@@ -800,13 +807,10 @@
             if (this.conferenceStated === '未开始') {
               console.log('未开始');
               //  获取工作会议首页 全部会议
-              this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/allmeeting?filter_EQS_meetingName=' + this.conferenceNamed + '&filter_GES_startTime=' + time, {jsonp: 'jsonpCallback'}).then(function (response) {
+              this.$http.jsonp('http://120.55.85.65:8088/spg/admin/working/allmeeting?page=' + this.conferencePage + '&rows=10&filter_EQS_meetingName=' + this.conferenceNamed + '&filter_GES_startTime=' + time, {jsonp: 'jsonpCallback'}).then(function (response) {
                 // response.data 为服务端返回的数据
-                console.log(response.data.result.rows);
                 this.conference = response.data.result.rows;
                 this.conferenceTotal = response.data.result.total;
-                console.log(response.data.result.rows[0].starttime);
-                console.log(this.conferenceTotal);
                 console.log('条件查询会议成功');
               }).catch(function (response) {
                 // 出错处理
@@ -815,13 +819,10 @@
             } else if (this.conferenceStated === '进行中') {
               console.log('进行中');
               //  获取工作会议首页 全部会议
-              this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/allmeeting?filter_EQS_meetingName=' + this.conferenceNamed + '&filter_LES_startTime=' + time + '&filter_GES_endTime=' + time, {jsonp: 'jsonpCallback'}).then(function (response) {
+              this.$http.jsonp('http://120.55.85.65:8088/spg/admin/working/allmeeting?page=' + this.conferencePage + '&rows=10&filter_EQS_meetingName=' + this.conferenceNamed + '&filter_LES_startTime=' + time + '&filter_GES_endTime=' + time, {jsonp: 'jsonpCallback'}).then(function (response) {
                 // response.data 为服务端返回的数据
-                console.log(response.data.result.rows);
                 this.conference = response.data.result.rows;
                 this.conferenceTotal = response.data.result.total;
-                console.log(response.data.result.rows[0].starttime);
-                console.log(this.conferenceTotal);
                 console.log('条件查询会议成功');
               }).catch(function (response) {
                 // 出错处理
@@ -829,13 +830,10 @@
               });
             } else if (this.conferenceStated === '已结束') {
               console.log('已结束');
-              this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/allmeeting?filter_EQS_meetingName=' + this.conferenceNamed + '&filter_LES_endTime=' + time, {jsonp: 'jsonpCallback'}).then(function (response) {
+              this.$http.jsonp('http://120.55.85.65:8088/spg/admin/working/allmeeting?page=' + this.conferencePage + '&rows=10&filter_EQS_meetingName=' + this.conferenceNamed + '&filter_LES_endTime=' + time, {jsonp: 'jsonpCallback'}).then(function (response) {
                 // response.data 为服务端返回的数据
-                console.log(response.data.result.rows);
                 this.conference = response.data.result.rows;
                 this.conferenceTotal = response.data.result.total;
-                console.log(response.data.result.rows[0].starttime);
-                console.log(this.conferenceTotal);
                 console.log('条件查询会议成功');
               }).catch(function (response) {
                 // 出错处理
@@ -844,7 +842,7 @@
             }
           } else {
             //  获取工作会议首页 全部会议
-            this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/allmeeting?filter_EQS_meetingName=' + this.conferenceNamed + '&filter_GES_endTime=' + startTime + '&filter_LES_startTime=' + endTime, {jsonp: 'jsonpCallback'}).then(function (response) {
+            this.$http.jsonp('http://120.55.85.65:8088/spg/admin/working/allmeeting?page=' + this.conferencePage + '&rows=10&filter_EQS_meetingName=' + this.conferenceNamed + '&filter_GES_endTime=' + startTime + '&filter_LES_startTime=' + endTime, {jsonp: 'jsonpCallback'}).then(function (response) {
               // response.data 为服务端返回的数据
               console.log(response.data.result.rows);
               this.conference = response.data.result.rows;
@@ -860,7 +858,7 @@
         openCheck(row) {  // 进入会议详情
           console.log(row.meetingid);
           //  获取工作会议具体内容
-          this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/getmeeting?mid=' + row.meetingid, {jsonp: 'jsonpCallback'}).then(function (response) {
+          this.$http.jsonp('http://120.55.85.65:8088/spg/admin/working/getmeeting?mid=' + row.meetingid, {jsonp: 'jsonpCallback'}).then(function (response) {
             // response.data 为服务端返回的数据
             console.log('我是opencheck');
             console.log(response.data.result.meeting);
