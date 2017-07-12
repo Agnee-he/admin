@@ -10,12 +10,12 @@
         <div class="right">
           <div class="mar_left">
             <div class="system">管理系统</div>
-            <div class="address">单位：XX门店/单位</div>
+            <div class="address">单位：{{$store.state.userShop}}</div>
           </div>
           <div class="mar_right">
             <el-dropdown>
               <span class="el-dropdown-link">
-                <i class="person"></i><span style="float: left;font-size: 14px;">超级管理员</span><i class="down"></i>
+                <i class="person"></i><span style="float: left;font-size: 14px;width: 150px;">{{$store.state.user.jobnumber}}</span><i class="down"></i>
               </span>
               <el-dropdown-menu style="text-align: center;margin-left: -130px;" slot="dropdown">
                 <el-dropdown-item>账户资料</el-dropdown-item>
@@ -64,6 +64,8 @@ export default {
       search_over: false,
       account: false
     };
+  },
+  created() {
   },
   watch: {
     show_search_first() {
@@ -138,7 +140,7 @@ export default {
           background #ffffff;
           .mar_left
             float left;
-            width 810px;
+            width 710px;
             .system
               margin-top 20px;
               margin-left 28px;
@@ -158,7 +160,7 @@ export default {
             text-align center;
             float left;
             margin-top 32px;
-            width 210px;
+            width 310px;
             .person
               float left;
               margin-right 6px;

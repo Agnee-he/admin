@@ -1,5 +1,5 @@
 <template>
-  <div class="check_display">
+  <div class="check_display" v-show="$store.state.show_checkDisplay">
     <el-row>
       <div class="close">
         <el-row>
@@ -166,6 +166,8 @@
 
 <script>
   export default {
+    props: {
+    },
     data() {
       return {
         value1: 4.5
@@ -173,6 +175,7 @@
     },
     methods: {
       closeCheckDisplay() {
+        this.$store.state.show_checkDisplay = false;
       }
     }
   };
@@ -193,6 +196,9 @@
     margin-top 20px;
     font-size 14px;
   .check_display
+    position absolute;
+    z-index 999;
+    top 130px;
     margin-left 30px;
     width 898px;
     height 778px;

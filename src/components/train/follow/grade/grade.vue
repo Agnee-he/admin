@@ -19,7 +19,7 @@
       </el-row>
     </div>
     <div class="chart">
-      <div id="myChart" :style="{width: '300px', height: '300px'}"></div>
+      <div id="myChart"></div>
     </div>
     <div class="table">
       <el-table
@@ -76,19 +76,19 @@
         myChart.setOption(
           {
             title: {
-              text: '某站点用户访问来源',
-              subtext: '纯属虚构',
+              text: '',
+              subtext: '',
               x: 'center'
             },
             tooltip: {
               trigger: 'item',
               formatter: '{a} <br/>{b} : {c} ({d}%)'
             },
-            legend: {
-              orient: 'vertical',
-              left: 'left',
-              data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
-            },
+//            legend: {
+//              orient: 'vertical',
+//              left: 'left',
+//              data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+//            },
             series: [
               {
                 name: '访问来源',
@@ -149,6 +149,7 @@
     .chart
       text-align center;
       #myChart
+        margin 0 auto;
         width 300px;
         height 300px;
     .table

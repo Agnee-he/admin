@@ -1,5 +1,10 @@
 <template>
-  <div class="newDisplay">
+  <div class="newDisplay" v-show="$store.state.show_newDisplay">
+    <div class="close">
+      <el-row>
+        <el-col :span="24"><div><i @click="closeNewDisplay" class="el-icon-circle-close"></i></div></el-col>
+      </el-row>
+    </div>
     <div class="top">
       <el-row>
         <el-col :span="2">
@@ -173,6 +178,9 @@
           console.log(this.newDisplay);
           console.log(response);
         });
+      },
+      closeNewDisplay() {
+          this.$store.state.show_newDisplay = false;
       }
     }
   };
@@ -193,6 +201,9 @@
     margin-top 30px;
     font-size 14px;
   .newDisplay
+    position absolute;
+    z-index 999;
+    top 130px;
     margin-left 30px;
     width 898px;
     height 778px;
@@ -200,6 +211,10 @@
     background-color white;
     box-shadow 0 0 2px #1F2D3D;
     padding 30px;
+    .close
+      margin-top -10px;
+      margin-right -10px;
+      float right;
     .top
       padding-bottom  10px;
       height 70px;

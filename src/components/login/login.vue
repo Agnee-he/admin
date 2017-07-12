@@ -33,12 +33,22 @@
         password: '',
         checked: false,
         user_p: '',
-        password_p: ''
+        password_p: '',
+        shop: [] //  门店列表信息
       };
     },
     //  相当于init doAjax
     beforeCreate() {
       // console.log('login页面 加载完成！')
+      //  获取门店列表
+      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then(function (response) {
+        // response.data 为服务端返回的数据
+        this.shop = response.data.result.shopModels;
+      }).catch(function (response) {
+        // 出错处理
+        console.log(response);
+        console.log('获取门店失败');
+      });
     },
     //  相当于ready 模板编译挂载之后
     mounted: function() {
@@ -47,10 +57,22 @@
     },
     methods: {
       login() {
-        if (this.user_name === 'admin' && this.password === '123') {
+        //  登录请求
+        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/login?username=' + this.user_name + '&password=' + this.password, {jsonp: 'jsonpCallback'}).then(function (response) {
+          // response.data 为服务端返回的数据
           this.$store.state.showIndex = true;
           this.$store.state.showLogin = false;
-        }
+          this.$store.state.user = response.data.result;
+          for (let i = 0; i < this.shop.length; i++) {
+              if (this.$store.state.user.location.shopId === this.shop[i].shopid) {
+                this.$store.state.userShop = this.shop[i].shopname;
+              }
+          }
+        }).catch(function (response) {
+          // 出错处理
+          console.log(response);
+          console.log('登录失败');
+        });
       },
       //  设置cookie
       setCookie (name, value, expiremMinutes) {
