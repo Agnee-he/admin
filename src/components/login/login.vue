@@ -58,7 +58,7 @@
     methods: {
       login() {
         //  登录请求
-        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/login?username=' + this.user_name + '&password=' + this.password, {jsonp: 'jsonpCallback'}).then(function (response) {
+        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/login?username=' + this.user_name + '&password=' + this.password, {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           this.$store.state.showIndex = true;
           this.$store.state.showLogin = false;
