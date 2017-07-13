@@ -564,14 +564,14 @@
       border  1px solid #D3DCE6;
       border-radius 5px;
       box-shadow 0 0 5px black;
-      top: 50%;
-      left: 50%;
+      position absolute;
+      z-index 999;
+      top: 43%;
+      left: 44%;
       margin: -300px 0 0 -390px;
       padding 15px;
-      position: fixed;
-      width: 925px;
-      height: 600px;
-      z-index: 25;
+      width: 865px;
+      height: 800px;
       overflow auto;
       .close
         float right;
