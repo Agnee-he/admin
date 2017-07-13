@@ -34,7 +34,7 @@
             </div></el-col>
             <el-col :span="8"><div>
               <div class="btn">
-                <el-button @click="searchMeeting"><i class="el-icon-search"></i>搜索</el-button><el-button @click="test"><i class="el-icon-loading"></i>重置</el-button><el-button @click="editMeetting"><i class="el-icon-plus"></i>发布会议</el-button>
+                <el-button @click="searchMeeting"><i class="el-icon-search"></i>搜索</el-button><el-button @click="resetSearchMeeting"><i class="el-icon-loading"></i>重置</el-button><el-button @click="editMeetting"><i class="el-icon-plus"></i>发布会议</el-button>
               </div>
             </div></el-col>
           </el-row>
@@ -854,6 +854,22 @@
               console.log(response);
             });
           }
+        },
+        resetSearchMeeting() {
+          this.conferenceStated = '';
+          this.conference = [];
+          this.conferenceTotal = 0;
+          this.conferenceDated = '';
+          //  获取工作会议首页 全部会议
+          this.$http.jsonp('http://120.55.85.65:8088/spg/admin/working/allmeeting?page=' + this.conferencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+            // response.data 为服务端返回的数据
+            this.conference = response.data.result.rows;
+            this.conferenceTotal = response.data.result.total;
+            console.log('条件查询会议重置成功');
+          }).catch(function (response) {
+            // 出错处理
+            console.log(response);
+          });
         },
         openCheck(row) {  // 进入会议详情
           console.log(row.meetingid);

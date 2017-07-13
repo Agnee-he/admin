@@ -6,7 +6,7 @@
           <div class="search_input1">
             <span>搜索主题：</span>
             <div class="el-inp">
-              <el-input v-model="displayName" placeholder="请输入陈列主题"></el-input>
+              <el-input v-model="displayType" placeholder="请输入陈列主题"></el-input>
             </div>
           </div>
           <div class="search_input2">
@@ -26,13 +26,15 @@
             </div>
           </div>
           <div class="but">
-            <el-button @click="searchDisplay"><i class="el-icon-search"></i>搜索</el-button><el-button @click="test1"><i class="el-icon-edit"></i>重置</el-button><el-button @click="openNewDisplay"><i class="el-icon-plus"></i>新增陈列</el-button>
+            <el-button @click="searchDisplay"><i class="el-icon-search"></i>搜索</el-button><el-button @click="resetSearchDisplay"><i class="el-icon-edit"></i>重置</el-button><el-button @click="openNewDisplay"><i class="el-icon-plus"></i>新增陈列</el-button>
           </div>
         </div>
         <div class="main">
           <el-table
             ref="multipleTable"
             :data="display"
+            @select="selectRow"
+            @select-all="selectRowAll"
             border
             tooltip-effect="dark"
             style="width: 100%"
@@ -87,8 +89,7 @@
             </el-table-column>
           </el-table>
           <div class="but_select">
-            <el-button @click="toggleSelection(tableData3)">全选</el-button>
-            <el-button @click="toggleSelection()">取消选择</el-button>
+            <el-button @click="toggleSelection(display)">全选</el-button>
             <el-button><i class="el-icon-delete"></i>删除</el-button>
             <el-button><i class="el-icon-upload2"></i>导出</el-button>
           </div>
@@ -235,10 +236,10 @@
             </el-row>
           </div>
           <div class="choose3">
-            <el-collapse v-model="activeNames" v-for="(item, index) in orderList">
+            <el-collapse v-model="activeNames" v-for="(item, index) in orderList" :key="index">
               <el-collapse-item :title="item.city+item.date" :name="index">
                 <el-row style="height: 60px;">
-                  <el-col :span="4" v-for="bci in item.bci"><div>
+                  <el-col :span="4" v-for="bci in item.bci" :key="index"><div>
                     <p>{{bci.bcitype}}({{bci.stime}}-{{bci.etime}})</p>
                   </div></el-col>
                 </el-row>
@@ -268,7 +269,6 @@
                   <p>NO.3123123123123</p>
                 </div></el-col>
                 <el-col :span="8"><div>
-                  <P class="top_p1">创建时间：<span>2017-02-24 15:00</span></P>
                 </div></el-col>
               </el-row>
             </div>
@@ -281,8 +281,10 @@
                   <el-col class="el_input" :span="20"><div>
                     <el-select v-model="city" placeholder="点击选择地区">
                       <el-option
-                        v-for="item in city_list" :key="item.id"
-                        :value="item">
+                        v-for="item in city_list"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
                       </el-option>
                     </el-select>
                   </div></el-col>
@@ -313,7 +315,8 @@
                     <el-col :span="6"><div>
                       <p>班次名称</p>
                       <el-input v-for="item in schedule" :key="item.id" v-model="item.bctype" placeholder="班次名称"></el-input>
-                    </div></el-col>
+                    </div>
+                      <el-button @click="addBci">添加班次</el-button></el-col>
                     <el-col :span="14"><div>
                       <p>时间段</p>
                       <div v-for="item in schedule" :key="item.id">
@@ -779,51 +782,32 @@
         startTime: '',
         endTime: '',
         //  分割线
-        city_list: [],
+        city_list: [], // 城市列表
+        city_shop: [], //  城市与门店之间关系
         city: '',
         schedulingdate: '',
-        schedulingdate1: '',
         schedule: [
           {
-            city: '',
-            schedulingdate: '',
             bctype: '',
             stime: '',
             etime: ''
           },
           {
-            city: '',
-            schedulingdate: '',
             bctype: '',
             stime: '',
             etime: ''
           },
           {
-            city: '',
-            schedulingdate: '',
-            bctype: '',
-            stime: '',
-            etime: ''
-          },
-          {
-            city: '',
-            schedulingdate: '',
-            bctype: '',
-            stime: '',
-            etime: ''
-          },
-          {
-            city: '',
-            schedulingdate: '',
             bctype: '',
             stime: '',
             etime: ''
           }
         ],  // 新增班次组 排班设置
+        postschedule: [],  //  新建班次组提交的整个json
         display: [],   //  陈列首页  陈列列表
         displayTotal: 0,  // 陈列总数
         displayPage: 1, //   陈列显示第几页
-        displayName: '',  //  搜索时输入的陈列名称
+        displayType: '',  //  搜索时输入的陈列类别
         displayShop: '',  //  搜索时输入的陈列类别
         displayTime: '',  //  搜索陈列时选择的时间段
         shopModels: [],  // 门店列表
@@ -832,11 +816,24 @@
     },
     created() {
       //  获取城市列表
-      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/cityinfo', {jsonp: 'jsonpCallback'}).then(function (response) {
+      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/cityshop', {jsonp: 'jsonpCallback'}).then(function (response) {
         // response.data 为服务端返回的数据
-        this.city_list = response.data.result.城市列表;
+        let list = response.data.result.门店列表;
+//        for (let i = 0; i < list.length; i++) {
+//          console.log(1);
+//          console.log(list[i]);
+//        }
+        this.city_shop = list;
+        for (let tmp in list) {
+//          console.log(tmp);  //  “键名”
+          this.city_list.push({label: tmp, value: tmp});
+//          console.log(list[tmp]);  //  “键值'
+        }
+        console.log(this.city_list);
+        console.log(this.city_shop);
       }).catch(function () {
         // 出错处理
+        console.log('获取城市列表失败');
       });
       //  获取首页陈列列表
       this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/qryDisplays?page=' + this.displayPage +
@@ -982,20 +979,34 @@
 //        let formData = JSON.stringify(this.schedule); // 这里才是你的表单数据
         let formData = this.schedule;
         let formarDate = this.formatDateTime(this.schedulingdate);  //  格式化时间
-        for (let i = 0; i < formData.length - 1; i++) {
-          formData[i].city = this.city;
-          formData[i].schedulingdate = formarDate;
+        console.log(this.city);
+        console.log(this.city_shop);
+        console.log(formData);
+        console.log(formarDate);
+        for (let tmp in this.city_shop) {
+//          console.log(tmp);  //  键名
+//          console.log(list[tmp]);  //  键值'
+          let city = tmp;
+          let list = this.city_shop[tmp];
+          if (this.city === city) {
+              console.log(list.length);
+              for (let x = 0; x < list.length; x++) {
+                  for (let y = 0; y < this.schedule.length; y++) {
+                      let newSch = {city: city, shopid: list[x].shopid, bctype: this.schedule[y].bctype, stime: this.schedule[y].stime, etime: this.schedule[y].etime};
+                      this.postschedule.push(newSch);
+                  }
+              }
+          }
         }
-        let params = JSON.stringify(formData);
-        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/attendance/addSchedulings', {jsonp: 'jsonpCallback', dataType: 'jsonp', data: params, emulateJSON: true}, {headers: {contentType: 'application/x-www-form-urlencoded'}}).then((response) => {
-          // success callback
-          console.log(1);
-          console.log(response);
-        }, (response) => {
-          // error callback
-          console.log(params);
-          console.log(response);
-        });
+        console.log(this.postschedule);
+//        let params = JSON.stringify(formData);
+//        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/attendance/addSchedulings', {jsonp: 'jsonpCallback', dataType: 'jsonp', data: params, emulateJSON: true}, {headers: {contentType: 'application/x-www-form-urlencoded'}}).then((response) => {
+//          console.log(1);
+//          console.log(response);
+//        }, (response) => {
+//          console.log(params);
+//          console.log(response);
+//        });
       },
       openCheckDisplay(row) {
       	this.$store.state.show_checkDisplay = true;
@@ -1012,11 +1023,25 @@
         }
         //  获取首页陈列列表
         this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/qryDisplays?page=' + this.displayPage +
-          '&rows=10&filter_EQS_displayName=' + this.displayName + '&filter_LIKES_shopName=' + this.displayShop + '&filter_LES_startTime=' + endTime + '&filter_GES_startTime=' + startTime, {jsonp: 'jsonpCallback'}).then(function (response) {
+          '&rows=10&filter_EQS_displayType=' + this.displayType + '&filter_LIKES_shopName=' + this.displayShop + '&filter_LES_startTime=' + endTime + '&filter_GES_startTime=' + startTime, {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           this.display = response.data.result.rows;
           this.displayTotal = response.data.result.total;
-          console.log(this.display);
+        }).catch(function () {
+          // 出错处理
+          console.log('获取陈列列表失败');
+        });
+      },
+      resetSearchDisplay() {
+        this.displayTime = '';
+        this.displayType = '';
+        this.displayShop = '';
+        //  获取首页陈列列表
+        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/qryDisplays?page=' + this.displayPage +
+          '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+          // response.data 为服务端返回的数据
+          this.display = response.data.result.rows;
+          this.displayTotal = response.data.result.total;
         }).catch(function () {
           // 出错处理
           console.log('获取陈列列表失败');
@@ -1035,6 +1060,34 @@
           r.push(array[i].shopid);
         }
         return r;
+      },
+      addBci() {  // 添加班次
+          let newBci = {bctype: '', stime: '', etime: ''};
+          this.schedule.push(newBci);
+      },
+      handleDownload() {
+        require.ensure([], () => {
+          const { export_json_to_excel } = require('../../vendor/Export2Excel');
+          const tHeader = ['编号', '陈列主题', '发布时间', '门店', '陈列考评'];
+          const filterVal = ['id', 'displayType', 'startTime', 'shopName', 'stars'];
+          const list = this.excel;
+          const data = this.formatJson(filterVal, list);
+          export_json_to_excel(tHeader, data, '门店陈列');
+        });
+        console.log(1);
+      },
+      formatJson(filterVal, jsonData) {
+        return jsonData.map(v => filterVal.map(j => v[j]));
+      },
+      selectRow(row) {
+        this.excel = row;
+        console.log(this.excel);
+        console.log(row);
+      },
+      selectRowAll(row) {
+        this.excel = row;
+        console.log(this.excel);
+        console.log(row);
       }
   },
     components: {
@@ -1157,7 +1210,7 @@
           margin-top -350px;
           margin-left -400px;
           width 600px;
-          height 500px;
+          height 600px;
           padding 30px;
           background-color white;
           box-shadow 0 0 2px black;

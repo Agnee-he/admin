@@ -6,21 +6,21 @@
     <h3 class="title">课程详情</h3>
     <div class="title">
       <el-row>
-        <el-col :span="3"><div class="grid-content bg-purple left"></div></el-col>
-        <el-col :span="5"><div class="grid-content bg-purple-light">
+        <el-col :span="3"><div></div></el-col>
+        <el-col :span="5"><div>
           <p class="left_p course_name">课程名称</p>
           <p class="left_p">NO.2342343242</p>
         </div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple">
+        <el-col :span="4"><div>
           <p>所属分类：XXX</p>
         </div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple-light">
+        <el-col :span="4"><div>
           <p></p>
         </div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple">
+        <el-col :span="4"><div>
           <p></p>
         </div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple-light">
+        <el-col :span="4"><div>
           <p class="right_p">通过率：52%</p>
           <p class="right_p">平均分：77分</p>
         </div></el-col>
@@ -29,20 +29,20 @@
     <div class="content">
       <p class="til">课程内容：</p>
       <el-row>
-        <el-col :span="3"><div class="grid-content bg-purple left"></div></el-col>
-        <el-col :span="5"><div class="grid-content bg-purple-light">
+        <el-col :span="3"><div></div></el-col>
+        <el-col :span="5"><div>
           <p>课程名称</p>
         </div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple">
+        <el-col :span="4"><div>
           <p></p>
         </div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple-light">
+        <el-col :span="4"><div>
           <p></p>
         </div></el-col>
-        <el-col :span="2"><div class="grid-content bg-purple">
+        <el-col :span="2"><div>
           <p></p>
         </div></el-col>
-        <el-col :span="6"><div class="grid-content bg-purple-light">
+        <el-col :span="6"><div>
           <p class="left_p">xxxmb,下载</p>
           <p class="left_p">上传于：2017/6/6 10：29</p>
         </div></el-col>
@@ -51,7 +51,7 @@
     <div class="study">
       <p class="til">员工学习：<span class="num">234人</span></p>
       <el-row class="search">
-        <el-col :span="10"><div class="grid-content bg-purple">
+        <el-col :span="10"><div>
           <div class="search_input1">
             <span>搜索地区：</span>
             <div class="el-inp">
@@ -65,7 +65,7 @@
             </div>
           </div>
         </div></el-col>
-        <el-col :span="8"><div class="grid-content bg-purple-light">
+        <el-col :span="8"><div>
           <div class="search_input3">
             <span>考试状态：</span>
             <div class="el-inp">
@@ -80,7 +80,7 @@
             </div>
           </div>
         </div></el-col>
-        <el-col :span="6"><div class="grid-content bg-purple">
+        <el-col :span="6"><div>
           <div class="but">
             <el-button><i class="el-icon-search"></i>搜索</el-button><el-button><i class="el-icon-information"></i>重置</el-button>
           </div>
@@ -89,6 +89,8 @@
       <el-table class="el_tab"
         ref="multipleTable"
         :data="tableData3"
+        @select="selectRow"
+        @select-all="selectRowAll"
         border
         tooltip-effect="dark"
         style="width: 100%">
@@ -120,7 +122,7 @@
         </el-table-column>
       </el-table>
       <div style="margin-top: 10px; float: left;">
-        <el-button @click="toggleSelection([tableData3[0],tableData3[1],tableData3[2],tableData3[3],tableData3[4],tableData3[5],tableData3[6],tableData3[7],tableData3[8], tableData3[9]])">全选</el-button><el-button>导出</el-button>
+        <el-button @click="toggleSelection(tableData3)">全选</el-button><el-button @click="handleDownload">导出</el-button>
       </div>
       <div class="paging">
         <paging :total="11"></paging>
@@ -130,10 +132,10 @@
       <p class="til">考试考题：</p>
       <div class="btn">
         <el-row>
-          <el-col :span="12"><div class="grid-content bg-purple">
+          <el-col :span="12"><div>
             <p>单选题</p>
           </div></el-col>
-          <el-col :span="12"><div class="grid-content bg-purple-light right">
+          <el-col :span="12"><div style="float: right">
             <el-button><i class="el-icon-delete"></i>删除</el-button><el-button @click="showEdit"><i class="el-icon-edit"></i>编辑</el-button>
           </div></el-col>
         </el-row>
@@ -188,23 +190,23 @@
       </div>
       <div class="top">
         <el-row>
-          <el-col :span="3"><div class="grid-content bg-purple left1">
+          <el-col :span="3"><div class="left1">
 
           </div></el-col>
-          <el-col :span="5"><div class="grid-content bg-purple-light">
+          <el-col :span="5"><div>
             <p class="left_p course_name">课程名称</p>
             <p class="left_p">NO.2342343242</p>
           </div></el-col>
-          <el-col :span="4"><div class="grid-content bg-purple">
+          <el-col :span="4"><div>
             <p>所属分类：XXX</p>
           </div></el-col>
-          <el-col :span="4"><div class="grid-content bg-purple-light">
+          <el-col :span="4"><div>
             <p></p>
           </div></el-col>
-          <el-col :span="2"><div class="grid-content bg-purple">
+          <el-col :span="2"><div>
             <p></p>
           </div></el-col>
-          <el-col :span="6"><div class="grid-content bg-purple-light">
+          <el-col :span="6"><div>
             <p>&nbsp;</p>
             <p>更新时间：2017-02-23 14:52</p>
           </div></el-col>
@@ -231,11 +233,11 @@
         </div>
         <div class="bottom">
           <el-row>
-            <el-col :span="12"><div class="grid-content bg-purple">
+            <el-col :span="12"><div>
               <p class="thin_p">单选试题只能有一个正确答案；</p>
               <p class="thin_p">每道题目分数=（每题权重值/所有题权重值总和）*100</p>
             </div></el-col>
-            <el-col :span="12"><div class="grid-content bg-purple-light btn">
+            <el-col :span="12"><div class="btn">
               <el-button type="primary" size="large" @click="submitExam">保存</el-button>
             </div></el-col>
           </el-row>
@@ -394,7 +396,8 @@
             }
           ], // 新增考题内容
           show_edit: false,
-          input1: ''
+          input1: '',
+          excel: ''
         };
       },
 
@@ -423,6 +426,30 @@
         },
         submitExam() { //  保存上传新考题
           console.log(this.newExam);
+        },
+        handleDownload() {
+          require.ensure([], () => {
+            const { export_json_to_excel } = require('../../../../vendor/Export2Excel');
+            const tHeader = ['所属门店/地区', '员工姓名', '考试状态', '分数'];
+            const filterVal = ['address', 'name', 'state', 'grade'];
+            const list = this.excel;
+            const data = this.formatJson(filterVal, list);
+            export_json_to_excel(tHeader, data, '课程详情');
+          });
+          console.log(1);
+        },
+        formatJson(filterVal, jsonData) {
+          return jsonData.map(v => filterVal.map(j => v[j]));
+        },
+        selectRow(row) {
+          this.excel = row;
+          console.log(this.excel);
+          console.log(row);
+        },
+        selectRowAll(row) {
+          this.excel = row;
+          console.log(this.excel);
+          console.log(row);
         }
       },
 
