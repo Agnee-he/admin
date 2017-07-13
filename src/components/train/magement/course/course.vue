@@ -8,21 +8,21 @@
       <el-row>
         <el-col :span="3"><div></div></el-col>
         <el-col :span="5"><div>
-          <p class="left_p course_name">课程名称</p>
-          <p class="left_p">NO.2342343242</p>
+          <p class="left_p course_name">{{course[0].coursename}}</p>
+          <p class="left_p">NO.{{course[0].courseid}}</p>
         </div></el-col>
         <el-col :span="4"><div>
-          <p>所属分类：XXX</p>
-        </div></el-col>
-        <el-col :span="4"><div>
-          <p></p>
+          <!--<p>所属分类：XXX</p>-->
         </div></el-col>
         <el-col :span="4"><div>
           <p></p>
         </div></el-col>
         <el-col :span="4"><div>
-          <p class="right_p">通过率：52%</p>
-          <p class="right_p">平均分：77分</p>
+          <p></p>
+        </div></el-col>
+        <el-col :span="4"><div>
+          <p class="right_p">通过率：{{course[0].passrate}}</p>
+          <p class="right_p">平均分：{{course[0].averagescore}}</p>
         </div></el-col>
       </el-row>
     </div>
@@ -31,7 +31,7 @@
       <el-row>
         <el-col :span="3"><div></div></el-col>
         <el-col :span="5"><div>
-          <p>课程名称</p>
+          <p>{{course[0].coursename}}</p>
         </div></el-col>
         <el-col :span="4"><div>
           <p></p>
@@ -49,7 +49,7 @@
       </el-row>
     </div>
     <div class="study">
-      <p class="til">员工学习：<span class="num">234人</span></p>
+      <p class="til">员工学习：<span class="num">{{course[0].num}}人</span></p>
       <el-row class="search">
         <el-col :span="10"><div>
           <div class="search_input1">
@@ -88,7 +88,7 @@
       </el-row>
       <el-table class="el_tab"
         ref="multipleTable"
-        :data="tableData3"
+        :data="course[1].traininginfo"
         @select="selectRow"
         @select-all="selectRowAll"
         border
@@ -99,7 +99,7 @@
           width="55">
         </el-table-column>
         <el-table-column
-          prop="address"
+          prop="shop"
           label="所属门店/地区"
           align="center">
         </el-table-column>
@@ -109,12 +109,12 @@
           align="center">
         </el-table-column>
         <el-table-column
-          prop="state"
+          prop="testresult"
           label="考试状态"
           align="center">
         </el-table-column>
         <el-table-column
-          prop="grade"
+          prop="scores"
           sortable
           label="分数"
           align="center"
@@ -143,7 +143,7 @@
       <div class="test_content">
         <el-table
           ref="singleTable"
-          :data="tableData"
+          :data="course[1].questions"
           highlight-current-row
           style="width: 100%">
           <el-table-column
@@ -151,31 +151,37 @@
             width="50">
           </el-table-column>
           <el-table-column
-            property="test"
-            label="题目">
+            property="content"
+            label="题目"
+            width="200"
+            show-overflow-tooltip>
           </el-table-column>
           <el-table-column
-            property="a"
-            label="A">
+            property="A"
+            label="A"
+            show-overflow-tooltip>
           </el-table-column>
           <el-table-column
-            property="b"
-            label="B">
+            property="B"
+            label="B"
+            show-overflow-tooltip>
           </el-table-column>
           <el-table-column
-            property="c"
-            label="C">
+            property="C"
+            label="C"
+            show-overflow-tooltip>
           </el-table-column>
           <el-table-column
-            property="d"
-            label="D">
+            property="D"
+            label="D"
+            show-overflow-tooltip>
           </el-table-column>
           <el-table-column
             property="answer"
             label="答案">
           </el-table-column>
           <el-table-column
-            property="weight"
+            property="scores"
             label="权重">
           </el-table-column>
         </el-table>
@@ -251,6 +257,11 @@
   import paging from '../../../paging/paging.vue';
 
     export default {
+    	props: {
+    		course: {
+    			type: Array
+        }
+      },
       data() {
         return {
           options: [

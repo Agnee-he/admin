@@ -9,11 +9,11 @@
       <el-button><i class="el-icon-plus"></i>新增类</el-button>
     </div>
     <div class="study_main">
-      <el-tabs @tab-click="handleClick" v-for="(item, index) in allCourse" :key="index">
-        <el-tab-pane :label="item.type">
+      <el-tabs type="card" v-model="activeName">
+        <el-tab-pane v-for="(item, index) in allCourse" :name="item.num" :label="item.type" :key="index">
           <el-table
             ref="multipleTable"
-            :data="tableData3"
+            :data="item.course"
             tooltip-effect="dark"
             @select="selectRow"
             @select-all="selectRowAll"
@@ -23,24 +23,24 @@
               width="55">
             </el-table-column>
             <el-table-column
-              prop="course"
+              prop="coursename"
               align="center"
               label="课程"
               >
             </el-table-column>
             <el-table-column
-              prop="pass"
+              prop="passrate"
               align="center"
               label="通过率">
             </el-table-column>
             <el-table-column
-              prop="average"
+              prop="averagescore"
               align="center"
               label="平均分"
               show-overflow-tooltip>
             </el-table-column>
             <el-table-column
-              prop="number"
+              prop="num"
               align="center"
               label="学习人数"
               show-overflow-tooltip>
@@ -49,7 +49,7 @@
               <template scope="scope">
                 <el-button
                   size="small"
-                  @click="openDetail">编辑</el-button>
+                  @click="openDetail(scope.row)">编辑</el-button>
                 <!--<el-button-->
                   <!--size="small"-->
                   <!--type="danger"-->
@@ -66,7 +66,7 @@
         </el-tab-pane>
       </el-tabs>
     </div>
-    <course class="course_detail" v-show="$store.state.showCourse"></course>
+    <course :course="oneCourse" class="course_detail" v-show="$store.state.showCourse"></course>
     <add-course class="course_detail" v-show="$store.state.show_addCourse"></add-course>
   </div>
 </template>
@@ -79,7 +79,7 @@
     export default {
       data() {
         return {
-          activeName: 'first',
+          activeName: '1',
           tableData3: [
             {
               id: '1',
@@ -107,19 +107,23 @@
           input: '',
           excel: [], // 导出excel表内容
           number: '', // 需要删除的index
-          allCourse: []  //  获取的课程集合
+          allCourse: [],  //  获取的课程集合
+          oneCourse: []  //  查看单个课程时的详情
         };
       },
 
       created() {
         //  获取所有课程
-        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/training/allcourses?username=chencheng1604', {jsonp: 'jsonpCallback'}).then(function (response) {
+        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/training/allcourses?username=chencheng1604', {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           let allCourse = response.data.result.AllCourses;
           for (let tmp in allCourse) {
 //          console.log(tmp);  //  键名
 //          console.log(list[tmp]);  //  键值'
             this.allCourse.push({type: tmp, num: '', course: allCourse[tmp]});
+          }
+          for (let i = 0; i < this.allCourse.length; i++) {
+          	this.allCourse[i].num = String(i + 1);
           }
           console.log(this.allCourse);
           console.log('获取课程成功');
@@ -145,6 +149,40 @@
         openDetail(row) {
           console.log(row);
           this.$store.state.showCourse = true;
+          //  获取课程详情
+          this.$http.jsonp('http://120.55.85.65:8088/spg/admin/training/testresult?courseid=' + row.courseid, {jsonp:
+            'jsonpCallback'}).then(function (response) {
+            // response.data 为服务端返回的数据
+            this.oneCourse = [];
+            this.oneCourse.push(row);
+            this.oneCourse.push(response.data.result);
+            console.log('结果');
+            console.log(response.data.result);
+            for (let i = 0; i < this.oneCourse[1].questions.length; i++) {
+              this.oneCourse[1].questions[i].options = this.oneCourse[1].questions[i].options.split(';');
+              for (let x = 0; x < this.oneCourse[1].questions[i].options.length; x++) {
+                switch (x) {
+                  case 0:
+                    this.oneCourse[1].questions[i].A = this.oneCourse[1].questions[i].options[x].substr(2);
+                    break;
+                  case 1:
+                    this.oneCourse[1].questions[i].B = this.oneCourse[1].questions[i].options[x].substr(2);
+                    break;
+                  case 2:
+                    this.oneCourse[1].questions[i].C = this.oneCourse[1].questions[i].options[x].substr(2);
+                  	break;
+                  case 3:
+                    this.oneCourse[1].questions[i].D = this.oneCourse[1].questions[i].options[x].substr(2);
+                  	break;
+                }
+              }
+            }
+            console.log(this.oneCourse);
+            console.log('课程详情成功');
+          }).catch(function (response) {
+//             出错处理
+            console.log(response);
+          });
         },
         handleDownload() {
           require.ensure([], () => {
@@ -200,6 +238,7 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   .study
     position relative;
+    overflow auto;
     height 750px;
     .study_top
       height 50px;
