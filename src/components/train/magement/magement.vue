@@ -9,8 +9,8 @@
       <el-button><i class="el-icon-plus"></i>新增类</el-button>
     </div>
     <div class="study_main">
-      <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane label="类目一" name="first">
+      <el-tabs @tab-click="handleClick" v-for="(item, index) in allCourse" :key="index">
+        <el-tab-pane :label="item.type">
           <el-table
             ref="multipleTable"
             :data="tableData3"
@@ -61,24 +61,20 @@
             <el-button @click="toggleSelection(tableData3)">全选</el-button>
             <el-button @click="testSelect(tableData3)"><i class="el-icon-delete"></i>删除</el-button>
             <el-button @click="handleDownload"><i class="el-icon-upload2"></i>导出</el-button>
-            <el-button><i class="el-icon-plus"></i>新增课程</el-button>
-          </div>
-          <div class="paging">
-            <paging :total="5"></paging>
+            <el-button @click="addCourse"><i class="el-icon-plus"></i>新增课程</el-button>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="类目二" name="second"></el-tab-pane>
-        <el-tab-pane label="类目三" name="third"></el-tab-pane>
-        <el-tab-pane label="类目四" name="fourth"></el-tab-pane>
       </el-tabs>
     </div>
     <course class="course_detail" v-show="$store.state.showCourse"></course>
+    <add-course class="course_detail" v-show="$store.state.show_addCourse"></add-course>
   </div>
 </template>
 
 <script>
   import paging from '../../paging/paging.vue';
   import course from './course/course.vue';
+  import addCourse from './addCourse/addCourse.vue';
 
     export default {
       data() {
@@ -110,8 +106,28 @@
           multipleSelection: [],
           input: '',
           excel: [], // 导出excel表内容
-          number: '' // 需要删除的index
+          number: '', // 需要删除的index
+          allCourse: []  //  获取的课程集合
         };
+      },
+
+      created() {
+        //  获取所有课程
+        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/training/allcourses?username=chencheng1604', {jsonp: 'jsonpCallback'}).then(function (response) {
+          // response.data 为服务端返回的数据
+          let allCourse = response.data.result.AllCourses;
+          for (let tmp in allCourse) {
+//          console.log(tmp);  //  键名
+//          console.log(list[tmp]);  //  键值'
+            this.allCourse.push({type: tmp, num: '', course: allCourse[tmp]});
+          }
+          console.log(this.allCourse);
+          console.log('获取课程成功');
+        }).catch(function (response) {
+          // 出错处理
+          console.log('获取课程失败');
+          console.log(response);
+        });
       },
       methods: {
         handleClick(tab, event) {
@@ -168,11 +184,15 @@
           this.excel = row;
           console.log(this.excel);
           console.log(row);
+        },
+        addCourse() {
+            this.$store.state.show_addCourse = true;
         }
       },
       components: {
         paging,
-        course
+        course,
+        addCourse
       }
     };
 </script>

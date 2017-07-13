@@ -1,18 +1,18 @@
 <template>
   <div class="follow">
-    <div v-show="">
+    <div>
       <div class="follow_top">
         <div class="search">
           <div class="search_input1">
-            <span>搜索主题：</span>
+            <span>搜索地区：</span>
             <div class="el-inp">
-              <el-input v-model="input1" placeholder="请输入陈列编号/主题"></el-input>
+              <el-input v-model="input1" placeholder="请输入地区"></el-input>
             </div>
           </div>
           <div class="search_input2">
-            <span>搜索门店：</span>
+            <span>搜索员工：</span>
             <div class="el-inp">
-              <el-input v-model="input1" placeholder="请输入陈列编号/主题"></el-input>
+              <el-input v-model="input1" placeholder="请输入员工"></el-input>
             </div>
           </div>
           <div class="but">
@@ -24,6 +24,8 @@
         <el-table
           ref="multipleTable"
           :data="tableData3"
+          @select="selectRow"
+          @select-all="selectRowAll"
           border
           tooltip-effect="dark"
           style="width: 100%"
@@ -35,6 +37,7 @@
           <el-table-column
             prop="address"
             label="所属门店/地址"
+            width="160"
             align="center">
           </el-table-column>
           <el-table-column
@@ -57,6 +60,7 @@
           <el-table-column
             prop="pass"
             label="合格率(%)"
+            width="140"
             align="center"
             sortable
             show-overflow-tooltip>
@@ -68,14 +72,26 @@
             sortable
             show-overflow-tooltip>
           </el-table-column>
+          <el-table-column align="center" width="80" label="操作">
+            <template scope="scope">
+              <el-button
+                size="small"
+                @click="openGrade(scope.row)">查看</el-button>
+              <!--<el-button-->
+              <!--size="small"-->
+              <!--type="danger"-->
+              <!--@click="handleDelete(scope.$index, scope.row)">删除</el-button>-->
+            </template>
+          </el-table-column>
         </el-table>
         <div style="margin-top: 20px">
           <el-button @click="toggleSelection(tableData3)">全选</el-button>
+          <el-button @click="handleDownload"><i class="el-icon-upload2"></i>导出</el-button>
         </div>
       </div>
       <paging class="paging"></paging>
     </div>
-    <grade></grade>
+    <grade v-show="$store.state.show_grade"></grade>
   </div>
 </template>
 
@@ -120,7 +136,8 @@
             }
             ],
           multipleSelection: [],
-          input1: ''
+          input1: '',
+          excel: '' //  需要导出的数据
         };
       },
 
@@ -136,6 +153,33 @@
         },
         handleSelectionChange(val) {
           this.multipleSelection = val;
+        },
+        openGrade() {
+            this.$store.state.show_grade = true;
+        },
+        handleDownload() {
+          require.ensure([], () => {
+            const { export_json_to_excel } = require('../../../vendor/Export2Excel');
+            const tHeader = ['所属门店/地址', '员工姓名', '已学课程', '未学课程', '合格率(%)', '平均分'];
+            const filterVal = ['address', 'name', 'studied', 'not_study', 'pass', 'average'];
+            const list = this.excel;
+            const data = this.formatJson(filterVal, list);
+            export_json_to_excel(tHeader, data, '考核成绩');
+          });
+          console.log(1);
+        },
+        formatJson(filterVal, jsonData) {
+          return jsonData.map(v => filterVal.map(j => v[j]));
+        },
+        selectRow(row) {
+          this.excel = row;
+          console.log(this.excel);
+          console.log(row);
+        },
+        selectRowAll(row) {
+          this.excel = row;
+          console.log(this.excel);
+          console.log(row);
         }
       },
 
@@ -148,6 +192,7 @@
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   .follow
+    height 768px;
     .follow_top
       .search
         height 50px;

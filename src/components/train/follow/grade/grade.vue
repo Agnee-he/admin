@@ -1,5 +1,10 @@
 <template>
   <div class="grade">
+    <div class="close">
+      <el-row>
+        <el-col :span="24"><div><i @click="closeGrade" class="el-icon-circle-close"></i></div></el-col>
+      </el-row>
+    </div>
     <div class="top">
       <el-row>
         <el-col :span="3">
@@ -13,7 +18,8 @@
         </el-col>
         <el-col :span="8">
           <div>
-            <p class="top_p">xxxx</p>
+            <p class="pass_p">通过率：33</p>
+            <p class="ave_p">平均分：99</p>
           </div>
         </el-col>
       </el-row>
@@ -113,6 +119,9 @@
             ]
           }
         );
+      },
+      closeGrade() {
+          this.$store.state.show_grade = false;
       }
     }
   };
@@ -129,17 +138,31 @@
   .title_p
     font-size 18px;
     margin-top 0;
+  .pass_p
+    float right;
+    margin-top 0;
+    font-size 14px;
+  .ave_p
+    margin-top 30px;
+    font-size 14px;
   .content_p
     margin-top 20px;
     font-size 14px;
   .grade
-    margin-left 30px;
-    width 808px;
+    position absolute;
+    z-index 999;
+    top 10px;
+    margin-left 0;
+    width 872px;
     height 718px;
     overflow auto;
     background-color white;
     box-shadow 0 0 2px #1F2D3D;
     padding 30px;
+    .close
+      margin-top -10px;
+      margin-right -10px;
+      float right;
     .top
       border-bottom 1px solid #D3DCE6;
       .logo
