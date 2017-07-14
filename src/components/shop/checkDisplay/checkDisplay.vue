@@ -14,18 +14,18 @@
           <el-col :span="7">
             <div>
               <p class="title_p">门店陈列标准</p>
-              <p class="content_p">NO.123213123</p>
+              <p class="content_p">NO.{{displayDetail.id}}</p>
             </div>
           </el-col>
           <el-col :span="7">
             <div>
-              <p class="title_p">上海门店</p>
+              <p class="title_p">{{displayDetail.shopName}}</p>
               <p class="content_p">店长：我是谁</p>
             </div>
           </el-col>
           <el-col :span="7">
             <div class="rate">
-              <el-rate disabled v-model="value1"></el-rate>
+              <el-rate disabled v-model="displayDetail.stars"></el-rate>
             </div>
           </el-col>
         </el-row>
@@ -33,21 +33,21 @@
       <div class="require">
         <div class="title">
           <p class="left">陈列要求：</p>
-          <p class="right">更新于： 2017-12-12 12：12</p>
+          <p class="right">更新于： {{displayDetail.startTime}}</p>
         </div>
-        <div class="show_img">
-          <img src="#"/><img src="#"/><img src="#"/><img src="#"/><img src="#"/>
+        <div class="show_img" v-for="item in displayDetail.displayStandardurls">
+          <img :src="item.standardImgurl"/>
         </div>
         <div class="remark">
           <p>备注：</p>
-          <p class="text">我是谁？我在哪？为什么都在垂涎我的美色？</p>
+          <p class="text">{{displayDetail.displayRemarks}}</p>
         </div>
       </div>
       <div class="swiper">
         <p>陈列情况：</p>
         <el-carousel :interval="5000" arrow="always">
-          <el-carousel-item v-for="item in 4" :key="item">
-            <h3>{{ item }}</h3>
+          <el-carousel-item v-for="item in displayDetail.displayActualurls" :key="item">
+            <img :src="item.actualImgurl" width="100%" height="100%"/>
           </el-carousel-item>
         </el-carousel>
         <p class="right">上传人：我是谁     更新于：2017-7-7 12：11</p>
@@ -60,103 +60,23 @@
                 <el-row>
                   <el-col :span="4">
                     <div>
-                      <p class="name">我是谁的评价：</p>
+                      <p class="name">评价：</p>
                     </div>
                   </el-col>
                   <el-col :span="12">
-                    <div class="rate">
-                      <el-rate disabled v-model="value1"></el-rate>
+                    <div class="content" >
+                      <p>{{displayDetail.reviews}}</p>
                     </div>
                   </el-col>
                   <el-col :span="8">
-                    <div class="time">
-                      <p>2017-7-7 12:00</p>
-                    </div>
+                    <!--<div class="time">-->
+                      <!--<p>2017-7-7 12:00</p>-->
+                    <!--</div>-->
                   </el-col>
                 </el-row>
               </div>
             </div>
-            <div class="content">
-              <p>我是谁  我在哪里  不敢当</p>
-            </div>
-          </li>
-          <li>
-            <div class="title">
-              <div>
-                <el-row>
-                  <el-col :span="4">
-                    <div>
-                      <p class="name">我是谁的评价：</p>
-                    </div>
-                  </el-col>
-                  <el-col :span="12">
-                    <div class="rate">
-                      <el-rate disabled v-model="value1"></el-rate>
-                    </div>
-                  </el-col>
-                  <el-col :span="8">
-                    <div class="time">
-                      <p>2017-7-7 12:00</p>
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-            </div>
-            <div class="content">
-              <p>不行  我受不了这种委屈</p>
-            </div>
-          </li>
-          <li>
-            <div class="title">
-              <div>
-                <el-row>
-                  <el-col :span="4">
-                    <div>
-                      <p class="name">我是谁的评价：</p>
-                    </div>
-                  </el-col>
-                  <el-col :span="12">
-                    <div class="rate">
-                      <el-rate disabled v-model="value1"></el-rate>
-                    </div>
-                  </el-col>
-                  <el-col :span="8">
-                    <div class="time">
-                      <p>2017-7-7 12:00</p>
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-            </div>
-            <div class="content">
-              <p>我是谁  我在哪里  不敢当</p>
-            </div>
-          </li>
-          <li>
-            <div class="title">
-              <div>
-                <el-row>
-                  <el-col :span="4">
-                    <div>
-                      <p class="name">我是谁的评价：</p>
-                    </div>
-                  </el-col>
-                  <el-col :span="12">
-                    <div class="rate">
-                      <el-rate disabled v-model="value1"></el-rate>
-                    </div>
-                  </el-col>
-                  <el-col :span="8">
-                    <div class="time">
-                      <p>2017-7-7 12:00</p>
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-            </div>
-            <div class="content">
-              <p>我是谁  我在哪里  不敢当</p>
-            </div>
+
           </li>
         </ul>
       </div>
@@ -167,6 +87,9 @@
 <script>
   export default {
     props: {
+      displayDetail: {
+          type: Array
+      }
     },
     data() {
       return {
@@ -273,7 +196,6 @@
               font-size 14px;
               color #99A9BF;
           .content
-            margin-left 145px;
             font-size 14px;
             p
               margin 0;

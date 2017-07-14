@@ -226,11 +226,11 @@
             <tr class="tr1">
               <th style="width: 5%">题号</th><th>题目</th><th style="width: 10%">A</th><th style="width: 10%">B</th><th style="width: 10%">C</th><th style="width: 10%">D</th><th style="width: 10%">答案</th><th style="width: 10%">权重</th>
             </tr>
-            <tr class="tr2" v-for="(item, index) in oldExam">
-              <td>{{index}}</td><td>{{item.exam}}</td><td>{{item.A}}</td><td>{{item.B}}</td><td>{{item.C}}</td><td>{{item.D}}</td><td>{{item.answer}}</td><td>{{item.weight}}</td>
+            <tr class="tr2" v-for="(item, index) in course[1].questions">
+              <td>{{index}}</td><td>{{item.content}}</td><td>{{item.A}}</td><td>{{item.B}}</td><td>{{item.C}}</td><td>{{item.D}}</td><td>{{item.answer}}</td><td>{{item.scores}}</td>
             </tr>
             <tr class="tr2" v-for="(item, index) in newExam">
-              <td>{{oldExam.length + index}}</td><td><el-input type="textarea" :rows="2" v-model="item.exam" placeholder="请输入题目"></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.A"></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.B"></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.C" ></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.D"></el-input></td><td><el-input v-model="item.answer"></el-input></td><td><el-input v-model="item.weight"></el-input></td>
+              <td>{{course[1].questions.length + index}}</td><td><el-input type="textarea" :rows="2" v-model="item.exam" placeholder="请输入题目"></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.A"></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.B"></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.C" ></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.D"></el-input></td><td><el-input v-model="item.answer"></el-input></td><td><el-input v-model="item.weight"></el-input></td>
             </tr>
             <tr class="tr2">
               <td><i class="el-icon-plus" @click="addRow"></i></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -364,35 +364,6 @@
               d: '4',
               answer: 'A',
               weight: '10'
-            }
-          ],
-          oldExam: [
-            {
-              exam: 'xxxx',
-              A: '1',
-              B: '2',
-              C: '3',
-              D: '4',
-              answer: 'a',
-              weight: '3'
-            },
-            {
-              exam: 'ddddd',
-              A: '1',
-              B: '2',
-              C: '3',
-              D: '4',
-              answer: 'b',
-              weight: '4'
-            },
-            {
-              exam: 'ddddd',
-              A: '1',
-              B: '2',
-              C: '3',
-              D: '4',
-              answer: 'b',
-              weight: '4'
             }
           ],
           newExam: [

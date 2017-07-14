@@ -5,7 +5,7 @@
       <div class="header">
         <div class="left">
           <div class="icon"></div>
-          <div class="title">非常导购</div>
+          <!--<div class="title">非常导购</div>-->
         </div>
         <div class="right">
           <div class="mar_left">
@@ -116,11 +116,11 @@ export default {
           float left;
           width 180px;
           height 80px;
-          background #0096ff;
+          background #344a5d;
           .icon
             float left;
             margin-top 20px;
-            margin-left 14px;
+            margin-left 60px;
             width 44px;
             height 44px;
             background url("./img/logo.png") no-repeat center;

@@ -63,7 +63,36 @@
         </el-col>
         <el-col :span="20">
           <div class="checked">
-            <el-checkbox v-model="checked1">陈列标准</el-checkbox><el-checkbox v-model="checked2">门店促销</el-checkbox>
+              <el-radio class="radio" v-model="radio" label="1">标准陈列</el-radio><br/><br/>
+              <el-radio class="radio" v-model="radio" label="2">促销陈列</el-radio>
+          </div>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="4">
+          <div>
+            <p>时间设置：</p>
+          </div>
+        </el-col>
+        <el-col :span="20">
+          <div class="block" v-if="radio === '1'">
+            <el-date-picker
+              v-model="value1"
+              type="date"
+              placeholder="选择开始日期">
+            </el-date-picker>
+          </div>
+          <div class="block" v-else>
+            <el-date-picker
+              v-model="value1"
+              type="date"
+              placeholder="选择开始日期">
+            </el-date-picker>
+            <el-date-picker
+              v-model="value1"
+              type="date"
+              placeholder="选择结束日期">
+            </el-date-picker>
           </div>
         </el-col>
       </el-row>
@@ -74,7 +103,7 @@
           </div>
         </el-col>
         <el-col :span="20">
-          <div>
+          <div class="block">
             <el-upload style="width: 500px;"
               class="upload-demo"
               action=""
@@ -117,7 +146,7 @@
         </el-col>
         <el-col :span="20">
           <div>
-            <el-button class="submit" @click="submitNewDisplay" type="primary">提交</el-button>
+            <el-button class="submit" @click="test" type="primary">提交</el-button>
           </div>
         </el-col>
       </el-row>
@@ -129,7 +158,8 @@
   export default {
     data() {
       return {
-        options: [{
+        options: [
+            {
           label: '杭州'
         }, {
           label: '绍兴'
@@ -141,8 +171,8 @@
           label: '温州'
         }],
         value5: [],
-        checked1: false,
-        checked2: false,
+        value1: '',
+        radio: '1',
         fileList: [],  // 图片上传列表
         textarea: '',
         input: '',
@@ -167,7 +197,7 @@
         this.newDisplay.displayStandard = fileList;
       },
       test() {
-        console.log(this.newDisplay.displayStandard);
+        console.log(this.radio);
       },
       submitNewDisplay() {
         this.$http.jsonp('http://192.168.199.145:8080/spg/admin/display/addDisplay', {jsonp: 'jsonpCallback', dataType: 'jsonp', data: this.newDisplay}, {headers: {contentType: 'application/x-www-form-urlencoded'}}).then((response) => {
@@ -235,8 +265,10 @@
         width 300px;
       .checked
         margin-top 15px;
-      .upload
+      .block
         margin-top 15px;
+      .upload
+        margin-top 30px;
         width 600px;
       .remark
         margin-top 15px;

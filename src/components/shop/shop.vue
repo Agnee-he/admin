@@ -125,13 +125,13 @@
           <el-row class="con_row">
             <el-col :span="8"><div>
               <div class="left">
-                <p class="sp">搜索地区：</p><el-input class="input3" v-model="input3" placeholder="请输入地区"></el-input>
+                <p class="sp">搜索门店：</p><el-input class="input3" v-model="atendenceShop" placeholder="请输入门店"></el-input>
               </div>
             </div></el-col>
             <el-col :span="8"><div>
               <div class="block">
                 <el-date-picker
-                  v-model="date"
+                  v-model="attendenceDate"
                   format
                   type="date"
                   placeholder="选择日期时间">
@@ -139,7 +139,7 @@
               </div>
             </div></el-col>
             <el-col :span="8"><div>
-              <el-button class="btn"><i class="el-icon-upload2"></i>导出</el-button>
+              <el-button class="btn" @click="searchAttendence"><i class="el-icon-search"></i>搜索</el-button>
             </div></el-col>
           </el-row>
           <el-row class="con_row2">
@@ -151,34 +151,42 @@
                   :data="attendance"
                   style="width: 100%">
                   <el-table-column
-                    prop="order"
+                    prop="bctype"
                     label="班次"
                     align="center"
                     width="80">
                   </el-table-column>
                   <el-table-column
-                    prop="date"
+                    prop="dkdate"
                     label="考勤时间"
                     align="center"
-                    width="100">
+                    width="200">
                   </el-table-column>
                   <el-table-column
-                    prop="type"
+                    prop="dktype"
                     label="考勤类型"
                     align="center">
                   </el-table-column>
                   <el-table-column
-                    prop="name"
+                    prop="chname"
                     label="姓名"
                     align="center"
                     width="80">
                   </el-table-column>
                   <el-table-column
-                    prop="late"
-                    label="是否迟到"
+                    prop="result"
+                    label="考勤结果"
                     align="center">
                   </el-table-column>
                 </el-table>
+                <div class="block" style="float: right;margin-top: 15px;">
+                  <el-pagination
+                    :current-page.sync="attendencePage"
+                    :page-size="10"
+                    layout="total, prev, pager, next"
+                    :total="attendenceTotal">
+                  </el-pagination>
+                </div>
               </div>
             </div></el-col>
             <!--<el-col :span="12"><div class="grid-content bg-purple-light">-->
@@ -608,7 +616,7 @@
     </div>
     <!-- 新增陈列 -->
     <new-display v-show="$store.state.show_newDisplay"></new-display>
-    <check-display v-show="$store.state.show_checkDisplay"></check-display>
+    <check-display :displayDetail="displayDetail" v-show="$store.state.show_checkDisplay"></check-display>
   </div>
 </template>
 <script>
@@ -709,36 +717,6 @@
             picture: '共五张，点击查看'
           }
         ],
-        attendance: [
-          {
-            order: '早班',
-            date: '2017-1-1',
-            type: '打卡',
-            name: '晓明',
-            late: '迟到'
-          },
-          {
-            order: '早班',
-            date: '2017-1-1',
-            type: '打卡',
-            name: '晓明',
-            late: '迟到'
-          },
-          {
-            order: '早班',
-            date: '2017-1-1',
-            type: '打卡',
-            name: '晓明',
-            late: '迟到'
-          },
-          {
-            order: '早班',
-            date: '2017-1-1',
-            type: '打卡',
-            name: '晓明',
-            late: '迟到'
-          }
-        ],  //  考勤
         order: [
           {
             order: '早班',
@@ -810,8 +788,14 @@
         displayType: '',  //  搜索时输入的陈列类别
         displayShop: '',  //  搜索时输入的陈列类别
         displayTime: '',  //  搜索陈列时选择的时间段
+        displayDetail: [], // 陈列详情
         shopModels: [],  // 门店列表
-        orderList: []  // 班次列表
+        orderList: [],  // 班次列表
+        attendance: [], //  考勤
+        attendencePage: 1,  //  考勤列表第几页
+        attendenceTotal: 0,   //  考勤总条数
+        attendenceDate: '',  //  搜索时输入的考勤日期
+        atendenceShop: ''  //  搜索时输入的考勤门店
       };
     },
     created() {
@@ -878,6 +862,20 @@
         // 出错处理
         console.log('获取排班列表失败');
       });
+      // 获取考勤列表
+      this.$http.jsonp('http://192.168.199.145:8080/spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+        // response.data 为服务端返回的数据
+        this.attendance = response.data.result.rows;
+        this.attendenceTotal = response.data.result.total;
+        for (let i = 0; i < this.attendance.length; i++) {
+          this.attendance[i].dkdate = this.getLocalTime(this.attendance[i].dkdate.toString().substring(0, 10));
+        }
+        console.log(this.attendance);
+        console.log('获取考勤列表成功');
+      }).catch(function () {
+        // 出错处理
+        console.log('获取考勤列表失败');
+      });
     },
     computed: {
     },
@@ -897,6 +895,28 @@
                 });
               } else {
                   this.searchDisplay();
+              }
+          }
+      },
+      attendencePage: {
+          handler: function () {
+              if (this.attendenceDate === '' && this.atendenceShop === '') {
+                // 获取考勤列表
+                this.$http.jsonp('http://192.168.199.145:8080/spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+                  // response.data 为服务端返回的数据
+                  this.attendance = response.data.result.rows;
+                  this.attendenceTotal = response.data.result.total;
+                  for (let i = 0; i < this.attendance.length; i++) {
+                    this.attendance[i].dkdate = this.getLocalTime(this.attendance[i].dkdate.toString().substring(0, 10));
+                  }
+                  console.log(this.attendance);
+                  console.log('获取考勤列表成功');
+                }).catch(function () {
+                  // 出错处理
+                  console.log('获取考勤列表失败');
+                });
+              } else {
+                  this.searchAttendence();
               }
           }
       }
@@ -1010,6 +1030,17 @@
       },
       openCheckDisplay(row) {
       	this.$store.state.show_checkDisplay = true;
+        console.log(row.id);
+        // 查询陈列详情
+        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getDisplay?id=' + row.id, {jsonp: 'jsonpCallback'}).then((response) => {
+          // response.data 为服务端返回的数据
+          this.displayDetail = response.data.result.陈列信息;
+          this.displayDetail.stars = Number(this.displayDetail.stars);
+          console.log(typeof this.displayDetail);
+          console.log(response.data.result.陈列信息);
+        }, (response) => {
+          console.log(response);
+        });
       },
       openNewDisplay() {
         this.$store.state.show_newDisplay = true;
@@ -1088,8 +1119,32 @@
         this.excel = row;
         console.log(this.excel);
         console.log(row);
+      },
+      searchAttendence() {
+        if (this.attendenceDate !== '') {
+          this.attendenceDate = Date.parse(this.attendenceDate);
+          console.log(1);
+        }
+        console.log(this.attendenceDate);
+        // 获取考勤列表
+        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10&filter_EQS_dkdate=' + this.attendenceDate + '&filter_LIKES_shopname=' + this.atendenceShop, {jsonp: 'jsonpCallback'}).then(function (response) {
+          // response.data 为服务端返回的数据
+          this.attendance = response.data.result.rows;
+          this.attendenceTotal = response.data.result.total;
+          for (let i = 0; i < this.attendance.length; i++) {
+            this.attendance[i].dkdate = this.getLocalTime(this.attendance[i].dkdate.toString().substring(0, 10));
+          }
+          console.log(this.attendance);
+          console.log('获取考勤列表成功');
+        }).catch(function () {
+          // 出错处理
+          console.log('获取考勤列表失败');
+        });
+      },
+      getLocalTime(nS) {
+        return new Date(parseInt(nS) * 1000).toLocaleString().substr(0, 18);
       }
-  },
+    },
     components: {
       paging,
       newDisplay,
