@@ -50,42 +50,42 @@
     </div>
     <div class="study">
       <p class="til">员工学习：<span class="num">{{course[0].num}}人</span></p>
-      <el-row class="search">
-        <el-col :span="10"><div>
-          <div class="search_input1">
-            <span>搜索地区：</span>
-            <div class="el-inp">
-              <el-input v-model="input1" placeholder="请输入地区名称/编号"></el-input>
-            </div>
-          </div>
-          <div class="search_input2">
-            <span>搜索员工：</span>
-            <div class="el-inp">
-              <el-input v-model="input1" placeholder="请输入员工姓名/工号"></el-input>
-            </div>
-          </div>
-        </div></el-col>
-        <el-col :span="8"><div>
-          <div class="search_input3">
-            <span>考试状态：</span>
-            <div class="el-inp">
-              <el-select v-model="value" placeholder="请选择">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </div>
-          </div>
-        </div></el-col>
-        <el-col :span="6"><div>
-          <div class="but">
-            <el-button><i class="el-icon-search"></i>搜索</el-button><el-button><i class="el-icon-information"></i>重置</el-button>
-          </div>
-        </div></el-col>
-      </el-row>
+      <!--<el-row class="search">-->
+        <!--<el-col :span="10"><div>-->
+          <!--<div class="search_input1">-->
+            <!--<span>搜索地区：</span>-->
+            <!--<div class="el-inp">-->
+              <!--<el-input v-model="input1" placeholder="请输入地区名称/编号"></el-input>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="search_input2">-->
+            <!--<span>搜索员工：</span>-->
+            <!--<div class="el-inp">-->
+              <!--<el-input v-model="input1" placeholder="请输入员工姓名/工号"></el-input>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div></el-col>-->
+        <!--<el-col :span="8"><div>-->
+          <!--<div class="search_input3">-->
+            <!--<span>考试状态：</span>-->
+            <!--<div class="el-inp">-->
+              <!--<el-select v-model="value" placeholder="请选择">-->
+                <!--<el-option-->
+                  <!--v-for="item in options"-->
+                  <!--:key="item.value"-->
+                  <!--:label="item.label"-->
+                  <!--:value="item.value">-->
+                <!--</el-option>-->
+              <!--</el-select>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div></el-col>-->
+        <!--<el-col :span="6"><div>-->
+          <!--<div class="but">-->
+            <!--<el-button><i class="el-icon-search"></i>搜索</el-button><el-button><i class="el-icon-information"></i>重置</el-button>-->
+          <!--</div>-->
+        <!--</div></el-col>-->
+      <!--</el-row>-->
       <el-table class="el_tab"
         ref="multipleTable"
         :data="course[1].traininginfo"
@@ -124,9 +124,9 @@
       <div style="margin-top: 10px; float: left;">
         <el-button @click="toggleSelection(tableData3)">全选</el-button><el-button @click="handleDownload">导出</el-button>
       </div>
-      <div class="paging">
-        <paging :total="11"></paging>
-      </div>
+      <!--<div class="paging">-->
+        <!--<paging :total="11"></paging>-->
+      <!--</div>-->
     </div>
     <div class="test">
       <p class="til">考试考题：</p>
@@ -200,8 +200,8 @@
 
           </div></el-col>
           <el-col :span="5"><div>
-            <p class="left_p course_name">课程名称</p>
-            <p class="left_p">NO.2342343242</p>
+            <p class="left_p course_name">{{course[0].coursename}}</p>
+            <p class="left_p">NO.{{course[0].courseid}}</p>
           </div></el-col>
           <el-col :span="4"><div>
             <p>所属分类：XXX</p>
@@ -418,20 +418,15 @@
             const data = this.formatJson(filterVal, list);
             export_json_to_excel(tHeader, data, '课程详情');
           });
-          console.log(1);
         },
         formatJson(filterVal, jsonData) {
           return jsonData.map(v => filterVal.map(j => v[j]));
         },
         selectRow(row) {
           this.excel = row;
-          console.log(this.excel);
-          console.log(row);
         },
         selectRowAll(row) {
           this.excel = row;
-          console.log(this.excel);
-          console.log(row);
         }
       },
 

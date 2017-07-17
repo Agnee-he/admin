@@ -12,14 +12,14 @@
         </el-col>
         <el-col :span="13">
           <div>
-            <p class="title_p">我是name</p>
-            <p class="content_p">no.111</p>
+            <p class="title_p">{{name}}</p>
+            <p class="content_p">no.{{id}}</p>
           </div>
         </el-col>
         <el-col :span="8">
           <div>
-            <p class="pass_p">通过率：33</p>
-            <p class="ave_p">平均分：99</p>
+            <p class="pass_p">通过率：{{passRate}}</p>
+            <p class="ave_p">平均分：{{averGrade}}</p>
           </div>
         </el-col>
       </el-row>
@@ -30,27 +30,33 @@
     <div class="table">
       <el-table
         ref="multipleTable"
-        :data="grade"
+        :data="grade.已考核"
         border
         tooltip-effect="dark"
         style="width: 100%">
         <el-table-column
-          type="selection"
-          width="55">
-        </el-table-column>
-        <el-table-column
-          prop="belongshop"
-          label="门店"
+          prop="coursename"
+          label="课程名称"
           show-overflow-tooltip>
         </el-table-column>
         <el-table-column
-          prop="name"
-          label="姓名"
+          prop="passrate"
+          label="通过率"
           show-overflow-tooltip>
         </el-table-column>
         <el-table-column
-          prop="grade"
-          label="成绩"
+          prop="averagescore"
+          label="平均分"
+          show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column
+          prop="scores"
+          label="员工分数"
+          show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column
+          prop="ranking"
+          label="排名"
           show-overflow-tooltip>
         </el-table-column>
       </el-table>
@@ -60,19 +66,53 @@
 
 <script>
   export default {
-    data() {
-      return {
-        grade: [
-          {
-            belongshop: '一号店',
-            name: '时代感',
-            grade: 99
-          }
-      ]
-      };
+    props: {
+      name: {
+          type: String
+      },
+      id: {
+          type: Number
+      },
+      passRate: {
+          type: String
+      },
+      averGrade: {
+          type: String
+      }
     },
-    mounted() {
-      this.drawLine();
+    data() {
+        return {
+          grade: [],
+          weiTongGuo: 0,
+          yiTongGuo: 0,
+          weiKaoHe: 0
+        };
+    },
+    created() {
+    },
+    watch: {
+      id: {
+          handler: function () {
+            //  获取具体某人考核
+            this.$http.jsonp('http://192.168.199.145:8080/spg/admin/training/myResult?userid=' + this.id, {jsonp: 'jsonpCallback'}).then(function (response) {
+              // response.data 为服务端返回的数据
+              this.grade = response.data.result.myresult;
+              this.weiTongGuo = this.grade.未通过.length;
+              this.yiTongGuo = this.grade.已通过.length;
+              this.weiKaoHe = this.grade.未考核.length;
+              console.log('获取单人成绩成功');
+            }).catch(function (response) {
+              // 出错处理
+              console.log('获取单人成绩失败');
+              console.log(response);
+            });
+          }
+      },
+      grade: {
+          handler: function() {
+            this.drawLine();
+          }
+      }
     },
     methods: {
       drawLine() {
@@ -90,23 +130,16 @@
               trigger: 'item',
               formatter: '{a} <br/>{b} : {c} ({d}%)'
             },
-//            legend: {
-//              orient: 'vertical',
-//              left: 'left',
-//              data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
-//            },
             series: [
               {
-                name: '访问来源',
+                name: '占比',
                 type: 'pie',
                 radius: '55%',
                 center: ['50%', '60%'],
                 data: [
-                  {value: 335, name: '直接访问'},
-                  {value: 310, name: '邮件营销'},
-                  {value: 234, name: '联盟广告'},
-                  {value: 135, name: '视频广告'},
-                  {value: 1548, name: '搜索引擎'}
+                  {value: this.weiTongGuo, name: '未通过'},
+                  {value: this.yiTongGuo, name: '已通过'},
+                  {value: this.weiKaoHe, name: '未考核'}
                 ],
                 itemStyle: {
                   emphasis: {
@@ -173,7 +206,7 @@
       text-align center;
       #myChart
         margin 0 auto;
-        width 300px;
+        width 400px;
         height 300px;
     .table
       margin-top 15px;

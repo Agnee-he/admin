@@ -252,7 +252,7 @@
                   </div></el-col>
                 </el-row>
                 <div>
-                  <p>使用门店：<span v-for="shop in item.shop"><span>{{shop.shopid}};</span></span></p>
+                  <p>使用门店：<span v-for="shop in item.shopName"><span>{{shop.shopName}};</span></span></p>
                 </div>
               </el-collapse-item>
             </el-collapse>
@@ -789,14 +789,16 @@
         displayShop: '',  //  搜索时输入的陈列类别
         displayTime: '',  //  搜索陈列时选择的时间段
         displayDetail: [], // 陈列详情
-        shopModels: [],  // 门店列表
+        shopModels: [],  // 门店列表 门店-id之间的对应关系数组
         orderList: [],  // 班次列表
         attendance: [], //  考勤
         attendencePage: 1,  //  考勤列表第几页
         attendenceTotal: 0,   //  考勤总条数
         attendenceDate: '',  //  搜索时输入的考勤日期
-        atendenceShop: ''  //  搜索时输入的考勤门店
+        atendenceShop: '' //  搜索时输入的考勤门店
       };
+    },
+    beforeCreate() {
     },
     created() {
       //  获取城市列表
@@ -833,6 +835,20 @@
       this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then(function (response) {
         // response.data 为服务端返回的数据
         this.shopModels = response.data.result.shopModels;
+        // 门店id name匹配
+        for (let i = 0; i < this.orderList.length; i++) {
+          for (let y = 0; y < this.orderList[i].shop.length; y++) {
+            for (let x = 0; x < this.shopModels.length; x++) {
+              if (this.orderList[i].shop[y] === this.shopModels[x].shopid) {
+                let shopName = {shopName: this.shopModels[x].shopname};
+                this.orderList[i].shopName.push(shopName);
+              }
+            }
+          }
+        }
+        console.log(this.orderList);
+        console.log(this.shopModels.length);
+        console.log('获取门店列表成功');
       }).catch(function () {
         // 出错处理
         console.log('获取门店列表失败');
@@ -842,9 +858,8 @@
         // response.data 为服务端返回的数据
         let list = response.data.result.rows;
         for (let x = 0; x < list.length; x++) {
-            let newList = {city: list[x].city, date: list[x].schedulingdate, shop: [{shopid: list[x].shopid}], bci: [{bcitype: list[x].bctype, stime: list[x].stime, etime: list[x].etime}]};
+            let newList = {city: list[x].city, date: list[x].schedulingdate, shop: [{shopid: list[x].shopid}], bci: [{bcitype: list[x].bctype, stime: list[x].stime, etime: list[x].etime}], shopName: []};
             this.orderList.push(newList);
-            console.log(x);
             for (let y = x + 1; y < list.length; y++) {
               if (this.orderList[x].city === list[y].city && this.orderList[x].date === list[y].schedulingdate) {
                   this.orderList[x].shop.push({shopid: list[y].shopid});
@@ -855,9 +870,9 @@
         }
         //  shopid 去重
         for (let i = 0; i < this.orderList.length; i++) {
-          this.orderList[i].shop = this.unique(this.orderList[i].shop);
+           this.orderList[i].shop = this.unique(this.orderList[i].shop);
         }
-        console.log(this.orderList);
+        console.log('获取排班列表成功');
       }).catch(function () {
         // 出错处理
         console.log('获取排班列表失败');

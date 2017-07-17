@@ -125,12 +125,8 @@
           for (let i = 0; i < this.allCourse.length; i++) {
           	this.allCourse[i].num = String(i + 1);
           }
-          console.log(this.allCourse);
-          console.log('获取课程成功');
         }).catch(function (response) {
           // 出错处理
-          console.log('获取课程失败');
-          console.log(response);
         });
       },
       methods: {
@@ -147,7 +143,6 @@
           }
         },
         openDetail(row) {
-          console.log(row);
           this.$store.state.showCourse = true;
           //  获取课程详情
           this.$http.jsonp('http://120.55.85.65:8088/spg/admin/training/testresult?courseid=' + row.courseid, {jsonp:
@@ -156,8 +151,6 @@
             this.oneCourse = [];
             this.oneCourse.push(row);
             this.oneCourse.push(response.data.result);
-            console.log('结果');
-            console.log(response.data.result);
             for (let i = 0; i < this.oneCourse[1].questions.length; i++) {
               this.oneCourse[1].questions[i].options = this.oneCourse[1].questions[i].options.split(';');
               for (let x = 0; x < this.oneCourse[1].questions[i].options.length; x++) {
@@ -178,10 +171,8 @@
               }
             }
             console.log(this.oneCourse);
-            console.log('课程详情成功');
           }).catch(function (response) {
 //             出错处理
-            console.log(response);
           });
         },
         handleDownload() {
@@ -193,13 +184,11 @@
             const data = this.formatJson(filterVal, list);
             export_json_to_excel(tHeader, data, '课程');
           });
-          console.log(1);
         },
         formatJson(filterVal, jsonData) {
           return jsonData.map(v => filterVal.map(j => v[j]));
         },
         testSelect(rows) {
-          console.log(1);
           rows.forEach(row => {
               console.log(row.multipleSelection);
           });
@@ -215,13 +204,9 @@
 //        },
         selectRow(row) {
           this.excel = row;
-          console.log(this.excel);
-          console.log(row);
         },
         selectRowAll(row) {
           this.excel = row;
-          console.log(this.excel);
-          console.log(row);
         },
         addCourse() {
             this.$store.state.show_addCourse = true;

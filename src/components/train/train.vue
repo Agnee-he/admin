@@ -3,7 +3,6 @@
     <el-tabs class="tabs" type="border-card">
       <el-tab-pane label="课程管理">
         <magement></magement>
-        <div class=""></div>
       </el-tab-pane>
       <el-tab-pane label="考核跟进">
         <follow></follow>

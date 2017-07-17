@@ -23,7 +23,7 @@
       <div class="follow_main">
         <el-table
           ref="multipleTable"
-          :data="tableData3"
+          :data="allGrade"
           @select="selectRow"
           @select-all="selectRowAll"
           border
@@ -35,30 +35,30 @@
             width="55">
           </el-table-column>
           <el-table-column
-            prop="address"
+            prop="shopname"
             label="所属门店/地址"
             width="160"
             align="center">
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="employee"
             label="员工姓名"
             align="center">
           </el-table-column>
           <el-table-column
-            prop="studied"
+            prop="haslearn"
             label="已学课程"
             align="center"
             show-overflow-tooltip>
           </el-table-column>
           <el-table-column
-            prop="not_study"
+            prop="nolearn"
             label="未学课程"
             align="center"
             show-overflow-tooltip>
           </el-table-column>
           <el-table-column
-            prop="pass"
+            prop="passrate"
             label="合格率(%)"
             width="140"
             align="center"
@@ -66,7 +66,7 @@
             show-overflow-tooltip>
           </el-table-column>
           <el-table-column
-            prop="average"
+            prop="averagescore"
             label="平均分"
             align="center"
             sortable
@@ -89,9 +89,16 @@
           <el-button @click="handleDownload"><i class="el-icon-upload2"></i>导出</el-button>
         </div>
       </div>
-      <paging class="paging"></paging>
+      <div class="block paging">
+          <el-pagination
+            :current-page.sync="gradePage"
+            :page-size="10"
+            layout="total, prev, pager, next"
+            :total="gradeTotal">
+          </el-pagination>
+      </div>
     </div>
-    <grade v-show="$store.state.show_grade"></grade>
+    <grade :name="name" :id="userId" :pass-rate="passRate" :aver-grade="averGrade" v-show="$store.state.show_grade"></grade>
   </div>
 </template>
 
@@ -137,8 +144,29 @@
             ],
           multipleSelection: [],
           input1: '',
-          excel: '' //  需要导出的数据
+          excel: '', //  需要导出的数据
+          allGrade: [],  //  考核跟进总表
+          gradePage: 1,  //  考核跟进总表当前页
+          gradeTotal: 0,   // 考核跟进总表条数
+          name: '',   //  具体某人
+          userId: 0,  //   具体某人id
+          passRate: '',  //  某人透过率
+          averGrade: ''   //  某人平均分
         };
+      },
+      created() {
+        //  获取考核跟进 成绩总表
+        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/training/pqResult?page=' + this.gradePage +
+          '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+          // response.data 为服务端返回的数据
+          this.allGrade = response.data.result.rows;
+          this.gradeTotal = response.data.result.total;
+          console.log('获取课程成功');
+        }).catch(function (response) {
+          // 出错处理
+          console.log('获取课程失败');
+          console.log(response);
+        });
       },
 
       methods: {
@@ -154,7 +182,11 @@
         handleSelectionChange(val) {
           this.multipleSelection = val;
         },
-        openGrade() {
+        openGrade(row) {
+            this.name = String(row.employee);
+            this.userId = 1800;
+            this.passRate = String(row.passrate);
+            this.averGrade = String(row.averagescore);
             this.$store.state.show_grade = true;
         },
         handleDownload() {

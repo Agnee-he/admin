@@ -14,41 +14,10 @@
               </el-option>
             </el-select>
             <el-button @click="test">展示</el-button>
+            <div class="chart">
+              <div id="myChart" style="width: 800px;height: 600px;"></div>
+            </div>
           </div>
-        </div>
-        <!--<div class="shop_fun">-->
-          <!--<div class="title"><p>常用功能</p></div>-->
-          <!--<div class="main"></div>-->
-        <!--</div>-->
-      </div>
-      <div class="right">
-        <div class="date">
-          <div class="title"><p>日期天气</p></div>
-          <div class="main"></div>
-        </div>
-        <div class="later">
-          <div class="title"><p>最新动态</p></div>
-          <div class="main">
-            <ul class="state">
-              <li>
-                <el-row>
-                  <el-col :span="4"><div style="margin-left: 10px;">
-                    <img src="../../img/head.png">
-                  </div></el-col>
-                  <el-col :span="12"><div>
-                    <span class="name">超级管理员</span><span class="fun">登陆系统</span>
-                  </div></el-col>
-                  <el-col :span="8"><div>
-                    <span class="li_date">11：30</span>
-                  </div></el-col>
-                </el-row>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="help">
-          <div class="title"><p>操作小贴士</p></div>
-          <div class="main"></div>
         </div>
       </div>
     </el-row>
@@ -68,17 +37,121 @@
         this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           this.shopModels = response.data.result.shopModels;
-          console.log(this.shopModels);
           console.log('获取获取门店和门店id成功');
         }).catch(function (response) {
           // 出错处理
           console.log(response);
         });
       },
+      mounted() {
+          this.drawLine();
+      },
       methods: {
-          test() {
+        test() {
               console.log(this.value);
-          }
+        },
+        drawLine() {
+          // 基于准备好的dom，初始化echarts实例
+          let myChart = this.$echarts.init(document.getElementById('myChart'));
+
+          let data = [
+            [[28604, 77, 17096869, 'Australia', 1990], [31163, 77.4, 27662440, 'Canada', 1990], [1516, 68, 1154605773, 'China', 1990], [13670, 74.7, 10582082, 'Cuba', 1990], [28599, 75, 4986705, 'Finland', 1990], [29476, 77.1, 56943299, 'France', 1990], [31476, 75.4, 78958237, 'Germany', 1990]]
+          ];
+          // 绘制图表
+          let option = {
+            backgroundColor: new this.$echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
+              offset: 0,
+              color: '#f7f8fa'
+            }, {
+              offset: 1,
+              color: '#cdd0d5'
+            }]),
+            title: {
+              text: ''
+            },
+            legend: {
+              right: 10,
+              data: ['1990', '2015']
+            },
+            xAxis: {
+              splitLine: {
+                lineStyle: {
+                  type: 'dashed'
+                }
+              }
+            },
+            yAxis: {
+              splitLine: {
+                lineStyle: {
+                  type: 'dashed'
+                }
+              },
+              scale: true
+            },
+            series: [{
+              name: '1990',
+              data: data[0],
+              type: 'scatter',
+              symbolSize: function (data) {
+                return Math.sqrt(data[2]) / 5e2;
+              },
+              label: {
+                emphasis: {
+                  show: true,
+                  formatter: function (param) {
+                    return param.data[3];
+                  },
+                  position: 'top'
+                }
+              },
+              itemStyle: {
+                normal: {
+                  shadowBlur: 10,
+                  shadowColor: 'rgba(120, 36, 50, 0.5)',
+                  shadowOffsetY: 5,
+                  color: new this.$echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                    offset: 0,
+                    color: 'rgb(251, 118, 123)'
+                  }, {
+                    offset: 1,
+                    color: 'rgb(204, 46, 72)'
+                  }])
+                }
+              }
+            }, {
+              name: '2015',
+              data: data[1],
+              type: 'scatter',
+              symbolSize: function (data) {
+                return Math.sqrt(data[2]) / 5e2;
+              },
+              label: {
+                emphasis: {
+                  show: true,
+                  formatter: function (param) {
+                    return param.data[3];
+                  },
+                  position: 'top'
+                }
+              },
+              itemStyle: {
+                normal: {
+                  shadowBlur: 10,
+                  shadowColor: 'rgba(25, 100, 150, 0.5)',
+                  shadowOffsetY: 5,
+                  color: new this.$echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                    offset: 0,
+                    color: 'rgb(129, 227, 238)'
+                  }, {
+                    offset: 1,
+                    color: 'rgb(25, 183, 207)'
+                  }])
+                }
+              }
+            }]
+          };
+          myChart.setOption(option);
+        }
       }
   };
 </script>
