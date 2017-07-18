@@ -14,7 +14,7 @@
             <!--</el-select>-->
             <!--<el-button @click="test">展示</el-button>-->
             <div class="chart">
-              <div id="myChart" style="width: 950px;height: 600px;"></div>
+              <div id="myChart" style="width: 960px;height: 600px;"></div>
             </div>
           </div>
         </div>
@@ -57,7 +57,10 @@
           console.log(this.shopName);
           console.log(this.shopNum);
           console.log(this.shopCount);
-          this.drawLine();
+          this.$nextTick(function() {
+            // DOM 更新了
+            this.drawLine();
+          });
           console.log('获取门店排名成功');
         }).catch(function (response) {
           // 出错处理
@@ -71,7 +74,7 @@
         drawLine() {
           // 基于准备好的dom，初始化echarts实例
           let myChart = this.$echarts.init(document.getElementById('myChart'));
-          let colors = ['#5793f3', '#d14a61', '#675bba'];
+          let colors = ['#5793f3', '#d14a61'];
 //           绘制图表
           let option = {
             color: colors,
@@ -80,18 +83,17 @@
               trigger: 'axis',
               axisPointer: {type: 'cross'}
             },
+            title: {
+              show: true,
+              text: '最近一个月门店销量TOP20',
+              left: '30%'
+            },
             grid: {
               right: '20%'
             },
-            toolbox: {
-              feature: {
-                dataView: {show: true, readOnly: false},
-                restore: {show: true},
-                saveAsImage: {show: true}
-              }
-            },
             legend: {
-              data:['蒸发量','降水量','平均温度']
+              data: ['销售数量', '销售业绩'],
+              right: '15%'
             },
             xAxis: [
               {
@@ -99,15 +101,19 @@
                 axisTick: {
                   alignWithLabel: true
                 },
-                data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                axisLabel: {
+                  interval: 0, // 横轴信息全部显示
+                  rotate: -30 // -30度角倾斜显示
+                },
+                data: this.shopName
               }
             ],
             yAxis: [
               {
                 type: 'value',
-                name: '蒸发量',
-                min: 0,
-                max: 250,
+                name: '销售数量',
+//                min: 0,
+//                max: 250,
                 position: 'right',
                 axisLine: {
                   lineStyle: {
@@ -115,37 +121,36 @@
                   }
                 },
                 axisLabel: {
-                  formatter: '{value} ml'
+                  formatter: '{value} 件'
                 }
               },
               {
                 type: 'value',
-                name: '降水量',
-                min: 0,
-                max: 250,
-                position: 'right',
-                offset: 80,
+                name: '销售业绩',
+//                min: 0,
+//                max: 250,
+                position: 'left',
                 axisLine: {
                   lineStyle: {
                     color: colors[1]
                   }
                 },
                 axisLabel: {
-                  formatter: '{value} ml'
+                  formatter: '{value} 元'
                 }
               }
             ],
             series: [
               {
-                name: '蒸发量',
+                name: '销售数量',
                 type: 'bar',
-                data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+                data: this.shopNum
               },
               {
-                name: '降水量',
+                name: '销售业绩',
                 type: 'bar',
                 yAxisIndex: 1,
-                data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+                data: this.shopCount
               }
             ]
           };
@@ -174,102 +179,4 @@
       .shop_performance
         width 578px;
         height 754px;
-        border 1px solid #E0EEE0;
-        border-radius 2px;
-        .title
-          width 578px;
-          height 40px;
-          border-bottom 1px solid #E0EEE0;
-          p
-            margin-top 10px;
-            margin-left 20px;
-            font-size 16px;
-            color #1abc9c;
-      .shop_fun
-        margin-top 30px;
-        width 578px;
-        height 398px;
-        border 1px solid #E0EEE0;
-        border-radius 2px;
-        background white;
-        .title
-          width 578px;
-          height 40px;
-          border-bottom 1px solid #E0EEE0;
-          p
-            margin-top 10px;
-            margin-left 20px;
-            font-size 16px;
-            color #ff8643;
-    .right
-      float left;
-      margin-left 30px;
-      width 352px;
-      height 752px;
-      .date
-        width 352px;
-        height 240px;
-        border 1px solid #E0EEE0;
-        border-radius 2px;
-        background white;
-        .title
-          width 352px;
-          height 40px;
-          border-bottom 1px solid #E0EEE0;
-          p
-            margin-top 10px;
-            margin-left 20px;
-            font-size 16px;
-            color #0096ff;
-      .later
-        margin-top 30px;
-        width 352px;
-        height 276px;
-        border 1px solid #E0EEE0;
-        border-radius 2px;
-        background white;
-        color #99A9BF;
-        .title
-          width 352px;
-          height 40px;
-          border-bottom 1px solid #E0EEE0;
-          p
-            margin-top 10px;
-            margin-left 20px;
-            font-size 16px;
-            color #99A9BF;
-        .main
-          .state
-            padding 0;
-            margin 0;
-            li
-              display: block;
-              margin-right 14px;
-              padding-top 9px;
-              height 40px;
-              list-style-type:none;
-              line-height 31px;
-              border-bottom 1px solid #bdc3c7;
-              font-size 14px;
-              &:hover
-                background #f6f8fc;
-                padding-top 9px;
-                height 40px;
-                border-left 2px solid #8e44ad;
-      .help
-        margin-top 30px;
-        width 352px;
-        height 174px;
-        border 1px solid #E0EEE0;
-        border-radius 2px;
-        background white;
-        .title
-          width 352px;
-          height 40px;
-          border-bottom 1px solid #E0EEE0;
-          p
-            margin-top 10px;
-            margin-left 20px;
-            font-size 16px;
-            color #e74c3c;
 </style>
