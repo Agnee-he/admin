@@ -3,19 +3,18 @@
     <el-row>
       <div class="left">
         <div class="shop_performance">
-          <div class="title"><p>门店业绩</p></div>
           <div class="main">
-            <el-select filterable v-model="value" placeholder="请选择展示的门店">
-              <el-option
-                v-for="item in shopModels"
-                :key="item.shopid"
-                :label="item.shopname"
-                :value="item.shopid">
-              </el-option>
-            </el-select>
-            <el-button @click="test">展示</el-button>
+            <!--<el-select filterable v-model="value" placeholder="请选择展示的门店">-->
+              <!--<el-option-->
+                <!--v-for="item in shopModels"-->
+                <!--:key="item.shopid"-->
+                <!--:label="item.shopname"-->
+                <!--:value="item.shopid">-->
+              <!--</el-option>-->
+            <!--</el-select>-->
+            <!--<el-button @click="test">展示</el-button>-->
             <div class="chart">
-              <div id="myChart" style="width: 800px;height: 600px;"></div>
+              <div id="myChart" style="width: 950px;height: 600px;"></div>
             </div>
           </div>
         </div>
@@ -29,7 +28,10 @@
       data() {
           return {
             value: '',
-            shopModels: []  // 门店和门店id
+            shopModels: [],  // 门店和门店id
+            shopName: [],  // 门店名
+            shopNum: [],  // 销售数量
+            shopCount: []  // 销售额
         };
       },
       beforeCreate() {
@@ -42,9 +44,25 @@
           // 出错处理
           console.log(response);
         });
-      },
-      mounted() {
+        //  获取门店排名
+        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/sales/ranking?stime=1&etime=1&orderby=num&top=20', {jsonp: 'jsonpCallback'}).then(function (response) {
+          // response.data 为服务端返回的数据
+          let result = response.data.result.result;
+          console.log(result);
+          for (let i = 0; i < result.length; i++) {
+              this.shopName.push(result[i].shopname);
+              this.shopNum.push(result[i].num);
+              this.shopCount.push(result[i].amount);
+          }
+          console.log(this.shopName);
+          console.log(this.shopNum);
+          console.log(this.shopCount);
           this.drawLine();
+          console.log('获取门店排名成功');
+        }).catch(function (response) {
+          // 出错处理
+          console.log(response);
+        });
       },
       methods: {
         test() {
@@ -53,102 +71,83 @@
         drawLine() {
           // 基于准备好的dom，初始化echarts实例
           let myChart = this.$echarts.init(document.getElementById('myChart'));
-
-          let data = [
-            [[28604, 77, 17096869, 'Australia', 1990], [31163, 77.4, 27662440, 'Canada', 1990], [1516, 68, 1154605773, 'China', 1990], [13670, 74.7, 10582082, 'Cuba', 1990], [28599, 75, 4986705, 'Finland', 1990], [29476, 77.1, 56943299, 'France', 1990], [31476, 75.4, 78958237, 'Germany', 1990]]
-          ];
-          // 绘制图表
+          let colors = ['#5793f3', '#d14a61', '#675bba'];
+//           绘制图表
           let option = {
-            backgroundColor: new this.$echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
-              offset: 0,
-              color: '#f7f8fa'
-            }, {
-              offset: 1,
-              color: '#cdd0d5'
-            }]),
-            title: {
-              text: ''
+            color: colors,
+
+            tooltip: {
+              trigger: 'axis',
+              axisPointer: {type: 'cross'}
+            },
+            grid: {
+              right: '20%'
+            },
+            toolbox: {
+              feature: {
+                dataView: {show: true, readOnly: false},
+                restore: {show: true},
+                saveAsImage: {show: true}
+              }
             },
             legend: {
-              right: 10,
-              data: ['1990', '2015']
+              data:['蒸发量','降水量','平均温度']
             },
-            xAxis: {
-              splitLine: {
-                lineStyle: {
-                  type: 'dashed'
+            xAxis: [
+              {
+                type: 'category',
+                axisTick: {
+                  alignWithLabel: true
+                },
+                data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+              }
+            ],
+            yAxis: [
+              {
+                type: 'value',
+                name: '蒸发量',
+                min: 0,
+                max: 250,
+                position: 'right',
+                axisLine: {
+                  lineStyle: {
+                    color: colors[0]
+                  }
+                },
+                axisLabel: {
+                  formatter: '{value} ml'
+                }
+              },
+              {
+                type: 'value',
+                name: '降水量',
+                min: 0,
+                max: 250,
+                position: 'right',
+                offset: 80,
+                axisLine: {
+                  lineStyle: {
+                    color: colors[1]
+                  }
+                },
+                axisLabel: {
+                  formatter: '{value} ml'
                 }
               }
-            },
-            yAxis: {
-              splitLine: {
-                lineStyle: {
-                  type: 'dashed'
-                }
+            ],
+            series: [
+              {
+                name: '蒸发量',
+                type: 'bar',
+                data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
               },
-              scale: true
-            },
-            series: [{
-              name: '1990',
-              data: data[0],
-              type: 'scatter',
-              symbolSize: function (data) {
-                return Math.sqrt(data[2]) / 5e2;
-              },
-              label: {
-                emphasis: {
-                  show: true,
-                  formatter: function (param) {
-                    return param.data[3];
-                  },
-                  position: 'top'
-                }
-              },
-              itemStyle: {
-                normal: {
-                  shadowBlur: 10,
-                  shadowColor: 'rgba(120, 36, 50, 0.5)',
-                  shadowOffsetY: 5,
-                  color: new this.$echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-                    offset: 0,
-                    color: 'rgb(251, 118, 123)'
-                  }, {
-                    offset: 1,
-                    color: 'rgb(204, 46, 72)'
-                  }])
-                }
+              {
+                name: '降水量',
+                type: 'bar',
+                yAxisIndex: 1,
+                data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
               }
-            }, {
-              name: '2015',
-              data: data[1],
-              type: 'scatter',
-              symbolSize: function (data) {
-                return Math.sqrt(data[2]) / 5e2;
-              },
-              label: {
-                emphasis: {
-                  show: true,
-                  formatter: function (param) {
-                    return param.data[3];
-                  },
-                  position: 'top'
-                }
-              },
-              itemStyle: {
-                normal: {
-                  shadowBlur: 10,
-                  shadowColor: 'rgba(25, 100, 150, 0.5)',
-                  shadowOffsetY: 5,
-                  color: new this.$echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-                    offset: 0,
-                    color: 'rgb(129, 227, 238)'
-                  }, {
-                    offset: 1,
-                    color: 'rgb(25, 183, 207)'
-                  }])
-                }
-              }
-            }]
+            ]
           };
           myChart.setOption(option);
         }
@@ -177,7 +176,6 @@
         height 754px;
         border 1px solid #E0EEE0;
         border-radius 2px;
-        background white;
         .title
           width 578px;
           height 40px;
