@@ -71,9 +71,9 @@
             </el-table-column>
             <el-table-column
               prop="stars"
-              label="陈列考评"
+              label="陈列考评(星)"
               sortable
-              width="120"
+              width="140"
               align="center">
             </el-table-column>
             <el-table-column label="操作" align="center">
@@ -274,7 +274,6 @@
                 </div></el-col>
                 <el-col :span="13"><div>
                   <p>新增班次组</p>
-                  <p>NO.3123123123123</p>
                 </div></el-col>
                 <el-col :span="8"><div>
                 </div></el-col>
@@ -616,13 +615,14 @@
     </div>
     <!-- 新增陈列 -->
     <new-display v-show="$store.state.show_newDisplay"></new-display>
-    <check-display :displayDetail="displayDetail" v-show="$store.state.show_checkDisplay"></check-display>
+    <check-display :display-detail="displayDetail" v-show="$store.state.show_checkDisplay"></check-display>
   </div>
 </template>
 <script>
   import paging from '../paging/paging.vue';
   import newDisplay from './newDisplay/newDisplay.vue';
   import checkDisplay from './checkDisplay/checkDisplay.vue';
+  import $ from 'jquery';
 
   export default {
     data() {
@@ -763,18 +763,8 @@
         city_list: [], // 城市列表
         city_shop: [], //  城市与门店之间关系
         city: '',
-        schedulingdate: '',
+        schedulingdate: '',  //  新增班次时间
         schedule: [
-          {
-            bctype: '',
-            stime: '',
-            etime: ''
-          },
-          {
-            bctype: '',
-            stime: '',
-            etime: ''
-          },
           {
             bctype: '',
             stime: '',
@@ -878,7 +868,7 @@
         console.log('获取排班列表失败');
       });
       // 获取考勤列表
-      this.$http.jsonp('http://192.168.199.145:8080/spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
         // response.data 为服务端返回的数据
         this.attendance = response.data.result.rows;
         this.attendenceTotal = response.data.result.total;
@@ -917,7 +907,7 @@
           handler: function () {
               if (this.attendenceDate === '' && this.atendenceShop === '') {
                 // 获取考勤列表
-                this.$http.jsonp('http://192.168.199.145:8080/spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+                this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
                   // response.data 为服务端返回的数据
                   this.attendance = response.data.result.rows;
                   this.attendenceTotal = response.data.result.total;
@@ -1010,38 +1000,61 @@
 //        minute = minute < 10 ? ('0' + minute) : minute;
         return y + '-' + m + '-' + d;
       },
+//      checkSch() {
+//        for (let i = 0; i < this.schedule.length; i++) {
+//
+//        }
+//      },
       submit() {  // 提交新增班次组
-//        let formData = JSON.stringify(this.schedule); // 这里才是你的表单数据
+        //  判断输入内容是否为空
+//        if (this.city === '') {
+//        } else if (this.schedulingdate === '') {
+//        } else if () {
+//
+//        }
         let formData = this.schedule;
         let formarDate = this.formatDateTime(this.schedulingdate);  //  格式化时间
         console.log(this.city);
         console.log(this.city_shop);
         console.log(formData);
         console.log(formarDate);
-        for (let tmp in this.city_shop) {
-//          console.log(tmp);  //  键名
-//          console.log(list[tmp]);  //  键值'
-          let city = tmp;
-          let list = this.city_shop[tmp];
-          if (this.city === city) {
-              console.log(list.length);
-              for (let x = 0; x < list.length; x++) {
-                  for (let y = 0; y < this.schedule.length; y++) {
-                      let newSch = {city: city, shopid: list[x].shopid, bctype: this.schedule[y].bctype, stime: this.schedule[y].stime, etime: this.schedule[y].etime};
-                      this.postschedule.push(newSch);
-                  }
-              }
-          }
+//        for (let tmp in this.city_shop) {
+//          let city = tmp;
+//          let list = this.city_shop[tmp];
+//          if (this.city === city) {
+//              console.log(list.length);
+//              for (let x = 0; x < list.length; x++) {
+//                  for (let y = 0; y < this.schedule.length; y++) {
+//                      let newSch = {city: city, schedulingdate: formarDate, bctype: this.schedule[y].bctype, stime: this.schedule[y].stime, etime: this.schedule[y].etime};
+//                      this.postschedule.push(newSch);
+//                  }
+//              }
+//          }
+//        }
+        for (let i = 0; i < this.schedule.length; i++) {
+          let newSch = {city: this.city, schedulingdate: formarDate, bctype: this.schedule[i].bctype, stime: this.schedule[i].stime, etime: this.schedule[i].etime};
+          this.postschedule.push(newSch);
         }
         console.log(this.postschedule);
-//        let params = JSON.stringify(formData);
-//        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/attendance/addSchedulings', {jsonp: 'jsonpCallback', dataType: 'jsonp', data: params, emulateJSON: true}, {headers: {contentType: 'application/x-www-form-urlencoded'}}).then((response) => {
-//          console.log(1);
+        let params = JSON.stringify(this.postschedule);
+//        this.$http.post('http://localhost:8080/spg/admin/attendance/addSchedulings', {data: params, dataType: 'json'}).then((response) => {
+//          console.log('post成功');
 //          console.log(response);
 //        }, (response) => {
 //          console.log(params);
 //          console.log(response);
 //        });
+        $.ajax({
+          type: 'POST',
+          url: 'http://localhost:8080/spg/admin/attendance/addSchedulings',
+          contentType: 'application/json;charset=utf-8', // 设置请求头信息
+          dataType: 'json',
+          data: params,
+          success: function(data) {
+            console.log('post成功');
+            console.log(data);
+          }
+        });
       },
       openCheckDisplay(row) {
       	this.$store.state.show_checkDisplay = true;

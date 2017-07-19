@@ -14,7 +14,7 @@
             <!--</el-select>-->
             <!--<el-button @click="test">展示</el-button>-->
             <div class="chart">
-              <div id="myChart" style="width: 960px;height: 600px;"></div>
+              <div id="myChart" style="width: 1100px;height: 600px;"></div>
             </div>
           </div>
         </div>

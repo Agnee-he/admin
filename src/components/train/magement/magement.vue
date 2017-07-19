@@ -67,7 +67,7 @@
       </el-tabs>
     </div>
     <course :course="oneCourse" class="course_detail" v-show="$store.state.showCourse"></course>
-    <add-course class="course_detail" v-show="$store.state.show_addCourse"></add-course>
+    <add-course class="course-detail" v-show="$store.state.show_addCourse"></add-course>
   </div>
 </template>
 

@@ -156,7 +156,7 @@
       },
       created() {
         //  获取考核跟进 成绩总表
-        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/training/pqResult?page=' + this.gradePage +
+        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/training/pqResult?page=' + this.gradePage +
           '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           this.allGrade = response.data.result.rows;

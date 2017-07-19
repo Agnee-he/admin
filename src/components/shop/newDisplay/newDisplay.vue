@@ -23,170 +23,206 @@
         </el-col>
       </el-row>
     </div>
-    <div class="main">
-      <el-row>
-        <el-col :span="4">
-          <div>
-            <p>陈列标准范围：</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div>
-            <el-select class="select" v-model="newDisplay.shopName" multiple placeholder="选择地区">
-              <el-option
-                v-for="item in options"
-                :key="item.label"
-                :label="item.label"
-                :value="item.label">
-              </el-option>
-            </el-select>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="4">
-          <div>
-            <p>陈列名称：</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div>
-            <el-input class="input" v-model="newDisplay.displayName" placeholder="请输入陈列名称"></el-input>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="4">
-          <div>
-            <p>陈列类型：</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div class="checked">
-              <el-radio class="radio" v-model="radio" label="1">标准陈列</el-radio><br/><br/>
-              <el-radio class="radio" v-model="radio" label="2">促销陈列</el-radio>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="4">
-          <div>
-            <p>时间设置：</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div class="block" v-if="radio === '1'">
-            <el-date-picker
-              v-model="value1"
-              type="date"
-              placeholder="选择开始日期">
-            </el-date-picker>
-          </div>
-          <div class="block" v-else>
-            <el-date-picker
-              v-model="value1"
-              type="date"
-              placeholder="选择开始日期">
-            </el-date-picker>
-            <el-date-picker
-              v-model="value1"
-              type="date"
-              placeholder="选择结束日期">
-            </el-date-picker>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="4">
-          <div @click="test">
-            <p>新的陈列要求：</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div class="block">
-            <el-upload style="width: 500px;"
-              class="upload-demo"
-              action=""
-              :auto-upload="false"
-              :on-change="handleChange"
-              :on-remove="handleRemove"
-              :file-list="fileList"
-              list-type="picture">
-              <el-button size="small" type="primary">点击上传</el-button>
-              <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-            </el-upload>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="4">
-          <div>
-            <p>备注：</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div>
-            <el-input
-              class="remark"
-              type="textarea"
-              :rows="2"
-              placeholder="请输入内容"
-              v-model="newDisplay.displayRemarks">
-            </el-input>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
-    <div class="btn">
-      <el-row>
-        <el-col :span="4">
-          <div>
-            <p class="note_p">提交成功后，将自动发送消息提示日常陈列标准有更新。</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div>
-            <el-button class="submit" @click="test" type="primary">提交</el-button>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
+    <form @submit.prevent="submit">
+      <div class="main">
+        <el-row>
+          <el-col :span="4">
+            <div>
+              <p>陈列标准范围：</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div>
+              <el-select class="select" v-model="shopid" multiple placeholder="选择地区">
+                <el-option
+                  v-for="item in shop"
+                  :key="item.shopid"
+                  :label="item.shopname"
+                  :value="item.shopid">
+                </el-option>
+              </el-select>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="4">
+            <div>
+              <p>陈列名称：</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div>
+              <el-input class="input" v-model="newDisplay.displayName" placeholder="请输入陈列名称"></el-input>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="4">
+            <div>
+              <p>陈列类型：</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div class="checked">
+                <el-radio class="radio" v-model="newDisplay.displayType" label="标准陈列">标准陈列</el-radio><br/><br/>
+                <el-radio class="radio" v-model="newDisplay.displayType" label="促销陈列">促销陈列</el-radio>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="4">
+            <div>
+              <p>时间设置：</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div class="block" v-if="newDisplay.displayType === '标准陈列'">
+              <el-date-picker
+                v-model="startTime"
+                type="date"
+                placeholder="选择开始日期">
+              </el-date-picker>
+            </div>
+            <div class="block" v-else>
+              <el-date-picker
+                v-model="startTime"
+                type="date"
+                placeholder="选择开始日期">
+              </el-date-picker>
+              <el-date-picker
+                v-model="overTime"
+                type="date"
+                placeholder="选择结束日期">
+              </el-date-picker>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="4">
+            <div @click="test">
+              <p>新的陈列要求：</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div class="block">
+              <el-upload style="width: 500px;"
+                class="upload-demo"
+                action=""
+                :auto-upload="false"
+                :on-change="handleChange"
+                :on-remove="handleRemove"
+                :file-list="fileList"
+                list-type="picture">
+                <el-button size="small" type="primary">点击上传</el-button>
+                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+              </el-upload>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="4">
+            <div>
+              <p>备注：</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div>
+              <el-input
+                class="remark"
+                type="textarea"
+                :rows="2"
+                placeholder="请输入内容"
+                v-model="newDisplay.displayRemarks">
+              </el-input>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="btn">
+        <el-row>
+          <el-col :span="4">
+            <div>
+              <p class="note_p">提交成功后，将自动发送消息提示日常陈列标准有更新。</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div>
+              <el-button class="submit" @click="submit" type="primary">提交</el-button>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+    </form>
   </div>
 </template>
 
 <script>
+  import $ from 'jquery';
+
   export default {
     data() {
       return {
-        options: [
-            {
-          label: '杭州'
-        }, {
-          label: '绍兴'
-        }, {
-          label: '上海'
-        }, {
-          label: '海南'
-        }, {
-          label: '温州'
-        }],
         value5: [],
         value1: '',
-        radio: '1',
+        radio: '标准陈列',
         fileList: [],  // 图片上传列表
         textarea: '',
         input: '',
+        shop: [], // 门店列表
+        shopid: [],
+        startTime: '',
+        overTime: '',
         newDisplay: { //  添加陈列的整个json
           displayName: '',
-          displayType: '',
-          shopName: '',
           displayRemarks: '',
-          displayStandard: []
-        }
+          displayStandard: [],
+          displayType: '标准陈列',
+          startTime: '',
+          overTime: ''
+        },
+        postDisplay: []
       };
     },
-
+    created() {
+      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then((response) => {
+          // success callback
+        this.shop = response.data.result.shopModels;
+          console.log(1);
+        }, (response) => {
+          // error callback
+          console.log(response);
+        });
+    },
+    watch: {
+      startTime: {
+        handler: function () {
+          //  时间格式转化
+          if (this.startTime !== '') {
+            this.newDisplay.startTime = this.formatDateTime(this.startTime);
+          }
+        }
+      },
+      overTime: {
+        handler: function () {
+          //  时间格式转化
+          if (this.overTime !== '') {
+            this.newDisplay.overTime = this.formatDateTime(this.overTime);
+          }
+        }
+      }
+    },
     methods: {
+      formatDateTime(date) { // 格式化时间
+        let y = date.getFullYear();
+        let m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        let d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+//        let h = date.getHours();
+//        let minute = date.getMinutes();
+//        minute = minute < 10 ? ('0' + minute) : minute;
+        return y + '-' + m + '-' + d;
+      },
       handleChange(file, fileList) {
         console.log(file, fileList);
         this.newDisplay.displayStandard = fileList;
@@ -197,17 +233,49 @@
         this.newDisplay.displayStandard = fileList;
       },
       test() {
-        console.log(this.radio);
+        console.log(this.newDisplay);
+        console.log(this.shopid);
       },
-      submitNewDisplay() {
-        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/display/addDisplay', {jsonp: 'jsonpCallback', dataType: 'jsonp', data: this.newDisplay}, {headers: {contentType: 'application/x-www-form-urlencoded'}}).then((response) => {
-          // success callback
-          console.log(1);
-        }, (response) => {
-          // error callback
-          console.log(this.newDisplay);
-          console.log(response);
+      submit() {
+        this.postDisplay = [];
+        for (let i = 0; i < this.shopid.length; i++) {
+          let dis = {shopid: this.shopid[i], displayName: this.newDisplay.displayName, displayType: this.newDisplay.displayType, startTime: this.newDisplay.startTime, overTime: this.newDisplay.overTime, displayRemarks: this.newDisplay.displayRemarks, shopName: '', displayStandard: this.newDisplay.displayStandard};
+          this.postDisplay.push(dis);
+        }
+        for (let x = 0; x < this.postDisplay.length; x++) {
+          for (let y = 0; y < this.shop.length; y++) {
+            if (this.postDisplay[x].shopid === this.shop[y].shopid) {
+              this.postDisplay[x].shopName = this.shop[y].shopname;
+            }
+          }
+        }
+        console.log(this.postDisplay);
+        $.ajax({
+          url: 'http://localhost:8080/spg/admin/display/addDisplay',
+          type: 'POST',
+          data: this.postDisplay,
+          async: false,
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function (returndata) {
+            console.log('图片上传成功');
+          },
+          error: function (returndata) {
+            console.log(returndata);
+          }
         });
+//        $.ajax({
+//          type: 'POST',
+//          url: 'http://localhost:8080/spg/admin/display/addDisplay',
+//          contentType: 'application/json;charset=utf-8', // 设置请求头信息
+//          dataType: 'json',
+//          data: this.postDisplay,
+//          success: function(data) {
+//            console.log('post成功');
+//            console.log(data);
+//          }
+//        });
       },
       closeNewDisplay() {
           this.$store.state.show_newDisplay = false;
