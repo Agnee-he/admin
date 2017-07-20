@@ -67,7 +67,7 @@
       </el-tabs>
     </div>
     <course :course="oneCourse" class="course_detail" v-show="$store.state.showCourse"></course>
-    <add-course class="course-detail" v-show="$store.state.show_addCourse"></add-course>
+    <add-course :course-type="courseType" class="course-detail" v-show="$store.state.show_addCourse"></add-course>
   </div>
 </template>
 
@@ -108,7 +108,8 @@
           excel: [], // 导出excel表内容
           number: '', // 需要删除的index
           allCourse: [],  //  获取的课程集合
-          oneCourse: []  //  查看单个课程时的详情
+          oneCourse: [],  //  查看单个课程时的详情
+          courseType: []  //  课程种类
         };
       },
 
@@ -117,6 +118,7 @@
         this.$http.jsonp('http://120.55.85.65:8088/spg/admin/training/allcourses?username=chencheng1604', {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           let allCourse = response.data.result.AllCourses;
+
           for (let tmp in allCourse) {
 //          console.log(tmp);  //  键名
 //          console.log(list[tmp]);  //  键值'
@@ -125,6 +127,11 @@
           for (let i = 0; i < this.allCourse.length; i++) {
           	this.allCourse[i].num = String(i + 1);
           }
+          console.log(this.allCourse);
+          for (let i = 0; i < this.allCourse.length; i++) {
+            this.courseType.push({value: this.allCourse[i].type});
+          }
+          console.log(this.courseType);
         }).catch(function (response) {
           // 出错处理
         });

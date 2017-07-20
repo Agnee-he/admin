@@ -23,7 +23,7 @@
         </el-col>
       </el-row>
     </div>
-    <form @submit.prevent="submit">
+    <form @submit.prevent="submit" id="uploadForm" enctype="multipart/form-data" method="post">
       <div class="main">
         <el-row>
           <el-col :span="4">
@@ -33,7 +33,7 @@
           </el-col>
           <el-col :span="20">
             <div>
-              <el-select class="select" v-model="shopid" multiple placeholder="选择地区">
+              <el-select class="select" name="shopid" v-model="shopid" multiple filterable placeholder="选择地区">
                 <el-option
                   v-for="item in shop"
                   :key="item.shopid"
@@ -52,7 +52,7 @@
           </el-col>
           <el-col :span="20">
             <div>
-              <el-input class="input" v-model="newDisplay.displayName" placeholder="请输入陈列名称"></el-input>
+              <el-input class="input" name="displayName" v-model="newDisplay.displayName" placeholder="请输入陈列名称"></el-input>
             </div>
           </el-col>
         </el-row>
@@ -64,8 +64,8 @@
           </el-col>
           <el-col :span="20">
             <div class="checked">
-                <el-radio class="radio" v-model="newDisplay.displayType" label="标准陈列">标准陈列</el-radio><br/><br/>
-                <el-radio class="radio" v-model="newDisplay.displayType" label="促销陈列">促销陈列</el-radio>
+                <el-radio class="radio" name="displayType" v-model="newDisplay.displayType" label="标准陈列">标准陈列</el-radio><br/><br/>
+                <el-radio class="radio" name="displayType" v-model="newDisplay.displayType" label="促销陈列">促销陈列</el-radio>
             </div>
           </el-col>
         </el-row>
@@ -79,17 +79,20 @@
             <div class="block" v-if="newDisplay.displayType === '标准陈列'">
               <el-date-picker
                 v-model="startTime"
+                name="startTime"
                 type="date"
                 placeholder="选择开始日期">
               </el-date-picker>
             </div>
             <div class="block" v-else>
               <el-date-picker
+                name="startTime"
                 v-model="startTime"
                 type="date"
                 placeholder="选择开始日期">
               </el-date-picker>
               <el-date-picker
+                name="overTime"
                 v-model="overTime"
                 type="date"
                 placeholder="选择结束日期">
@@ -117,6 +120,7 @@
                 <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
               </el-upload>
             </div>
+            <!--<input type="file" @change="getFile($event)">-->
           </el-col>
         </el-row>
         <el-row>
@@ -128,6 +132,7 @@
           <el-col :span="20">
             <div>
               <el-input
+                name="displayRemarks"
                 class="remark"
                 type="textarea"
                 :rows="2"
@@ -212,6 +217,10 @@
       }
     },
     methods: {
+      getFile(event) {
+        this.file = event.target.files[0];
+        console.log(this.file);
+      },
       formatDateTime(date) { // 格式化时间
         let y = date.getFullYear();
         let m = date.getMonth() + 1;
@@ -224,13 +233,20 @@
         return y + '-' + m + '-' + d;
       },
       handleChange(file, fileList) {
+        this.newDisplay.displayStandard = [];
         console.log(file, fileList);
-        this.newDisplay.displayStandard = fileList;
+        for (let i = 0; i < fileList.length; i++) {
+          this.newDisplay.displayStandard.push(fileList[i].raw);
+        }
         console.log(this.newDisplay.displayStandard);
       },
       handleRemove(file, fileList) {
+        this.newDisplay.displayStandard = [];
         console.log(file, fileList);
-        this.newDisplay.displayStandard = fileList;
+        for (let i = 0; i < fileList.length; i++) {
+          this.newDisplay.displayStandard.push(fileList[i].raw);
+        }
+        console.log(this.newDisplay.displayStandard);
       },
       test() {
         console.log(this.newDisplay);
@@ -239,21 +255,42 @@
       submit() {
         this.postDisplay = [];
         for (let i = 0; i < this.shopid.length; i++) {
-          let dis = {shopid: this.shopid[i], displayName: this.newDisplay.displayName, displayType: this.newDisplay.displayType, startTime: this.newDisplay.startTime, overTime: this.newDisplay.overTime, displayRemarks: this.newDisplay.displayRemarks, shopName: '', displayStandard: this.newDisplay.displayStandard};
+          let dis = {shopId: this.shopid[i], displayName: this.newDisplay.displayName, displayType: this.newDisplay.displayType, startTime: this.newDisplay.startTime, overTime: this.newDisplay.overTime, displayRemarks: this.newDisplay.displayRemarks, shopName: '', displayStandard: this.newDisplay.displayStandard};
           this.postDisplay.push(dis);
         }
+        let shopIdName = [];
         for (let x = 0; x < this.postDisplay.length; x++) {
           for (let y = 0; y < this.shop.length; y++) {
-            if (this.postDisplay[x].shopid === this.shop[y].shopid) {
-              this.postDisplay[x].shopName = this.shop[y].shopname;
+            if (this.postDisplay[x].shopId === this.shop[y].shopid) {
+              shopIdName.push(this.postDisplay[x].shopId + '-' + this.shop[y].shopname);
             }
           }
         }
+        console.log(shopIdName);
+        let formData3 = new FormData();
+        formData3.append('displayName', this.newDisplay.displayName);
+        formData3.append('displayType', this.newDisplay.displayType);
+        formData3.append('shopid', shopIdName);
+        formData3.append('startTime', this.newDisplay.startTime);
+        formData3.append('overTime', this.newDisplay.overTime);
+        formData3.append('displayRemarks', this.newDisplay.displayRemarks);
+        for (let i = 0; i < this.newDisplay.displayStandard.length; i++) {
+          formData3.append('files', this.newDisplay.displayStandard[i]);
+          console.log(this.newDisplay.displayStandard[i]);
+        }
+
+        console.log(formData3);
+        let fm = document.getElementById('uploadForm');
+        console.log(fm);
+        let formData1 = new FormData(fm);
+        console.log(formData1);
         console.log(this.postDisplay);
+        let formData = new FormData(this.postDisplay);
+        console.log(formData);
         $.ajax({
           url: 'http://localhost:8080/spg/admin/display/addDisplay',
           type: 'POST',
-          data: this.postDisplay,
+          data: formData3,
           async: false,
           cache: false,
           contentType: false,

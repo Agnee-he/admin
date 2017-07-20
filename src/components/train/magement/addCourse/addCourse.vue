@@ -14,11 +14,11 @@
               <p class="left_p">选择课程类型：</p>
             </div></el-col>
             <el-col :span="14"><div class="top_div">
-              <el-select v-model="value" placeholder="请选择">
+              <el-select v-model="type" placeholder="请选择">
                 <el-option
-                  v-for="item in options"
+                  v-for="item in courseType"
                   :key="item.value"
-                  :label="item.label"
+                  :label="item.value"
                   :value="item.value">
                 </el-option>
               </el-select>
@@ -31,7 +31,7 @@
               <p class="left_p">课程名称：</p>
             </div></el-col>
             <el-col :span="14"><div class="top_div">
-              <el-input v-model="input" placeholder="请输入内容"></el-input>
+              <el-input v-model="name" placeholder="请输入内容"></el-input>
             </div></el-col>
           </el-row>
         </div>
@@ -44,12 +44,13 @@
               <div class="block">
                 <el-upload style="width: 500px;"
                            class="upload-demo"
+                           :multiple="false"
                            action=""
                            :auto-upload="false"
                            :on-change="handleChange"
                            :on-remove="handleRemove"
                            :file-list="fileList"
-                           list-type="picture">
+                           list-type="text">
                   <el-button size="small" type="primary">点击上传</el-button>
                   <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
                 </el-upload>
@@ -66,42 +67,70 @@
 </template>
 
 <script>
+    import $ from 'jquery';
     export default {
+      props: {
+        courseType: {
+          type: Array
+        }
+      },
       data() {
         return {
-          options: [{
-            value: '选项1',
-            label: '黄金糕'
-          }, {
-            value: '选项2',
-            label: '双皮奶'
-          }, {
-            value: '选项3',
-            label: '蚵仔煎'
-          }, {
-            value: '选项4',
-            label: '龙须面'
-          }, {
-            value: '选项5',
-            label: '北京烤鸭'
-          }],
-          value: '',
-          input: '',
-          fileList: []
+          type: '',
+          name: '',
+          fileList: [],
+          file: []
         };
       },
       methods: {
         handleChange(file, fileList) {
+          this.file = [];
           console.log(file, fileList);
+          if (fileList.length > 1) {
+            fileList.shift();
+          }
+          this.file = fileList[0].raw;
+          console.log(this.file);
         },
         handleRemove(file, fileList) {
+          this.file = [];
           console.log(file, fileList);
+          if (fileList.length > 1) {
+            fileList.shift();
+          }
+          this.file = fileList[0].raw;
+          console.log(this.file);
         },
         closeAddCourse() {
           this.$store.state.show_addCourse = false;
+          this.type = '';
+          this.name = '';
+          this.file = [];
         },
         submit() {
-          this.$store.state.show_addCourse = false;
+          let formData3 = new FormData();
+          formData3.append('firstClass', this.type);
+          formData3.append('title', this.name);
+          formData3.append('file', this.file);
+          $.ajax({
+            url: 'http://localhost:8080/spg/admin/training/uploadcourseware',
+            type: 'POST',
+            data: formData3,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (returndata) {
+              console.log('图片上传成功');
+              this.$store.state.show_addCourse = false;
+              this.type = '';
+              this.name = '';
+              this.file = [];
+            },
+            error: function (returndata) {
+              console.log(returndata);
+            }
+          });
         }
       }
     };
@@ -115,6 +144,11 @@
     width 220px;
   .addCourse
     border 1px solid #D3DCE6;
+    position absolute;
+    top 0;
+    z-index 99;
+    width 866px;
+    height 668px;
     background white;
     padding 30px;
     overflow auto;

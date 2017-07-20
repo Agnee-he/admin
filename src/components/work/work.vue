@@ -101,9 +101,9 @@
           </div>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="合同审批">
-        <contract></contract>
-      </el-tab-pane>
+      <!--<el-tab-pane label="合同审批">-->
+        <!--<contract></contract>-->
+      <!--</el-tab-pane>-->
     </el-tabs>
     <!--发布/编辑会议-->
     <div class="issue" v-show="show_issue">
@@ -349,8 +349,8 @@
         </div>
         <div class="part">
           <p>参加范围：</p>
-          <div v-for="item in checkMeetingArea">
-            <span>{{item}};</span>
+          <div>
+            <span v-for="item in checkMeetingArea">{{item}};</span>
           </div>
         </div>
         <div class="schedule">

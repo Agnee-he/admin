@@ -44,12 +44,12 @@
               width="55"
               align="center">
             </el-table-column>
-            <el-table-column
-              prop="id"
-              label="编号"
-              width="70"
-              align="center">
-            </el-table-column>
+            <!--<el-table-column-->
+              <!--prop="index"-->
+              <!--label="编号"-->
+              <!--width="70"-->
+              <!--align="center">-->
+            <!--</el-table-column>-->
             <el-table-column
               prop="displayType"
               label="陈列主题"
@@ -90,7 +90,7 @@
           </el-table>
           <div class="but_select">
             <el-button @click="toggleSelection(display)">全选</el-button>
-            <el-button><i class="el-icon-delete"></i>删除</el-button>
+            <el-button @click="deleteDisplay"><i class="el-icon-delete"></i>删除</el-button>
             <el-button><i class="el-icon-upload2"></i>导出</el-button>
           </div>
           <div class="paging">
@@ -1155,7 +1155,7 @@
         }
         console.log(this.attendenceDate);
         // 获取考勤列表
-        this.$http.jsonp('http://192.168.199.145:8080/spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10&filter_EQS_dkdate=' + this.attendenceDate + '&filter_LIKES_shopname=' + this.atendenceShop, {jsonp: 'jsonpCallback'}).then(function (response) {
+        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10&filter_EQS_dkdate=' + this.attendenceDate + '&filter_LIKES_shopname=' + this.atendenceShop, {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           this.attendance = response.data.result.rows;
           this.attendenceTotal = response.data.result.total;
@@ -1171,6 +1171,34 @@
       },
       getLocalTime(nS) {
         return new Date(parseInt(nS) * 1000).toLocaleString().substr(0, 18);
+      },
+      deleteDisplay() {
+        let deleteId = [];
+        console.log(this.excel);
+        if (this.excel.length > 0) {
+          for (let i = 0; i < this.excel.length; i++) {
+            deleteId.push(this.excel[i].id);
+          }
+        }
+        let params = JSON.stringify(deleteId);
+        $.ajax({
+          type: 'POST',
+          url: 'http://120.55.85.65:8088/spg/admin/attendance/addSchedulings',
+          contentType: 'application/json;charset=utf-8', // 设置请求头信息
+          dataType: 'json',
+          data: params,
+          success: function(data) {
+            console.log('删除成功');
+            console.log(data);
+          }
+        });
+//        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/addSchedulings', {jsonp: 'jsonpCallback', data: params}).then(function (response) {
+//          // response.data 为服务端返回的数据
+//          console.log('删除成功');
+//        }).catch(function () {
+//          // 出错处理
+//          console.log('删除失败');
+//        });
       }
     },
     components: {

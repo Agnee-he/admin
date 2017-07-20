@@ -48,6 +48,31 @@
         </div></el-col>
       </el-row>
     </div>
+    <div class="choosePeople">
+      <el-row>
+        <el-col :span="3"><div>
+          <p style="font-size: 14px;">添加学习人员：</p>
+        </div></el-col>
+        <el-col :span="18"><div>
+          <el-select style="width: 600px;margin-top: 10px;" class="block" v-model="person" multiple filterable placeholder="请选择">
+            <el-option-group
+              v-for="group in allPerson"
+              :key="group.depname"
+              :label="group.depname">
+              <el-option
+                v-for="item in group.sysUnits"
+                :key="item.parid"
+                :label="item.uname"
+                :value="item.parid">
+              </el-option>
+            </el-option-group>
+          </el-select>
+        </div></el-col>
+        <el-col :span="3"><div style="margin-top: 10px;float: right">
+          <el-button type="primary" @click="test">提交</el-button>
+        </div></el-col>
+      </el-row>
+    </div>
     <div class="study">
       <p class="til">员工学习：<span class="num">{{course[0].num}}人</span></p>
       <!--<el-row class="search">-->
@@ -255,6 +280,7 @@
 
 <script>
   import paging from '../../../paging/paging.vue';
+  import $ from 'jquery';
 
     export default {
     	props: {
@@ -366,23 +392,46 @@
               weight: '10'
             }
           ],
-          newExam: [
-            {
-              exam: '',
-              A: '',
-              B: '',
-              C: '',
-              D: '',
-              answer: '',
-              weight: ''
-            }
-          ], // 新增考题内容
+          newExam: [], // 新增考题内容
+          postNew: [],  //  发送新增考题
           show_edit: false,
           input1: '',
-          excel: ''
+          excel: '',
+          allPerson: [],
+          person: []
         };
       },
-
+      watch: {
+//        person: {
+//          handler: function() {
+//            //  选择人员ID  与门店匹配
+//            let allPerson = this.allPerson;
+//            let length = allPerson.length;
+//            let choosePerson = this.person;
+//            for (let x = 0; x < choosePerson.length; x++) {
+//              for (let i = 0; i < length; i++) {
+//                for (let y = 0; y < allPerson[i].sysUnits.length; y++) {
+//                  if (allPerson[i].sysUnits[y].parid === choosePerson[x]) {
+//                    this.publishmeeting.spgParticipants[x] = {parid: choosePerson[x], belongsShop: allPerson[i].depname};
+//                  }
+//                }
+//              }
+//            }
+//          }
+//        }
+      },
+      created() {
+        //  获取会议全部人员
+        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/working/queryEmployees', {jsonp: 'jsonpCallback'}).then(function (response) {
+          // response.data 为服务端返回的数据
+          this.allPerson = response.data.result.participants;
+          console.log('拉取人员成功');
+        }).catch(function (response) {
+          // 出错处理
+          console.log('拉取人员失败');
+          console.log(response);
+        });
+      },
       methods: {
         toggleSelection(rows) {
           if (rows) {
@@ -407,7 +456,26 @@
             this.newExam.push(newTr);
         },
         submitExam() { //  保存上传新考题
+          this.postNew = [];
           console.log(this.newExam);
+          console.log(this.course[0].courseid);
+          for (let i = 0; i < this.newExam.length; i++) {
+            let postExam = {courseId: this.course[0].courseid, content: this.newExam[i].exam, options: 'A.' + this.newExam[i].A + ';B.' + this.newExam[i].B + ';C.' + this.newExam[i].C + ';D.' + this.newExam[i].D, answer: this.newExam[i].answer, scores: this.newExam[i].weight};
+            this.postNew.push(postExam);
+          }
+          console.log(this.postNew);
+          let params = JSON.stringify(this.postNew);
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/spg/admin/training/outofquestion',
+            contentType: 'application/json;charset=utf-8', // 设置请求头信息
+            dataType: 'json',
+            data: params,
+            success: function(data) {
+              console.log('post成功');
+              console.log(data);
+            }
+          });
         },
         handleDownload() {
           require.ensure([], () => {
@@ -427,6 +495,9 @@
         },
         selectRowAll(row) {
           this.excel = row;
+        },
+        test() {
+          console.log(this.person);
         }
       },
 
@@ -479,6 +550,10 @@
         height 50px;
         width 50px;
         background red;
+    .choosePeople
+      margin-top 5px;
+      height 55px;
+      border-bottom 1px solid #D3DCE6;
     .study
       margin-top 5px;
       padding-bottom  55px;
