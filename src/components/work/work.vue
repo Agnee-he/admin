@@ -78,7 +78,7 @@
               <template scope="scope">
                 <el-button
                   size="small"
-                  @click="openCheck(scope.row)">编辑</el-button>
+                  @click="openCheck(scope.row)">查看</el-button>
                 <!--<el-button-->
                 <!--size="small"-->
                 <!--type="danger"-->
@@ -123,10 +123,8 @@
           </div></el-col>
           <el-col :span="13"><div>
             <p>发布/编辑会议</p>
-            <p>NO.1213213213123</p>
           </div></el-col>
           <el-col :span="8"><div style="float: right">
-            <p class="top_p">更新日期：<span>2017-2-2 14:53</span></p>
           </div></el-col>
         </el-row>
       </div>
@@ -290,25 +288,27 @@
             </div>
           </el-col>
         </el-row>
-        <el-row class="main" v-for="item in sch" :key="item.id">
+        <el-row class="main" v-for="(item, index) in sch" :key="index">
           <el-col :span="8">
             <div class="sch">
-              <p>{{item.schName}}</p>
+              <p>{{item.name}}</p>
             </div>
           </el-col>
-          <el-col class="right_el" :span="16" v-for="person in item.person" :key="person.id">
-            <div class="people">
-              <el-select v-model="person.name" placeholder="选择人员">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </div>
-            <div class="room">
-              <el-input class="input" v-model="person.address" placeholder="请输入会议安排"></el-input>
+          <el-col class="right_el" :span="16">
+            <div v-for="(item, index) in item.person">
+              <div class="people">
+                <el-select v-model="item.userId" placeholder="选择人员">
+                  <el-option
+                    v-for="item in personSecond"
+                    :key="item.userId"
+                    :label="item.userName"
+                    :value="item.userId">
+                  </el-option>
+                </el-select>
+              </div>
+              <div class="room">
+                <el-input class="input" v-model="item.seatNumber" placeholder="请输入会议安排"></el-input>
+              </div>
             </div>
           </el-col>
           <el-button @click="addPerson(item.person)" class="btn"><i class="el-icon-plus"></i></el-button>
@@ -340,10 +340,10 @@
               <p class="content_p">NO.{{checkMeeting.meetingId}}</p>
             </div></el-col>
             <el-col :span="8"><div>
-              <div style="text-align: right">
-                <el-button @click="openEditMeetting"><i class="el-icon-edit"></i>编辑</el-button>
-              </div>
-              <p  class="content_p" style="text-align: right"><span>{{checkMeeting.publishTime}}</span> 发布</p>
+              <!--<div style="text-align: right">-->
+                <!--<el-button @click="openEditMeetting"><i class="el-icon-edit"></i>编辑</el-button>-->
+              <!--</div>-->
+              <p  class="content_p" style="text-align: right;margin-top: 50px;"><span>{{checkMeeting.publishTime}}</span> 发布</p>
             </div></el-col>
           </el-row>
         </div>
@@ -428,6 +428,7 @@
   import checkPerson from './check_person/check_person.vue';
   import ElRow from 'element-ui/packages/row/src/row';
   import Contract from './contract/contract.vue';
+  import $ from 'jquery';
 
     export default {
 
@@ -543,43 +544,6 @@
             },
           input: '',
           value3: '',
-          sch: [
-            {
-              schName: '我是日程1',
-              person: [
-                {
-                  name: '',
-                  address: ''
-                }
-              ]
-            },
-            {
-              schName: '我是日程2啊',
-              person: [
-                {
-                  name: '建军节',
-                  address: '102'
-                },
-                {
-                  name: '散打',
-                  address: '102'
-                },
-                {
-                  name: '罚点啥',
-                  address: '102'
-                }
-              ]
-            },
-            {
-              schName: '我是日程3咯',
-              person: [
-                {
-                  name: '',
-                  address: ''
-                }
-              ]
-            }
-          ],   // 日程第二步数据结构
           // 分割线
           conferenceState: [   //  选择会议状态  三个状态
             {
@@ -615,7 +579,21 @@
             spgPrograms: [],
             spgHotels: [],
             spgConferenceStaffs: []
-          }
+          },
+          meetingId: '', //  发布会议第一步成功功返回的会议编号
+          sch: [
+//            {
+//              schName: '',
+//              programId: '',
+//              person: [
+//                {
+//                  userId: '',
+//                  seatNumber: ''
+//                }
+//              ]
+//            }
+          ],   // 发布会议第二步数据结构
+          personSecond: []  // 发布会议第二步所有人
         };
       },
 
@@ -686,11 +664,42 @@
               for (let i = 0; i < length; i++) {
                 for (let y = 0; y < allPerson[i].sysUnits.length; y++) {
                   if (allPerson[i].sysUnits[y].parid === choosePerson[x]) {
-                    this.publishmeeting.spgParticipants[x] = {parid: choosePerson[x], belongsShop: allPerson[i].depname};
+                    this.publishmeeting.spgParticipants[x] = {userId: choosePerson[x], belongsShop: allPerson[i].depname, belongsAarea: null, phoneNumber: null, remarks: null};
                   }
                 }
               }
             }
+          }
+        },
+        meetingId: {
+          handler: function() {
+            console.log('meetingid监听');
+            //  根据id查询会议
+            this.$http.jsonp('http://120.55.85.65:8088/spg/admin/working/getmeeting?mid=' + this.meetingId, {jsonp: 'jsonpCallback'}).then(function (response) {
+              // response.data 为服务端返回的数据
+              let meetingSecond = response.data.result.meeting;
+              console.log(this.allPerson);
+              console.log(meetingSecond);
+              for (let i = 0; i < meetingSecond.spgParticipants.length; i++) {
+                for (let x = 0; x < this.allPerson.length; x++) {
+                  for (let y = 0; y < this.allPerson[x].sysUnits.length; y++) {
+                    if (meetingSecond.spgParticipants[i].userId === this.allPerson[x].sysUnits[y].parid) {
+                      let newPerson = {userId: meetingSecond.spgParticipants[i].userId, userName: this.allPerson[x].sysUnits[y].uname, parciId: meetingSecond.spgParticipants[i].parciId};
+                      this.personSecond.push(newPerson);
+                    }
+                  }
+                }
+              }
+              for (let i = 0; i < meetingSecond.spgPrograms.length; i++) {
+                let newProgram = {name: meetingSecond.spgPrograms[i].programName, programId: meetingSecond.spgPrograms[i].programId, person: [{userId: '', seatNumber: ''}]};
+                this.sch.push(newProgram);
+              }
+              console.log(this.personSecond);
+              console.log('查询会议成功');
+            }).catch(function (response) {
+              // 出错处理
+              console.log(response);
+            });
           }
         },
         conferencePage: {
@@ -715,13 +724,15 @@
         },
         checkMeeting: {
           handler: function () {
-            //  处理参与会议的大区
-            let person = this.checkMeeting.spgParticipants;
-            let length = person.length;
-            for (let i = 0; i < length; i++) {
-              this.checkMeetingArea.push(person[i].belongsShop);
+            if (this.checkMeeting.length > 0) {
+              //  处理参与会议的大区
+              let person = this.checkMeeting.spgParticipants;
+              let length = person.length;
+              for (let i = 0; i < length; i++) {
+                this.checkMeetingArea.push(person[i].belongsShop);
+              }
+              this.checkMeetingArea = this.unique(this.checkMeetingArea);
             }
-            this.checkMeetingArea = this.unique(this.checkMeetingArea);
           }
         }
       },
@@ -890,8 +901,10 @@
         closeCheck() {  // 退出会议详情
           this.show_work = true;
           this.show_edit = false;
+          this.checkMeeting = [];
         },
-        openEditMeetting() {  // 会议详情 进入 编辑会议
+        openEditMeetting() {
+          // 会议详情 进入 编辑会议
 //          this.meetting_second = this.meetting_get;
           this.publishmeeting = this.checkMeeting;
           // 注入会议人员
@@ -944,25 +957,77 @@
             //  没填会议要求
             console.log('meetingRequest');
           } else {
-            this.show_first = false;
-            this.show_second = true;
+            console.log(this.publishmeeting);
+            this.publishmeeting.startTime = this.formatDateTime1(this.publishmeeting.startTime);
+            this.publishmeeting.endTime = this.formatDateTime1(this.publishmeeting.endTime);
+            console.log(1);
+            for (let i = 0; i < this.publishmeeting.spgPrograms.length; i++) {
+              this.publishmeeting.spgPrograms[i].startTime = this.formatDateTime1(this.publishmeeting.spgPrograms[i].startTime);
+              this.publishmeeting.spgPrograms[i].endTime = this.formatDateTime1(this.publishmeeting.spgPrograms[i].endTime);
+            }
+            console.log(this.publishmeeting);
+            let params = JSON.stringify(this.publishmeeting);
+            let promise = $.ajax({
+              type: 'POST',
+              url: 'http://localhost:8080/spg/admin/working/publishmeeting',
+              contentType: 'application/json;charset=utf-8', // 设置请求头信息
+              dataType: 'json',
+              async: false,
+              data: params
+            });
+            promise.then(function(data) {
+              console.log('post成功');
+              console.log(data.result.meetingid);
+              this.meetingId = data.result.meetingid.toString();
+              this.show_first = false;
+              this.show_second = true;
+              console.log(this.show_first);
+              console.log(this.show_second);
+            });
           }
         },
+        formatDateTime1(date) { // 格式化时间 带小时
+          let y = date.getFullYear();
+          let m = date.getMonth() + 1;
+          m = m < 10 ? ('0' + m) : m;
+          let d = date.getDate();
+          d = d < 10 ? ('0' + d) : d;
+          let h = date.getHours();
+          let minute = date.getMinutes();
+          minute = minute < 10 ? ('0' + minute) : minute;
+          return y + '-' + m + '-' + d + ' ' + h + ':' + minute;
+        },
         sub() {   // 编辑会议页面  发布会议按钮
-          if (this.state === 1) {  //  判断回到哪个页面   1是从工作首页进入   2是从编辑会议页面进入
-            this.show_issue = false;
-            this.show_work = true;
-            this.show_first = true;
-            this.show_second = false;
-          } else {
-            this.show_issue = false;
-            this.show_edit = true;
-            this.show_first = true;
-            this.show_second = false;
-            let length = this.meetting_second.length;
-            this.meetting_second.splice(0, length);
+//          this.show_issue = false;
+//          this.show_work = true;
+//          this.show_first = true;
+//          this.show_second = false;
+          console.log(this.meetingId);
+          console.log(this.sch);
+          console.log(this.personSecond);
+          let postSch = [];
+          for (let i = 0; i < this.personSecond.length; i++) {
+            for (let x = 0; x < this.sch.length; x++) {
+              for (let y = 0; y < this.sch[x].person.length; y++) {
+                if (this.personSecond[i].userId === this.sch[x].person[y].userId) {
+                  let onePost = {programId: this.sch[x].programId, parciId: this.personSecond[i].parciId, seatNumber: this.sch[x].person[y].seatNumber, userId: this.personSecond[i].userId};
+                  postSch.push(onePost);
+                }
+              }
+            }
           }
-          this.state = 0;
+          console.log(postSch);
+          let params = JSON.stringify(postSch);
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/spg/admin/working/schedule',
+            contentType: 'application/json;charset=utf-8', // 设置请求头信息
+            dataType: 'json',
+            data: params,
+            success: function(data) {
+              console.log('post第二步成功');
+            }
+          });
         },
         addHotel() {
           let newHotel = {hotelName: '', hotelAddress: ''};
@@ -973,7 +1038,7 @@
           this.publishmeeting.spgConferenceStaffs.push(newPeople);
         },
         addPerson(person) {  // 发布编辑会议第二步人员安排添加按钮
-          let newPerson = {name: '', address: ''};
+          let newPerson = {userId: '', seatNumber: ''};
           person.push(newPerson);
         },
         check(value) {  // 监控value是否为空   可用于name date
