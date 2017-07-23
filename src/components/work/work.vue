@@ -228,9 +228,9 @@
             <el-col :span="21"><div>
               <div class="set_sch">
                 <table border="0" cellspacing="0" cellpadding="0" class="table" >
-                  <tr class="tr1"><th style="width: 200px;">酒店名称</th><th style="width: 200px;">酒店地址</th></tr>
+                  <tr class="tr1"><th style="width: 200px;">酒店名称</th><th>酒店地址</th><th style="width: 50px;">操作</th></tr>
                   <!-- 添加酒店安排 -->
-                  <tr class="tr2" v-for="(item, index) in publishmeeting.spgHotels" :key="index"><td><el-input v-model="item.hotelName" placeholder="请输入酒店名称"></el-input></td><td><el-input v-model="item.hotelAddress" placeholder="请输入酒店地址"></el-input></td></tr>
+                  <tr class="tr2" v-for="(item, index) in publishmeeting.spgHotels" :key="index"><td><el-input v-model="item.hotelName" placeholder="请输入酒店名称"></el-input></td><td><el-input v-model="item.hotelAddress" placeholder="请输入酒店地址"></el-input></td><td><el-button @click="deleteHotel(index)">删除</el-button></td></tr>
                 </table>
                 <el-button @click="addHotel"><i class="el-icon-plus"></i>添加酒店</el-button>
               </div>
@@ -245,9 +245,9 @@
             <el-col :span="21"><div>
               <div class="set_sch">
                 <table border="0" cellspacing="0" cellpadding="0" class="table" >
-                  <tr class="tr1"><th style="width: 200px;">负责人</th><th style="width: 200px;">负责人联系方式</th><th style="width: 340px;">备注</th></tr>
+                  <tr class="tr1"><th style="width: 200px;">负责人</th><th style="width: 200px;">负责人联系方式</th><th style="width: 340px;">备注</th><th>操作</th></tr>
                   <!-- 添加负责人 -->
-                  <tr class="tr2" v-for="(item, index) in publishmeeting.spgConferenceStaffs"><td><el-input v-model="item.name" placeholder="请输入负责人"></el-input></td><td><el-input v-model="item.phoneNumber" placeholder="请输入负责人手机号"></el-input></td><td><el-input type="text" v-model="item.remarks" placeholder="请输入备注"></el-input></td></tr>
+                  <tr class="tr2" v-for="(item, index) in publishmeeting.spgConferenceStaffs"><td><el-input v-model="item.name" placeholder="请输入负责人"></el-input></td><td><el-input v-model="item.phoneNumber" placeholder="请输入负责人手机号"></el-input></td><td><el-input type="text" v-model="item.remarks" placeholder="请输入备注"></el-input></td><td><el-button @click="detelePeople(index)">删除</el-button></td></tr>
                 </table>
                 <el-button @click="addPeople"><i class="el-icon-plus"></i>添加负责人</el-button>
               </div>
@@ -967,22 +967,22 @@
             }
             console.log(this.publishmeeting);
             let params = JSON.stringify(this.publishmeeting);
-            let promise = $.ajax({
+            $.ajax({
               type: 'POST',
               url: 'http://localhost:8080/spg/admin/working/publishmeeting',
               contentType: 'application/json;charset=utf-8', // 设置请求头信息
               dataType: 'json',
-              async: false,
-              data: params
-            });
-            promise.then(function(data) {
-              console.log('post成功');
-              console.log(data.result.meetingid);
-              this.meetingId = data.result.meetingid.toString();
-              this.show_first = false;
-              this.show_second = true;
-              console.log(this.show_first);
-              console.log(this.show_second);
+//              async: false,
+              data: params,
+              success: function(data) {
+                console.log('post成功');
+                console.log(data.result.meetingid);
+                this.meetingId = data.result.meetingid.toString();
+                this.show_first = false;
+                this.show_second = true;
+                console.log(this.show_first);
+                console.log(this.show_second);
+              }
             });
           }
         },
@@ -997,7 +997,8 @@
           minute = minute < 10 ? ('0' + minute) : minute;
           return y + '-' + m + '-' + d + ' ' + h + ':' + minute;
         },
-        sub() {   // 编辑会议页面  发布会议按钮
+        sub() {
+          // 编辑会议页面  发布会议按钮
 //          this.show_issue = false;
 //          this.show_work = true;
 //          this.show_first = true;
@@ -1101,6 +1102,14 @@
             r.push(array[i]);
           }
           return r;
+        },
+        deleteHotel(index) {
+          // 删除该行酒店数据
+          this.publishmeeting.spgHotels.splice(index, 1);
+        },
+        detelePeople(index) {
+          // 删除该行会务人员
+          this.publishmeeting.spgConferenceStaffs.splice(index, 1);
         }
 //        checkPerson(value) {  //  监控发布会议下一步 是否选择人员
 //          if (this.value === 0) {
