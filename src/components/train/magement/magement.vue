@@ -1,13 +1,13 @@
 <template>
   <div class="study">
-    <div class="study_top">
-      <span>搜索课程：</span>
-      <div class="study_input">
-        <el-input v-model="input" placeholder="请输入课程名称"></el-input>
-      </div>
-      <el-button><i class="el-icon-search"></i>搜索</el-button>
-      <el-button><i class="el-icon-plus"></i>新增类</el-button>
-    </div>
+    <!--<div class="study_top">-->
+      <!--<span>搜索课程：</span>-->
+      <!--<div class="study_input">-->
+        <!--<el-input v-model="input" placeholder="请输入课程名称"></el-input>-->
+      <!--</div>-->
+      <!--<el-button><i class="el-icon-search"></i>搜索</el-button>-->
+      <!--<el-button><i class="el-icon-plus"></i>新增类</el-button>-->
+    <!--</div>-->
     <div class="study_main">
       <el-tabs type="card" v-model="activeName">
         <el-tab-pane v-for="(item, index) in allCourse" :name="item.num" :label="item.type" :key="index">
@@ -59,7 +59,7 @@
           </el-table>
           <div class="study_but">
             <el-button @click="toggleSelection(tableData3)">全选</el-button>
-            <el-button @click="testSelect(tableData3)"><i class="el-icon-delete"></i>删除</el-button>
+            <el-button @click="deleteCourse"><i class="el-icon-delete"></i>删除</el-button>
             <el-button @click="handleDownload"><i class="el-icon-upload2"></i>导出</el-button>
             <el-button @click="addCourse"><i class="el-icon-plus"></i>新增课程</el-button>
           </div>
@@ -75,6 +75,7 @@
   import paging from '../../paging/paging.vue';
   import course from './course/course.vue';
   import addCourse from './addCourse/addCourse.vue';
+  import $ from 'jquery';
 
     export default {
       data() {
@@ -185,8 +186,8 @@
         handleDownload() {
           require.ensure([], () => {
             const { export_json_to_excel } = require('../../../vendor/Export2Excel');
-            const tHeader = ['序号', '课程', '通过率', '平均分', '人数'];
-            const filterVal = ['id', 'course', 'pass', 'average', 'number'];
+            const tHeader = ['课程', '通过率', '平均分', '人数'];
+            const filterVal = ['coursename', 'passrate', 'averagescore', 'num'];
             const list = this.excel;
             const data = this.formatJson(filterVal, list);
             export_json_to_excel(tHeader, data, '课程');
@@ -217,6 +218,30 @@
         },
         addCourse() {
             this.$store.state.show_addCourse = true;
+        },
+        deleteCourse() {
+          let deleteId = [];
+          console.log(this.excel);
+          if (this.excel.length > 0) {
+            for (let i = 0; i < this.excel.length; i++) {
+//            let id = this.excel[i].id;
+              let newId = this.excel[i].courseid;
+              deleteId.push(newId);
+            }
+          }
+          let params = JSON.stringify(deleteId);
+          console.log(params);
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/spg/admin/training/delcourse',
+            contentType: 'application/json;charset=utf-8', // 设置请求头信息
+            dataType: 'json',
+            data: params,
+            success: function(data) {
+              console.log('删除成功');
+              console.log(data);
+            }
+          });
         }
       },
       components: {
@@ -230,8 +255,7 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   .study
     position relative;
-    overflow auto;
-    height 750px;
+    height 590px;
     .study_top
       height 50px;
       border-bottom 1px solid #D3DCE6;
@@ -240,7 +264,7 @@
         margin-right 30px;
         width 250px;
     .study_main
-      margin-top 15px;
+      margin-top 0;
       .study_but
         float left;
         margin-top 15px;
@@ -252,6 +276,7 @@
       position absolute;
       z-index 999;
       top 0;
-      width 866px;
-      height 650px;
+      width 867px;
+      height 550px;
+      overflow-x hidden;
 </style>

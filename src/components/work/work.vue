@@ -43,6 +43,8 @@
           <el-table
             ref="multipleTable"
             :data="conference"
+            @select="selectRow"
+            @select-all="selectRowAll"
             border
             tooltip-effect="dark"
             style="width: 100%"
@@ -87,7 +89,7 @@
             </el-table-column>
           </el-table>
           <div style="margin-top: 10px">
-            <el-button @click="toggleSelection(conference)">全选</el-button><el-button><i class="el-icon-delete"></i>删除</el-button>
+            <el-button @click="toggleSelection(conference)">全选</el-button><el-button @click="deteleMeeting"><i class="el-icon-delete"></i>删除</el-button>
           </div>
           <div class="paging">
             <div class="block">
@@ -373,7 +375,7 @@
               <tr class="tr2" >
                 <td style="width: 50px;background-color: #EFF2F7;overflow: hidden">备注</td>
                 <td colspan="4">{{item.remarks}}</td>
-                <td style=""><el-button>查看与会人员安排</el-button></td></tr>
+                <td style=""><el-button @click="lookPeople(item)">查看与会人员安排</el-button></td></tr>
             </table>
           </div>
         </div>
@@ -418,7 +420,7 @@
     <!-- 编辑人员日程/酒店安排 -->
     <staffing class="staf" v-show=""></staffing>
     <!-- 查看人员日程/酒店安排 -->
-    <check-person class="check" v-show=""></check-person>
+    <check-person class="check" :name="lookName" :id="lookId" :people="lookPerson" v-show="$store.state.show_check"></check-person>
   </div>
 </template>
 
@@ -438,7 +440,6 @@
           show_issue: false,  //  发布编辑会议
           show_edit: false, // 编辑会议界面
           show_staffing: false, // 添加参加会议人员
-          show_check: false, // 查看参加会议人员
           show_first: true, //  编辑发布会议第一步
           show_second: false,  //  编辑发布会议第二步
           state: '0', // 进页面状态    state = 1 =>从工作首页进入发布会议页面    state = 2 => 从编辑会议页面进入发布会议界面
@@ -593,7 +594,16 @@
 //              ]
 //            }
           ],   // 发布会议第二步数据结构
-          personSecond: []  // 发布会议第二步所有人
+          personSecond: [],  // 发布会议第二步所有人
+          lookPerson: [
+            {
+              add: '1',
+              name: '2',
+              shop: '3'
+            }
+          ],   // 查看与会人员安排
+          lookName: '1',   // 查看与会人员安排name
+          lookId: '1'    // 查看与会人员安排id
         };
       },
 
@@ -967,23 +977,26 @@
             }
             console.log(this.publishmeeting);
             let params = JSON.stringify(this.publishmeeting);
+            let id = '';
             $.ajax({
               type: 'POST',
               url: 'http://localhost:8080/spg/admin/working/publishmeeting',
               contentType: 'application/json;charset=utf-8', // 设置请求头信息
               dataType: 'json',
-//              async: false,
+              async: false,
               data: params,
               success: function(data) {
                 console.log('post成功');
                 console.log(data.result.meetingid);
-                this.meetingId = data.result.meetingid.toString();
-                this.show_first = false;
-                this.show_second = true;
-                console.log(this.show_first);
-                console.log(this.show_second);
+                id = data.result.meetingid.toString();
               }
             });
+            if (id !== '') {
+              this.show_first = false;
+              this.show_second = true;
+              this.meetingId = id;
+              console.log(this.meetingId);
+            }
           }
         },
         formatDateTime1(date) { // 格式化时间 带小时
@@ -1110,6 +1123,68 @@
         detelePeople(index) {
           // 删除该行会务人员
           this.publishmeeting.spgConferenceStaffs.splice(index, 1);
+        },
+        deteleMeeting() {
+          // 删除选中的会议
+          let deleteId = [];
+          console.log(this.excel);
+          if (this.excel.length > 0) {
+            for (let i = 0; i < this.excel.length; i++) {
+//            let id = this.excel[i].id;
+              let newId = this.excel[i].meetingid;
+              deleteId.push(newId);
+            }
+          }
+          let params = JSON.stringify(deleteId);
+          console.log(params);
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/spg/admin/working/delmeeting',
+            contentType: 'application/json;charset=utf-8', // 设置请求头信息
+            dataType: 'json',
+            data: params,
+            success: function(data) {
+              console.log('删除成功');
+              console.log(data);
+            }
+          });
+        },
+        selectRow(row) {
+          this.excel = row;
+        },
+        selectRowAll(row) {
+          this.excel = row;
+        },
+        lookPeople(item) {
+          console.log(item.programName);
+          console.log(item.programId);
+          console.log(this.allPerson);
+          this.lookName = item.programName;
+          this.lookId = item.programId;
+          this.lookPerson = [];
+          let people = [];
+          this.$http.jsonp('http://192.168.199.144:8080/spg/admin/working/person?programid=' + this.lookId, {jsonp: 'jsonpCallback'}).then(function (response) {
+            // response.data 为服务端返回的数据
+            people = response.data.result.persons;
+            console.log('我是lookPeople');
+            console.log(people);
+            console.log(people.length);
+            for (let i = 0; i < people.length; i++) {
+              for (let x = 0; x < this.allPerson.length; x++) {
+                for (let y = 0; y < this.allPerson[x].sysUnits.length; y++) {
+                  if (people[i].userId === this.allPerson[x].sysUnits[y].parid) {
+                    let newPerson = {shop: this.allPerson[x].depname, name: this.allPerson[x].sysUnits[y].uname, add: people[i].seatNumber};
+                    this.lookPerson.push(newPerson);
+                  }
+                }
+              }
+            }
+            console.log(this.lookPerson);
+            this.$store.state.show_check = true;
+          }).catch(function (response) {
+            // 出错处理
+            console.log(response);
+          });
         }
 //        checkPerson(value) {  //  监控发布会议下一步 是否选择人员
 //          if (this.value === 0) {
@@ -1145,11 +1220,11 @@
     font-size 14px;
   .work
     position relative;
-    margin-top -898px;
+    margin-top -698px;
     margin-left 180px;
     padding-top 30px;
     width 1020px;
-    height 868px;
+    height 688px;
     background #ecf0f1;
     .el-tabs
       margin-left 30px;
@@ -1180,7 +1255,7 @@
       margin-left 30px;
       margin-right 30px;
       padding 30px;
-      height 768px;
+      height 588px;
       background-color white;
       box-shadow 0 0 2px black;
       overflow auto;
@@ -1334,7 +1409,7 @@
       margin-left 30px;
       margin-right 30px;
       padding 30px;
-      height 768px;
+      height 608px;
       overflow auto;
       background-color white;
       box-shadow 0 0 2px black;
@@ -1449,7 +1524,7 @@
       margin-left 30px;
       margin-right 30px;
       padding 30px;
-      height 768px;
+      height 608px;
       overflow-y scroll;
       background-color white;
       box-shadow 0 0 2px black;
@@ -1457,7 +1532,7 @@
       margin-left 30px;
       margin-right 30px;
       padding 30px;
-      height 768px;
+      height 608px;
       overflow-y scroll;
       background-color white;
       box-shadow 0 0 2px black;

@@ -341,7 +341,7 @@
     top 130px;
     margin-left 30px;
     width 898px;
-    height 778px;
+    height 618px;
     overflow auto;
     background-color white;
     box-shadow 0 0 2px #1F2D3D;

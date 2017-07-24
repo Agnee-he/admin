@@ -20,7 +20,7 @@
           <el-col :span="7">
             <div>
               <p class="title_p">{{displayDetail.shopName}}</p>
-              <p class="content_p">店长：我是谁</p>
+              <!--<p class="content_p">店长：我是谁</p>-->
             </div>
           </el-col>
           <el-col :span="7">
@@ -35,8 +35,8 @@
           <p class="left">陈列要求：</p>
           <p class="right">更新于： {{displayDetail.startTime}}</p>
         </div>
-        <div class="show_img" v-for="item in displayDetail.displayStandardurls">
-          <img :src="item.standardImgurl"/>
+        <div class="show_img">
+          <img v-for="item in displayDetail.displayStandardurls" :src="item.standardImgurl"/>
         </div>
         <div class="remark">
           <p>备注：</p>
@@ -50,7 +50,7 @@
             <img :src="item.actualImgurl" width="100%" height="100%"/>
           </el-carousel-item>
         </el-carousel>
-        <p class="right">上传人：我是谁     更新于：2017-7-7 12：11</p>
+        <!--<p class="right">上传人：我是谁     更新于：2017-7-7 12：11</p>-->
       </div>
       <div class="comment">
         <ul>
@@ -124,7 +124,7 @@
     top 130px;
     margin-left 30px;
     width 898px;
-    height 778px;
+    height 618px;
     overflow auto;
     background-color white;
     box-shadow 0 0 2px #1F2D3D;

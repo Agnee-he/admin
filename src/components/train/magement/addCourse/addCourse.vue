@@ -148,7 +148,7 @@
     top 0;
     z-index 99;
     width 866px;
-    height 668px;
+    height 468px;
     background white;
     padding 30px;
     overflow auto;

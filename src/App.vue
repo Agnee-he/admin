@@ -108,7 +108,7 @@ export default {
       margin-left auto;
       margin-right auto;
       width 1200px;
-      height 978px;
+      height 818px;
       .header
         width 1200px;
         height 80px;
@@ -206,12 +206,12 @@ export default {
                 text-align center;
       .main
         width 1200px;
-        height 898px;
+        height 718px;
         position relative;
         .left
           float left;
           width 180px;
-          height 898px;
+          height 738px;
           background #344a5d;
           font-weight 400;
           .search
@@ -317,7 +317,7 @@ export default {
         .right
           float left;
           width 1020px;
-          height 898px;
+          height 718px;
           background: #ecf0f1;
       .active
         width 178px;

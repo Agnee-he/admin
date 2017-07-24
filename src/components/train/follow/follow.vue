@@ -224,7 +224,7 @@
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   .follow
-    height 768px;
+    height 588px;
     .follow_top
       .search
         height 50px;

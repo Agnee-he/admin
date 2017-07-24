@@ -91,7 +91,7 @@
           <div class="but_select">
             <el-button @click="toggleSelection(display)">全选</el-button>
             <el-button @click="deleteDisplay"><i class="el-icon-delete"></i>删除</el-button>
-            <el-button><i class="el-icon-upload2"></i>导出</el-button>
+            <el-button @click="handleDownload"><i class="el-icon-upload2"></i>导出</el-button>
           </div>
           <div class="paging">
             <div class="block">
@@ -122,31 +122,29 @@
         </div>
         <div class="content" v-show="show_content">
           <p class="center_p">考勤核对</p>
-          <el-row class="con_row">
-            <el-col :span="8"><div>
-              <div class="left">
-                <p class="sp">搜索门店：</p><el-input class="input3" v-model="atendenceShop" placeholder="请输入门店"></el-input>
-              </div>
-            </div></el-col>
-            <el-col :span="8"><div>
-              <div class="block">
-                <el-date-picker
-                  v-model="attendenceDate"
-                  format
-                  type="date"
-                  placeholder="选择日期时间">
-                </el-date-picker>
-              </div>
-            </div></el-col>
-            <el-col :span="8"><div>
-              <el-button class="btn" @click="searchAttendence"><i class="el-icon-search"></i>搜索</el-button>
-            </div></el-col>
-          </el-row>
+          <!--<el-row class="con_row">-->
+            <!--<el-col :span="8"><div>-->
+              <!--<div class="left">-->
+                <!--<p class="sp">搜索门店：</p><el-input class="input3" v-model="atendenceShop" placeholder="请输入门店"></el-input>-->
+              <!--</div>-->
+            <!--</div></el-col>-->
+            <!--<el-col :span="8"><div>-->
+              <!--<div class="block">-->
+                <!--<el-date-picker-->
+                  <!--v-model="attendenceDate"-->
+                  <!--format-->
+                  <!--type="date"-->
+                  <!--placeholder="选择日期时间">-->
+                <!--</el-date-picker>-->
+              <!--</div>-->
+            <!--</div></el-col>-->
+            <!--<el-col :span="8"><div>-->
+              <!--<el-button class="btn" @click="searchAttendence"><i class="el-icon-search"></i>搜索</el-button>-->
+            <!--</div></el-col>-->
+          <!--</el-row>-->
           <el-row class="con_row2">
             <el-col :span="24"><div>
               <div class="content_top">
-                <span>考勤</span>
-                <!--<el-button style="float: right" type="text">查看更多>></el-button>-->
                 <el-table
                   :data="attendance"
                   style="width: 100%">
@@ -785,7 +783,8 @@
         attendencePage: 1,  //  考勤列表第几页
         attendenceTotal: 0,   //  考勤总条数
         attendenceDate: '',  //  搜索时输入的考勤日期
-        atendenceShop: '' //  搜索时输入的考勤门店
+        atendenceShop: '', //  搜索时输入的考勤门店
+        excel: []  //  要导出的内容
       };
     },
     beforeCreate() {
@@ -972,6 +971,7 @@
       },
       closeChoose5() {
         this.show_choose5 = false;
+        this.postschedule = [];
       },
       test() {
         let formData = this.schedule;
@@ -1007,54 +1007,31 @@
 //      },
       submit() {  // 提交新增班次组
         //  判断输入内容是否为空
-//        if (this.city === '') {
-//        } else if (this.schedulingdate === '') {
-//        } else if () {
-//
-//        }
         let formData = this.schedule;
         let formarDate = this.formatDateTime(this.schedulingdate);  //  格式化时间
         console.log(this.city);
         console.log(this.city_shop);
         console.log(formData);
         console.log(formarDate);
-//        for (let tmp in this.city_shop) {
-//          let city = tmp;
-//          let list = this.city_shop[tmp];
-//          if (this.city === city) {
-//              console.log(list.length);
-//              for (let x = 0; x < list.length; x++) {
-//                  for (let y = 0; y < this.schedule.length; y++) {
-//                      let newSch = {city: city, schedulingdate: formarDate, bctype: this.schedule[y].bctype, stime: this.schedule[y].stime, etime: this.schedule[y].etime};
-//                      this.postschedule.push(newSch);
-//                  }
-//              }
-//          }
-//        }
         for (let i = 0; i < this.schedule.length; i++) {
           let newSch = {city: this.city, schedulingdate: formarDate, bctype: this.schedule[i].bctype, stime: this.schedule[i].stime, etime: this.schedule[i].etime};
           this.postschedule.push(newSch);
         }
         console.log(this.postschedule);
         let params = JSON.stringify(this.postschedule);
-//        this.$http.post('http://localhost:8080/spg/admin/attendance/addSchedulings', {data: params, dataType: 'json'}).then((response) => {
-//          console.log('post成功');
-//          console.log(response);
-//        }, (response) => {
-//          console.log(params);
-//          console.log(response);
-//        });
         $.ajax({
           type: 'POST',
           url: 'http://localhost:8080/spg/admin/attendance/addSchedulings',
           contentType: 'application/json;charset=utf-8', // 设置请求头信息
           dataType: 'json',
+          async: false,
           data: params,
           success: function(data) {
             console.log('post成功');
             console.log(data);
           }
         });
+        this.postschedule = [];
       },
       openCheckDisplay(row) {
       	this.$store.state.show_checkDisplay = true;
@@ -1127,8 +1104,8 @@
       handleDownload() {
         require.ensure([], () => {
           const { export_json_to_excel } = require('../../vendor/Export2Excel');
-          const tHeader = ['编号', '陈列主题', '发布时间', '门店', '陈列考评'];
-          const filterVal = ['id', 'displayType', 'startTime', 'shopName', 'stars'];
+          const tHeader = ['陈列主题', '发布时间', '门店', '陈列考评'];
+          const filterVal = ['displayType', 'startTime', 'shopName', 'stars'];
           const list = this.excel;
           const data = this.formatJson(filterVal, list);
           export_json_to_excel(tHeader, data, '门店陈列');
@@ -1177,13 +1154,16 @@
         console.log(this.excel);
         if (this.excel.length > 0) {
           for (let i = 0; i < this.excel.length; i++) {
-            deleteId.push(this.excel[i].id);
+//            let id = this.excel[i].id;
+            let newId = this.excel[i].id;
+            deleteId.push(newId);
           }
         }
         let params = JSON.stringify(deleteId);
+        console.log(params);
         $.ajax({
           type: 'POST',
-          url: 'http://120.55.85.65:8088/spg/admin/attendance/addSchedulings',
+          url: 'http://localhost:8080/spg/admin/display/delDisplay',
           contentType: 'application/json;charset=utf-8', // 设置请求头信息
           dataType: 'json',
           data: params,
@@ -1232,7 +1212,7 @@
     margin-left 180px;
     padding-top 30px;
     width 1020px;
-    height 868px;
+    height 708px;
     overflow auto;
     background #ecf0f1;
     .tabs
@@ -1268,18 +1248,18 @@
           float right;
           margin-top 15px;
       .top1
-        margin-top 10px;
-        height 40px;
+        margin-top 5px;
+        height 30px;
         border-bottom 1px solid #D3DCE6;
       .two_btn
-        margin-top 10px;
+        margin-top 5px;
         margin-left 340px;
         margin-right 300px;
         .btn1
           margin-right 100px;
       .content
-        margin-top 10px;
-        border-top 10px solid #D3DCE6;
+        margin-top 5px;
+        border-top 5px solid #D3DCE6;
         .center_p
           text-align center;
         .con_row
@@ -1292,17 +1272,17 @@
               display inline-block;
               width 200px;
           .block
-            margin-top 10px;
+            margin-top 5px;
             margin-left 60px;
           .btn
             float right;
-            margin-top 10px;
+            margin-top 5px;
         .con_row2
-          margin-top 10px;
+          margin-top 5px;
           .content_top1
             margin-left 20px;
       .choose_order
-        height 708px;
+        height 568px;
         overflow-y auto;
         .choose1
           border-bottom 1px solid #D3DCE6;
@@ -1316,15 +1296,16 @@
                 font-size 12px;
         .choose5
           position absolute;
-          top 50%;
+          top 65%;
           left 50%;
           margin-top -350px;
-          margin-left -400px;
+          margin-left -300px;
           width 600px;
-          height 600px;
+          height 450px;
           padding 30px;
           background-color white;
           box-shadow 0 0 2px black;
+          overflow auto;
           .close
             margin-top -10px;
             margin-right -10px;
@@ -1352,7 +1333,7 @@
       margin-right 30px;
       padding-left 15px;
       padding-right 15px;
-      max-height 838px;
+      max-height 638px;
       overflow auto;
       background white;
       border 1px solid #D3DCE6;
@@ -1419,7 +1400,7 @@
       margin-right 30px;
       padding-left 15px;
       padding-right 15px;
-      max-height 838px;
+      max-height 638px;
       overflow auto;
       background white;
       border 1px solid #D3DCE6;

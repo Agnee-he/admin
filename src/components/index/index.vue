@@ -165,18 +165,18 @@
     margin 0;
     padding 0;
   .index
-    margin-top -898px;
+    margin-top -698px;
     margin-left 180px;
     padding-top 30px;
     width 1020px;
-    height 868px;
+    height 688px;
     background #ecf0f1;
     .left
       float left;
       margin-left 30px;
       width 578px;
-      height 752px;
+      height 572px;
       .shop_performance
         width 578px;
-        height 754px;
+        height 554px;
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="check">
     <el-row>
-      <div class="close" @click="">
+      <div class="close" @click="closeLook">
         <el-row>
           <el-col :span="23"><div>
           </div></el-col>
@@ -15,33 +15,35 @@
           <el-col :span="3"><div class="logo">
           </div></el-col>
           <el-col :span="16"><div>
-            <p class="title_p">会议名称</p>
-            <p class="content_p">NO.111111111111</p>
+            <p class="title_p">{{name}}</p>
+            <p class="content_p">NO.{{id}}</p>
           </div></el-col>
           <el-col :span="5"><div>
             <p  class="top_p" style="text-align: right">日程名称/酒店名称 安排表</p>
           </div></el-col>
         </el-row>
       </div>
-      <div class="search">
-        <el-row>
-          <el-col :span="10"><div class="input_search">
-            <span>搜索地区：</span>
-            <el-input class="el_input" v-model="input" placeholder="请输入地区名称/编号"></el-input>
-          </div></el-col>
-          <el-col :span="10"><div class="input_search">
-            <span>搜索员工：</span>
-            <el-input class="el_input" v-model="input" placeholder="请输入员工姓名/工号"></el-input>
-          </div></el-col>
-          <el-col :span="4"><div class="btn">
-            <el-button>搜索</el-button><el-button>重置</el-button>
-          </div></el-col>
-        </el-row>
-      </div>
+      <!--<div class="search">-->
+        <!--<el-row>-->
+          <!--<el-col :span="10"><div class="input_search">-->
+            <!--<span>搜索地区：</span>-->
+            <!--<el-input class="el_input" v-model="input" placeholder="请输入地区名称/编号"></el-input>-->
+          <!--</div></el-col>-->
+          <!--<el-col :span="10"><div class="input_search">-->
+            <!--<span>搜索员工：</span>-->
+            <!--<el-input class="el_input" v-model="input" placeholder="请输入员工姓名/工号"></el-input>-->
+          <!--</div></el-col>-->
+          <!--<el-col :span="4"><div class="btn">-->
+            <!--<el-button>搜索</el-button><el-button>重置</el-button>-->
+          <!--</div></el-col>-->
+        <!--</el-row>-->
+      <!--</div>-->
       <div class="table_div">
         <el-table
           ref="multipleTable"
-          :data="meeting_person"
+          @select="selectRow"
+          @select-all="selectRowAll"
+          :data="people"
           border
           tooltip-effect="dark"
           style="width: 100%">
@@ -51,7 +53,7 @@
             width="55">
           </el-table-column>
           <el-table-column
-            prop="address"
+            prop="shop"
             align="center"
             label="所属门店/地区">
           </el-table-column>
@@ -61,17 +63,16 @@
             label="员工姓名">
           </el-table-column>
           <el-table-column
-            prop="stay"
+            prop="add"
             align="center"
-            label="日程名称/酒店名称"
+            label="会议位置"
             show-overflow-tooltip>
           </el-table-column>
         </el-table>
         <div style="margin-top: 10px">
-          <el-button @click="toggleSelection([meeting_person[0],meeting_person[1],meeting_person[2],meeting_person[3],meeting_person[4],meeting_person[5],meeting_person[6],meeting_person[7],meeting_person[8], meeting_person[9]])">全选</el-button>
-          <el-button @click="">导出</el-button>
+          <el-button @click="toggleSelection(people)">全选</el-button>
+          <el-button @click="handleDownload">导出</el-button>
         </div>
-        <paging class="paging"  :total="1"></paging>
       </div>
     </el-row>
   </div>
@@ -81,6 +82,17 @@
   import paging from '../../paging/paging.vue';
 
   export default {
+    props: {
+      people: {
+        type: Array
+      },
+      name: {
+        type: String
+      },
+      id: {
+        type: String
+      }
+    },
     data() {
       return {
         meeting_person: [
@@ -90,11 +102,32 @@
             stay: 'ddd'
           }
         ],
-        input: ''
+        input: '',
+        excel: []
       };
     },
 
     methods: {
+      handleDownload() {
+        require.ensure([], () => {
+          const { export_json_to_excel } = require('../../../vendor/Export2Excel');
+          const tHeader = ['所属门店/地区', '员工姓名', '会议位置'];
+          const filterVal = ['shop', 'name', 'add'];
+          const list = this.excel;
+          const data = this.formatJson(filterVal, list);
+          export_json_to_excel(tHeader, data, '安排表');
+        });
+        console.log(1);
+      },
+      formatJson(filterVal, jsonData) {
+        return jsonData.map(v => filterVal.map(j => v[j]));
+      },
+      selectRow(row) {
+        this.excel = row;
+      },
+      selectRowAll(row) {
+        this.excel = row;
+      },
       handleClick(tab, event) {
         console.log(tab, event);
       },
@@ -106,6 +139,9 @@
         } else {
           this.$refs.multipleTable.clearSelection();
         }
+      },
+      closeLook() {
+        this.$store.state.show_check = false;
       }
     },
 
@@ -126,6 +162,10 @@
     margin-top 5px;
     font-size 14px;
   .check
+    position absolute;
+    top 30px;
+    z-index 99;
+    width 900px;
     .close
       float right;
       width 22px;

@@ -69,7 +69,7 @@
           </el-select>
         </div></el-col>
         <el-col :span="3"><div style="margin-top: 10px;float: right">
-          <el-button type="primary" @click="test">提交</el-button>
+          <el-button type="primary" @click="submitPerson">提交</el-button>
         </div></el-col>
       </el-row>
     </div>
@@ -161,7 +161,7 @@
             <p>单选题</p>
           </div></el-col>
           <el-col :span="12"><div style="float: right">
-            <el-button><i class="el-icon-delete"></i>删除</el-button><el-button @click="showEdit"><i class="el-icon-edit"></i>编辑</el-button>
+            <el-button @click="showEdit"><i class="el-icon-edit"></i>编辑</el-button>
           </div></el-col>
         </el-row>
       </div>
@@ -465,6 +465,7 @@
           }
           console.log(this.postNew);
           let params = JSON.stringify(this.postNew);
+          console.log(params);
           $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/spg/admin/training/outofquestion',
@@ -481,10 +482,10 @@
           require.ensure([], () => {
             const { export_json_to_excel } = require('../../../../vendor/Export2Excel');
             const tHeader = ['所属门店/地区', '员工姓名', '考试状态', '分数'];
-            const filterVal = ['address', 'name', 'state', 'grade'];
+            const filterVal = ['shop', 'name', 'testresult', 'scores'];
             const list = this.excel;
             const data = this.formatJson(filterVal, list);
-            export_json_to_excel(tHeader, data, '课程详情');
+            export_json_to_excel(tHeader, data, '员工学习成绩');
           });
         },
         formatJson(filterVal, jsonData) {
@@ -496,8 +497,29 @@
         selectRowAll(row) {
           this.excel = row;
         },
-        test() {
+        submitPerson() {
           console.log(this.person);
+          console.log(this.course[0].courseid);
+          let userCourseModels = [];
+          for (let i = 0; i < this.person.length; i++) {
+//            let newPerson = this.course[0].courseid + ',' + this.person[i];
+            let newP = {courseid: this.course[0].courseid, userid: this.person[i].toString()};
+            userCourseModels.push(newP);
+          }
+          console.log(userCourseModels);
+          let params = JSON.stringify(userCourseModels);
+          console.log(params);
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/spg/admin/training/assigncourse',
+            contentType: 'application/json;charset=utf-8', // 设置请求头信息
+            dataType: 'json',
+            data: params,
+            success: function(data) {
+              console.log('选人成功');
+              console.log(data);
+            }
+          });
         }
       },
 
@@ -526,6 +548,7 @@
   .course
     border 1px solid #D3DCE6;
     background white;
+    height 600px;
     padding 30px;
     overflow auto;
     .title
@@ -611,8 +634,8 @@
       left: 44%;
       margin: -300px 0 0 -390px;
       padding 15px;
-      width: 865px;
-      height: 800px;
+      width: 860px;
+      height: 670px;
       overflow auto;
       .close
         float right;
