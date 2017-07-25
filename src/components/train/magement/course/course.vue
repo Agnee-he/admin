@@ -173,7 +173,7 @@
           style="width: 100%">
           <el-table-column
             type="index"
-            width="50">
+            width="70">
           </el-table-column>
           <el-table-column
             property="content"
@@ -208,6 +208,17 @@
           <el-table-column
             property="scores"
             label="权重">
+          </el-table-column>
+          <el-table-column align="center" label="操作">
+            <template scope="scope">
+              <el-button
+                size="small"
+                @click="deleteExam(scope.row)">删除</el-button>
+              <!--<el-button-->
+              <!--size="small"-->
+              <!--type="danger"-->
+              <!--@click="handleDelete(scope.$index, scope.row)">删除</el-button>-->
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -466,27 +477,40 @@
           console.log(this.postNew);
           let params = JSON.stringify(this.postNew);
           console.log(params);
+          let success = false;
           $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/spg/admin/training/outofquestion',
             contentType: 'application/json;charset=utf-8', // 设置请求头信息
             dataType: 'json',
+            async: false,
             data: params,
             success: function(data) {
               console.log('post成功');
               console.log(data);
+              success = true;
             }
           });
+          if (success) {
+            this.show_edit = false;
+          }
         },
         handleDownload() {
-          require.ensure([], () => {
-            const { export_json_to_excel } = require('../../../../vendor/Export2Excel');
-            const tHeader = ['所属门店/地区', '员工姓名', '考试状态', '分数'];
-            const filterVal = ['shop', 'name', 'testresult', 'scores'];
-            const list = this.excel;
-            const data = this.formatJson(filterVal, list);
-            export_json_to_excel(tHeader, data, '员工学习成绩');
-          });
+          if (this.excel.length === 0) {
+            this.$message({
+              message: '未选择数据！',
+              type: 'warning'
+            });
+          } else {
+            require.ensure([], () => {
+              const { export_json_to_excel } = require('../../../../vendor/Export2Excel');
+              const tHeader = ['所属门店/地区', '员工姓名', '考试状态', '分数'];
+              const filterVal = ['shop', 'name', 'testresult', 'scores'];
+              const list = this.excel;
+              const data = this.formatJson(filterVal, list);
+              export_json_to_excel(tHeader, data, '员工学习成绩');
+            });
+          }
         },
         formatJson(filterVal, jsonData) {
           return jsonData.map(v => filterVal.map(j => v[j]));
@@ -520,6 +544,30 @@
               console.log(data);
             }
           });
+        },
+        deleteExam(row) {
+          console.log(row);
+          let id = [row.questionId];
+          let params = JSON.stringify(id);
+          console.log(params);
+          let success = false;
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/spg/admin/training/delquestion',
+            contentType: 'application/json;charset=utf-8', // 设置请求头信息
+            dataType: 'json',
+            async: false,
+            data: params,
+            success: function(data) {
+              console.log('删除成功');
+              console.log(data);
+              success = true;
+            }
+          });
+          if (success) {
+            this.$store.state.showCourse = false;
+            this.$store.state.showCourse = true;
+          }
         }
       },
 
@@ -632,7 +680,7 @@
       z-index 999;
       top: 43%;
       left: 44%;
-      margin: -300px 0 0 -390px;
+      margin: -250px 0 0 -390px;
       padding 15px;
       width: 860px;
       height: 670px;

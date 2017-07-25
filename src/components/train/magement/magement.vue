@@ -67,7 +67,7 @@
       </el-tabs>
     </div>
     <course :course="oneCourse" class="course_detail" v-show="$store.state.showCourse"></course>
-    <add-course :course-type="courseType" class="course-detail" v-show="$store.state.show_addCourse"></add-course>
+    <add-course class="course-detail" v-show="$store.state.show_addCourse"></add-course>
   </div>
 </template>
 
@@ -109,7 +109,23 @@
           excel: [], // 导出excel表内容
           number: '', // 需要删除的index
           allCourse: [],  //  获取的课程集合
-          oneCourse: [],  //  查看单个课程时的详情
+          oneCourse: [
+            {
+              averagescore: '',
+              checked: '',
+              courseid: '',
+              coursename: '',
+              num: '',
+              passrate: '',
+              path: '',
+              ranking: '',
+              scores: ''
+            },
+            {
+              questions: [],
+              traininginfo: []
+            }
+          ],  //  查看单个课程时的详情
           courseType: []  //  课程种类
         };
       },
@@ -184,14 +200,21 @@
           });
         },
         handleDownload() {
-          require.ensure([], () => {
-            const { export_json_to_excel } = require('../../../vendor/Export2Excel');
-            const tHeader = ['课程', '通过率', '平均分', '人数'];
-            const filterVal = ['coursename', 'passrate', 'averagescore', 'num'];
-            const list = this.excel;
-            const data = this.formatJson(filterVal, list);
-            export_json_to_excel(tHeader, data, '课程');
-          });
+          if (this.excel.length === 0) {
+            this.$message({
+              message: '未选择数据！',
+              type: 'warning'
+            });
+          } else {
+            require.ensure([], () => {
+              const { export_json_to_excel } = require('../../../vendor/Export2Excel');
+              const tHeader = ['课程', '通过率', '平均分', '人数'];
+              const filterVal = ['coursename', 'passrate', 'averagescore', 'num'];
+              const list = this.excel;
+              const data = this.formatJson(filterVal, list);
+              export_json_to_excel(tHeader, data, '课程');
+            });
+          }
         },
         formatJson(filterVal, jsonData) {
           return jsonData.map(v => filterVal.map(j => v[j]));
@@ -236,6 +259,7 @@
             url: 'http://localhost:8080/spg/admin/training/delcourse',
             contentType: 'application/json;charset=utf-8', // 设置请求头信息
             dataType: 'json',
+            async: false,
             data: params,
             success: function(data) {
               console.log('删除成功');

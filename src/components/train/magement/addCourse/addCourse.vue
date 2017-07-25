@@ -67,19 +67,29 @@
 </template>
 
 <script>
+    import router from '../../../../router';
     import $ from 'jquery';
     export default {
-      props: {
-        courseType: {
-          type: Array
-        }
-      },
       data() {
         return {
           type: '',
           name: '',
           fileList: [],
-          file: []
+          file: [],
+          courseType: [
+            {
+              value: '集团类'
+            },
+            {
+              value: '公司类'
+            },
+            {
+              value: '员工类'
+            },
+            {
+              value: '门店类'
+            }
+          ]
         };
       },
       methods: {
@@ -112,6 +122,8 @@
           formData3.append('firstClass', this.type);
           formData3.append('title', this.name);
           formData3.append('file', this.file);
+          let success = false;
+          let returnData;
           $.ajax({
             url: 'http://localhost:8080/spg/admin/training/uploadcourseware',
             type: 'POST',
@@ -122,15 +134,27 @@
             processData: false,
             success: function (returndata) {
               console.log('图片上传成功');
-              this.$store.state.show_addCourse = false;
-              this.type = '';
-              this.name = '';
-              this.file = [];
+              success = true;
+              returnData = returndata.returnCode;
             },
             error: function (returndata) {
               console.log(returndata);
             }
           });
+          if (success) {
+            if (returnData === 'B1016') {
+              this.$message({
+                message: '课程标题已存在，请重命名!',
+                type: 'error'
+              });
+            } else {
+              this.$store.state.show_addCourse = false;
+              this.type = '';
+              this.name = '';
+              this.file = [];
+              router.go({name: 'train'});
+            }
+          }
         }
       }
     };

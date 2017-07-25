@@ -17,12 +17,12 @@
               <span class="el-dropdown-link">
                 <i class="person"></i><span style="float: left;font-size: 14px;width: 150px;">{{$store.state.user.jobnumber}}</span><i class="down"></i>
               </span>
-              <el-dropdown-menu style="text-align: center;margin-left: -130px;" slot="dropdown">
-                <el-dropdown-item>账户资料</el-dropdown-item>
-                <el-dropdown-item>账户组织</el-dropdown-item>
-                <el-dropdown-item>更改密码</el-dropdown-item>
-                <el-dropdown-item>退出</el-dropdown-item>
-              </el-dropdown-menu>
+              <!--<el-dropdown-menu style="text-align: center;margin-left: -130px;" slot="dropdown">-->
+                <!--<el-dropdown-item>账户资料</el-dropdown-item>-->
+                <!--<el-dropdown-item>账户组织</el-dropdown-item>-->
+                <!--<el-dropdown-item>更改密码</el-dropdown-item>-->
+                <!--<el-dropdown-item>退出</el-dropdown-item>-->
+              <!--</el-dropdown-menu>-->
             </el-dropdown>
             <i class="help"></i><i class="setting"></i>
           </div>

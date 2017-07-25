@@ -43,8 +43,8 @@
           <el-table
             ref="multipleTable"
             :data="conference"
-            @select="selectRow"
-            @select-all="selectRowAll"
+            @select="selectRow1"
+            @select-all="selectRowAll1"
             border
             tooltip-effect="dark"
             style="width: 100%"
@@ -89,7 +89,7 @@
             </el-table-column>
           </el-table>
           <div style="margin-top: 10px">
-            <el-button @click="toggleSelection(conference)">全选</el-button><el-button @click="deteleMeeting"><i class="el-icon-delete"></i>删除</el-button>
+            <el-button @click="toggleSelection(conference)">全选</el-button><el-button @click="handleDownload"><i class="el-icon-upload2"></i>导出</el-button><el-button @click="deteleMeeting"><i class="el-icon-delete"></i>删除</el-button>
           </div>
           <div class="paging">
             <div class="block">
@@ -603,7 +603,9 @@
             }
           ],   // 查看与会人员安排
           lookName: '1',   // 查看与会人员安排name
-          lookId: '1'    // 查看与会人员安排id
+          lookId: '1',    // 查看与会人员安排id
+          excel1: [],
+          excel: []
         };
       },
 
@@ -744,18 +746,53 @@
               this.checkMeetingArea = this.unique(this.checkMeetingArea);
             }
           }
+        },
+        sch: {
+          handler: function () {
+            console.log(this.sch);
+            for (let i = 0; i < this.sch.length; i++) {
+              console.log(this.sch[i]);
+              if (this.sch[i].person.length > 1) {
+                for (let x = 0; x < this.sch[i].person.length - 1; x++) {
+                  for (let y = x + 1; y < this.sch[i].person.length; y++) {
+                    if (this.sch[i].person[x].userId === this.sch[i].person[y].userId) {
+                      console.log('重复');
+                      this.$message({
+                        showClose: true,
+                        message: '同一个日程内人员重复！请重新选择！',
+                        type: 'warning'
+                      });
+                    }
+                  }
+                }
+              }
+            }
+          },
+          deep: true
         }
       },
 
-//      mounted() {
-//        let personLength = this.value7.length;
-//        for (let i = 0; i < personLength; i++) {
-//          let newPerson = {label: this.value7[i]};
-//          this.person.push(newPerson);
-//        }
-//      },
-
       methods: {
+        handleDownload() {
+          if (this.excel1.length === 0) {
+            this.$message({
+              message: '未选择数据！',
+              type: 'warning'
+            });
+          } else {
+            require.ensure([], () => {
+              const { export_json_to_excel } = require('../../vendor/Export2Excel');
+              const tHeader = ['会议名称', '会议状态', '开始时间', '结束时间'];
+              const filterVal = ['meetingname', 'meetingstate', 'starttime', 'endtime'];
+              const list = this.excel1;
+              const data = this.formatJson(filterVal, list);
+              export_json_to_excel(tHeader, data, '会议');
+            });
+          }
+        },
+        formatJson(filterVal, jsonData) {
+          return jsonData.map(v => filterVal.map(j => v[j]));
+        },
         handleClick(tab, event) {
           console.log(tab, event);
         },
@@ -991,11 +1028,22 @@
                 id = data.result.meetingid.toString();
               }
             });
-            if (id !== '') {
+            if (id === '') {
               this.show_first = false;
               this.show_second = true;
               this.meetingId = id;
               console.log(this.meetingId);
+              this.publishmeeting = {
+                meetingName: '',
+                  startTime: '',
+                  endTime: '',
+                  meetingRequest: '',
+                  spgParticipants: [],
+                  spgPrograms: [],
+                  spgHotels: [],
+                  spgConferenceStaffs: []
+              };
+              this.person = [];
             }
           }
         },
@@ -1012,10 +1060,6 @@
         },
         sub() {
           // 编辑会议页面  发布会议按钮
-//          this.show_issue = false;
-//          this.show_work = true;
-//          this.show_first = true;
-//          this.show_second = false;
           console.log(this.meetingId);
           console.log(this.sch);
           console.log(this.personSecond);
@@ -1032,16 +1076,25 @@
           }
           console.log(postSch);
           let params = JSON.stringify(postSch);
+          let success = false;
           $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/spg/admin/working/schedule',
             contentType: 'application/json;charset=utf-8', // 设置请求头信息
             dataType: 'json',
             data: params,
+            async: false,
             success: function(data) {
               console.log('post第二步成功');
+              success = true;
             }
           });
+          if (success) {
+            this.show_issue = false;
+            this.show_work = true;
+            this.show_first = true;
+            this.show_second = false;
+          }
         },
         addHotel() {
           let newHotel = {hotelName: '', hotelAddress: ''};
@@ -1154,6 +1207,12 @@
         },
         selectRowAll(row) {
           this.excel = row;
+        },
+        selectRow1(row) {
+          this.excel1 = row;
+        },
+        selectRowAll1(row) {
+          this.excel1 = row;
         },
         lookPeople(item) {
           console.log(item.programName);

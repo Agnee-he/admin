@@ -13,12 +13,12 @@
         <el-col :span="14">
           <div>
             <p class="title_p">新建门店陈列标准</p>
-            <p class="content_p">NO.3444424</p>
+            <!--<p class="content_p">NO.3444424</p>-->
           </div>
         </el-col>
         <el-col :span="8">
           <div>
-            <p class="top_p">更新时间 2017-11-11 14：21</p>
+            <!--<p class="top_p">更新时间 2017-11-11 14：21</p>-->
           </div>
         </el-col>
       </el-row>
@@ -287,6 +287,8 @@
         console.log(this.postDisplay);
         let formData = new FormData(this.postDisplay);
         console.log(formData);
+        let success = false;
+        let returnDate = '';
         $.ajax({
           url: 'http://localhost:8080/spg/admin/display/addDisplay',
           type: 'POST',
@@ -297,25 +299,42 @@
           processData: false,
           success: function (returndata) {
             console.log('图片上传成功');
+            success = true;
+            returnDate = returndata.returnCode;
           },
           error: function (returndata) {
             console.log(returndata);
           }
         });
-//        $.ajax({
-//          type: 'POST',
-//          url: 'http://localhost:8080/spg/admin/display/addDisplay',
-//          contentType: 'application/json;charset=utf-8', // 设置请求头信息
-//          dataType: 'json',
-//          data: this.postDisplay,
-//          success: function(data) {
-//            console.log('post成功');
-//            console.log(data);
-//          }
-//        });
+        if (success) {
+          if (returnDate === 'B1013') {
+            this.$message({
+              message: '主题名称重复,请重新输入',
+              type: 'error'
+            });
+          } else {
+            this.$store.state.show_newDisplay = false;
+            this.newDisplay = { //  添加陈列的整个json
+              displayName: '',
+              displayRemarks: '',
+              displayStandard: [],
+              displayType: '标准陈列',
+              startTime: '',
+              overTime: ''
+            };
+          }
+        }
       },
       closeNewDisplay() {
           this.$store.state.show_newDisplay = false;
+          this.newDisplay = { //  添加陈列的整个json
+            displayName: '',
+            displayRemarks: '',
+            displayStandard: [],
+            displayType: '标准陈列',
+            startTime: '',
+            overTime: ''
+        };
       }
     }
   };

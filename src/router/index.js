@@ -10,18 +10,22 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
+      name: 'shop',
       path: '/shop',
       component: Shop
     },
     {
+      name: 'work',
       path: '/work',
       component: Work
     },
     {
+      name: 'index',
       path: '/index',
       component: Index
     },
     {
+      name: 'train',
       path: '/train',
       component: Train
     }

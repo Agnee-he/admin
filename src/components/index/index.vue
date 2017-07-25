@@ -14,7 +14,7 @@
             <!--</el-select>-->
             <!--<el-button @click="test">展示</el-button>-->
             <div class="chart">
-              <div id="myChart" style="width: 1100px;height: 600px;"></div>
+              <div id="myChart" style="width: 1100px;height: 700px;"></div>
             </div>
           </div>
         </div>
@@ -179,4 +179,7 @@
       .shop_performance
         width 578px;
         height 554px;
+        .main
+          .chart
+            margin-top 30px;
 </style>

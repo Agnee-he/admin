@@ -2,23 +2,23 @@
   <div class="follow">
     <div>
       <div class="follow_top">
-        <div class="search">
-          <div class="search_input1">
-            <span>搜索地区：</span>
-            <div class="el-inp">
-              <el-input v-model="input1" placeholder="请输入地区"></el-input>
-            </div>
-          </div>
-          <div class="search_input2">
-            <span>搜索员工：</span>
-            <div class="el-inp">
-              <el-input v-model="input1" placeholder="请输入员工"></el-input>
-            </div>
-          </div>
-          <div class="but">
-            <el-button><i class="el-icon-search"></i>搜索</el-button><el-button><i class="el-icon-edit"></i>重置</el-button>
-          </div>
-        </div>
+        <!--<div class="search">-->
+          <!--<div class="search_input1">-->
+            <!--<span>搜索地区：</span>-->
+            <!--<div class="el-inp">-->
+              <!--<el-input v-model="input1" placeholder="请输入地区"></el-input>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="search_input2">-->
+            <!--<span>搜索员工：</span>-->
+            <!--<div class="el-inp">-->
+              <!--<el-input v-model="input1" placeholder="请输入员工"></el-input>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="but">-->
+            <!--<el-button><i class="el-icon-search"></i>搜索</el-button><el-button><i class="el-icon-edit"></i>重置</el-button>-->
+          <!--</div>-->
+        <!--</div>-->
       </div>
       <div class="follow_main">
         <el-table
@@ -184,21 +184,29 @@
         },
         openGrade(row) {
             this.name = String(row.employee);
-            this.userId = 1800;
+            console.log(row);
+            this.userId = row.userid;
             this.passRate = String(row.passrate);
             this.averGrade = String(row.averagescore);
             this.$store.state.show_grade = true;
         },
         handleDownload() {
-          require.ensure([], () => {
-            const { export_json_to_excel } = require('../../../vendor/Export2Excel');
-            const tHeader = ['所属门店/地址', '员工姓名', '已学课程', '未学课程', '合格率(%)', '平均分'];
-            const filterVal = ['address', 'name', 'studied', 'not_study', 'pass', 'average'];
-            const list = this.excel;
-            const data = this.formatJson(filterVal, list);
-            export_json_to_excel(tHeader, data, '考核成绩');
-          });
-          console.log(1);
+          if (this.excel.length === 0) {
+            this.$message({
+              message: '未选择数据！',
+              type: 'warning'
+            });
+          } else {
+            require.ensure([], () => {
+              const { export_json_to_excel } = require('../../../vendor/Export2Excel');
+              const tHeader = ['所属门店/地址', '员工姓名', '已学课程', '未学课程', '合格率(%)', '平均分'];
+              const filterVal = ['shopname', 'employee', 'haslearn', 'nolearn', 'passrate', 'averagescore'];
+              const list = this.excel;
+              const data = this.formatJson(filterVal, list);
+              export_json_to_excel(tHeader, data, '考核成绩');
+            });
+            console.log(1);
+          }
         },
         formatJson(filterVal, jsonData) {
           return jsonData.map(v => filterVal.map(j => v[j]));
@@ -227,7 +235,7 @@
     height 588px;
     .follow_top
       .search
-        height 50px;
+        /*height 50px;*/
         border-bottom 1px solid #D3DCE6;
         .search_input1
           float left;
@@ -244,7 +252,7 @@
         .but
           float right;
   .follow_main
-    margin-top 30px;
+    margin-top 0px;
   .paging
     float right;
     margin-top -40px;

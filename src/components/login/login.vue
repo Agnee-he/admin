@@ -14,9 +14,9 @@
           <template slot="prepend"><img src="../../img/person.png"/></template>
         </el-input>
         <p class="password_p" v-model="password_p"></p>
-        <div class="get_forgive">
-          <el-checkbox v-model="checked">记住密码</el-checkbox><el-button style="margin-left: 150px;" type="text">忘记密码</el-button>
-        </div>
+        <!--<div class="get_forgive">-->
+          <!--<el-checkbox v-model="checked">记住密码</el-checkbox><el-button style="margin-left: 150px;" type="text">忘记密码</el-button>-->
+        <!--</div>-->
       </div>
       <div class="btn">
         <el-button class="login_btn" type="primary" size="large" @click="login">登录</el-button>
@@ -68,10 +68,17 @@
                 this.$store.state.userShop = this.shop[i].shopname;
               }
           }
+          this.$notify({
+            title: '成功成功',
+            message: '欢迎进入非常导购管理系统！',
+            type: 'success'
+          });
         }).catch(function (response) {
           // 出错处理
-          console.log(response);
-          console.log('登录失败');
+          this.$notify.error({
+            title: '登录失败',
+            message: '请确认帐号密码！'
+          });
         });
       },
       //  设置cookie

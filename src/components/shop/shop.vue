@@ -149,6 +149,12 @@
                   :data="attendance"
                   style="width: 100%">
                   <el-table-column
+                    prop="chname"
+                    label="姓名"
+                    align="center"
+                    width="80">
+                  </el-table-column>
+                  <el-table-column
                     prop="bctype"
                     label="班次"
                     align="center"
@@ -164,12 +170,6 @@
                     prop="dktype"
                     label="考勤类型"
                     align="center">
-                  </el-table-column>
-                  <el-table-column
-                    prop="chname"
-                    label="姓名"
-                    align="center"
-                    width="80">
                   </el-table-column>
                   <el-table-column
                     prop="result"
@@ -225,19 +225,15 @@
           <!--</div>-->
           <div class="choose2">
             <el-row>
-              <el-col :span="3"><div>
-                <p>搜索班次组：</p>
+              <el-col :span="0"><div>
+                <!--<p>搜索班次组：</p>-->
               </div></el-col>
-              <el-col :span="5"><div>
-                <el-input style="float: left; margin-top: 10px;" v-model="input_banCi" placeholder="请输入班次名称"></el-input>
+              <el-col :span="0"><div>
+                <!--<el-input style="float: left; margin-top: 10px;" v-model="input_banCi" placeholder="请输入班次名称"></el-input>-->
               </div></el-col>
-              <el-col :span="4"><div>
-                <p></p>
-              </div></el-col>
-              <el-col :span="2"><div><p></p></div></el-col>
-              <el-col :span="2"><div><p></p></div></el-col>
-              <el-col :span="8"><div style="margin-top: 10px;">
-                <el-button><i class="el-icon-search"></i>搜索</el-button><el-button @click="showChoose5"><i class="el-icon-plus"></i>新增</el-button ><el-button @click="closeChooseOrder"><i class="el-icon-close"></i>关闭</el-button>
+              <el-col :span="24"><div style="margin-top: 10px;margin-bottom: 10px;float: right;">
+                <!--<el-button><i class="el-icon-search"></i>搜索</el-button>-->
+                <el-button @click="showChoose5"><i class="el-icon-plus"></i>新增</el-button ><el-button @click="closeChooseOrder"><i class="el-icon-close"></i>关闭</el-button>
               </div></el-col>
             </el-row>
           </div>
@@ -319,7 +315,15 @@
                   </div></el-col>
                     <el-col :span="6"><div>
                       <p>班次名称</p>
-                      <el-input v-for="item in schedule" :key="item.id" v-model="item.bctype" placeholder="班次名称"></el-input>
+                      <!--<el-input v-for="item in schedule" :key="item.id" v-model="item.bctype" placeholder="班次名称"></el-input>-->
+                      <el-select v-for="item in schedule" :key="item.id" v-model="item.bctype" placeholder="请选择">
+                        <el-option
+                          v-for="item in ban"
+                          :key="item.value"
+                          :label="item.value"
+                          :value="item.value">
+                        </el-option>
+                      </el-select>
                     </div>
                       <el-button @click="addBci">添加班次</el-button></el-col>
                     <el-col :span="14"><div>
@@ -784,7 +788,24 @@
         attendenceTotal: 0,   //  考勤总条数
         attendenceDate: '',  //  搜索时输入的考勤日期
         atendenceShop: '', //  搜索时输入的考勤门店
-        excel: []  //  要导出的内容
+        excel: [],  //  要导出的内容
+        ban: [
+          {
+            value: '早班'
+          },
+          {
+            value: '午班'
+          },
+          {
+            value: '晚班'
+          },
+          {
+            value: '夜班'
+          },
+          {
+            value: '周末班'
+          }
+        ] //  新建班次时选择的班次名称
       };
     },
     beforeCreate() {
@@ -1007,31 +1028,45 @@
 //      },
       submit() {  // 提交新增班次组
         //  判断输入内容是否为空
-        let formData = this.schedule;
-        let formarDate = this.formatDateTime(this.schedulingdate);  //  格式化时间
-        console.log(this.city);
-        console.log(this.city_shop);
-        console.log(formData);
-        console.log(formarDate);
-        for (let i = 0; i < this.schedule.length; i++) {
-          let newSch = {city: this.city, schedulingdate: formarDate, bctype: this.schedule[i].bctype, stime: this.schedule[i].stime, etime: this.schedule[i].etime};
-          this.postschedule.push(newSch);
-        }
-        console.log(this.postschedule);
-        let params = JSON.stringify(this.postschedule);
-        $.ajax({
-          type: 'POST',
-          url: 'http://localhost:8080/spg/admin/attendance/addSchedulings',
-          contentType: 'application/json;charset=utf-8', // 设置请求头信息
-          dataType: 'json',
-          async: false,
-          data: params,
-          success: function(data) {
-            console.log('post成功');
-            console.log(data);
+        if (this.city === '') {
+          // 没选城市
+          this.$message({
+            message: '请选择使用范围！',
+            type: 'warning'
+          });
+        } else if (this.schedulingdate === '') {
+          // 没选时间
+          this.$message({
+            message: '请选择使用日期！',
+            type: 'warning'
+          });
+        } else {
+          let formData = this.schedule;
+          let formarDate = this.formatDateTime(this.schedulingdate);  //  格式化时间
+          console.log(this.city);
+          console.log(this.city_shop);
+          console.log(formData);
+          console.log(formarDate);
+          for (let i = 0; i < this.schedule.length; i++) {
+            let newSch = {city: this.city, schedulingdate: formarDate, bctype: this.schedule[i].bctype, stime: this.schedule[i].stime, etime: this.schedule[i].etime};
+            this.postschedule.push(newSch);
           }
-        });
-        this.postschedule = [];
+          console.log(this.postschedule);
+          let params = JSON.stringify(this.postschedule);
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/spg/admin/attendance/addSchedulings',
+            contentType: 'application/json;charset=utf-8', // 设置请求头信息
+            dataType: 'json',
+            async: false,
+            data: params,
+            success: function(data) {
+              console.log('post成功');
+              console.log(data);
+            }
+          });
+          this.postschedule = [];
+        }
       },
       openCheckDisplay(row) {
       	this.$store.state.show_checkDisplay = true;
@@ -1102,15 +1137,22 @@
           this.schedule.push(newBci);
       },
       handleDownload() {
-        require.ensure([], () => {
-          const { export_json_to_excel } = require('../../vendor/Export2Excel');
-          const tHeader = ['陈列主题', '发布时间', '门店', '陈列考评'];
-          const filterVal = ['displayType', 'startTime', 'shopName', 'stars'];
-          const list = this.excel;
-          const data = this.formatJson(filterVal, list);
-          export_json_to_excel(tHeader, data, '门店陈列');
-        });
-        console.log(1);
+        if (this.excel.length === 0) {
+          this.$message({
+            message: '未选择数据！',
+            type: 'warning'
+          });
+        } else {
+          require.ensure([], () => {
+            const { export_json_to_excel } = require('../../vendor/Export2Excel');
+            const tHeader = ['陈列主题', '发布时间', '门店', '陈列考评'];
+            const filterVal = ['displayType', 'startTime', 'shopName', 'stars'];
+            const list = this.excel;
+            const data = this.formatJson(filterVal, list);
+            export_json_to_excel(tHeader, data, '门店陈列');
+          });
+          console.log(1);
+        }
       },
       formatJson(filterVal, jsonData) {
         return jsonData.map(v => filterVal.map(j => v[j]));

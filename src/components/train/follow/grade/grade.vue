@@ -94,7 +94,7 @@
       id: {
           handler: function () {
             //  获取具体某人考核
-            this.$http.jsonp('http://192.168.199.145:8080/spg/admin/training/myResult?userid=' + this.id, {jsonp: 'jsonpCallback'}).then(function (response) {
+            this.$http.jsonp('http://120.55.85.65:8088/spg/admin/training/myResult?userid=' + this.id, {jsonp: 'jsonpCallback'}).then(function (response) {
               // response.data 为服务端返回的数据
               this.grade = response.data.result.myresult;
               this.weiTongGuo = this.grade.未通过.length;
