@@ -153,14 +153,15 @@
               this.type = '';
               this.name = '';
               this.file = [];
-              router.go({path: '/train'});
+              router.push({path: '/train'});
             }
           }
         },
         submit1() {
-//          router.go({path: '/train'});
-          console.log(this.$store.state.user);
-          console.log(this.$store.state.userShop);
+//          this.$router.push({ path: '/train' });
+          this.$store.state.show_addCourse = false;
+          router.go({path: '/train'});
+          console.log(sessionStorage.getItem('login'));
         }
       }
     };

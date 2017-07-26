@@ -11,7 +11,7 @@
             <div class="address">单位：{{$store.state.userShop}}</div>
           </div>
           <div class="mar_right">
-            <el-dropdown>
+            <!--<el-dropdown>-->
               <span class="el-dropdown-link">
                 <i class="person"></i><span style="float: left;font-size: 14px;width: 150px;">{{$store.state.user}}</span><i class="down"></i>
               </span>
@@ -21,7 +21,7 @@
               <!--<el-dropdown-item>更改密码</el-dropdown-item>-->
               <!--<el-dropdown-item>退出</el-dropdown-item>-->
               <!--</el-dropdown-menu>-->
-            </el-dropdown>
+            <!--</el-dropdown>-->
             <i class="help"></i><i class="setting"></i>
           </div>
         </div>

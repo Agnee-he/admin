@@ -26,7 +26,7 @@
 </template>
 
 <script>
-//  import router from '../../router';
+  import router from '../../router';
   export default {
     data() {
       return {
@@ -71,10 +71,13 @@
               if (user.location.shopId === this.shop[i].shopid) {
 //                this.$store.state.userShop = this.shop[i].shopname;
                 sessionStorage.setItem('shopname', this.shop[i].shopname);
+                console.log(this.shop[i].shopnam);
+                this.$store.state.userShop = this.shop[i].shopname;
               }
           }
           console.log(user.jobnumber);
           sessionStorage.setItem('user', user.jobnumber);
+          this.$store.state.user = user.jobnumber;
           this.$notify({
             title: '成功成功',
             message: '欢迎进入非常导购管理系统！',
@@ -82,7 +85,7 @@
           });
           sessionStorage.setItem('login', '100');
           console.log(this.$store.state.login);
-          this.$router.push({ path: '/shouye' });
+          router.push({ path: '/shouye' });
         }).catch(function (response) {
           // 出错处理
           this.$notify.error({

@@ -1255,11 +1255,11 @@
   .select_p3
     font-size 14px;
   .shop
-    margin-top -898px;
+    margin-top -698px;
     margin-left 180px;
     padding-top 30px;
     width 1020px;
-    height 708px;
+    height 688px;
     overflow auto;
     background #ecf0f1;
     .tabs

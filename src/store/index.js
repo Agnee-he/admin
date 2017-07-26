@@ -4,7 +4,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import actions from './actions/index.js';
-import mutations from './mutations/index.js';
 import * as getters from './getters/index.js';
 
 Vue.use(Vuex);
@@ -21,6 +20,9 @@ const state = {
   show_addCourse: false,  //  新增课程界面
   show_check: false, // 查看参加会议人员
   num_newCrouse: 0  //  新增课程监听
+};
+
+const mutations = {
 };
 
 //  把上面的融到一起

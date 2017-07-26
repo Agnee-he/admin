@@ -121,7 +121,7 @@
   .check_display
     position absolute;
     z-index 999;
-    top 130px;
+    top 150px;
     margin-left 30px;
     width 898px;
     height 618px;
