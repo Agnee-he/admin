@@ -61,6 +61,7 @@
       </div>
       <div class="btn">
         <el-button type="primary" @click="submit">提交</el-button>
+        <el-button type="primary" @click="submit1">提交</el-button>
       </div>
     </el-row>
   </div>
@@ -152,9 +153,14 @@
               this.type = '';
               this.name = '';
               this.file = [];
-              router.go({name: 'train'});
+              router.go({path: '/train'});
             }
           }
+        },
+        submit1() {
+//          router.go({path: '/train'});
+          console.log(this.$store.state.user);
+          console.log(this.$store.state.userShop);
         }
       }
     };

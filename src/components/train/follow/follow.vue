@@ -85,7 +85,7 @@
           </el-table-column>
         </el-table>
         <div style="margin-top: 20px">
-          <el-button @click="toggleSelection(tableData3)">全选</el-button>
+          <el-button @click="toggleSelection(allGrade)">全选</el-button>
           <el-button @click="handleDownload"><i class="el-icon-upload2"></i>导出</el-button>
         </div>
       </div>

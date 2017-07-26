@@ -374,9 +374,9 @@
       height 70px;
       border-bottom 1px solid #D3DCE6;
       .logo
-        width 50px;
-        height 70px;
-        background-color #1c8de0;
+        width 60px;
+        height 54px;
+        background-image url("../../../img/shop.png");
     .main
       margin-top 20px;
       padding-bottom 15px;

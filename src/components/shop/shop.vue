@@ -26,7 +26,7 @@
             </div>
           </div>
           <div class="but">
-            <el-button @click="searchDisplay"><i class="el-icon-search"></i>搜索</el-button><el-button @click="resetSearchDisplay"><i class="el-icon-edit"></i>重置</el-button><el-button @click="openNewDisplay"><i class="el-icon-plus"></i>新增陈列</el-button>
+            <el-button @click="searchDisplay"><i class="el-icon-search"></i>搜索</el-button><el-button @click="resetSearchDisplay"><img src="../../img/resetting.png" width="12px" height="12px;"/>重置</el-button><el-button @click="openNewDisplay"><i class="el-icon-plus"></i>新增陈列</el-button>
           </div>
         </div>
         <div class="main">
@@ -780,7 +780,7 @@
         displayType: '',  //  搜索时输入的陈列类别
         displayShop: '',  //  搜索时输入的陈列类别
         displayTime: '',  //  搜索陈列时选择的时间段
-        displayDetail: [], // 陈列详情
+        displayDetail: {}, // 陈列详情
         shopModels: [],  // 门店列表 门店-id之间的对应关系数组
         orderList: [],  // 班次列表
         attendance: [], //  考勤
@@ -1053,6 +1053,7 @@
           }
           console.log(this.postschedule);
           let params = JSON.stringify(this.postschedule);
+          let success = false;
           $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/spg/admin/attendance/addSchedulings',
@@ -1063,9 +1064,13 @@
             success: function(data) {
               console.log('post成功');
               console.log(data);
+              success = true;
             }
           });
-          this.postschedule = [];
+          if (success) {
+            this.postschedule = [];
+            this.show_choose5 = false;
+          }
         }
       },
       openCheckDisplay(row) {
@@ -1355,9 +1360,9 @@
           .title
             border-bottom 1px solid #D3DCE6;
             .logo
-              width 60px;
-              height 70px;
-              background-color red;
+              width 64px;
+              height 64px;
+              background-image url("../../img/banci.png");
           .choose5_content
             .choose_address
               .el_input

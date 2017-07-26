@@ -19,7 +19,7 @@
         <el-col :span="8">
           <div>
             <p class="pass_p">通过率：{{passRate}}</p>
-            <p class="ave_p">平均分：{{averGrade}}</p>
+            <p class="ave_p">平均分：{{averGrade}}分</p>
           </div>
         </el-col>
       </el-row>
@@ -199,9 +199,9 @@
     .top
       border-bottom 1px solid #D3DCE6;
       .logo
-        width 50px;
-        height 70px;
-        background-color aqua;
+        width 64px;
+        height 64px;
+        background-image url("../../../../img/grade.png");
     .chart
       text-align center;
       #myChart

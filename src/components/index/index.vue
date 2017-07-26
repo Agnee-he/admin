@@ -14,7 +14,7 @@
             <!--</el-select>-->
             <!--<el-button @click="test">展示</el-button>-->
             <div class="chart">
-              <div id="myChart" style="width: 1100px;height: 700px;"></div>
+              <div id="myChart" style="width: 1100px;height: 600px;"></div>
             </div>
           </div>
         </div>
@@ -161,9 +161,6 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-  body
-    margin 0;
-    padding 0;
   .index
     margin-top -698px;
     margin-left 180px;

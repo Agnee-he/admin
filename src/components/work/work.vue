@@ -34,7 +34,7 @@
             </div></el-col>
             <el-col :span="8"><div>
               <div class="btn">
-                <el-button @click="searchMeeting"><i class="el-icon-search"></i>搜索</el-button><el-button @click="resetSearchMeeting"><i class="el-icon-loading"></i>重置</el-button><el-button @click="editMeetting"><i class="el-icon-plus"></i>发布会议</el-button>
+                <el-button @click="searchMeeting"><i class="el-icon-search"></i>搜索</el-button><el-button @click="resetSearchMeeting"><img src="../../img/resetting.png" width="12px" height="12px;"/>重置</el-button><el-button @click="editMeetting"><i class="el-icon-plus"></i>发布会议</el-button>
               </div>
             </div></el-col>
           </el-row>
@@ -1326,9 +1326,9 @@
       .issue_top
         border-bottom 1px solid #D3DCE6;
         .logo
-          width 50px;
-          height 80px;
-          background-color red;
+          width 64px;
+          height 64px;
+          background-image url("../../img/meeting.png");
       .issue_main
         margin-top 15px;
         .name
@@ -1484,9 +1484,9 @@
         .el_row
           height 70px;
           .logo
-            height 70px;
-            width 50px;
-            background-color #1c8de0;
+            width 64px;
+            height 64px;
+            background-image url("../../img/meeting.png");
       .part
         border-bottom 1px solid #D3DCE6;
         padding-bottom 10px;

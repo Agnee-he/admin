@@ -695,9 +695,9 @@
         border-bottom 1px solid #D3DCE6;
         .left1
           margin-left 15px;
-          height 75px;
-          width 60px;
-          background red;
+          width 64px;
+          height 64px;
+          background-image url("../../../../img/test.png");
       .main
         margin-left 15px;
         margin-right 15px;

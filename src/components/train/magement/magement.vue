@@ -58,7 +58,7 @@
             </el-table-column>
           </el-table>
           <div class="study_but">
-            <el-button @click="toggleSelection(tableData3)">全选</el-button>
+            <!--<el-button @click="toggleSelection(item.course)">全选</el-button>-->
             <el-button @click="deleteCourse"><i class="el-icon-delete"></i>删除</el-button>
             <el-button @click="handleDownload"><i class="el-icon-upload2"></i>导出</el-button>
             <el-button @click="addCourse"><i class="el-icon-plus"></i>新增课程</el-button>
@@ -131,29 +131,34 @@
       },
 
       created() {
-        //  获取所有课程
-        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/training/allcourses?username=chencheng1604', {jsonp: 'jsonpCallback'}).then(function (response) {
-          // response.data 为服务端返回的数据
-          let allCourse = response.data.result.AllCourses;
-
-          for (let tmp in allCourse) {
-//          console.log(tmp);  //  键名
-//          console.log(list[tmp]);  //  键值'
-            this.allCourse.push({type: tmp, num: '', course: allCourse[tmp]});
-          }
-          for (let i = 0; i < this.allCourse.length; i++) {
-          	this.allCourse[i].num = String(i + 1);
-          }
-          console.log(this.allCourse);
-          for (let i = 0; i < this.allCourse.length; i++) {
-            this.courseType.push({value: this.allCourse[i].type});
-          }
-          console.log(this.courseType);
-        }).catch(function (response) {
-          // 出错处理
-        });
+        this.getCourse();
+      },
+      watch: {
       },
       methods: {
+        getCourse() {
+          //  获取所有课程
+          this.$http.jsonp('http://120.55.85.65:8088/spg/admin/training/allcourses?username=chencheng1604', {jsonp: 'jsonpCallback'}).then(function (response) {
+            // response.data 为服务端返回的数据
+            let allCourse = response.data.result.AllCourses;
+
+            for (let tmp in allCourse) {
+//          console.log(tmp);  //  键名
+//          console.log(list[tmp]);  //  键值'
+              this.allCourse.push({type: tmp, num: '', course: allCourse[tmp]});
+            }
+            for (let i = 0; i < this.allCourse.length; i++) {
+              this.allCourse[i].num = String(i + 1);
+            }
+            console.log(this.allCourse);
+            for (let i = 0; i < this.allCourse.length; i++) {
+              this.courseType.push({value: this.allCourse[i].type});
+            }
+            console.log(this.courseType);
+          }).catch(function (response) {
+            // 出错处理
+          });
+        },
         handleClick(tab, event) {
           console.log(tab, event);
         },

@@ -45,9 +45,9 @@
       </div>
       <div class="swiper">
         <p>陈列情况：</p>
-        <el-carousel :interval="5000" arrow="always">
+        <el-carousel :interval="5000" arrow="always" width="880px" height="440px">
           <el-carousel-item v-for="item in displayDetail.displayActualurls" :key="item">
-            <img :src="item.actualImgurl" width="100%" height="100%"/>
+            <img :src="item.actualImgurl" width="880px" height="440px"/>
           </el-carousel-item>
         </el-carousel>
         <!--<p class="right">上传人：我是谁     更新于：2017-7-7 12：11</p>-->
@@ -88,7 +88,7 @@
   export default {
     props: {
       displayDetail: {
-          type: Array
+          type: Object
       }
     },
     data() {
@@ -139,9 +139,9 @@
       height 70px;
       border-bottom 1px solid #D3DCE6;
       .logo
-        width 50px;
-        height 70px;
-        background-color #1c8de0;
+        width 60px;
+        height 54px;
+        background-image url("../../../img/shop.png");
       .rate
         margin-top 40px;
         float right;
