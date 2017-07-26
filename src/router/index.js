@@ -17,33 +17,28 @@ const router = new Router({
       redirect: '/index',
       component: Shouye,
       meta: { requireAuth: true },
-      // meta: {auth: true},
       children: [   //  子路由
         {
           name: 'shop',
           path: '/shop',
-          // meta: {auth: true},
           meta: { requireAuth: true },
           component: Shop
         },
         {
           name: 'work',
           path: '/work',
-          // meta: {auth: true},
           meta: { requireAuth: true },
           component: Work
         },
         {
           name: 'index',
           path: '/index',
-          // meta: {auth: true},
           meta: { requireAuth: true },
           component: Index
         },
         {
           name: 'train',
           path: '/train',
-          // meta: {auth: true},
           meta: { requireAuth: true },
           component: Train
         }
