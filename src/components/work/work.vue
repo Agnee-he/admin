@@ -431,6 +431,7 @@
   import ElRow from 'element-ui/packages/row/src/row';
   import Contract from './contract/contract.vue';
   import $ from 'jquery';
+  import router from '../../router';
 
     export default {
 
@@ -932,7 +933,7 @@
         openCheck(row) {  // 进入会议详情
           console.log(row.meetingid);
           //  获取工作会议具体内容
-          this.$http.jsonp('http://120.55.85.65:8088/spg/admin/working/getmeeting?mid=' + row.meetingid, {jsonp: 'jsonpCallback'}).then(function (response) {
+          this.$http.jsonp('http://192.168.199.145:8080/spg/admin/working/getmeeting?mid=' + row.meetingid, {jsonp: 'jsonpCallback'}).then(function (response) {
             // response.data 为服务端返回的数据
             console.log('我是opencheck');
             console.log(response.data.result.meeting);
@@ -982,27 +983,59 @@
           if (!this.check(this.publishmeeting.meetingName)) {
             //  没填会议名称
             console.log('name');
+            this.$message({
+              message: '没填会议名称！',
+              type: 'warning'
+            });
           } else if (!this.check(this.publishmeeting.startTime)) {
             //  没填会议开始时间
             console.log('startTime');
+            this.$message({
+              message: '没填会议开始时间！',
+              type: 'warning'
+            });
           } else if (!this.check(this.publishmeeting.endTime)) {
             //  没填会议结束时间
             console.log('endTime');
+            this.$message({
+              message: '没填会议结束时间！',
+              type: 'warning'
+            });
           } else if (this.publishmeeting.spgParticipants.length === 0) {
             //  没选择人员
             console.log('person');
+            this.$message({
+              message: '所选人员为空！',
+              type: 'warning'
+            });
           } else if (!this.checkSchedule(this.publishmeeting.spgPrograms)) {  //  this.checkSchedule 返回true = 填好了  flase = 没填好
             //  判断是否填好日程
             console.log('schedule');
+            this.$message({
+              message: '日程信息未填写完整！',
+              type: 'warning'
+            });
           } else if (!this.checkHotel(this.publishmeeting.spgHotels)) {
             //  判断时候填好酒店
             console.log('hotel');
+            this.$message({
+              message: '酒店信息未填写完整！',
+              type: 'warning'
+            });
           } else if (!this.checkPeople(this.publishmeeting.spgConferenceStaffs)) {
             //  判断会务人员是否填好
             console.log('people');
+            this.$message({
+              message: '会务人员为空！',
+              type: 'warning'
+            });
           } else if (!this.check(this.publishmeeting.meetingRequest)) {
             //  没填会议要求
             console.log('meetingRequest');
+            this.$message({
+              message: '没填会议要求！',
+              type: 'warning'
+            });
           } else {
             console.log(this.publishmeeting);
             this.publishmeeting.startTime = this.formatDateTime1(this.publishmeeting.startTime);
@@ -1028,7 +1061,7 @@
                 id = data.result.meetingid.toString();
               }
             });
-            if (id === '') {
+            if (id !== '') {
               this.show_first = false;
               this.show_second = true;
               this.meetingId = id;
@@ -1089,11 +1122,14 @@
               success = true;
             }
           });
+          console.log(success);
           if (success) {
             this.show_issue = false;
             this.show_work = true;
             this.show_first = true;
             this.show_second = false;
+            console.log('出题成功');
+            router.go({path: '/work'});
           }
         },
         addHotel() {
@@ -1195,12 +1231,14 @@
             url: 'http://localhost:8080/spg/admin/working/delmeeting',
             contentType: 'application/json;charset=utf-8', // 设置请求头信息
             dataType: 'json',
+            async: false,
             data: params,
             success: function(data) {
               console.log('删除成功');
               console.log(data);
             }
           });
+          router.go({path: '/work'});
         },
         selectRow(row) {
           this.excel = row;
@@ -1222,7 +1260,7 @@
           this.lookId = item.programId;
           this.lookPerson = [];
           let people = [];
-          this.$http.jsonp('http://192.168.199.144:8080/spg/admin/working/person?programid=' + this.lookId, {jsonp: 'jsonpCallback'}).then(function (response) {
+          this.$http.jsonp('http://192.168.199.143:8080/spg/admin/working/person?programid=' + this.lookId, {jsonp: 'jsonpCallback'}).then(function (response) {
             // response.data 为服务端返回的数据
             people = response.data.result.persons;
             console.log('我是lookPeople');

@@ -45,11 +45,13 @@
       </div>
       <div class="swiper">
         <p>陈列情况：</p>
-        <el-carousel :interval="5000" arrow="always" width="880px" height="440px">
-          <el-carousel-item v-for="item in displayDetail.displayActualurls" :key="item">
-            <img :src="item.actualImgurl" width="880px" height="440px"/>
-          </el-carousel-item>
-        </el-carousel>
+        <div class="block">
+          <el-carousel :interval="5000" arrow="always" width="880px" height="440px">
+            <el-carousel-item v-for="item in displayDetail.displayActualurls" :key="item">
+              <img :src="item.actualImgurl" width="880px" height="440px"/>
+            </el-carousel-item>
+          </el-carousel>
+        </div>
         <!--<p class="right">上传人：我是谁     更新于：2017-7-7 12：11</p>-->
       </div>
       <div class="comment">

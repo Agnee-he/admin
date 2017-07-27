@@ -6,6 +6,7 @@ import Index from '../components/index/index.vue';
 import Train from '../components/train/train.vue';
 import Login from '../components/login/login.vue';
 import Shouye from '../components/shouye/shouye.vue';
+import Course from '../components/train/magement/course/course.vue';
 
 Vue.use(Router);
 
@@ -40,7 +41,15 @@ const router = new Router({
           name: 'train',
           path: '/train',
           meta: { requireAuth: true },
-          component: Train
+          component: Train,
+          children: [
+            {
+              name: 'course',
+              path: '/course',
+              meta: { requireAuth: true },
+              component: Course
+            }
+          ]
         }
       ]
     },

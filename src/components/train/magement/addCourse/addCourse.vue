@@ -153,7 +153,7 @@
               this.type = '';
               this.name = '';
               this.file = [];
-              router.push({path: '/train'});
+              router.go({path: '/train'});
             }
           }
         },

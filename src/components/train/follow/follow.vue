@@ -154,6 +154,25 @@
           averGrade: ''   //  某人平均分
         };
       },
+      watch: {
+        gradePage: {
+          handler: function () {
+            //  获取考核跟进 成绩总表
+            this.$http.jsonp('http://120.55.85.65:8088/spg/admin/training/pqResult?page=' + this.gradePage +
+              '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+              // response.data 为服务端返回的数据
+              this.allGrade = response.data.result.rows;
+              this.gradeTotal = response.data.result.total;
+              console.log(this.allGrade);
+              console.log('获取课程成功');
+            }).catch(function (response) {
+              // 出错处理
+              console.log('获取课程失败');
+              console.log(response);
+            });
+          }
+        }
+      },
       created() {
         //  获取考核跟进 成绩总表
         this.$http.jsonp('http://120.55.85.65:8088/spg/admin/training/pqResult?page=' + this.gradePage +
@@ -161,6 +180,7 @@
           // response.data 为服务端返回的数据
           this.allGrade = response.data.result.rows;
           this.gradeTotal = response.data.result.total;
+          console.log(this.allGrade);
           console.log('获取课程成功');
         }).catch(function (response) {
           // 出错处理

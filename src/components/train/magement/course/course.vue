@@ -26,28 +26,28 @@
         </div></el-col>
       </el-row>
     </div>
-    <div class="content">
-      <p class="til">课程内容：</p>
-      <el-row>
-        <el-col :span="3"><div></div></el-col>
-        <el-col :span="5"><div>
-          <p>{{course[0].coursename}}</p>
-        </div></el-col>
-        <el-col :span="4"><div>
-          <p></p>
-        </div></el-col>
-        <el-col :span="4"><div>
-          <p></p>
-        </div></el-col>
-        <el-col :span="2"><div>
-          <p></p>
-        </div></el-col>
-        <el-col :span="6"><div>
-          <p class="left_p">xxxmb,下载</p>
-          <p class="left_p">上传于：2017/6/6 10：29</p>
-        </div></el-col>
-      </el-row>
-    </div>
+    <!--<div class="content">-->
+      <!--<p class="til">课程内容：</p>-->
+      <!--<el-row>-->
+        <!--<el-col :span="3"><div></div></el-col>-->
+        <!--<el-col :span="5"><div>-->
+          <!--<p>{{course[0].coursename}}</p>-->
+        <!--</div></el-col>-->
+        <!--<el-col :span="4"><div>-->
+          <!--<p></p>-->
+        <!--</div></el-col>-->
+        <!--<el-col :span="4"><div>-->
+          <!--<p></p>-->
+        <!--</div></el-col>-->
+        <!--<el-col :span="2"><div>-->
+          <!--<p></p>-->
+        <!--</div></el-col>-->
+        <!--<el-col :span="6"><div>-->
+          <!--<p class="left_p">xxxmb,下载</p>-->
+          <!--<p class="left_p">上传于：2017/6/6 10：29</p>-->
+        <!--</div></el-col>-->
+      <!--</el-row>-->
+    <!--</div>-->
     <div class="choosePeople">
       <el-row>
         <el-col :span="3"><div>
@@ -263,10 +263,17 @@
               <th style="width: 5%">题号</th><th>题目</th><th style="width: 10%">A</th><th style="width: 10%">B</th><th style="width: 10%">C</th><th style="width: 10%">D</th><th style="width: 10%">答案</th><th style="width: 10%">权重</th>
             </tr>
             <tr class="tr2" v-for="(item, index) in course[1].questions">
-              <td>{{index}}</td><td>{{item.content}}</td><td>{{item.A}}</td><td>{{item.B}}</td><td>{{item.C}}</td><td>{{item.D}}</td><td>{{item.answer}}</td><td>{{item.scores}}</td>
+              <td>{{index + 1}}</td><td>{{item.content}}</td><td>{{item.A}}</td><td>{{item.B}}</td><td>{{item.C}}</td><td>{{item.D}}</td><td>{{item.answer}}</td><td>{{item.scores}}</td>
             </tr>
             <tr class="tr2" v-for="(item, index) in newExam">
-              <td>{{course[1].questions.length + index}}</td><td><el-input type="textarea" :rows="2" v-model="item.exam" placeholder="请输入题目"></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.A"></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.B"></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.C" ></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.D"></el-input></td><td><el-input v-model="item.answer"></el-input></td><td><el-input v-model="item.weight"></el-input></td>
+              <td>{{course[1].questions.length + index + 1}}</td><td><el-input type="textarea" :rows="2" v-model="item.exam" placeholder="请输入题目"></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.A"></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.B"></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.C" ></el-input></td><td><el-input type="textarea" :rows="2" v-model="item.D"></el-input></td><td><el-select v-model="item.answer" placeholder="答案">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select></td><td><el-input v-model="item.weight"></el-input></td>
             </tr>
             <tr class="tr2">
               <td><i class="el-icon-plus" @click="addRow"></i></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -292,6 +299,7 @@
 <script>
   import paging from '../../../paging/paging.vue';
   import $ from 'jquery';
+  import router from '../../../../router';
 
     export default {
     	props: {
@@ -303,15 +311,18 @@
         return {
           options: [
           {
-            value: '选项1',
-            label: '1'
+            value: 'A',
+            label: 'A'
           }, {
-            value: '选项2',
-            label: '2'
+            value: 'B',
+            label: 'B'
           }, {
-            value: '选项3',
-            label: '3'
-          }],
+            value: 'C',
+            label: 'C'
+          }, {
+              value: 'D',
+              label: 'D'
+            }],
           value: '',
           tableData3: [
             {
@@ -430,6 +441,24 @@
 //            }
 //          }
 //        }
+        newExam: {
+          handler: function () {
+            for (let i = 0; i < this.newExam.length; i++) {
+              console.log(this.newExam[i]);
+              if (this.newExam[i].weight !== '') {
+                if (isNaN(this.newExam[i].weight)) {
+                  console.log('2121');
+                  this.$message({
+                    message: '权重请输入数值!',
+                    type: 'warning'
+                  });
+                  this.newExam[i].weight = '0';
+                }
+              }
+            }
+          },
+          deep: true
+        }
       },
       created() {
         //  获取会议全部人员
@@ -491,8 +520,10 @@
               success = true;
             }
           });
+          console.log(success);
           if (success) {
             this.show_edit = false;
+            router.go({path: '/course'});
           }
         },
         handleDownload() {
@@ -524,26 +555,35 @@
         submitPerson() {
           console.log(this.person);
           console.log(this.course[0].courseid);
-          let userCourseModels = [];
-          for (let i = 0; i < this.person.length; i++) {
+          if (this.person.length !== 0) {
+            let userCourseModels = [];
+            for (let i = 0; i < this.person.length; i++) {
 //            let newPerson = this.course[0].courseid + ',' + this.person[i];
-            let newP = {courseid: this.course[0].courseid, userid: this.person[i].toString()};
-            userCourseModels.push(newP);
-          }
-          console.log(userCourseModels);
-          let params = JSON.stringify(userCourseModels);
-          console.log(params);
-          $.ajax({
-            type: 'POST',
-            url: 'http://localhost:8080/spg/admin/training/assigncourse',
-            contentType: 'application/json;charset=utf-8', // 设置请求头信息
-            dataType: 'json',
-            data: params,
-            success: function(data) {
-              console.log('选人成功');
-              console.log(data);
+              let newP = {courseid: this.course[0].courseid, userid: this.person[i].toString()};
+              userCourseModels.push(newP);
             }
-          });
+            console.log(userCourseModels);
+            let params = JSON.stringify(userCourseModels);
+            console.log(params);
+            $.ajax({
+              type: 'POST',
+              url: 'http://localhost:8080/spg/admin/training/assigncourse',
+              contentType: 'application/json;charset=utf-8', // 设置请求头信息
+              dataType: 'json',
+              async: false,
+              data: params,
+              success: function(data) {
+                console.log('选人成功');
+                console.log(data);
+              }
+            });
+            router.go({path: '/train'});
+          } else {
+            this.$message({
+              message: '所选人员为空！',
+              type: 'warning'
+            });
+          }
         },
         deleteExam(row) {
           console.log(row);

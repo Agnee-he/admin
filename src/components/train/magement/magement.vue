@@ -76,6 +76,7 @@
   import course from './course/course.vue';
   import addCourse from './addCourse/addCourse.vue';
   import $ from 'jquery';
+  import router from '../../../router';
 
     export default {
       data() {
@@ -174,7 +175,7 @@
         openDetail(row) {
           this.$store.state.showCourse = true;
           //  获取课程详情
-          this.$http.jsonp('http://120.55.85.65:8088/spg/admin/training/testresult?courseid=' + row.courseid, {jsonp:
+          this.$http.jsonp('http://192.168.199.143:8080/spg/admin/training/testresult?courseid=' + row.courseid, {jsonp:
             'jsonpCallback'}).then(function (response) {
             // response.data 为服务端返回的数据
             this.oneCourse = [];
@@ -271,6 +272,7 @@
               console.log(data);
             }
           });
+          router.go({path: '/train'});
         }
       },
       components: {

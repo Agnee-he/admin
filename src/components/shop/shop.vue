@@ -625,6 +625,7 @@
   import newDisplay from './newDisplay/newDisplay.vue';
   import checkDisplay from './checkDisplay/checkDisplay.vue';
   import $ from 'jquery';
+  import router from '../../router';
 
   export default {
     data() {
@@ -1213,12 +1214,14 @@
           url: 'http://localhost:8080/spg/admin/display/delDisplay',
           contentType: 'application/json;charset=utf-8', // 设置请求头信息
           dataType: 'json',
+          async: false,
           data: params,
           success: function(data) {
             console.log('删除成功');
             console.log(data);
           }
         });
+        router.go({path: '/shop'});
 //        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/addSchedulings', {jsonp: 'jsonpCallback', data: params}).then(function (response) {
 //          // response.data 为服务端返回的数据
 //          console.log('删除成功');

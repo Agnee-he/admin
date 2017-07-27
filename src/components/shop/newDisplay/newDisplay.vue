@@ -163,6 +163,7 @@
 
 <script>
   import $ from 'jquery';
+  import router from '../../../router';
 
   export default {
     data() {
@@ -322,6 +323,7 @@
               startTime: '',
               overTime: ''
             };
+            router.go({path: '/shop'});
           }
         }
       },
@@ -357,7 +359,7 @@
   .newDisplay
     position absolute;
     z-index 999;
-    top 130px;
+    top 150px;
     margin-left 30px;
     width 898px;
     height 618px;
