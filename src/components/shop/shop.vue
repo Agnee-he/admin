@@ -1097,6 +1097,7 @@
           if (success) {
             this.postschedule = [];
             this.show_choose5 = false;
+            router.go({path: '/shop'});
           }
         }
       },
