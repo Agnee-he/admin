@@ -137,7 +137,7 @@
           console.log(response);
         });
         // 获取销量
-        this.$http.jsonp('http://192.168.199.143:8080/spg/admin/sales/fusion?username=ZXX000', {jsonp: 'jsonpCallback'}).then(function (response) {
+        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/sales/fusion?username=ZXX000', {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           let returnData = response.data.result;
           this.type = returnData.type;
