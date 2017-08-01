@@ -6,7 +6,7 @@
           <div class="main">
             <div class="select">
               <div class="one" v-if="type === 'shop'">
-                <span class="demonstration">默认 click 触发子菜单</span>
+                <span class="demonstration">选择门店</span>
                 <el-select v-model="value" placeholder="请选择">
                   <el-option
                     v-for="item in selectOptions"
@@ -17,7 +17,7 @@
                 </el-select>
               </div>
               <div class="two" v-if="type === 'straightcamp'">
-                <span class="demonstration">默认 click 触发子菜单</span>
+                <span class="demonstration">选择门店</span>
                 <el-select v-model="value" placeholder="请选择">
                   <el-option
                     v-for="item in selectOptions"
@@ -29,14 +29,46 @@
               </div>
               <div class="three" v-if="type === 'group'">
                 <div class="block">
-                  <span class="demonstration">默认 click 触发子菜单</span>
+                  <span class="demonstration">选择门店</span>
                   <el-cascader
-                    :options="options"
-                    :show-all-levels="false"
+                    style="width: 350px"
+                    :options="selectOptions"
                     v-model="selectedOptions">
                   </el-cascader>
                 </div>
               </div>
+            </div>
+            <div class="btn">
+              <div class="block">
+                <span class="demonstration">选择日期</span>
+                <el-date-picker
+                  v-model="value6"
+                  type="daterange"
+                  placeholder="选择日期范围">
+                </el-date-picker>
+              </div>
+              <el-button @click="showYeJi">查询业绩</el-button>
+            </div>
+            <div class="table">
+              <el-table
+                :data="tableData3"
+                height="500"
+                style="width: 100%">
+                <el-table-column
+                  prop="date"
+                  label="日期"
+                  width="180">
+                </el-table-column>
+                <el-table-column
+                  prop="name"
+                  label="姓名"
+                  width="180">
+                </el-table-column>
+                <el-table-column
+                  prop="address"
+                  label="地址">
+                </el-table-column>
+              </el-table>
             </div>
           </div>
         </div>
@@ -57,247 +89,41 @@
             shopNum: [],  // 销售数量
             shopCount: [],  // 销售额
             type: '',
-            options3: [
-              {
-              label: '热门城市',
-              options: [{
-                value: 'Shanghai',
-                label: '上海'
-              }, {
-                value: 'Beijing',
-                label: '北京'
-              }]
-            }, {
-              label: '城市名',
-              options: [{
-                value: 'Chengdu',
-                label: '成都'
-              }, {
-                value: 'Shenzhen',
-                label: '深圳'
-              }, {
-                value: 'Guangzhou',
-                label: '广州'
-              }, {
-                value: 'Dalian',
-                label: '大连'
-              }]
-            }],
-            options1: [
-              {
-              value: '选项1',
-              label: '黄金糕'
-            }, {
-              value: '选项2',
-              label: '双皮奶'
-            }, {
-              value: '选项3',
-              label: '蚵仔煎'
-            }, {
-              value: '选项4',
-              label: '龙须面'
-            }, {
-              value: '选项5',
-              label: '北京烤鸭'
-            }],
-            options: [
-              {
-              value: 'zhinan',
-              label: '指南',
-              children: [{
-                value: 'shejiyuanze',
-                label: '设计原则',
-                children: [{
-                  value: 'yizhi',
-                  label: '一致'
-                }, {
-                  value: 'fankui',
-                  label: '反馈'
-                }, {
-                  value: 'xiaolv',
-                  label: '效率'
-                }, {
-                  value: 'kekong',
-                  label: '可控'
-                }]
-              }, {
-                value: 'daohang',
-                label: '导航',
-                children: [{
-                  value: 'cexiangdaohang',
-                  label: '侧向导航'
-                }, {
-                  value: 'dingbudaohang',
-                  label: '顶部导航'
-                }]
-              }]
-            }, {
-              value: 'zujian',
-              label: '组件',
-              children: [{
-                value: 'basic',
-                label: 'Basic',
-                children: [{
-                  value: 'layout',
-                  label: 'Layout 布局'
-                }, {
-                  value: 'color',
-                  label: 'Color 色彩'
-                }, {
-                  value: 'typography',
-                  label: 'Typography 字体'
-                }, {
-                  value: 'icon',
-                  label: 'Icon 图标'
-                }, {
-                  value: 'button',
-                  label: 'Button 按钮'
-                }]
-              }, {
-                value: 'form',
-                label: 'Form',
-                children: [{
-                  value: 'radio',
-                  label: 'Radio 单选框'
-                }, {
-                  value: 'checkbox',
-                  label: 'Checkbox 多选框'
-                }, {
-                  value: 'input',
-                  label: 'Input 输入框'
-                }, {
-                  value: 'input-number',
-                  label: 'InputNumber 计数器'
-                }, {
-                  value: 'select',
-                  label: 'Select 选择器'
-                }, {
-                  value: 'cascader',
-                  label: 'Cascader 级联选择器'
-                }, {
-                  value: 'switch',
-                  label: 'Switch 开关'
-                }, {
-                  value: 'slider',
-                  label: 'Slider 滑块'
-                }, {
-                  value: 'time-picker',
-                  label: 'TimePicker 时间选择器'
-                }, {
-                  value: 'date-picker',
-                  label: 'DatePicker 日期选择器'
-                }, {
-                  value: 'datetime-picker',
-                  label: 'DateTimePicker 日期时间选择器'
-                }, {
-                  value: 'upload',
-                  label: 'Upload 上传'
-                }, {
-                  value: 'rate',
-                  label: 'Rate 评分'
-                }, {
-                  value: 'form',
-                  label: 'Form 表单'
-                }]
-              }, {
-                value: 'data',
-                label: 'Data',
-                children: [{
-                  value: 'table',
-                  label: 'Table 表格'
-                }, {
-                  value: 'tag',
-                  label: 'Tag 标签'
-                }, {
-                  value: 'progress',
-                  label: 'Progress 进度条'
-                }, {
-                  value: 'tree',
-                  label: 'Tree 树形控件'
-                }, {
-                  value: 'pagination',
-                  label: 'Pagination 分页'
-                }, {
-                  value: 'badge',
-                  label: 'Badge 标记'
-                }]
-              }, {
-                value: 'notice',
-                label: 'Notice',
-                children: [{
-                  value: 'alert',
-                  label: 'Alert 警告'
-                }, {
-                  value: 'loading',
-                  label: 'Loading 加载'
-                }, {
-                  value: 'message',
-                  label: 'Message 消息提示'
-                }, {
-                  value: 'message-box',
-                  label: 'MessageBox 弹框'
-                }, {
-                  value: 'notification',
-                  label: 'Notification 通知'
-                }]
-              }, {
-                value: 'navigation',
-                label: 'Navigation',
-                children: [{
-                  value: 'menu',
-                  label: 'NavMenu 导航菜单'
-                }, {
-                  value: 'tabs',
-                  label: 'Tabs 标签页'
-                }, {
-                  value: 'breadcrumb',
-                  label: 'Breadcrumb 面包屑'
-                }, {
-                  value: 'dropdown',
-                  label: 'Dropdown 下拉菜单'
-                }, {
-                  value: 'steps',
-                  label: 'Steps 步骤条'
-                }]
-              }, {
-                value: 'others',
-                label: 'Others',
-                children: [{
-                  value: 'dialog',
-                  label: 'Dialog 对话框'
-                }, {
-                  value: 'tooltip',
-                  label: 'Tooltip 文字提示'
-                }, {
-                  value: 'popover',
-                  label: 'Popover 弹出框'
-                }, {
-                  value: 'card',
-                  label: 'Card 卡片'
-                }, {
-                  value: 'carousel',
-                  label: 'Carousel 走马灯'
-                }, {
-                  value: 'collapse',
-                  label: 'Collapse 折叠面板'
-                }]
-              }]
-            }, {
-              value: 'ziyuan',
-              label: '资源',
-              children: [{
-                value: 'axure',
-                label: 'Axure Components'
-              }, {
-                value: 'sketch',
-                label: 'Sketch Templates'
-              }, {
-                value: 'jiaohu',
-                label: '组件交互文档'
-              }]
-            }],
             selectedOptions: [],
-            selectOptions: []
+            selectOptions: [],
+            yeJi: [],  // 门店业绩
+            value6: '',
+            startTime: '',
+            endTime: '',
+            tableData3: [{
+              date: '2016-05-03',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+              date: '2016-05-02',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+              date: '2016-05-04',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+              date: '2016-05-01',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+              date: '2016-05-08',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+              date: '2016-05-06',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+              date: '2016-05-07',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1518 弄'
+            }]
         };
       },
       created() {
@@ -325,6 +151,25 @@
             console.log(this.selectOptions);
           } else if (returnData.type === 'group') {
             console.log('group');
+            for (let x = 0; x < returnData.result.length; x++) {
+//              console.log('x');
+//              console.log(this.selectOptions);
+              let one = {value: returnData.result[x].grpClassId, label: returnData.result[x].grpClassName, children: []};
+              this.selectOptions.push(one);
+              for (let y = 0; y < returnData.result[x].sysGroupModels.length; y++) {
+//                console.log('y');
+//                console.log(this.selectOptions);
+                let two = {value: returnData.result[x].sysGroupModels[y].grpId, label: returnData.result[x].sysGroupModels[y].grpName, children: []};
+                this.selectOptions[x].children.push(two);
+                for (let z = 0; z < returnData.result[x].sysGroupModels[y].shopModels.length; z++) {
+//                  console.log('z');
+//                  console.log(this.selectOptions);
+                  let three = {value: returnData.result[x].sysGroupModels[y].shopModels[z].shopid, label: returnData.result[x].sysGroupModels[y].shopModels[z].shopname};
+                  this.selectOptions[x].children[y].children.push(three);
+                }
+              }
+            }
+            console.log(this.selectOptions);
           } else {
             console.log('shop');
             let newD = {value: returnData.result.shopid, label: returnData.result.shopname};
@@ -340,6 +185,31 @@
       methods: {
         test() {
               console.log(this.value);
+        },
+        formatDateTime(date) { // 格式化时间
+          let y = date.getFullYear();
+          let m = date.getMonth() + 1;
+          m = m < 10 ? ('0' + m) : m;
+          let d = date.getDate();
+          d = d < 10 ? ('0' + d) : d;
+//        let h = date.getHours();
+//        let minute = date.getMinutes();
+//        minute = minute < 10 ? ('0' + minute) : minute;
+          return y + '-' + m + '-' + d;
+        },
+        showYeJi() {
+          if (this.value6 !== []) {  // 判断是否选择时间段
+            if (this.value !== '') {
+              console.log(this.value);
+              console.log(this.value6);
+            } else if (this.selectedOptions[2] !== '') {
+              console.log(this.selectedOptions[2]);
+              console.log(this.formatDateTime((this.value6[0])));
+              console.log(this.formatDateTime((this.value6[1])));
+            } else {
+              console.log('空');
+            }
+          }
         }
       }
   };
@@ -356,12 +226,27 @@
     .left
       float left;
       margin-left 30px;
-      width 578px;
-      height 572px;
+      width 960px;
+      height 658px;
+      background white;
+      border 1px solid black;
+      border-radius 5px;
       .shop_performance
-        width 578px;
-        height 554px;
+        width 960px;
+        height 658px;
         .main
-          .chart
+          margin-top 30px;
+          margin-left 30px;
+          margin-right 30px;
+          .select
+            display inline-block;
+          .btn
+            display inline-block;
+            margin-left 30px;
+            .block
+              display inline-block;
+            .el-button
+              margin-left 30px;
+          .table
             margin-top 30px;
 </style>

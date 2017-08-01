@@ -515,146 +515,6 @@
         </div>
       </div>
     </div >
-    <!--门店排班设置-->
-    <div class="order" v-show="show_order">
-      <div class="close">
-        <el-row>
-          <el-col :span="24"><div><i @click="closeOrder" class="el-icon-circle-close"></i></div></el-col>
-        </el-row>
-      </div>
-      <div class="order_top">
-        <el-row style="height: 80px;margin-top: 15px;">
-          <el-col :span="2"><div class="grid-content bg-purple">
-            <div style="height: 80px;background-color: darkblue;">图标</div>
-          </div></el-col>
-          <el-col :span="8"><div class="grid-content bg-purple-light">
-            <p style="margin-left: 10px;margin-top: 20px;">门店排班设置</p>
-          </div></el-col>
-          <el-col :span="2"><div class="grid-content bg-purple"><p></p></div></el-col>
-          <el-col :span="4"><div class="grid-content bg-purple-light"><p></p></div></el-col>
-          <el-col :span="2"><div class="grid-content bg-purple"><p></p></div></el-col>
-          <el-col :span="6"><div class="grid-content bg-purple-light">
-            <p style="margin-top: 50px;font-size: 14px;">设置时间：<span>2017-11-11 11:11</span></p>
-          </div></el-col>
-        </el-row>
-      </div>
-      <div class="order_content">
-        <div class="select_add">
-          <el-row>
-            <el-col :span="4"><div>
-              <p class="select_p1">请选择门店/地区：</p>
-              <p class="select_p2">选择需要排班的门店</p>
-            </div></el-col>
-            <el-col :span="20"><div>
-              <el-select v-model="value" placeholder="点击选择地区" style="margin-top: 16px;">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </div></el-col>
-          </el-row>
-        </div>
-        <div class="select_banCi">
-          <el-row>
-            <el-col :span="4"><div>
-              <p class="select_p1">选择班次组：</p>
-              <p class="select_p2">选择排班的班次组</p>
-            </div></el-col>
-            <el-col :span="6"><div>
-              <el-select v-model="value" placeholder="点击选择班次" style="margin-top: 16px;">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </div></el-col>
-            <el-col :span="5"><div>
-              <p class="select_p3">早班（9：00~11：00）</p>
-              <p class="select_p3">早班（9：00~11：00）</p>
-            </div></el-col>
-            <el-col :span="5"><div>
-              <p class="select_p3">早班（9：00~11：00）</p>
-              <p class="select_p3">早班（9：00~11：00）</p>
-            </div></el-col>
-            <el-col :span="2"><div></div></el-col>
-            <el-col :span="2"><div></div></el-col>
-          </el-row>
-        </div>
-        <div class="select_date">
-          <el-row>
-            <el-col :span="4"><div>
-              <p class="select_p1">设置排班日期：</p>
-              <p class="select_p2">仅能为未来的日起设置排班，如果以设置排班，将会被新排班覆盖。</p>
-            </div></el-col>
-            <el-col :span="20"><div>
-              <div class="block" style="margin-top: 16px;">
-                <el-date-picker
-                  v-model="value1"
-                  type="date"
-                  placeholder="选择日期"
-                  :picker-options="pickerOptions0">
-                </el-date-picker>
-              </div>
-            </div></el-col>
-          </el-row>
-        </div>
-        <div class="setting_banCi">
-          <el-row>
-            <el-col :span="4"><div>
-              <p class="select_p1">设置排班：</p>
-              <p class="select_p2">选择需要排班的门店</p>
-            </div></el-col>
-            <el-col :span="20"><div style="overflow-y: auto">
-                <el-transfer style="transform: scale(0.85);margin-left: -55px;"
-                             :titles="['人员', '早班']"
-                             :footer-format="{ noChecked: '共 ${total} 人', hasChecked: '已选 ${checked}/${total} 人' }"
-                             v-model="value2"
-                             :data="data2">
-                </el-transfer>
-                <el-transfer style="transform: scale(0.85);margin-left: -55px;"
-                             :titles="['人员', '早班']"
-                             :footer-format="{ noChecked: '共 ${total} 人', hasChecked: '已选 ${checked}/${total} 人' }"
-                             v-model="value2"
-                             :data="data2">
-                </el-transfer>
-                <el-transfer style="transform: scale(0.85);margin-left: -55px;"
-                             :titles="['人员', '早班']"
-                             :footer-format="{ noChecked: '共 ${total} 人', hasChecked: '已选 ${checked}/${total} 人' }"
-                             v-model="value2"
-                             :data="data2">
-                </el-transfer>
-            </div></el-col>
-          </el-row>
-        </div>
-        <div class="remark">
-          <el-row>
-            <el-col :span="4"><div class="grid-content bg-purple">
-              <p class="select_p1">备注：</p>
-            </div></el-col>
-            <el-col :span="20"><div>
-              <el-input style="margin-top: 15px;"
-                type="textarea"
-                :rows="2"
-                placeholder="请输入内容"
-                v-model="textarea">
-              </el-input>
-            </div></el-col>
-          </el-row>
-        </div>
-        <div class="sub_btn">
-          <el-row>
-            <el-col :span="24"><div>
-              <el-button type="primary" size="large" @click="closeOrder">确认排班</el-button>
-            </div></el-col>
-          </el-row>
-        </div>
-      </div>
-    </div>
     <!-- 新增陈列 -->
     <new-display v-show="$store.state.show_newDisplay"></new-display>
     <check-display :display-detail="displayDetail" v-show="$store.state.show_checkDisplay"></check-display>
@@ -694,100 +554,9 @@
         value6: '',     // 时间选择器内容
         input3: '',   // 113
         date: '',     // 120
-        tableData3: [
-          {
-            number: '2222',
-            title: '陈列标准',
-            date: '2016-05-03',
-            name: '广州一店',
-            evaluation: '5星',
-            picture: '共五张，点击查看'
-          },
-          {
-            number: '2222',
-            title: '陈列标准',
-            date: '2016-05-04',
-            name: '广州一店',
-            evaluation: '1星',
-            picture: '共五张，点击查看'
-          },
-          {
-            number: '2222',
-            title: '陈列标准',
-            date: '2016-05-06',
-            name: '广州一店',
-            evaluation: '3星',
-            picture: '共五张，点击查看'
-          },
-          {
-            number: '2222',
-            title: '陈列标准',
-            date: '2016-05-01',
-            name: '广州一店',
-            evaluation: '4星',
-            picture: '共五张，点击查看'
-          },
-          {
-            number: '2222',
-            title: '陈列标准',
-            date: '2016-05-03',
-            name: '广州一店',
-            evaluation: '5星',
-            picture: '共五张，点击查看'
-          },
-          {
-            number: '2222',
-            title: '陈列标准',
-            date: '2016-05-03',
-            name: '广州一店',
-            evaluation: '5星',
-            picture: '共五张，点击查看'
-          },
-          {
-            number: '2222',
-            title: '陈列标准',
-            date: '2016-05-03',
-            name: '广州一店',
-            evaluation: '5星',
-            picture: '共五张，点击查看'
-          },
-          {
-            number: '2222',
-            title: '陈列标准',
-            date: '2016-05-03',
-            name: '广州一店',
-            evaluation: '5星',
-            picture: '共五张，点击查看'
-          }
-        ],
-        order: [
-          {
-            order: '早班',
-            name: '1',
-            num: '1',
-            position: '1'
-          }
-        ], //  排班
         input_banCi: '',
         value3: '',
         checked: false, // 是否全选
-        options: [
-          {
-            value: '选项1',
-            label: '黄金糕'
-          }, {
-            value: '选项2',
-            label: '双皮奶'
-          }, {
-            value: '选项3',
-            label: '蚵仔煎'
-          }, {
-            value: '选项4',
-            label: '龙须面'
-          }, {
-            value: '选项5',
-            label: '北京烤鸭'
-          }],
         value: '',
         value1: '',
         data2: generateData2(),
@@ -886,44 +655,58 @@
       }).catch(function () {
         // 出错处理
       });
-      //  获取门店列表
-      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then(function (response) {
-        // response.data 为服务端返回的数据
-        this.shopModels = response.data.result.shopModels;
-        // 门店id name匹配
-        for (let i = 0; i < this.orderList.length; i++) {
-          for (let y = 0; y < this.orderList[i].shop.length; y++) {
-            for (let x = 0; x < this.shopModels.length; x++) {
-              if (this.orderList[i].shop[y] === this.shopModels[x].shopid) {
-                let shopName = {shopName: this.shopModels[x].shopname};
-                this.orderList[i].shopName.push(shopName);
-              }
-            }
-          }
-        }
-      }).catch(function () {
-        // 出错处理
-        console.log('获取门店列表失败');
-      });
       // 获取排班列表
       this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/pqSchedulings', {jsonp: 'jsonpCallback'}).then(function (response) {
         // response.data 为服务端返回的数据
         let list = response.data.result.rows;
+        console.log(this.orderList);
         for (let x = 0; x < list.length; x++) {
             let newList = {city: list[x].city, date: list[x].schedulingdate, shop: [{shopid: list[x].shopid}], bci: [{bcitype: list[x].bctype, stime: list[x].stime, etime: list[x].etime}], shopName: []};
             this.orderList.push(newList);
-            for (let y = x + 1; y < list.length; y++) {
+            for (let y = 0; y < list.length; y++) {
               if (this.orderList[x].city === list[y].city && this.orderList[x].date === list[y].schedulingdate) {
-                  this.orderList[x].shop.push({shopid: list[y].shopid});
-                  this.orderList[x].bci.push({bcitype: list[y].bctype, stime: list[y].stime, etime: list[y].etime});
-                  list.splice(y, 1);
+                this.orderList[x].shop.push({shopid: list[y].shopid});
+                this.orderList[x].bci.push({bcitype: list[y].bctype, stime: list[y].stime, etime: list[y].etime});
               }
             }
         }
-        //  shopid 去重
+        let newList = [];
         for (let i = 0; i < this.orderList.length; i++) {
-           this.orderList[i].shop = this.unique(this.orderList[i].shop);
+          let isRepeated = false;
+          for (let x = 0; x < newList.length; x++) {
+            if (this.orderList[i].city === this.orderList[x].city) {
+              console.log('重复');
+              isRepeated = true;
+              break;
+            }
+          }
+          if (!isRepeated) {
+            newList.push(this.orderList[i]);
+          }
         }
+        this.orderList = newList;
+        console.log(this.orderList);
+        let banci = [];
+        for (let i = 0; i < this.orderList.length; i++) {
+          console.log('i');
+          for (let x = 0; x < this.orderList[i].bci.length; x++) {
+            console.log('x');
+            let isRepeated = false;
+            for (let y = 0; y < banci.length; y++) {
+              console.log('y');
+              if (this.orderList[i].bci[x].bcitype === banci[y].bcitype) {
+                isRepeated = true;
+              break;
+              }
+            }
+            if (!isRepeated) {
+              banci.push(this.orderList[i].bci[x]);
+            }
+          }
+          console.log(banci);
+          this.orderList[i].bci = banci;
+        }
+        console.log(this.orderList);
       }).catch(function () {
         // 出错处理
       });
@@ -984,6 +767,35 @@
                   this.searchAttendence();
               }
           }
+      },
+      orderList: {
+        handler: function () {
+          //  获取门店列表
+          this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then(function (response) {
+            // response.data 为服务端返回的数据
+            this.shopModels = response.data.result.shopModels;
+            // 门店id name匹配
+            for (let i = 0; i < this.orderList.length; i++) {
+              console.log('dsadas');
+              for (let y = 0; y < this.orderList[i].shop.length; y++) {
+                console.log('1');
+                for (let x = 0; x < this.shopModels.length; x++) {
+                  console.log('2');
+                  console.log(this.orderList);
+                  if (this.orderList[i].shop[y].shopid === this.shopModels[x].shopid) {
+                    console.log('3');
+                    let shopName = {shopName: this.shopModels[x].shopname};
+                    this.orderList[i].shopName.push(shopName);
+                  }
+                }
+              }
+            }
+            console.log(this.orderList);
+          }).catch(function () {
+            // 出错处理
+            console.log('获取门店列表失败');
+          });
+        }
       }
     },
     methods: {
