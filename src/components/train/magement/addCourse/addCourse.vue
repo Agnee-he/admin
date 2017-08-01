@@ -96,21 +96,17 @@
       methods: {
         handleChange(file, fileList) {
           this.file = [];
-          console.log(file, fileList);
           if (fileList.length > 1) {
             fileList.shift();
           }
           this.file = fileList[0].raw;
-          console.log(this.file);
         },
         handleRemove(file, fileList) {
           this.file = [];
-          console.log(file, fileList);
           if (fileList.length > 1) {
             fileList.shift();
           }
           this.file = fileList[0].raw;
-          console.log(this.file);
         },
         closeAddCourse() {
           this.$store.state.show_addCourse = false;

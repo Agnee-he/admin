@@ -62,22 +62,8 @@
     created() {
     },
     watch: {
-      show_search_first() {
-        this.search_first = true;
-      }
     },
     methods: {
-      show_search() {
-        this.search_first = false;
-        this.search_over = true;
-      },
-      search_close() {
-        this.search_over = false;
-        this.search_first = true;
-      },
-      account_click() {
-        this.account = !this.account;
-      }
     }
   };
 </script>

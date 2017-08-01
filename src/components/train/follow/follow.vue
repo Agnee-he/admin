@@ -163,12 +163,8 @@
               // response.data 为服务端返回的数据
               this.allGrade = response.data.result.rows;
               this.gradeTotal = response.data.result.total;
-              console.log(this.allGrade);
-              console.log('获取课程成功');
             }).catch(function (response) {
               // 出错处理
-              console.log('获取课程失败');
-              console.log(response);
             });
           }
         }
@@ -180,12 +176,8 @@
           // response.data 为服务端返回的数据
           this.allGrade = response.data.result.rows;
           this.gradeTotal = response.data.result.total;
-          console.log(this.allGrade);
-          console.log('获取课程成功');
         }).catch(function (response) {
           // 出错处理
-          console.log('获取课程失败');
-          console.log(response);
         });
       },
 
@@ -225,7 +217,6 @@
               const data = this.formatJson(filterVal, list);
               export_json_to_excel(tHeader, data, '考核成绩');
             });
-            console.log(1);
           }
         },
         formatJson(filterVal, jsonData) {
@@ -233,13 +224,9 @@
         },
         selectRow(row) {
           this.excel = row;
-          console.log(this.excel);
-          console.log(row);
         },
         selectRowAll(row) {
           this.excel = row;
-          console.log(this.excel);
-          console.log(row);
         }
       },
 

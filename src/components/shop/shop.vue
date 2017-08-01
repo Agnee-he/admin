@@ -73,7 +73,7 @@
               prop="stars"
               label="陈列考评(星)"
               sortable
-              width="140"
+              width="160"
               align="center">
             </el-table-column>
             <el-table-column label="操作" align="center">
@@ -177,7 +177,7 @@
                     align="center">
                   </el-table-column>
                 </el-table>
-                <div class="block" style="float: right;margin-top: 15px;">
+                <div class="block" style="float: right;margin-top: 10px;">
                   <el-pagination
                     :current-page.sync="attendencePage"
                     :page-size="10"
@@ -365,6 +365,46 @@
             </div>
           </div>
         </div>
+      </el-tab-pane>
+      <el-tab-pane label="门店信息">
+        <el-row>
+          <el-col :span="3"><div>
+            <p>门店名称：</p>
+          </div></el-col>
+          <el-col :span="6"><div class="shop_input">
+            <el-select v-model="shopOptions.shopId" placeholder="请选择">
+              <el-option
+                v-for="item in allShop"
+                :key="item.shopid"
+                :label="item.shopname"
+                :value="item.shopid">
+              </el-option>
+            </el-select>
+          </div></el-col>
+          <el-col :span="3"><div>
+            <p>门店地址：</p>
+          </div></el-col>
+          <el-col :span="8"><div class="shop_input">
+            <el-input v-model="shopOptions.shopAddress" placeholder="请输入门店地址"></el-input>
+          </div></el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="3"><div>
+            <p>门店经度：</p>
+          </div></el-col>
+          <el-col :span="6"><div class="shop_input add_input">
+            <el-input v-model="shopOptions.longitude" placeholder="请输入经度"></el-input>
+          </div></el-col>
+          <el-col :span="3"><div>
+            <p>门店纬度：</p>
+          </div></el-col>
+          <el-col :span="6"><div class="shop_input add_input">
+            <el-input v-model="shopOptions.latitude" placeholder="请输入纬度"></el-input>
+          </div></el-col>
+          <el-col :span="4"><div class="shop_input float_right">
+            <el-button @click="submitShop" type="primary">提交</el-button>
+          </div></el-col>
+        </el-row>
       </el-tab-pane>
     </el-tabs>
     <!-- 门店排班查询与操作 -->
@@ -806,7 +846,15 @@
           {
             value: '周末班'
           }
-        ] //  新建班次时选择的班次名称
+        ], //  新建班次时选择的班次名称
+        allShop: [],  // 所有门店name-id
+        shopOptions: {
+          shopId: '',
+          shopName: '',
+          shopAddress: '',
+          longitude: '',  // 经度
+          latitude: ''
+        }  // 门店信息列表
       };
     },
     beforeCreate() {
@@ -826,11 +874,8 @@
           this.city_list.push({label: tmp, value: tmp});
 //          console.log(list[tmp]);  //  “键值'
         }
-        console.log(this.city_list);
-        console.log(this.city_shop);
       }).catch(function () {
         // 出错处理
-        console.log('获取城市列表失败');
       });
       //  获取首页陈列列表
       this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/qryDisplays?page=' + this.displayPage +
@@ -840,7 +885,6 @@
         this.displayTotal = response.data.result.total;
       }).catch(function () {
         // 出错处理
-        console.log('获取陈列列表失败');
       });
       //  获取门店列表
       this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then(function (response) {
@@ -857,9 +901,6 @@
             }
           }
         }
-        console.log(this.orderList);
-        console.log(this.shopModels.length);
-        console.log('获取门店列表成功');
       }).catch(function () {
         // 出错处理
         console.log('获取门店列表失败');
@@ -883,10 +924,8 @@
         for (let i = 0; i < this.orderList.length; i++) {
            this.orderList[i].shop = this.unique(this.orderList[i].shop);
         }
-        console.log('获取排班列表成功');
       }).catch(function () {
         // 出错处理
-        console.log('获取排班列表失败');
       });
       // 获取考勤列表
       this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
@@ -896,11 +935,15 @@
         for (let i = 0; i < this.attendance.length; i++) {
           this.attendance[i].dkdate = this.getLocalTime(this.attendance[i].dkdate.toString().substring(0, 10));
         }
-        console.log(this.attendance);
-        console.log('获取考勤列表成功');
       }).catch(function () {
         // 出错处理
-        console.log('获取考勤列表失败');
+      });
+      // 获取所有门店name-id
+      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then(function (response) {
+        // response.data 为服务端返回的数据
+        this.allShop = response.data.result.shopModels;
+      }).catch(function () {
+        // 出错处理
       });
     },
     computed: {
@@ -917,7 +960,6 @@
                   this.displayTotal = response.data.result.total;
                 }).catch(function () {
                   // 出错处理
-                  console.log('获取陈列列表失败');
                 });
               } else {
                   this.searchDisplay();
@@ -935,11 +977,8 @@
                   for (let i = 0; i < this.attendance.length; i++) {
                     this.attendance[i].dkdate = this.getLocalTime(this.attendance[i].dkdate.toString().substring(0, 10));
                   }
-                  console.log(this.attendance);
-                  console.log('获取考勤列表成功');
                 }).catch(function () {
                   // 出错处理
-                  console.log('获取考勤列表失败');
                 });
               } else {
                   this.searchAttendence();
@@ -948,9 +987,6 @@
       }
     },
     methods: {
-      handleClick(tab, event) {
-        console.log(tab, event);
-      },
       toggleSelection(rows) {
         if (rows) {
           rows.forEach(row => {
@@ -1005,10 +1041,8 @@
         let params = JSON.stringify(formData);
         this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/addSchedulings', params, {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
-          console.log(1);
         }).catch(function (response) {
           // 出错处理
-          console.log(response);
         });
       },
       formatDateTime(date) { // 格式化时间
@@ -1042,17 +1076,11 @@
             type: 'warning'
           });
         } else {
-          let formData = this.schedule;
           let formarDate = this.formatDateTime(this.schedulingdate);  //  格式化时间
-          console.log(this.city);
-          console.log(this.city_shop);
-          console.log(formData);
-          console.log(formarDate);
           for (let i = 0; i < this.schedule.length; i++) {
             let newSch = {city: this.city, schedulingdate: formarDate, bctype: this.schedule[i].bctype, stime: this.schedule[i].stime, etime: this.schedule[i].etime};
             this.postschedule.push(newSch);
           }
-          console.log(this.postschedule);
           let params = JSON.stringify(this.postschedule);
           let success = false;
           $.ajax({
@@ -1063,8 +1091,6 @@
             async: false,
             data: params,
             success: function(data) {
-              console.log('post成功');
-              console.log(data);
               success = true;
             }
           });
@@ -1076,16 +1102,12 @@
       },
       openCheckDisplay(row) {
       	this.$store.state.show_checkDisplay = true;
-        console.log(row.id);
         // 查询陈列详情
         this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getDisplay?id=' + row.id, {jsonp: 'jsonpCallback'}).then((response) => {
           // response.data 为服务端返回的数据
           this.displayDetail = response.data.result.陈列信息;
           this.displayDetail.stars = Number(this.displayDetail.stars);
-          console.log(typeof this.displayDetail);
-          console.log(response.data.result.陈列信息);
         }, (response) => {
-          console.log(response);
         });
       },
       openNewDisplay() {
@@ -1106,7 +1128,6 @@
           this.displayTotal = response.data.result.total;
         }).catch(function () {
           // 出错处理
-          console.log('获取陈列列表失败');
         });
       },
       resetSearchDisplay() {
@@ -1121,7 +1142,6 @@
           this.displayTotal = response.data.result.total;
         }).catch(function () {
           // 出错处理
-          console.log('获取陈列列表失败');
         });
       },
       test1() {
@@ -1157,7 +1177,6 @@
             const data = this.formatJson(filterVal, list);
             export_json_to_excel(tHeader, data, '门店陈列');
           });
-          console.log(1);
         }
       },
       formatJson(filterVal, jsonData) {
@@ -1165,20 +1184,14 @@
       },
       selectRow(row) {
         this.excel = row;
-        console.log(this.excel);
-        console.log(row);
       },
       selectRowAll(row) {
         this.excel = row;
-        console.log(this.excel);
-        console.log(row);
       },
       searchAttendence() {
         if (this.attendenceDate !== '') {
           this.attendenceDate = Date.parse(this.attendenceDate);
-          console.log(1);
         }
-        console.log(this.attendenceDate);
         // 获取考勤列表
         this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10&filter_EQS_dkdate=' + this.attendenceDate + '&filter_LIKES_shopname=' + this.atendenceShop, {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
@@ -1187,11 +1200,8 @@
           for (let i = 0; i < this.attendance.length; i++) {
             this.attendance[i].dkdate = this.getLocalTime(this.attendance[i].dkdate.toString().substring(0, 10));
           }
-          console.log(this.attendance);
-          console.log('获取考勤列表成功');
         }).catch(function () {
           // 出错处理
-          console.log('获取考勤列表失败');
         });
       },
       getLocalTime(nS) {
@@ -1199,7 +1209,6 @@
       },
       deleteDisplay() {
         let deleteId = [];
-        console.log(this.excel);
         if (this.excel.length > 0) {
           for (let i = 0; i < this.excel.length; i++) {
 //            let id = this.excel[i].id;
@@ -1208,7 +1217,6 @@
           }
         }
         let params = JSON.stringify(deleteId);
-        console.log(params);
         $.ajax({
           type: 'POST',
           url: 'http://localhost:8080/spg/admin/display/delDisplay',
@@ -1217,18 +1225,33 @@
           async: false,
           data: params,
           success: function(data) {
-            console.log('删除成功');
-            console.log(data);
           }
         });
         router.go({path: '/shop'});
-//        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/addSchedulings', {jsonp: 'jsonpCallback', data: params}).then(function (response) {
-//          // response.data 为服务端返回的数据
-//          console.log('删除成功');
-//        }).catch(function () {
-//          // 出错处理
-//          console.log('删除失败');
+      },
+      submitShop() {
+        for (let i = 0; i < this.allShop.length; i++) {
+          if (this.shopOptions.shopId === this.allShop[i].shopid) {
+            this.shopOptions.shopName = this.allShop[i].shopname;
+          }
+        }
+//        let params = JSON.stringify(this.shopOptions);
+//        let success = false;
+//        $.ajax({
+//          type: 'POST',
+//          url: 'http://localhost:8080/spg/admin/attendance/addSchedulings',
+//          contentType: 'application/json;charset=utf-8', // 设置请求头信息
+//          dataType: 'json',
+//          async: false,
+//          data: params,
+//          success: function(data) {
+//            console.log('post成功');
+//            console.log(data);
+//            success = true;
+//          }
 //        });
+//        if (success) {
+//        }
       }
     },
     components: {
@@ -1243,6 +1266,12 @@
   body
     margin 0;
     padding 0;
+  .shop_input
+    margin-top 10px;
+  .add_input
+    width 100px;
+  .float_right
+    float right;
   .top_p
     margin-top 40px;
     font-size 14px;
@@ -1260,9 +1289,9 @@
   .shop
     margin-top -698px;
     margin-left 180px;
-    padding-top 30px;
+    padding-top 20px;
     width 1020px;
-    height 688px;
+    height 698px;
     overflow auto;
     background #ecf0f1;
     .tabs

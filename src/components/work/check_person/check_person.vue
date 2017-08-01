@@ -117,7 +117,6 @@
           const data = this.formatJson(filterVal, list);
           export_json_to_excel(tHeader, data, '安排表');
         });
-        console.log(1);
       },
       formatJson(filterVal, jsonData) {
         return jsonData.map(v => filterVal.map(j => v[j]));
@@ -129,7 +128,6 @@
         this.excel = row;
       },
       handleClick(tab, event) {
-        console.log(tab, event);
       },
       toggleSelection(rows) {
         if (rows) {

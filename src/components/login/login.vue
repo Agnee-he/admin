@@ -27,16 +27,17 @@
 
 <script>
   import router from '../../router';
+
   export default {
     data() {
       return {
+        url: this.$store.state.url,
         user_name: '',
         password: '',
         checked: false,
         user_p: '',
         password_p: '',
-        shop: [], //  门店列表信息
-        expiremMinutes: 7
+        shop: [] //  门店列表信息
       };
     },
     //  相当于init doAjax
@@ -45,13 +46,11 @@
     created() {
       // console.log('login页面 加载完成！')
       //  获取门店列表
-      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then(function (response) {
+      this.$http.jsonp(this.url + 'spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then(function (response) {
         // response.data 为服务端返回的数据
         this.shop = response.data.result.shopModels;
       }).catch(function (response) {
         // 出错处理
-        console.log(response);
-        console.log('获取门店失败');
       });
     },
     //  相当于ready 模板编译挂载之后
@@ -62,20 +61,15 @@
     methods: {
       login() {
         //  登录请求
-        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/login?username=' + this.user_name + '&password=' + this.password, {jsonp: 'jsonpCallback'}).then(function (response) {
+        this.$http.jsonp(this.url + 'spg/admin/login?username=' + this.user_name + '&password=' + this.password, {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
-          console.log(1);
-          console.log(response.data.result);
           let user = response.data.result;
           for (let i = 0; i < this.shop.length; i++) {
               if (user.location.shopId === this.shop[i].shopid) {
-//                this.$store.state.userShop = this.shop[i].shopname;
                 sessionStorage.setItem('shopname', this.shop[i].shopname);
-                console.log(this.shop[i].shopnam);
                 this.$store.state.userShop = this.shop[i].shopname;
               }
           }
-          console.log(user.jobnumber);
           sessionStorage.setItem('user', user.jobnumber);
           this.$store.state.user = user.jobnumber;
           this.$notify({
@@ -84,103 +78,15 @@
             type: 'success'
           });
           sessionStorage.setItem('login', '100');
-          console.log(this.$store.state.login);
           router.push({ path: '/shouye' });
         }).catch(function (response) {
           // 出错处理
+          console.log(response);
           this.$notify.error({
             title: '登录失败',
             message: '请确认帐号密码！'
           });
         });
-      },
-      //  设置cookie
-      setCookie (name, value, expiremMinutes) {
-        let exdate = new Date();
-        exdate.setTime(exdate.getTime() + expiremMinutes * 60 * 1000);
-        document.cookie = name + '=' + escape(value) + ((expiremMinutes === null) ? '' : ';expires=' + exdate.toGMTString());
-      },
-      //  读取cookie
-      getCookie (name) {
-          if (document.cookie.length > 0) {
-            let start = document.cookie.indexOf(name + '=');
-            if (start !== -1) {
-              start = start + name.length + 1;
-              let end = document.cookie.indexOf(';', start);
-              if (end === -1) end = document.cookie.length;
-              return decodeURI(document.cookie.substring(start, end));
-          }
-        }
-        return '';
-      },
-      setLocalStorage() {
-        if (!window.localStorage) {
-          alert('浏览器支持localstorage');
-          return false;
-        } else {
-          let storage = window.localStorage;
-          //  写入a字段
-          storage['a'] = 1;
-          //  写入b字段
-          storage.b = 1;
-          //  写入c字段
-          storage.setItem('c', 3);
-          console.log(typeof storage['a']);
-          console.log(typeof storage['b']);
-          console.log(typeof storage['c']);
-        }
-      },
-      getLocalStorage() {
-        if (!window.localStorage) {
-          alert('浏览器支持localstorage');
-          return false;
-        } else {
-          let storage = window.localStorage;
-          //  写入a字段
-          storage['a'] = 1;
-          //  写入b字段
-          storage.b = 1;
-          //  写入c字段
-          storage.setItem('c', 3);
-          console.log(typeof storage['a']);
-          console.log(typeof storage['b']);
-          console.log(typeof storage['c']);
-          //  第一种方法读取
-          let a = storage.a;
-          console.log(a);
-          //  第二种方法读取
-          let b = storage['b'];
-          console.log(b);
-          //  第三种方法读取
-          let c = storage.getItem('c');
-          console.log(c);
-          //  修改值
-          storage.a = 4;
-          console.log(storage.a);
-          //  localStorage的键获取
-          storage.a = 1;
-          storage.setItem('c', 3);
-          for (let i = 0; i < storage.length; i++) {
-            let key = storage.key(i);
-            console.log(key);
-          }
-        }
-      },
-      deleteLocalStorage() {
-        //   将localStorage的所有内容清除
-        let storage = window.localStorage;
-        storage.a = 1;
-        storage.setItem('c', 3);
-        console.log(storage);
-        storage.clear();
-        console.log(storage);
-        //   将localStorage的所有内容清除
-        let storage2 = window.localStorage;
-        storage2.a = 1;
-        storage2.setItem('c', 3);
-        console.log(storage2);
-        storage2.removeItem('a');
-        console.log(storage2.a);
       }
     }
   };

@@ -10,6 +10,7 @@ Vue.use(Vuex);
 
 //  state
 const state = {
+  url: 'http://120.55.85.65:8088/',  // 正式接口ip
   login: sessionStorage.getItem('login'), // 判断是否登录
   user: sessionStorage.getItem('user'),  //  用户信息
   userShop: sessionStorage.getItem('shopname'), //  用户所属门店

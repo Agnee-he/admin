@@ -465,11 +465,8 @@
         this.$http.jsonp('http://120.55.85.65:8088/spg/admin/working/queryEmployees', {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           this.allPerson = response.data.result.participants;
-          console.log('拉取人员成功');
         }).catch(function (response) {
           // 出错处理
-          console.log('拉取人员失败');
-          console.log(response);
         });
       },
       methods: {
@@ -497,15 +494,11 @@
         },
         submitExam() { //  保存上传新考题
           this.postNew = [];
-          console.log(this.newExam);
-          console.log(this.course[0].courseid);
           for (let i = 0; i < this.newExam.length; i++) {
             let postExam = {courseId: this.course[0].courseid, content: this.newExam[i].exam, options: 'A.' + this.newExam[i].A + ';B.' + this.newExam[i].B + ';C.' + this.newExam[i].C + ';D.' + this.newExam[i].D, answer: this.newExam[i].answer, scores: this.newExam[i].weight};
             this.postNew.push(postExam);
           }
-          console.log(this.postNew);
           let params = JSON.stringify(this.postNew);
-          console.log(params);
           let success = false;
           $.ajax({
             type: 'POST',
@@ -515,8 +508,6 @@
             async: false,
             data: params,
             success: function(data) {
-              console.log('post成功');
-              console.log(data);
               success = true;
             }
           });
@@ -553,8 +544,6 @@
           this.excel = row;
         },
         submitPerson() {
-          console.log(this.person);
-          console.log(this.course[0].courseid);
           if (this.person.length !== 0) {
             let userCourseModels = [];
             for (let i = 0; i < this.person.length; i++) {
@@ -562,9 +551,7 @@
               let newP = {courseid: this.course[0].courseid, userid: this.person[i].toString()};
               userCourseModels.push(newP);
             }
-            console.log(userCourseModels);
             let params = JSON.stringify(userCourseModels);
-            console.log(params);
             $.ajax({
               type: 'POST',
               url: 'http://localhost:8080/spg/admin/training/assigncourse',
@@ -586,10 +573,8 @@
           }
         },
         deleteExam(row) {
-          console.log(row);
           let id = [row.questionId];
           let params = JSON.stringify(id);
-          console.log(params);
           let success = false;
           $.ajax({
             type: 'POST',

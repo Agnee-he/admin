@@ -70,11 +70,8 @@ const router = new Router({
 // 全局导航钩子
 router.beforeEach((to, from, next) => {
   // 判断该路由是否需要登录权限
-  console.log('login1');
   if (to.meta.requireAuth) {
     // 通过vuex state获取当前的token是否存在
-    console.log('login2');
-    console.log(sessionStorage.getItem('login'));
     if (sessionStorage.getItem('login') === '100') {
       next();
     } else {

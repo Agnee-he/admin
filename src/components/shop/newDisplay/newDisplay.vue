@@ -102,7 +102,7 @@
         </el-row>
         <el-row>
           <el-col :span="4">
-            <div @click="test">
+            <div>
               <p>新的陈列要求：</p>
             </div>
           </el-col>
@@ -193,10 +193,8 @@
       this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then((response) => {
           // success callback
         this.shop = response.data.result.shopModels;
-          console.log(1);
         }, (response) => {
-          // error callback
-          console.log(response);
+          // error callback、
         });
     },
     watch: {
@@ -220,7 +218,6 @@
     methods: {
       getFile(event) {
         this.file = event.target.files[0];
-        console.log(this.file);
       },
       formatDateTime(date) { // 格式化时间
         let y = date.getFullYear();
@@ -235,19 +232,15 @@
       },
       handleChange(file, fileList) {
         this.newDisplay.displayStandard = [];
-        console.log(file, fileList);
         for (let i = 0; i < fileList.length; i++) {
           this.newDisplay.displayStandard.push(fileList[i].raw);
         }
-        console.log(this.newDisplay.displayStandard);
       },
       handleRemove(file, fileList) {
         this.newDisplay.displayStandard = [];
-        console.log(file, fileList);
         for (let i = 0; i < fileList.length; i++) {
           this.newDisplay.displayStandard.push(fileList[i].raw);
         }
-        console.log(this.newDisplay.displayStandard);
       },
       test() {
         console.log(this.newDisplay);
@@ -267,7 +260,6 @@
             }
           }
         }
-        console.log(shopIdName);
         let formData3 = new FormData();
         formData3.append('displayName', this.newDisplay.displayName);
         formData3.append('displayType', this.newDisplay.displayType);
@@ -277,17 +269,7 @@
         formData3.append('displayRemarks', this.newDisplay.displayRemarks);
         for (let i = 0; i < this.newDisplay.displayStandard.length; i++) {
           formData3.append('files', this.newDisplay.displayStandard[i]);
-          console.log(this.newDisplay.displayStandard[i]);
         }
-
-        console.log(formData3);
-        let fm = document.getElementById('uploadForm');
-        console.log(fm);
-        let formData1 = new FormData(fm);
-        console.log(formData1);
-        console.log(this.postDisplay);
-        let formData = new FormData(this.postDisplay);
-        console.log(formData);
         let success = false;
         let returnDate = '';
         $.ajax({
@@ -299,12 +281,10 @@
           contentType: false,
           processData: false,
           success: function (returndata) {
-            console.log('图片上传成功');
             success = true;
             returnDate = returndata.returnCode;
           },
           error: function (returndata) {
-            console.log(returndata);
           }
         });
         if (success) {

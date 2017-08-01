@@ -100,11 +100,8 @@
               this.weiTongGuo = this.grade.未通过.length;
               this.yiTongGuo = this.grade.已通过.length;
               this.weiKaoHe = this.grade.未考核.length;
-              console.log('获取单人成绩成功');
             }).catch(function (response) {
               // 出错处理
-              console.log('获取单人成绩失败');
-              console.log(response);
             });
           }
       },

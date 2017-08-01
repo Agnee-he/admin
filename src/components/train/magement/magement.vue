@@ -155,7 +155,6 @@
             for (let i = 0; i < this.allCourse.length; i++) {
               this.courseType.push({value: this.allCourse[i].type});
             }
-            console.log(this.courseType);
           }).catch(function (response) {
             // 出错处理
           });
@@ -200,7 +199,6 @@
                 }
               }
             }
-            console.log(this.oneCourse);
           }).catch(function (response) {
 //             出错处理
           });
@@ -259,7 +257,6 @@
             }
           }
           let params = JSON.stringify(deleteId);
-          console.log(params);
           $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/spg/admin/training/delcourse',
@@ -268,8 +265,6 @@
             async: false,
             data: params,
             success: function(data) {
-              console.log('删除成功');
-              console.log(data);
             }
           });
           router.go({path: '/train'});
