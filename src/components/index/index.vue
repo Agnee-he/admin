@@ -42,7 +42,7 @@
               <div class="block">
                 <span class="demonstration">选择日期</span>
                 <el-date-picker
-                  v-model="value6"
+                  v-model="date"
                   type="daterange"
                   placeholder="选择日期范围">
                 </el-date-picker>
@@ -57,16 +57,22 @@
                 <el-table-column
                   prop="date"
                   label="日期"
-                  width="180">
+                  sortable
+                  align="center"
+                  width="280">
                 </el-table-column>
                 <el-table-column
-                  prop="name"
-                  label="姓名"
-                  width="180">
+                  prop="num"
+                  label="数量（件）"
+                  sortable
+                  align="center"
+                  width="280">
                 </el-table-column>
                 <el-table-column
-                  prop="address"
-                  label="地址">
+                  prop="count"
+                  align="center"
+                  sortable
+                  label="销量（元）">
                 </el-table-column>
               </el-table>
             </div>
@@ -82,6 +88,7 @@
       data() {
           return {
             url: this.$store.state.url,
+            userName: this.$store.state.user,
             value: '',
             value7: '',
             shopModels: [],  // 门店和门店id
@@ -92,38 +99,10 @@
             selectedOptions: [],
             selectOptions: [],
             yeJi: [],  // 门店业绩
-            value6: '',
+            date: '',
             startTime: '',
             endTime: '',
-            tableData3: [{
-              date: '2016-05-03',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-              date: '2016-05-02',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-              date: '2016-05-04',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-              date: '2016-05-01',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-              date: '2016-05-08',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-              date: '2016-05-06',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-              date: '2016-05-07',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1518 弄'
-            }]
+            tableData3: []
         };
       },
       created() {
@@ -131,17 +110,14 @@
         this.$http.jsonp(this.url + 'spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           this.shopModels = response.data.result.shopModels;
-          console.log('获取获取门店和门店id成功');
         }).catch(function (response) {
           // 出错处理
-          console.log(response);
         });
         // 获取销量
-        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/sales/fusion?username=ZXX000', {jsonp: 'jsonpCallback'}).then(function (response) {
+        this.$http.jsonp(this.url + 'spg/admin/sales/fusion?username=' + this.userName, {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           let returnData = response.data.result;
           this.type = returnData.type;
-          console.log(returnData);
           if (returnData.type === 'straightcamp') {
             console.log('straightcamp');
             for (let i = 0; i < returnData.result.length; i++) {
@@ -150,36 +126,24 @@
             }
             console.log(this.selectOptions);
           } else if (returnData.type === 'group') {
-            console.log('group');
             for (let x = 0; x < returnData.result.length; x++) {
-//              console.log('x');
-//              console.log(this.selectOptions);
               let one = {value: returnData.result[x].grpClassId, label: returnData.result[x].grpClassName, children: []};
               this.selectOptions.push(one);
               for (let y = 0; y < returnData.result[x].sysGroupModels.length; y++) {
-//                console.log('y');
-//                console.log(this.selectOptions);
                 let two = {value: returnData.result[x].sysGroupModels[y].grpId, label: returnData.result[x].sysGroupModels[y].grpName, children: []};
                 this.selectOptions[x].children.push(two);
                 for (let z = 0; z < returnData.result[x].sysGroupModels[y].shopModels.length; z++) {
-//                  console.log('z');
-//                  console.log(this.selectOptions);
                   let three = {value: returnData.result[x].sysGroupModels[y].shopModels[z].shopid, label: returnData.result[x].sysGroupModels[y].shopModels[z].shopname};
                   this.selectOptions[x].children[y].children.push(three);
                 }
               }
             }
-            console.log(this.selectOptions);
           } else {
-            console.log('shop');
             let newD = {value: returnData.result.shopid, label: returnData.result.shopname};
             this.selectOptions.push(newD);
-            console.log(this.selectOptions);
           }
-          console.log('获取门店');
         }).catch(function (response) {
           // 出错处理
-          console.log(response);
         });
       },
       methods: {
@@ -198,16 +162,32 @@
           return y + '-' + m + '-' + d;
         },
         showYeJi() {
-          if (this.value6 !== []) {  // 判断是否选择时间段
+          if (this.date !== '') {  // 判断是否选择时间段
+            this.startTime = this.formatDateTime((this.date[0]));
+            this.endTime = this.formatDateTime((this.date[1]));
             if (this.value !== '') {
-              console.log(this.value);
-              console.log(this.value6);
-            } else if (this.selectedOptions[2] !== '') {
-              console.log(this.selectedOptions[2]);
-              console.log(this.formatDateTime((this.value6[0])));
-              console.log(this.formatDateTime((this.value6[1])));
+              this.$http.jsonp('http://192.168.199.144:8080/spg/admin/sales/performance?shopid=802&stime=' + this.startTime + '&etime=' + this.endTime, {jsonp: 'jsonpCallback'}).then(function (response) {
+                // response.data 为服务端返回的数据
+                let data = response.data.result.销售业绩;
+                for (let i = 0; i < data.length; i++) {
+                  let newData = {date: data[i][0], num: data[i][1], count: data[i][2]};
+                  this.tableData3.push(newData);
+                }
+              }).catch(function (response) {
+                // 出错处理
+              });
+            } else if (this.selectedOptions[2] !== 'undefined') {
+              this.$http.jsonp('http://192.168.199.144:8080/spg/admin/sales/performance?shopid=802&stime=' + this.startTime + '&etime=' + this.endTime, {jsonp: 'jsonpCallback'}).then(function (response) {
+                // response.data 为服务端返回的数据
+                let data = response.data.result.销售业绩;
+                for (let i = 0; i < data.length; i++) {
+                  let newData = {date: data[i][0], num: data[i][1], count: data[i][2]};
+                  this.tableData3.push(newData);
+                }
+              }).catch(function (response) {
+                // 出错处理
+              });
             } else {
-              console.log('空');
             }
           }
         }
@@ -229,7 +209,7 @@
       width 960px;
       height 658px;
       background white;
-      border 1px solid black;
+      border 1px solid #D3DCE6;
       border-radius 5px;
       .shop_performance
         width 960px;

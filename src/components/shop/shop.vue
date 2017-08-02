@@ -1,110 +1,100 @@
 <template>
   <div class="shop">
     <el-tabs type="border-card" class="tabs" v-show="show_store_display">
-      <el-tab-pane label="门店陈列">
-        <div class="top">
-          <div class="search_input1">
-            <span>搜索主题：</span>
-            <div class="el-inp">
-              <el-input v-model="displayType" placeholder="请输入陈列主题"></el-input>
-            </div>
-          </div>
-          <div class="search_input2">
-            <span>搜索门店：</span>
-            <div class="el-inp">
-              <el-input v-model="displayShop" placeholder="请输入门店名称"></el-input>
-            </div>
-          </div>
-          <div class="choose_date">
-            <div class="block">
-              <span class="demonstration">发布日期：</span>
-              <el-date-picker
-                v-model="displayTime"
-                type="daterange"
-                placeholder="选择日期范围">
-              </el-date-picker>
-            </div>
-          </div>
-          <div class="but">
-            <el-button @click="searchDisplay"><i class="el-icon-search"></i>搜索</el-button><el-button @click="resetSearchDisplay"><img src="../../img/resetting.png" width="12px" height="12px;"/>重置</el-button><el-button @click="openNewDisplay"><i class="el-icon-plus"></i>新增陈列</el-button>
-          </div>
-        </div>
-        <div class="main">
-          <el-table
-            ref="multipleTable"
-            :data="display"
-            @select="selectRow"
-            @select-all="selectRowAll"
-            border
-            tooltip-effect="dark"
-            style="width: 100%"
-            @selection-change="handleSelectionChange">
-            <el-table-column
-              type="selection"
-              width="55"
-              align="center">
-            </el-table-column>
+      <!--<el-tab-pane label="门店陈列">-->
+        <!--<div class="top">-->
+          <!--<div class="search_input1">-->
+            <!--<span>搜索主题：</span>-->
+            <!--<div class="el-inp">-->
+              <!--<el-input v-model="displayType" placeholder="请输入陈列主题"></el-input>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="search_input2">-->
+            <!--<span>搜索门店：</span>-->
+            <!--<div class="el-inp">-->
+              <!--<el-input v-model="displayShop" placeholder="请输入门店名称"></el-input>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="choose_date">-->
+            <!--<div class="block">-->
+              <!--<span class="demonstration">发布日期：</span>-->
+              <!--<el-date-picker-->
+                <!--v-model="displayTime"-->
+                <!--type="daterange"-->
+                <!--placeholder="选择日期范围">-->
+              <!--</el-date-picker>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="but">-->
+            <!--<el-button @click="searchDisplay"><i class="el-icon-search"></i>搜索</el-button><el-button @click="resetSearchDisplay"><img src="../../img/resetting.png" width="12px" height="12px;"/>重置</el-button><el-button @click="openNewDisplay"><i class="el-icon-plus"></i>新增陈列</el-button>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="main">-->
+          <!--<el-table-->
+            <!--ref="multipleTable"-->
+            <!--:data="display"-->
+            <!--@select="selectRow"-->
+            <!--@select-all="selectRowAll"-->
+            <!--border-->
+            <!--tooltip-effect="dark"-->
+            <!--style="width: 100%"-->
+            <!--@selection-change="handleSelectionChange">-->
             <!--<el-table-column-->
-              <!--prop="index"-->
-              <!--label="编号"-->
-              <!--width="70"-->
+              <!--type="selection"-->
+              <!--width="55"-->
               <!--align="center">-->
             <!--</el-table-column>-->
-            <el-table-column
-              prop="displayType"
-              label="陈列主题"
-              width="150"
-              align="center">
-            </el-table-column>
-            <el-table-column
-              prop="startTime"
-              label="发布日期"
-              sortable
-              width="200"
-              align="center">
-            </el-table-column>
-            <el-table-column
-              prop="shopName"
-              label="门店"
-              width="230"
-              align="center">
-            </el-table-column>
-            <el-table-column
-              prop="stars"
-              label="陈列考评(星)"
-              sortable
-              width="160"
-              align="center">
-            </el-table-column>
-            <el-table-column label="操作" align="center">
-              <template scope="scope">
-                <el-button
-                  size="small"
-                  @click="openCheckDisplay(scope.row)">查看</el-button>
+            <!--<el-table-column-->
+              <!--prop="displayType"-->
+              <!--label="陈列主题"-->
+              <!--width="150"-->
+              <!--align="center">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column-->
+              <!--prop="startTime"-->
+              <!--label="发布日期"-->
+              <!--sortable-->
+              <!--width="200"-->
+              <!--align="center">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column-->
+              <!--prop="shopName"-->
+              <!--label="门店"-->
+              <!--width="230"-->
+              <!--align="center">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column-->
+              <!--prop="stars"-->
+              <!--label="陈列考评(星)"-->
+              <!--sortable-->
+              <!--width="160"-->
+              <!--align="center">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column label="操作" align="center">-->
+              <!--<template scope="scope">-->
                 <!--<el-button-->
                   <!--size="small"-->
-                  <!--type="danger"-->
-                  <!--@click="handleDelete(scope.$index, scope.row)">删除</el-button>-->
-              </template>
-            </el-table-column>
-          </el-table>
-          <div class="but_select">
-            <el-button @click="toggleSelection(display)">全选</el-button>
-            <el-button @click="deleteDisplay"><i class="el-icon-delete"></i>删除</el-button>
-            <el-button @click="handleDownload"><i class="el-icon-upload2"></i>导出</el-button>
-          </div>
-          <div class="paging">
-            <div class="block">
-              <el-pagination
-                :current-page.sync="displayPage"
-                :page-size="10"
-                layout="total, prev, pager, next"
-                :total="displayTotal">
-              </el-pagination>
-            </div>
-          </div>
-        </div>
-      </el-tab-pane>
+                  <!--@click="openCheckDisplay(scope.row)">查看</el-button>-->
+              <!--</template>-->
+            <!--</el-table-column>-->
+          <!--</el-table>-->
+          <!--<div class="but_select">-->
+            <!--<el-button @click="toggleSelection(display)">全选</el-button>-->
+            <!--<el-button @click="deleteDisplay"><i class="el-icon-delete"></i>删除</el-button>-->
+            <!--<el-button @click="handleDownload"><i class="el-icon-upload2"></i>导出</el-button>-->
+          <!--</div>-->
+          <!--<div class="paging">-->
+            <!--<div class="block">-->
+              <!--<el-pagination-->
+                <!--:current-page.sync="displayPage"-->
+                <!--:page-size="10"-->
+                <!--layout="total, prev, pager, next"-->
+                <!--:total="displayTotal">-->
+              <!--</el-pagination>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</el-tab-pane>-->
       <el-tab-pane label="考勤排班">
         <div class="top1">
           <el-row>
@@ -117,31 +107,11 @@
           </el-row>
         </div>
         <div class="two_btn" v-show="show_content">
-          <el-button class="btn1" type="primary"><i class="el-icon-edit"></i>考勤</el-button>
-          <el-button class="btn2" type="primary" @click="showChooseOrder"><i class="el-icon-date"></i>排班</el-button>
+          <!--<el-button class="btn1" type="primary"><i class="el-icon-edit"></i>考勤</el-button>-->
+          <el-button style="margin-left: 85px;" class="btn2" type="primary" @click="showChooseOrder"><i class="el-icon-date"></i>排班</el-button>
         </div>
         <div class="content" v-show="show_content">
           <p class="center_p">考勤核对</p>
-          <!--<el-row class="con_row">-->
-            <!--<el-col :span="8"><div>-->
-              <!--<div class="left">-->
-                <!--<p class="sp">搜索门店：</p><el-input class="input3" v-model="atendenceShop" placeholder="请输入门店"></el-input>-->
-              <!--</div>-->
-            <!--</div></el-col>-->
-            <!--<el-col :span="8"><div>-->
-              <!--<div class="block">-->
-                <!--<el-date-picker-->
-                  <!--v-model="attendenceDate"-->
-                  <!--format-->
-                  <!--type="date"-->
-                  <!--placeholder="选择日期时间">-->
-                <!--</el-date-picker>-->
-              <!--</div>-->
-            <!--</div></el-col>-->
-            <!--<el-col :span="8"><div>-->
-              <!--<el-button class="btn" @click="searchAttendence"><i class="el-icon-search"></i>搜索</el-button>-->
-            <!--</div></el-col>-->
-          <!--</el-row>-->
           <el-row class="con_row2">
             <el-col :span="24"><div>
               <div class="content_top">
@@ -187,52 +157,17 @@
                 </div>
               </div>
             </div></el-col>
-            <!--<el-col :span="12"><div class="grid-content bg-purple-light">-->
-              <!--<div class="content_top1">-->
-                <!--<span>排班</span><el-button style="float: right" type="text" @click="showOrderPosition">查看更多>></el-button>-->
-                <!--<el-table-->
-                  <!--:data="order"-->
-                  <!--style="width: 100%">-->
-                  <!--<el-table-column-->
-                    <!--prop="order"-->
-                    <!--label="班次"-->
-                    <!--align="center">-->
-                  <!--</el-table-column>-->
-                  <!--<el-table-column-->
-                    <!--prop="name"-->
-                    <!--label="员工"-->
-                    <!--align="center">-->
-                  <!--</el-table-column>-->
-                  <!--<el-table-column-->
-                    <!--prop="num"-->
-                    <!--label="员工编号"-->
-                    <!--align="center">-->
-                  <!--</el-table-column>-->
-                  <!--<el-table-column-->
-                    <!--prop="position"-->
-                    <!--label="员工职位"-->
-                    <!--align="center">-->
-                  <!--</el-table-column>-->
-                <!--</el-table>-->
-              <!--</div>-->
-            <!--</div></el-col>-->
           </el-row>
         </div>
         <!-- 排班时间 -->
         <div class="choose_order" v-show="show_choose_order">
-          <!--<div class="choose1">-->
-            <!--<p>选择默认班次</p>-->
-          <!--</div>-->
           <div class="choose2">
             <el-row>
               <el-col :span="0"><div>
-                <!--<p>搜索班次组：</p>-->
               </div></el-col>
               <el-col :span="0"><div>
-                <!--<el-input style="float: left; margin-top: 10px;" v-model="input_banCi" placeholder="请输入班次名称"></el-input>-->
               </div></el-col>
               <el-col :span="24"><div style="margin-top: 10px;margin-bottom: 10px;float: right;">
-                <!--<el-button><i class="el-icon-search"></i>搜索</el-button>-->
                 <el-button @click="showChoose5"><i class="el-icon-plus"></i>新增</el-button ><el-button @click="closeChooseOrder"><i class="el-icon-close"></i>关闭</el-button>
               </div></el-col>
             </el-row>
@@ -280,14 +215,17 @@
                     <p>使用范围：</p>
                   </div></el-col>
                   <el-col class="el_input" :span="20"><div>
-                    <el-select v-model="city" placeholder="点击选择地区">
-                      <el-option
-                        v-for="item in city_list"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                      </el-option>
-                    </el-select>
+                    <!--<el-select v-model="city" placeholder="点击选择地区">-->
+                      <!--<el-option-->
+                        <!--v-for="item in city_list"-->
+                        <!--:key="item.value"-->
+                        <!--:label="item.label"-->
+                        <!--:value="item.value">-->
+                      <!--</el-option>-->
+                    <!--</el-select>-->
+                    <select class="selectSelf" v-model="city">
+                      <option v-for="item in city_list">{{item.value}}</option>
+                    </select>
                   </div></el-col>
                 </el-row>
               </div>
@@ -315,7 +253,6 @@
                   </div></el-col>
                     <el-col :span="6"><div>
                       <p>班次名称</p>
-                      <!--<el-input v-for="item in schedule" :key="item.id" v-model="item.bctype" placeholder="班次名称"></el-input>-->
                       <el-select v-for="item in schedule" :key="item.id" v-model="item.bctype" placeholder="请选择">
                         <el-option
                           v-for="item in ban"
@@ -372,14 +309,17 @@
             <p>门店名称：</p>
           </div></el-col>
           <el-col :span="6"><div class="shop_input">
-            <el-select v-model="shopOptions.shopId" placeholder="请选择">
-              <el-option
-                v-for="item in allShop"
-                :key="item.shopid"
-                :label="item.shopname"
-                :value="item.shopid">
-              </el-option>
-            </el-select>
+            <!--<el-select v-model="shopOptions.shopId" placeholder="请选择">-->
+              <!--<el-option-->
+                <!--v-for="item in allShop"-->
+                <!--:key="item.shopid"-->
+                <!--:label="item.shopname"-->
+                <!--:value="item.shopid">-->
+              <!--</el-option>-->
+            <!--</el-select>-->
+            <select class="selectSelf2" v-model="shopOptions.shopName">
+              <option v-for="item in allShop">{{item.shopname}}</option>
+            </select>
           </div></el-col>
           <el-col :span="3"><div>
             <p>门店地址：</p>
@@ -407,114 +347,6 @@
         </el-row>
       </el-tab-pane>
     </el-tabs>
-    <!-- 门店排班查询与操作 -->
-    <div class="order_position" v-show="show_order_position">
-      <div class="close">
-        <el-row>
-          <el-col :span="23"><div></div></el-col>
-          <el-col :span="1"><div>
-            <i @click="closeOrderPosition" class="el-icon-circle-close"></i>
-          </div></el-col>
-        </el-row>
-      </div>
-      <div @click="closeOrderPosition" class="position1">
-        <p>门店排班查询与操作</p>
-      </div>
-      <div class="position2">
-        <el-row>
-          <el-col :span="12"><div class="grid-content bg-purple">
-            <div class="search1">
-              <span>搜索地区： </span><el-input class="input1" v-model="input" placeholder="请输入内容"></el-input>
-            </div>
-            <div class="search2">
-              <div class="block">
-                <span class="demonstration">起止日期：</span>
-                <el-date-picker class="input2"
-                  v-model="value3"
-                  type="daterange"
-                  placeholder="选择时间范围">
-                </el-date-picker>
-              </div>
-            </div>
-          </div></el-col>
-          <el-col :span="12"><div class="grid-content bg-purple-light">
-            <div class="search3">
-              <el-button @click=""><i class="el-icon-search"></i>搜索</el-button><el-button><i class="el-icon-loading
-"></i>重置</el-button><el-button @click="showOrder"><i class="el-icon-edit"></i>去排班</el-button>
-            </div>
-          </div></el-col>
-        </el-row>
-      </div>
-      <div class="position3">
-        <div class="position3_top">
-          <el-row>
-            <el-col :span="12"><div>
-              <el-checkbox v-model="checked">全选</el-checkbox>
-            </div></el-col>
-            <el-col :span="12"><div>
-              <div class="btn">
-                <el-button><i class="el-icon-close"></i>删除</el-button><el-button><i class="el-icon-upload2"></i>导出</el-button>
-              </div>
-            </div></el-col>
-          </el-row>
-        </div>
-        <div class="position3_content">
-              <ul class="pos_ul">
-                <el-row>
-                  <el-col :span="24"><div>
-                    <li>
-                        <el-checkbox v-model="checked">2017-2-2 周六</el-checkbox>
-                        <div class="pad">
-                          <div class="pos_li">
-                            <table border="0" cellspacing="0" cellpadding="0">
-                              <tr><th>班次</th></tr>
-                              <tr><td>早班</td></tr>
-                              <tr><td>10：00~11：00</td></tr>
-                            </table>
-                            <table border="0" cellspacing="0" cellpadding="0">
-                              <tr><th>员工姓名</th><th>员工工号</th><th>员工职位</th></tr>
-                              <tr><td>员工一</td><td>12345689789</td><td>店长</td></tr>
-                              <tr><td>员工一</td><td>111111</td><td>店长</td></tr>
-                              <tr><td>员工一</td><td>111111</td><td>店长</td></tr>
-                              <tr><td>员工一</td><td>111111</td><td>店长</td></tr>
-                            </table>
-                            <table border="0" cellspacing="0" cellpadding="0">
-                              <tr><th>班次</th></tr>
-                              <tr><td>早班</td></tr>
-                              <tr><td>10：00~11：00</td></tr>
-                            </table>
-                            <table border="0" cellspacing="0" cellpadding="0">
-                              <tr><th>员工姓名</th><th>员工工号</th><th>员工职位</th></tr>
-                              <tr><td>员工一</td><td>12345689789</td><td>店长</td></tr>
-                              <tr><td>员工一</td><td>111111</td><td>店长</td></tr>
-                              <tr><td>员工一</td><td>111111</td><td>店长</td></tr>
-                              <tr><td>员工一</td><td>111111</td><td>店长</td></tr>
-                            </table>
-                            <table border="0" cellspacing="0" cellpadding="0">
-                              <tr><th>班次</th></tr>
-                              <tr><td>早班</td></tr>
-                              <tr><td>10：00~11：00</td></tr>
-                            </table>
-                            <table border="0" cellspacing="0" cellpadding="0">
-                              <tr><th>员工姓名</th><th>员工工号</th><th>员工职位</th></tr>
-                              <tr><td>员工一</td><td>12345689789</td><td>店长</td></tr>
-                              <tr><td>员工一</td><td>111111</td><td>店长</td></tr>
-                              <tr><td>员工一</td><td>111111</td><td>店长</td></tr>
-                              <tr><td>员工一</td><td>111111</td><td>店长</td></tr>
-                            </table>
-                            <table border="0" cellspacing="0" cellpadding="0">
-                              <tr><th>排班备注</th></tr>
-                              <tr><td>2222222222222222222</td></tr>
-                            </table>
-                          </div>
-                        </div>
-                      </li>
-                  </div></el-col>
-                </el-row>
-              </ul>
-        </div>
-      </div>
-    </div >
     <!-- 新增陈列 -->
     <new-display v-show="$store.state.show_newDisplay"></new-display>
     <check-display :display-detail="displayDetail" v-show="$store.state.show_checkDisplay"></check-display>
@@ -541,6 +373,7 @@
         return data;
       };
       return {
+        url: this.$store.state.localUrl,
         show_store_display: true,
         show_attendance: false,
         show_content: true,
@@ -626,22 +459,14 @@
         }  // 门店信息列表
       };
     },
-    beforeCreate() {
-    },
     created() {
       //  获取城市列表
       this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/cityshop', {jsonp: 'jsonpCallback'}).then(function (response) {
         // response.data 为服务端返回的数据
         let list = response.data.result.门店列表;
-//        for (let i = 0; i < list.length; i++) {
-//          console.log(1);
-//          console.log(list[i]);
-//        }
         this.city_shop = list;
         for (let tmp in list) {
-//          console.log(tmp);  //  “键名”
           this.city_list.push({label: tmp, value: tmp});
-//          console.log(list[tmp]);  //  “键值'
         }
       }).catch(function () {
         // 出错处理
@@ -656,16 +481,16 @@
         // 出错处理
       });
       // 获取排班列表
-      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/pqSchedulings', {jsonp: 'jsonpCallback'}).then(function (response) {
+      this.$http.jsonp(this.url + 'spg/admin/attendance/pqSchedulings', {jsonp: 'jsonpCallback'}).then(function (response) {
         // response.data 为服务端返回的数据
         let list = response.data.result.rows;
-        console.log(this.orderList);
         for (let x = 0; x < list.length; x++) {
-            let newList = {city: list[x].city, date: list[x].schedulingdate, shop: [{shopid: list[x].shopid}], bci: [{bcitype: list[x].bctype, stime: list[x].stime, etime: list[x].etime}], shopName: []};
+            let newList = {city: list[x].city, date: list[x].schedulingdate, shop: [{shopid: list[x].shopid}], bci: [{bcitype: list[x].bctype, stime: list[x].stime, etime: list[x].etime}], shopName: [{shopName: list[x].shopname}]};
             this.orderList.push(newList);
             for (let y = 0; y < list.length; y++) {
-              if (this.orderList[x].city === list[y].city && this.orderList[x].date === list[y].schedulingdate) {
+              if ((this.orderList[x].city === list[y].city) && (this.orderList[x].date === list[y].schedulingdate)) {
                 this.orderList[x].shop.push({shopid: list[y].shopid});
+                this.orderList[x].shopName.push({shopName: list[y].shopname});
                 this.orderList[x].bci.push({bcitype: list[y].bctype, stime: list[y].stime, etime: list[y].etime});
               }
             }
@@ -674,8 +499,7 @@
         for (let i = 0; i < this.orderList.length; i++) {
           let isRepeated = false;
           for (let x = 0; x < newList.length; x++) {
-            if (this.orderList[i].city === this.orderList[x].city) {
-              console.log('重复');
+            if ((this.orderList[i].city === newList[x].city) && (this.orderList[i].date === newList[x].date)) {
               isRepeated = true;
               break;
             }
@@ -685,15 +509,12 @@
           }
         }
         this.orderList = newList;
-        console.log(this.orderList);
         let banci = [];
+        let shopAall = [];
         for (let i = 0; i < this.orderList.length; i++) {
-          console.log('i');
           for (let x = 0; x < this.orderList[i].bci.length; x++) {
-            console.log('x');
             let isRepeated = false;
             for (let y = 0; y < banci.length; y++) {
-              console.log('y');
               if (this.orderList[i].bci[x].bcitype === banci[y].bcitype) {
                 isRepeated = true;
               break;
@@ -703,10 +524,22 @@
               banci.push(this.orderList[i].bci[x]);
             }
           }
-          console.log(banci);
           this.orderList[i].bci = banci;
+          for (let x = 0; x < this.orderList[i].shopName.length; x++) {
+            let isRepeated = false;
+            for (let y = 0; y < shopAall.length; y++) {
+              if (this.orderList[i].shopName[x].shopName === shopAall[y].shopName) {
+                isRepeated = true;
+              break;
+              }
+            }
+            if (!isRepeated) {
+              shopAall.push(this.orderList[i].shopName[x]);
+            }
+          }
+          this.orderList[i].shopName = shopAall;
+          shopAall = [];
         }
-        console.log(this.orderList);
       }).catch(function () {
         // 出错处理
       });
@@ -768,35 +601,48 @@
               }
           }
       },
-      orderList: {
+      shopOptions: {
         handler: function () {
-          //  获取门店列表
-          this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then(function (response) {
-            // response.data 为服务端返回的数据
-            this.shopModels = response.data.result.shopModels;
-            // 门店id name匹配
-            for (let i = 0; i < this.orderList.length; i++) {
-              console.log('dsadas');
-              for (let y = 0; y < this.orderList[i].shop.length; y++) {
-                console.log('1');
-                for (let x = 0; x < this.shopModels.length; x++) {
-                  console.log('2');
-                  console.log(this.orderList);
-                  if (this.orderList[i].shop[y].shopid === this.shopModels[x].shopid) {
-                    console.log('3');
-                    let shopName = {shopName: this.shopModels[x].shopname};
-                    this.orderList[i].shopName.push(shopName);
-                  }
-                }
-              }
-            }
-            console.log(this.orderList);
-          }).catch(function () {
-            // 出错处理
-            console.log('获取门店列表失败');
-          });
-        }
+          if ((this.shopOptions.longitude > 180) || (this.shopOptions.longitude < 0)) {
+            this.shopOptions.longitude = '';
+            this.$message({
+              message: '请输入正确的经度！',
+              type: 'warning'
+            });
+          }
+          if ((this.shopOptions.latitude > 90) || (this.shopOptions.latitude < 0)) {
+            this.shopOptions.latitude = '';
+            this.$message({
+              message: '请输入正确的纬度！',
+              type: 'warning'
+            });
+          }
+        },
+        deep: true
       }
+      // orderList: {
+      //   handler: function () {
+      //     //  获取门店列表
+      //     this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then(function (response) {
+      //       // response.data 为服务端返回的数据
+      //       this.shopModels = response.data.result.shopModels;
+      //       // 门店id name匹配
+      //       for (let i = 0; i < this.orderList.length; i++) {
+      //         for (let y = 0; y < this.orderList[i].shop.length; y++) {
+      //           for (let x = 0; x < this.shopModels.length; x++) {
+      //             if (this.orderList[i].shop[y].shopid === this.shopModels[x].shopid) {
+      //               let shopName = {shopName: this.shopModels[x].shopname};
+      //               this.orderList[i].shopName.push(shopName);
+      //             }
+      //           }
+      //         }
+      //       }
+      //     }).catch(function () {
+      //       // 出错处理
+      //       console.log('获取门店列表失败');
+      //     });
+      //   }
+      // }
     },
     methods: {
       toggleSelection(rows) {
@@ -868,11 +714,6 @@
 //        minute = minute < 10 ? ('0' + minute) : minute;
         return y + '-' + m + '-' + d;
       },
-//      checkSch() {
-//        for (let i = 0; i < this.schedule.length; i++) {
-//
-//        }
-//      },
       submit() {  // 提交新增班次组
         //  判断输入内容是否为空
         if (this.city === '') {
@@ -1044,27 +885,36 @@
       },
       submitShop() {
         for (let i = 0; i < this.allShop.length; i++) {
-          if (this.shopOptions.shopId === this.allShop[i].shopid) {
-            this.shopOptions.shopName = this.allShop[i].shopname;
+          if (this.shopOptions.shopName === this.allShop[i].shopname) {
+            this.shopOptions.shopId = this.allShop[i].shopid;
           }
         }
-//        let params = JSON.stringify(this.shopOptions);
-//        let success = false;
-//        $.ajax({
-//          type: 'POST',
-//          url: 'http://localhost:8080/spg/admin/attendance/addSchedulings',
-//          contentType: 'application/json;charset=utf-8', // 设置请求头信息
-//          dataType: 'json',
-//          async: false,
-//          data: params,
-//          success: function(data) {
-//            console.log('post成功');
-//            console.log(data);
-//            success = true;
-//          }
-//        });
-//        if (success) {
-//        }
+        let params = JSON.stringify(this.shopOptions);
+        let success = false;
+        $.ajax({
+          type: 'POST',
+          url: 'http://localhost:8080/spg/admin/attendance/setaddress',
+          contentType: 'application/json;charset=utf-8', // 设置请求头信息
+          dataType: 'json',
+          async: false,
+          data: params,
+          success: function(data) {
+            success = true;
+          }
+        });
+        if (success) {
+          this.$message({
+            message: '设置门店信息成功！',
+            type: 'success'
+          });
+          this.shopOptions = {
+              shopId: '',
+              shopName: '',
+              shopAddress: '',
+              longitude: '',  // 经度
+              latitude: ''
+          };  // 门店信息列表
+        }
       }
     },
     components: {
@@ -1076,6 +926,16 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
+  .selectSelf
+    width 100px;
+    height 35px;
+    border 1px solid #C0CCDA;
+    border-radius 5px;
+  .selectSelf2
+    width 150px;
+    height 35px;
+    border 1px solid #C0CCDA;
+    border-radius 5px;
   body
     margin 0;
     padding 0;

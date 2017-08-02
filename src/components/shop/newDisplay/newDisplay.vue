@@ -33,14 +33,9 @@
           </el-col>
           <el-col :span="20">
             <div>
-              <el-select class="select" name="shopid" v-model="shopid" multiple filterable placeholder="选择地区">
-                <el-option
-                  v-for="item in shop"
-                  :key="item.shopid"
-                  :label="item.shopname"
-                  :value="item.shopid">
-                </el-option>
-              </el-select>
+              <select class="selectSelf" v-model="shopid">
+                <option v-for="item in shop">{{item.shopname}}</option>
+              </select>
             </div>
           </el-col>
         </el-row>
@@ -248,6 +243,11 @@
       },
       submit() {
         this.postDisplay = [];
+        for (let x = 0; x < this.shop.length; x++) {
+          if (this.shop[x].shopid === this.shopid[0]) {
+            this.shopid[0] = this.shop[x].shopname;
+          }
+        }
         for (let i = 0; i < this.shopid.length; i++) {
           let dis = {shopId: this.shopid[i], displayName: this.newDisplay.displayName, displayType: this.newDisplay.displayType, startTime: this.newDisplay.startTime, overTime: this.newDisplay.overTime, displayRemarks: this.newDisplay.displayRemarks, shopName: '', displayStandard: this.newDisplay.displayStandard};
           this.postDisplay.push(dis);
@@ -309,6 +309,7 @@
       },
       closeNewDisplay() {
           this.$store.state.show_newDisplay = false;
+          this.shopid = [];
           this.newDisplay = { //  添加陈列的整个json
             displayName: '',
             displayRemarks: '',
@@ -323,6 +324,11 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
+  .selectSelf
+    margin-top 10px;
+    height 35px;
+    border 1px solid #C0CCDA;
+    border-radius 5px;
   .note_p
     font-size 14px;
     color #99A9BF;
