@@ -167,7 +167,18 @@
               </div></el-col>
               <el-col :span="0"><div>
               </div></el-col>
-              <el-col :span="24"><div style="margin-top: 10px;margin-bottom: 10px;float: right;">
+              <el-col :span="14" style="margin-top: 10px;float: left;">
+                <div class="block">
+                  <span class="demonstration">选择时间段</span>
+                  <el-date-picker
+                    v-model="dateRange"
+                    type="daterange"
+                    placeholder="选择日期范围">
+                  </el-date-picker>
+                  <el-button @click="searchBanci">搜索排班</el-button>
+                </div>
+              </el-col>
+              <el-col :span="10"><div style="margin-top: 10px;margin-bottom: 10px;float: right;">
                 <el-button @click="showChoose5"><i class="el-icon-plus"></i>新增</el-button ><el-button @click="closeChooseOrder"><i class="el-icon-close"></i>关闭</el-button>
               </div></el-col>
             </el-row>
@@ -309,14 +320,6 @@
             <p>门店名称：</p>
           </div></el-col>
           <el-col :span="6"><div class="shop_input">
-            <!--<el-select v-model="shopOptions.shopId" placeholder="请选择">-->
-              <!--<el-option-->
-                <!--v-for="item in allShop"-->
-                <!--:key="item.shopid"-->
-                <!--:label="item.shopname"-->
-                <!--:value="item.shopid">-->
-              <!--</el-option>-->
-            <!--</el-select>-->
             <select class="selectSelf2" v-model="shopOptions.shopName">
               <option v-for="item in allShop">{{item.shopname}}</option>
             </select>
@@ -373,7 +376,7 @@
         return data;
       };
       return {
-        url: this.$store.state.localUrl,
+        url: this.$store.state.lastUrl,
         show_store_display: true,
         show_attendance: false,
         show_content: true,
@@ -456,12 +459,13 @@
           shopAddress: '',
           longitude: '',  // 经度
           latitude: ''
-        }  // 门店信息列表
+        },  // 门店信息列表
+        dateRange: ''
       };
     },
     created() {
       //  获取城市列表
-      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/cityshop', {jsonp: 'jsonpCallback'}).then(function (response) {
+      this.$http.jsonp(this.url + 'spg/admin/attendance/cityshop', {jsonp: 'jsonpCallback'}).then(function (response) {
         // response.data 为服务端返回的数据
         let list = response.data.result.门店列表;
         this.city_shop = list;
@@ -472,7 +476,7 @@
         // 出错处理
       });
       //  获取首页陈列列表
-      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/qryDisplays?page=' + this.displayPage +
+      this.$http.jsonp(this.url + 'spg/admin/display/qryDisplays?page=' + this.displayPage +
         '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
         // response.data 为服务端返回的数据
         this.display = response.data.result.rows;
@@ -481,9 +485,9 @@
         // 出错处理
       });
       // 获取排班列表
-      this.$http.jsonp(this.url + 'spg/admin/attendance/pqSchedulings', {jsonp: 'jsonpCallback'}).then(function (response) {
+      this.$http.jsonp(this.url + 'spg/admin/attendance/periodSchedulings?stime=1&etime=1', {jsonp: 'jsonpCallback'}).then(function (response) {
         // response.data 为服务端返回的数据
-        let list = response.data.result.rows;
+        let list = response.data.result.spgSchedulings;
         for (let x = 0; x < list.length; x++) {
             let newList = {city: list[x].city, date: list[x].schedulingdate, shop: [{shopid: list[x].shopid}], bci: [{bcitype: list[x].bctype, stime: list[x].stime, etime: list[x].etime}], shopName: [{shopName: list[x].shopname}]};
             this.orderList.push(newList);
@@ -544,7 +548,10 @@
         // 出错处理
       });
       // 获取考勤列表
-      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+      let now = new Date();
+      now.setDate(now.getDate() + 7);
+      now.setDate(now.getDate() - 14);
+      this.$http.jsonp(this.url + 'spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
         // response.data 为服务端返回的数据
         this.attendance = response.data.result.rows;
         this.attendenceTotal = response.data.result.total;
@@ -555,9 +562,12 @@
         // 出错处理
       });
       // 获取所有门店name-id
-      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then(function (response) {
+      this.$http.jsonp(this.url + 'spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then(function (response) {
         // response.data 为服务端返回的数据
         this.allShop = response.data.result.shopModels;
+        this.allShop.sort(function(x, y) {
+          return y.shopname.localeCompare(x.shopname);
+        });
       }).catch(function () {
         // 出错处理
       });
@@ -569,7 +579,7 @@
           handler: function() {
               if (this.displayName === '' && this.displayShop === '' && this.displayTime === '') {
                 //  获取首页陈列列表
-                this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/qryDisplays?page=' + this.displayPage +
+                this.$http.jsonp(this.url + 'spg/admin/display/qryDisplays?page=' + this.displayPage +
                   '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
                   // response.data 为服务端返回的数据
                   this.display = response.data.result.rows;
@@ -586,7 +596,7 @@
           handler: function () {
               if (this.attendenceDate === '' && this.atendenceShop === '') {
                 // 获取考勤列表
-                this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+                this.$http.jsonp(this.url + 'spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
                   // response.data 为服务端返回的数据
                   this.attendance = response.data.result.rows;
                   this.attendenceTotal = response.data.result.total;
@@ -697,7 +707,7 @@
           formData[i].schedulingdate = formarDate;
         }
         let params = JSON.stringify(formData);
-        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/addSchedulings', params, {jsonp: 'jsonpCallback'}).then(function (response) {
+        this.$http.jsonp(this.url + 'spg/admin/attendance/addSchedulings', params, {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
         }).catch(function (response) {
           // 出错处理
@@ -738,7 +748,7 @@
           let success = false;
           $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080/spg/admin/attendance/addSchedulings',
+            url: this.url + 'spg/admin/attendance/addSchedulings',
             contentType: 'application/json;charset=utf-8', // 设置请求头信息
             dataType: 'json',
             async: false,
@@ -757,7 +767,7 @@
       openCheckDisplay(row) {
       	this.$store.state.show_checkDisplay = true;
         // 查询陈列详情
-        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getDisplay?id=' + row.id, {jsonp: 'jsonpCallback'}).then((response) => {
+        this.$http.jsonp(this.url + 'spg/admin/display/getDisplay?id=' + row.id, {jsonp: 'jsonpCallback'}).then((response) => {
           // response.data 为服务端返回的数据
           this.displayDetail = response.data.result.陈列信息;
           this.displayDetail.stars = Number(this.displayDetail.stars);
@@ -775,7 +785,7 @@
           endTime = this.formatDateTime(this.displayTime[1]);
         }
         //  获取首页陈列列表
-        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/qryDisplays?page=' + this.displayPage +
+        this.$http.jsonp(this.url + 'spg/admin/display/qryDisplays?page=' + this.displayPage +
           '&rows=10&filter_EQS_displayType=' + this.displayType + '&filter_LIKES_shopName=' + this.displayShop + '&filter_LES_startTime=' + endTime + '&filter_GES_startTime=' + startTime, {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           this.display = response.data.result.rows;
@@ -789,7 +799,7 @@
         this.displayType = '';
         this.displayShop = '';
         //  获取首页陈列列表
-        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/qryDisplays?page=' + this.displayPage +
+        this.$http.jsonp(this.url + 'spg/admin/display/qryDisplays?page=' + this.displayPage +
           '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           this.display = response.data.result.rows;
@@ -847,7 +857,7 @@
           this.attendenceDate = Date.parse(this.attendenceDate);
         }
         // 获取考勤列表
-        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10&filter_EQS_dkdate=' + this.attendenceDate + '&filter_LIKES_shopname=' + this.atendenceShop, {jsonp: 'jsonpCallback'}).then(function (response) {
+        this.$http.jsonp(this.url + 'spg/admin/attendance/attendanceinfo?page=' + this.attendencePage + '&rows=10&filter_EQS_dkdate=' + this.attendenceDate + '&filter_LIKES_shopname=' + this.atendenceShop, {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           this.attendance = response.data.result.rows;
           this.attendenceTotal = response.data.result.total;
@@ -873,7 +883,7 @@
         let params = JSON.stringify(deleteId);
         $.ajax({
           type: 'POST',
-          url: 'http://localhost:8080/spg/admin/display/delDisplay',
+          url: this.url + '/spg/admin/display/delDisplay',
           contentType: 'application/json;charset=utf-8', // 设置请求头信息
           dataType: 'json',
           async: false,
@@ -893,7 +903,7 @@
         let success = false;
         $.ajax({
           type: 'POST',
-          url: 'http://localhost:8080/spg/admin/attendance/setaddress',
+          url: this.url + '/spg/admin/attendance/setaddress',
           contentType: 'application/json;charset=utf-8', // 设置请求头信息
           dataType: 'json',
           async: false,
@@ -914,6 +924,85 @@
               longitude: '',  // 经度
               latitude: ''
           };  // 门店信息列表
+        }
+      },
+      searchBanci() {
+        if (this.dateRange !== '') {
+          let startTime = this.formatDateTime(this.dateRange[0]);
+          let endTime = this.formatDateTime(this.dateRange[1]);
+          // 获取排班列表
+          this.$http.jsonp(this.url + 'spg/admin/attendance/periodSchedulings?stime=' + startTime + '&etime=' + endTime, {jsonp: 'jsonpCallback'}).then(function (response) {
+            // response.data 为服务端返回的数据
+            let list = response.data.result.spgSchedulings;
+            if (list.length === 0) {
+              this.orderList = [];
+            } else {
+              for (let x = 0; x < list.length; x++) {
+                let newList = {
+                  city: list[x].city,
+                  date: list[x].schedulingdate,
+                  shop: [{shopid: list[x].shopid}],
+                  bci: [{bcitype: list[x].bctype, stime: list[x].stime, etime: list[x].etime}],
+                  shopName: [{shopName: list[x].shopname}]
+                };
+                this.orderList.push(newList);
+                for (let y = 0; y < list.length; y++) {
+                  if ((this.orderList[x].city === list[y].city) && (this.orderList[x].date === list[y].schedulingdate)) {
+                    this.orderList[x].shop.push({shopid: list[y].shopid});
+                    this.orderList[x].shopName.push({shopName: list[y].shopname});
+                    this.orderList[x].bci.push({bcitype: list[y].bctype, stime: list[y].stime, etime: list[y].etime});
+                  }
+                }
+              }
+              let newList = [];
+              for (let i = 0; i < this.orderList.length; i++) {
+                let isRepeated = false;
+                for (let x = 0; x < newList.length; x++) {
+                  if ((this.orderList[i].city === newList[x].city) && (this.orderList[i].date === newList[x].date)) {
+                    isRepeated = true;
+                    break;
+                  }
+                }
+                if (!isRepeated) {
+                  newList.push(this.orderList[i]);
+                }
+              }
+              this.orderList = newList;
+              let banci = [];
+              let shopAall = [];
+              for (let i = 0; i < this.orderList.length; i++) {
+                for (let x = 0; x < this.orderList[i].bci.length; x++) {
+                  let isRepeated = false;
+                  for (let y = 0; y < banci.length; y++) {
+                    if (this.orderList[i].bci[x].bcitype === banci[y].bcitype) {
+                      isRepeated = true;
+                      break;
+                    }
+                  }
+                  if (!isRepeated) {
+                    banci.push(this.orderList[i].bci[x]);
+                  }
+                }
+                this.orderList[i].bci = banci;
+                for (let x = 0; x < this.orderList[i].shopName.length; x++) {
+                  let isRepeated = false;
+                  for (let y = 0; y < shopAall.length; y++) {
+                    if (this.orderList[i].shopName[x].shopName === shopAall[y].shopName) {
+                      isRepeated = true;
+                      break;
+                    }
+                  }
+                  if (!isRepeated) {
+                    shopAall.push(this.orderList[i].shopName[x]);
+                  }
+                }
+                this.orderList[i].shopName = shopAall;
+                shopAall = [];
+              }
+            }
+          }).catch(function () {
+            // 出错处理
+          });
         }
       }
     },

@@ -1,5 +1,5 @@
 /**
- * Created by Administrator on 2017/4/26 0026.
+ * Created by Administrator on 2017/6/26 0026.
  */
 import Vue from 'vue';
 import Vuex from 'vuex';
@@ -10,7 +10,7 @@ Vue.use(Vuex);
 
 //  state
 const state = {
-  localUrl: 'http://192.168.199.144:8080/',  // 本地环境
+  localUrl: 'http://localhost:8080/',  // 本地环境
   lastUrl: 'http://61.130.182.170:8085/',  // 生产环境ip
   url: 'http://120.55.85.65:8088/',  // 测试环境接口ip
   login: sessionStorage.getItem('login'), // 判断是否登录

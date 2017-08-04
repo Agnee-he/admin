@@ -31,7 +31,7 @@
   export default {
     data() {
       return {
-        url: this.$store.state.url,
+        url: this.$store.state.lastUrl,
         user_name: '',
         password: '',
         checked: false,
@@ -56,7 +56,7 @@
     //  相当于ready 模板编译挂载之后
     mounted: function() {
       //  读取cookie中的账号信息，如果有accountInfo的话，则说明该用户之前勾选了记住密码的功能，则需要自动填上账号密码
-    //      this.loadAccountInfo();
+      //  this.loadAccountInfo();
     },
     methods: {
       login() {
@@ -64,21 +64,42 @@
         this.$http.jsonp(this.url + 'spg/admin/login?username=' + this.user_name + '&password=' + this.password, {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           let user = response.data.result;
-          for (let i = 0; i < this.shop.length; i++) {
+          let returnData = response.data.result.permissions.functionList;
+          if (user.location === null) {
+            sessionStorage.setItem('shopname', '总部');
+            this.$store.state.userShop = '总部';
+          } else {
+            for (let i = 0; i < this.shop.length; i++) {
               if (user.location.shopId === this.shop[i].shopid) {
                 sessionStorage.setItem('shopname', this.shop[i].shopname);
                 this.$store.state.userShop = this.shop[i].shopname;
               }
+            }
           }
-          sessionStorage.setItem('user', user.jobnumber);
-          this.$store.state.user = user.jobnumber;
-          this.$notify({
-            title: '成功成功',
-            message: '欢迎进入非常导购管理系统！',
-            type: 'success'
-          });
-          sessionStorage.setItem('login', '100');
-          router.push({ path: '/shouye' });
+          let quanxian = 0;
+          for (let i = 0; i < returnData.length; i++) {
+            if (returnData[i].functionId === 'Platform') {
+              if ((returnData[i].authId === 'Ins') || (returnData[i].authId === 'Del') || (returnData[i].authId === 'Mod') || (returnData[i].authId === 'Que')) {
+                quanxian = quanxian + 1;
+              }
+            }
+          }
+          if (quanxian === 4) {
+            sessionStorage.setItem('user', user.jobnumber);
+            this.$store.state.user = user.jobnumber;
+            this.$notify({
+              title: '成功成功',
+              message: '欢迎进入非常导购管理系统！',
+              type: 'success'
+            });
+            sessionStorage.setItem('login', '100');
+            router.push({ path: '/shouye' });
+          } else {
+            this.$notify.error({
+              title: '登录失败',
+              message: '权限不足！'
+            });
+          }
         }).catch(function (response) {
           // 出错处理
           console.log(response);

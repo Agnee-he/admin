@@ -87,7 +87,7 @@
   export default {
       data() {
           return {
-            url: this.$store.state.url,
+            url: this.$store.state.lastUrl,
             userName: this.$store.state.user,
             value: '',
             value7: '',
@@ -162,11 +162,12 @@
           return y + '-' + m + '-' + d;
         },
         showYeJi() {
+          this.tableData3 = [];
           if (this.date !== '') {  // 判断是否选择时间段
             this.startTime = this.formatDateTime((this.date[0]));
             this.endTime = this.formatDateTime((this.date[1]));
             if (this.value !== '') {
-              this.$http.jsonp('http://192.168.199.144:8080/spg/admin/sales/performance?shopid=802&stime=' + this.startTime + '&etime=' + this.endTime, {jsonp: 'jsonpCallback'}).then(function (response) {
+              this.$http.jsonp(this.url + 'spg/admin/sales/performance?shopid=' + this.value + '&stime=' + this.startTime + '&etime=' + this.endTime, {jsonp: 'jsonpCallback'}).then(function (response) {
                 // response.data 为服务端返回的数据
                 let data = response.data.result.销售业绩;
                 for (let i = 0; i < data.length; i++) {
@@ -177,7 +178,7 @@
                 // 出错处理
               });
             } else if (this.selectedOptions[2] !== 'undefined') {
-              this.$http.jsonp('http://192.168.199.144:8080/spg/admin/sales/performance?shopid=802&stime=' + this.startTime + '&etime=' + this.endTime, {jsonp: 'jsonpCallback'}).then(function (response) {
+              this.$http.jsonp(this.url + 'spg/admin/sales/performance?shopid=' + this.selectedOptions[2] + '&stime=' + this.startTime + '&etime=' + this.endTime, {jsonp: 'jsonpCallback'}).then(function (response) {
                 // response.data 为服务端返回的数据
                 let data = response.data.result.销售业绩;
                 for (let i = 0; i < data.length; i++) {
@@ -189,6 +190,11 @@
               });
             } else {
             }
+          } else {
+            this.$message({
+              message: '请选择时间!',
+              type: 'warning'
+            });
           }
         }
       }
