@@ -314,15 +314,17 @@
           </div>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="门店信息">
+      <el-tab-pane class="address_shop" label="门店位置">
         <el-row>
           <el-col :span="3"><div>
             <p>门店名称：</p>
           </div></el-col>
           <el-col :span="6"><div class="shop_input">
-            <select class="selectSelf2" v-model="shopOptions.shopName">
-              <option v-for="item in allShop">{{item.shopname}}</option>
-            </select>
+            <!--<select class="selectSelf2" v-model="shopOptions.shopName">-->
+              <!--<option v-for="item in allShop">{{item.shopname}}</option>-->
+            <!--</select>-->
+            <v-select class="selectSelf2" v-model="shopOptions.shopName" :options="shopName">
+            </v-select>
           </div></el-col>
           <el-col :span="3"><div>
             <p>门店地址：</p>
@@ -361,6 +363,10 @@
   import checkDisplay from './checkDisplay/checkDisplay.vue';
   import $ from 'jquery';
   import router from '../../router';
+  import ElInput from '../../../node_modules/element-ui/packages/input/src/input.vue';
+  import Vue from 'vue';
+  import vSelect from 'vue-select';
+  Vue.component('v-select', vSelect);
 
   export default {
     data() {
@@ -453,6 +459,7 @@
           }
         ], //  新建班次时选择的班次名称
         allShop: [],  // 所有门店name-id
+        shopName: [],
         shopOptions: {
           shopId: '',
           shopName: '',
@@ -568,6 +575,9 @@
         this.allShop.sort(function(x, y) {
           return y.shopname.localeCompare(x.shopname);
         });
+        for (let i = 0; i < this.allShop.length; i++) {
+          this.shopName.push(this.allShop[i].shopname);
+        }
       }).catch(function () {
         // 出错处理
       });
@@ -613,14 +623,30 @@
       },
       shopOptions: {
         handler: function () {
-          if ((this.shopOptions.longitude > 180) || (this.shopOptions.longitude < 0)) {
+          if (!isNaN(this.shopOptions.longitude)) {
+            if ((this.shopOptions.longitude > 180) || (this.shopOptions.longitude < 0)) {
+              this.shopOptions.longitude = '';
+              this.$message({
+                message: '请输入正确的经度！',
+                type: 'warning'
+              });
+            }
+          } else {
             this.shopOptions.longitude = '';
             this.$message({
               message: '请输入正确的经度！',
               type: 'warning'
             });
           }
-          if ((this.shopOptions.latitude > 90) || (this.shopOptions.latitude < 0)) {
+          if (!isNaN(this.shopOptions.latitude)) {
+            if ((this.shopOptions.latitude > 90) || (this.shopOptions.latitude < 0)) {
+              this.shopOptions.latitude = '';
+              this.$message({
+                message: '请输入正确的纬度！',
+                type: 'warning'
+              });
+            }
+          } else {
             this.shopOptions.latitude = '';
             this.$message({
               message: '请输入正确的纬度！',
@@ -1007,6 +1033,7 @@
       }
     },
     components: {
+      ElInput,
       paging,
       newDisplay,
       checkDisplay
@@ -1015,16 +1042,16 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
+  .address_shop
+    height 608px;
   .selectSelf
     width 100px;
     height 35px;
     border 1px solid #C0CCDA;
     border-radius 5px;
   .selectSelf2
-    width 150px;
-    height 35px;
-    border 1px solid #C0CCDA;
-    border-radius 5px;
+    width 220px;
+    font-size 16px;
   body
     margin 0;
     padding 0;
