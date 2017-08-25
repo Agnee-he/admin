@@ -1,3 +1,4 @@
+
 <template>
   <div class="shop">
     <el-tabs type="border-card" class="tabs" v-show="show_store_display">
@@ -96,22 +97,29 @@
         <!--</div>-->
       <!--</el-tab-pane>-->
       <el-tab-pane label="考勤排班">
-        <div class="top1">
-          <el-row>
-            <div style="float: left"><i class="el-icon-date"></i> 班次名称（默认）：</div>
-            <el-col :span="4"><div>早班(9:00~11:00)</div></el-col>
-            <el-col :span="4"><div>午班(9:00~11:00)</div></el-col>
-            <el-col :span="4"><div class="grid-content bg-purple-light">晚班(9:00~11:00)</div></el-col>
-            <el-col :span="4"><div class="grid-content bg-purple">周末班(9:00~11:00)</div></el-col>
-            <div style="float: right" @click="showChooseOrder"><i class="el-icon-setting"></i></div>
-          </el-row>
-        </div>
         <div class="two_btn" v-show="show_content">
           <!--<el-button class="btn1" type="primary"><i class="el-icon-edit"></i>考勤</el-button>-->
           <el-button style="margin-left: 85px;" class="btn2" type="primary" @click="showChooseOrder"><i class="el-icon-date"></i>排班</el-button>
         </div>
         <div class="content" v-show="show_content">
-          <p class="center_p">考勤核对</p>
+          <!-- 考勤时间查询 -->
+          <!--<div>-->
+            <!--<el-row>-->
+              <!--<el-col :span="4"><div>-->
+                <!--<p>选择考勤日期：</p>-->
+              <!--</div></el-col>-->
+              <!--<el-col :span="6"><div style="margin-top: 10px">-->
+                <!--<div class="block">-->
+                  <!--<el-date-picker-->
+                    <!--v-model="value1"-->
+                    <!--type="date"-->
+                    <!--placeholder="选择日期">-->
+                  <!--</el-date-picker>-->
+                <!--</div>-->
+              <!--</div></el-col>-->
+              <!--<el-col :span="8"><div style="margin-top: 10px"><el-button @click="checking">查询</el-button><el-button @click="resetChecking">重置</el-button></div></el-col>-->
+            <!--</el-row>-->
+          <!--</div>-->
           <el-row class="con_row2">
             <el-col :span="24"><div>
               <div class="content_top">
@@ -119,16 +127,23 @@
                   :data="attendance"
                   style="width: 100%">
                   <el-table-column
+                    fixed
                     prop="chname"
                     label="姓名"
                     align="center"
-                    width="80">
+                    width="150">
+                  </el-table-column>
+                  <el-table-column
+                    prop="shopname"
+                    label="门店"
+                    align="center"
+                    width="200">
                   </el-table-column>
                   <el-table-column
                     prop="bctype"
                     label="班次"
                     align="center"
-                    width="80">
+                    width="100">
                   </el-table-column>
                   <el-table-column
                     prop="dkdate"
@@ -139,11 +154,19 @@
                   <el-table-column
                     prop="dktype"
                     label="考勤类型"
+                    width="100"
+                    align="center">
+                  </el-table-column>
+                  <el-table-column
+                    prop="dklocation"
+                    label="打卡地点"
+                    width="500"
                     align="center">
                   </el-table-column>
                   <el-table-column
                     prop="result"
                     label="考勤结果"
+                    width="100"
                     align="center">
                   </el-table-column>
                 </el-table>
@@ -161,44 +184,29 @@
         </div>
         <!-- 排班时间 -->
         <div class="choose_order" v-show="show_choose_order">
-          <div class="choose2">
-            <el-row>
-              <el-col :span="0"><div>
-              </div></el-col>
-              <el-col :span="0"><div>
-              </div></el-col>
-              <el-col :span="14" style="margin-top: 10px;float: left;">
-                <div class="block">
-                  <span class="demonstration">选择时间段</span>
-                  <el-date-picker
-                    v-model="dateRange"
-                    type="daterange"
-                    placeholder="选择日期范围">
-                  </el-date-picker>
-                  <el-button @click="searchBanci">搜索排班</el-button>
+          <div class="banci">
+            <el-collapse accordion>
+              <el-collapse-item title="xxx班次" name="1">
+                <div>
+                  <el-row>
+                    <el-col :span="2"><div>时间范围：</div></el-col>
+                    <el-col :span="4"><div>2107-5-5 - 2017-7-7</div></el-col>
+                  </el-row>
                 </div>
-              </el-col>
-              <el-col :span="10"><div style="margin-top: 10px;margin-bottom: 10px;float: right;">
-                <el-button @click="showChoose5"><i class="el-icon-plus"></i>新增</el-button ><el-button @click="closeChooseOrder"><i class="el-icon-close"></i>关闭</el-button>
-              </div></el-col>
-            </el-row>
-          </div>
-          <div class="choose3">
-            <el-collapse v-model="activeNames" v-for="(item, index) in orderList" :key="index">
-              <el-collapse-item :title="item.city+item.date" :name="index">
-                <el-row style="height: 60px;">
-                  <el-col :span="4" v-for="bci in item.bci" :key="index"><div>
-                    <p>{{bci.bcitype}}({{bci.stime}}-{{bci.etime}})</p>
-                  </div></el-col>
+                <el-row>
+                  <el-col :span="4"><div>早班9：00-11：00</div></el-col>
+                  <el-col :span="4"><div>午班9：00-11：00</div></el-col>
+                  <el-col :span="4"><div>晚班9：00-11：00</div></el-col>
+                  <el-col :span="4"><div>夜班9：00-11：00</div></el-col>
                 </el-row>
                 <div>
-                  <p>使用门店：<span v-for="shop in item.shopName"><span>{{shop.shopName}};</span></span></p>
+                  使用门店：<span>xxxx;</span>
                 </div>
               </el-collapse-item>
             </el-collapse>
           </div>
-          <div class="choose4">
-
+          <div class="choose2">
+            <el-button @click="showChoose5"><i class="el-icon-plus"></i>新增</el-button ><el-button @click="closeChooseOrder"><i class="el-icon-close"></i>关闭</el-button>
           </div>
           <!--新增班次组-->
           <div class="choose5" v-show="show_choose5">
@@ -213,7 +221,7 @@
                   <div class="logo"></div>
                 </div></el-col>
                 <el-col :span="13"><div>
-                  <p>新增班次组</p>
+                  <p>新增班组</p>
                 </div></el-col>
                 <el-col :span="8"><div>
                 </div></el-col>
@@ -223,37 +231,37 @@
               <div class="choose_address">
                 <el-row>
                   <el-col :span="4"><div>
-                    <p>使用范围：</p>
+                    <p>班组名称：</p>
                   </div></el-col>
-                  <el-col class="el_input" :span="20"><div>
-                    <!--<el-select v-model="city" placeholder="点击选择地区">-->
-                      <!--<el-option-->
-                        <!--v-for="item in city_list"-->
-                        <!--:key="item.value"-->
-                        <!--:label="item.label"-->
-                        <!--:value="item.value">-->
-                      <!--</el-option>-->
-                    <!--</el-select>-->
-                    <select class="selectSelf" v-model="city">
-                      <option v-for="item in city_list">{{item.value}}</option>
-                    </select>
+                  <el-col class="el_input" :span="9"><div>
+                    <el-input v-model="banciname" placeholder="请输入班次名称"></el-input>
                   </div></el-col>
                 </el-row>
               </div>
               <div class="setting_date">
                 <el-row>
                   <el-col :span="4"><div>
-                    <p>日期设置：</p>
+                    <p>日期范围：</p>
                   </div></el-col>
                   <el-col :span="20"><div>
-                    <div class="block" style="margin-top: 10px;width: 217px;">
-                      <el-date-picker style="width: 217px;"
+                    <div class="block" style="margin-top: 10px;">
+                      <el-date-picker
                         v-model="schedulingdate"
-                        type="date"
-                        placeholder="选择日期"
-                        :picker-options="pickerOptions0">
+                        type="daterange"
+                        placeholder="选择日期范围">
                       </el-date-picker>
                     </div>
+                  </div></el-col>
+                </el-row>
+              </div>
+              <div class="setting_date">
+                <el-row>
+                  <el-col :span="4"><div>
+                    <p>使用门店：</p>
+                  </div></el-col>
+                  <el-col :span="20"><div>
+                    <v-select style="margin-top: 10px;" v-model="shopList" multiple="multiple" :options="shopName">
+                    </v-select>
                   </div></el-col>
                 </el-row>
               </div>
@@ -263,7 +271,7 @@
                     <p>班次设置：</p>
                   </div></el-col>
                     <el-col :span="6"><div>
-                      <p>班次名称</p>
+                      <p>班次类型</p>
                       <el-select v-for="item in schedule" :key="item.id" v-model="item.bctype" placeholder="请选择">
                         <el-option
                           v-for="item in ban"
@@ -416,8 +424,9 @@
         //  分割线
         city_list: [], // 城市列表
         city_shop: [], //  城市与门店之间关系
-        city: '',
-        schedulingdate: '',  //  新增班次时间
+        banciname: '',
+        schedulingdate: [],  //  新增班次时间
+        shopList: [],  // 新增班次门店列表
         schedule: [
           {
             bctype: '',
@@ -565,6 +574,7 @@
         for (let i = 0; i < this.attendance.length; i++) {
           this.attendance[i].dkdate = this.getLocalTime(this.attendance[i].dkdate.toString().substring(0, 10));
         }
+        console.log(this.attendance);
       }).catch(function () {
         // 出错处理
       });
@@ -751,26 +761,54 @@
         return y + '-' + m + '-' + d;
       },
       submit() {  // 提交新增班次组
+        console.log(this.banciname);
+        console.log(this.schedulingdate);
+        console.log(this.shopList);
+        console.log(this.schedule);
         //  判断输入内容是否为空
-        if (this.city === '') {
+        if (this.banciname === '') {
           // 没选城市
           this.$message({
-            message: '请选择使用范围！',
+            message: '请填写班次名称！',
             type: 'warning'
           });
-        } else if (this.schedulingdate === '') {
+        } else if (this.schedulingdate.length === 0) {
           // 没选时间
           this.$message({
             message: '请选择使用日期！',
             type: 'warning'
           });
+        } else if (this.shopList.length === 0) {
+          // 没选店门
+          this.$message({
+            message: '请选择使用门店！',
+            type: 'warning'
+          });
         } else {
-          let formarDate = this.formatDateTime(this.schedulingdate);  //  格式化时间
-          for (let i = 0; i < this.schedule.length; i++) {
-            let newSch = {city: this.city, schedulingdate: formarDate, bctype: this.schedule[i].bctype, stime: this.schedule[i].stime, etime: this.schedule[i].etime};
-            this.postschedule.push(newSch);
+          let startTime = this.formatDateTime(this.schedulingdate[0]);
+          let endTime = this.formatDateTime(this.schedulingdate[1]);
+          console.log(startTime + '~' + endTime);
+          let time = startTime + '~' + endTime;
+          let shops = [];
+          for (let i = 0; i < this.shopList.length; i++) {
+            for (let x = 0; x < this.allShop.length; x++) {
+              if (this.shopList[i] === this.allShop[x].shopname) {
+                let newShop = this.allShop[x].shopname + '>' + this.allShop[x].shopid;
+                shops.push(newShop);
+              }
+            }
           }
-          let params = JSON.stringify(this.postschedule);
+          console.log(shops);
+          let schduleTime = [];
+          for (let i = 0; i < this.schedule.length; i++) {
+            let newT = this.schedule[i].bctype + '-' + this.schedule[i].stime + '-' + this.schedule[i].etime;
+            schduleTime.push(newT);
+          }
+          console.log(schduleTime);
+          this.postschedule = {theme: this.banciname, daterange: time, shops: shops, bcsinfo: schduleTime};
+          console.log(this.postschedule);
+          let postParams = JSON.stringify(this.postschedule);
+          console.log(postParams);
           let success = false;
           $.ajax({
             type: 'POST',
@@ -778,7 +816,7 @@
             contentType: 'application/json;charset=utf-8', // 设置请求头信息
             dataType: 'json',
             async: false,
-            data: params,
+            data: postParams,
             success: function(data) {
               success = true;
             }
@@ -925,31 +963,38 @@
             this.shopOptions.shopId = this.allShop[i].shopid;
           }
         }
-        let params = JSON.stringify(this.shopOptions);
-        let success = false;
-        $.ajax({
-          type: 'POST',
-          url: this.url + '/spg/admin/attendance/setaddress',
-          contentType: 'application/json;charset=utf-8', // 设置请求头信息
-          dataType: 'json',
-          async: false,
-          data: params,
-          success: function(data) {
-            success = true;
-          }
-        });
-        if (success) {
-          this.$message({
-            message: '设置门店信息成功！',
-            type: 'success'
+        if ((this.shopOptions.latitude !== '') || (this.shopOptions.longitude !== '') || (this.shopOptions.shopAddress !== '') || (this.shopOptions.shopId !== '')) {
+          let params = JSON.stringify(this.shopOptions);
+          let success = false;
+          $.ajax({
+            type: 'POST',
+            url: this.url + '/spg/admin/attendance/setaddress',
+            contentType: 'application/json;charset=utf-8', // 设置请求头信息
+            dataType: 'json',
+            async: false,
+            data: params,
+            success: function(data) {
+              success = true;
+            }
           });
-          this.shopOptions = {
+          if (success) {
+            this.$message({
+              message: '设置门店信息成功！',
+              type: 'success'
+            });
+            this.shopOptions = {
               shopId: '',
               shopName: '',
               shopAddress: '',
               longitude: '',  // 经度
               latitude: ''
-          };  // 门店信息列表
+            };  // 门店信息列表
+          }
+        } else {
+          this.$message({
+            message: '门店信息不完整！',
+            type: 'warning'
+          });
         }
       },
       searchBanci() {
@@ -1030,6 +1075,12 @@
             // 出错处理
           });
         }
+      },
+      checking() {
+        console.log(1);
+      },
+      resetChecking() {
+        console.log(2);
       }
     },
     components: {
@@ -1147,13 +1198,17 @@
             margin-top 5px;
         .con_row2
           margin-top 5px;
-          .content_top1
-            margin-left 20px;
+          .content_top
+            margin-left 0;
+            font-size 12px;
       .choose_order
         height 568px;
         overflow-y auto;
         .choose1
           border-bottom 1px solid #D3DCE6;
+        .choose2
+          margin-top 10px;
+          float right;
         .choose3
           .choose3_ul
             li

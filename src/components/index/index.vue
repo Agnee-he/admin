@@ -59,20 +59,37 @@
                   label="日期"
                   sortable
                   align="center"
-                  width="280">
+                  width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="num"
-                  label="数量（件）"
+                  prop="total"
+                  label="总销量（件）"
                   sortable
-                  align="center"
-                  width="280">
+                  align="center">
                 </el-table-column>
                 <el-table-column
-                  prop="count"
-                  align="center"
+                  prop="revenue"
+                  label="销售收入（元）"
                   sortable
-                  label="销量（元）">
+                  align="center">
+                </el-table-column>
+                <el-table-column
+                  prop="average"
+                  label="均价（元）"
+                  sortable
+                  align="center">
+                </el-table-column>
+                <el-table-column
+                  prop="profit"
+                  label="销售毛利（元）"
+                  sortable
+                  align="center">
+                </el-table-column>
+                <el-table-column
+                  prop="rate"
+                  label="销售毛利率"
+                  sortable
+                  align="center">
                 </el-table-column>
               </el-table>
             </div>
@@ -167,22 +184,34 @@
             this.startTime = this.formatDateTime((this.date[0]));
             this.endTime = this.formatDateTime((this.date[1]));
             if (this.value !== '') {
-              this.$http.jsonp(this.url + 'spg/admin/sales/performance?shopid=' + this.value + '&stime=' + this.startTime + '&etime=' + this.endTime, {jsonp: 'jsonpCallback'}).then(function (response) {
+              this.$http.jsonp(this.url + 'spg/admin/sales/performance?shopid=' + this.value + '&stime=' + this.startTime + '&etime=' + this.endTime + '&orderby=DATE&order=desc', {jsonp: 'jsonpCallback'}).then(function (response) {
                 // response.data 为服务端返回的数据
                 let data = response.data.result.销售业绩;
+                if (data.length === 0) {
+                  this.$message({
+                    showClose: true,
+                    message: '没有销量。'
+                  });
+                }
                 for (let i = 0; i < data.length; i++) {
-                  let newData = {date: data[i][0], num: data[i][1], count: data[i][2]};
+                  let newData = {date: data[i][2], total: data[i][3], revenue: data[i][4], average: data[i][5], profit: data[i][6], rate: data[i][7]};
                   this.tableData3.push(newData);
                 }
               }).catch(function (response) {
                 // 出错处理
               });
             } else if (this.selectedOptions[2] !== 'undefined') {
-              this.$http.jsonp(this.url + 'spg/admin/sales/performance?shopid=' + this.selectedOptions[2] + '&stime=' + this.startTime + '&etime=' + this.endTime, {jsonp: 'jsonpCallback'}).then(function (response) {
+              this.$http.jsonp(this.url + 'spg/admin/sales/performance?shopid=' + this.selectedOptions[2] + '&stime=' + this.startTime + '&etime=' + this.endTime + '&orderby=DATE&order=desc', {jsonp: 'jsonpCallback'}).then(function (response) {
                 // response.data 为服务端返回的数据
                 let data = response.data.result.销售业绩;
+                if (data.length === 0) {
+                  this.$message({
+                    showClose: true,
+                    message: '没有销量。'
+                  });
+                }
                 for (let i = 0; i < data.length; i++) {
-                  let newData = {date: data[i][0], num: data[i][1], count: data[i][2]};
+                  let newData = {date: data[i][2], total: data[i][3], revenue: data[i][4], average: data[i][5], profit: data[i][6], rate: data[i][7]};
                   this.tableData3.push(newData);
                 }
               }).catch(function (response) {
