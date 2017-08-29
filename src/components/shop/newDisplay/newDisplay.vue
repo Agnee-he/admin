@@ -184,14 +184,14 @@
         postDisplay: []
       };
     },
-    created() {
-      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then((response) => {
-          // success callback
-        this.shop = response.data.result.shopModels;
-        }, (response) => {
-          // error callback、
-        });
-    },
+//    created() {
+//      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then((response) => {
+//          // success callback
+//        this.shop = response.data.result.shopModels;
+//        }, (response) => {
+//          // error callback、
+//        });
+//    },
     watch: {
       startTime: {
         handler: function () {

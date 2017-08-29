@@ -149,7 +149,7 @@
                     prop="dkdate"
                     label="考勤时间"
                     align="center"
-                    width="200">
+                    width="240">
                   </el-table-column>
                   <el-table-column
                     prop="dktype"
@@ -184,29 +184,51 @@
         </div>
         <!-- 排班时间 -->
         <div class="choose_order" v-show="show_choose_order">
+          <div class="choose2">
+            <el-row>
+              <el-col :span="2"><div style="margin-top: 5px;margin-left: 5px;">日期范围:</div></el-col>
+              <el-col :span="6"><div>
+                <div class="block">
+                  <el-date-picker
+                    v-model="banZuDate"
+                    type="daterange"
+                    placeholder="选择日期范围">
+                  </el-date-picker>
+                </div>
+              </div></el-col>
+              <el-col :span="4"><div><el-button @click="searchBanZu"><i class="el-icon-search"></i>搜索</el-button ></div></el-col>
+              <el-col :span="12"><div style="float: right">
+                <el-button @click="showChoose5"><i class="el-icon-plus"></i>新增</el-button ><el-button @click="closeChooseOrder"><i class="el-icon-close"></i>关闭</el-button>
+              </div></el-col>
+            </el-row>
+          </div>
           <div class="banci">
             <el-collapse accordion>
-              <el-collapse-item title="xxx班次" name="1">
+              <el-collapse-item v-for="(item, index) in banZu" :title="item.theme" :name="index">
                 <div>
                   <el-row>
                     <el-col :span="2"><div>时间范围：</div></el-col>
-                    <el-col :span="4"><div>2107-5-5 - 2017-7-7</div></el-col>
+                    <el-col :span="8"><div>{{item.startTime}}~{{item.endTime}}</div></el-col>
                   </el-row>
                 </div>
                 <el-row>
-                  <el-col :span="4"><div>早班9：00-11：00</div></el-col>
-                  <el-col :span="4"><div>午班9：00-11：00</div></el-col>
-                  <el-col :span="4"><div>晚班9：00-11：00</div></el-col>
-                  <el-col :span="4"><div>夜班9：00-11：00</div></el-col>
+                  <el-col :span="2"><div>班次：</div></el-col>
+                  <el-col v-for="(ban, index) in item.bcDetail" :span="4"><div>{{ban}}</div></el-col>
                 </el-row>
                 <div>
-                  使用门店：<span>xxxx;</span>
+                  <el-col :span="2"><div>使用门店：</div></el-col>
+                  <span v-for="(shop, index) in item.shop">{{shop}};</span>
                 </div>
               </el-collapse-item>
             </el-collapse>
-          </div>
-          <div class="choose2">
-            <el-button @click="showChoose5"><i class="el-icon-plus"></i>新增</el-button ><el-button @click="closeChooseOrder"><i class="el-icon-close"></i>关闭</el-button>
+            <div class="block" style="float: right;margin-top: 10px;">
+              <el-pagination
+                :current-page.sync="banZuPage"
+                :page-size="10"
+                layout="total, prev, pager, next"
+                :total="banZuTotal">
+              </el-pagination>
+            </div>
           </div>
           <!--新增班次组-->
           <div class="choose5" v-show="show_choose5">
@@ -472,11 +494,14 @@
         shopOptions: {
           shopId: '',
           shopName: '',
-          shopAddress: '',
           longitude: '',  // 经度
           latitude: ''
         },  // 门店信息列表
-        dateRange: ''
+        dateRange: '',
+        banZu: [],  //  班组
+        banZuDate: '', // 班组搜索时间段
+        banZuPage: 1,  // 班组第几页
+        banZuTotal: 0  // 班组数量
       };
     },
     created() {
@@ -563,6 +588,25 @@
       }).catch(function () {
         // 出错处理
       });
+      //  获取班组列表
+      this.$http.jsonp(this.url + 'spg/admin/attendance/groupScheduling?page=' + this.banZuPage + '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
+        // response.data 为服务端返回的数据
+        let data = response.data.result.rows;
+        this.banZuTotal = response.data.result.total;
+        for (let i = 0; i < data.length; i++) {
+          let shop = data[i].shops.split(',');
+          let banci = data[i].bcDetail.split(',');
+          data[i].bcDetail = banci.reverse();
+          for (let x = 0; x < shop.length; x++) {
+            let shopFirst = shop[x].split('>');
+            shop[x] = shopFirst[0];
+          }
+          data[i].shop = shop;
+        }
+        this.banZu = data;
+      }).catch(function () {
+        // 出错处理
+      });
       // 获取考勤列表
       let now = new Date();
       now.setDate(now.getDate() + 7);
@@ -573,8 +617,19 @@
         this.attendenceTotal = response.data.result.total;
         for (let i = 0; i < this.attendance.length; i++) {
           this.attendance[i].dkdate = this.getLocalTime(this.attendance[i].dkdate.toString().substring(0, 10));
+//          let time = this.attendance[i].dkdate.split(' ');
+//          let lastTime = time[1].split(':');
+//          let hour;
+//          let allTime;
+//          if (lastTime[0] > 12) {
+//            hour = lastTime[0] - 12;
+//            allTime = '下午' + hour + ' ' + lastTime[1] + ' ' + lastTime[2];
+//          } else {
+//            hour = lastTime[0];
+//            allTime = '上午' + hour + ':' + lastTime[1] + ':' + lastTime[2];
+//          }
+//          this.attendance[i].dkdate = '2017-8-11 10:30:08';
         }
-        console.log(this.attendance);
       }).catch(function () {
         // 出错处理
       });
@@ -595,6 +650,11 @@
     computed: {
     },
     watch: {
+      banZuPage: {
+        handler: function () {
+          this.searchBanZu();
+        }
+      },
       displayPage: {
           handler: function() {
               if (this.displayName === '' && this.displayShop === '' && this.displayTime === '') {
@@ -666,29 +726,6 @@
         },
         deep: true
       }
-      // orderList: {
-      //   handler: function () {
-      //     //  获取门店列表
-      //     this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then(function (response) {
-      //       // response.data 为服务端返回的数据
-      //       this.shopModels = response.data.result.shopModels;
-      //       // 门店id name匹配
-      //       for (let i = 0; i < this.orderList.length; i++) {
-      //         for (let y = 0; y < this.orderList[i].shop.length; y++) {
-      //           for (let x = 0; x < this.shopModels.length; x++) {
-      //             if (this.orderList[i].shop[y].shopid === this.shopModels[x].shopid) {
-      //               let shopName = {shopName: this.shopModels[x].shopname};
-      //               this.orderList[i].shopName.push(shopName);
-      //             }
-      //           }
-      //         }
-      //       }
-      //     }).catch(function () {
-      //       // 出错处理
-      //       console.log('获取门店列表失败');
-      //     });
-      //   }
-      // }
     },
     methods: {
       toggleSelection(rows) {
@@ -761,10 +798,6 @@
         return y + '-' + m + '-' + d;
       },
       submit() {  // 提交新增班次组
-        console.log(this.banciname);
-        console.log(this.schedulingdate);
-        console.log(this.shopList);
-        console.log(this.schedule);
         //  判断输入内容是否为空
         if (this.banciname === '') {
           // 没选城市
@@ -787,7 +820,6 @@
         } else {
           let startTime = this.formatDateTime(this.schedulingdate[0]);
           let endTime = this.formatDateTime(this.schedulingdate[1]);
-          console.log(startTime + '~' + endTime);
           let time = startTime + '~' + endTime;
           let shops = [];
           for (let i = 0; i < this.shopList.length; i++) {
@@ -798,17 +830,13 @@
               }
             }
           }
-          console.log(shops);
           let schduleTime = [];
           for (let i = 0; i < this.schedule.length; i++) {
             let newT = this.schedule[i].bctype + '-' + this.schedule[i].stime + '-' + this.schedule[i].etime;
             schduleTime.push(newT);
           }
-          console.log(schduleTime);
           this.postschedule = {theme: this.banciname, daterange: time, shops: shops, bcsinfo: schduleTime};
-          console.log(this.postschedule);
           let postParams = JSON.stringify(this.postschedule);
-          console.log(postParams);
           let success = false;
           $.ajax({
             type: 'POST',
@@ -933,7 +961,7 @@
         });
       },
       getLocalTime(nS) {
-        return new Date(parseInt(nS) * 1000).toLocaleString().substr(0, 18);
+        return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
       },
       deleteDisplay() {
         let deleteId = [];
@@ -1081,6 +1109,36 @@
       },
       resetChecking() {
         console.log(2);
+      },
+      searchBanZu() {
+        if (this.banZuDate.length === 0) {
+          this.$message({
+            message: '请先选择时间范围！',
+            type: 'warning'
+          });
+        } else {
+          let start = this.formatDateTime(this.banZuDate[0]);
+          let end = this.formatDateTime(this.banZuDate[1]);
+          //  获取班组列表
+          this.$http.jsonp(this.url + 'spg/admin/attendance/groupScheduling?page=' + this.banZuPage + '&rows=10&filter_LES_startTime=' + end + '&filter_GES_endTime=' + start, {jsonp: 'jsonpCallback'}).then(function (response) {
+            // response.data 为服务端返回的数据
+            let data = response.data.result.rows;
+            this.banZuTotal = response.data.result.total;
+            for (let i = 0; i < data.length; i++) {
+              let shop = data[i].shops.split(',');
+              let banci = data[i].bcDetail.split(',');
+              data[i].bcDetail = banci.reverse();
+              for (let x = 0; x < shop.length; x++) {
+                let shopFirst = shop[x].split('>');
+                shop[x] = shopFirst[0];
+              }
+              data[i].shop = shop;
+            }
+            this.banZu = data;
+          }).catch(function () {
+            // 出错处理
+          });
+        }
       }
     },
     components: {
@@ -1207,8 +1265,9 @@
         .choose1
           border-bottom 1px solid #D3DCE6;
         .choose2
-          margin-top 10px;
-          float right;
+          margin-top 0;
+        .banci
+          margin-top 5px;
         .choose3
           .choose3_ul
             li
