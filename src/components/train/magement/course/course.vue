@@ -54,19 +54,21 @@
           <p style="font-size: 14px;">添加学习人员：</p>
         </div></el-col>
         <el-col :span="18"><div>
-          <el-select style="width: 600px;margin-top: 10px;" class="block" v-model="person" multiple filterable placeholder="请选择">
-            <el-option-group
-              v-for="group in allPerson"
-              :key="group.depname"
-              :label="group.depname">
-              <el-option
-                v-for="item in group.sysUnits"
-                :key="item.parid"
-                :label="item.uname"
-                :value="item.parid">
-              </el-option>
-            </el-option-group>
-          </el-select>
+          <!--<el-select style="width: 600px;margin-top: 10px;" class="block" v-model="person" multiple filterable placeholder="请选择">-->
+            <!--<el-option-group-->
+              <!--v-for="group in allPerson"-->
+              <!--:key="group.depname"-->
+              <!--:label="group.depname">-->
+              <!--<el-option-->
+                <!--v-for="item in group.sysUnits"-->
+                <!--:key="item.parid"-->
+                <!--:label="item.uname"-->
+                <!--:value="item.parid">-->
+              <!--</el-option>-->
+            <!--</el-option-group>-->
+          <!--</el-select>-->
+          <v-select style="margin-top: 10px;" v-model="choosePersons" multiple="multiple" :options="personOptions">
+          </v-select>
         </div></el-col>
         <el-col :span="3"><div style="margin-top: 10px;float: right">
           <el-button type="primary" @click="submitPerson">提交</el-button>
@@ -240,7 +242,7 @@
             <p class="left_p">NO.{{course[0].courseid}}</p>
           </div></el-col>
           <el-col :span="4"><div>
-            <p>所属分类：XXX</p>
+            <p>{{course[0].type}}</p>
           </div></el-col>
           <el-col :span="4"><div>
             <p></p>
@@ -250,7 +252,7 @@
           </div></el-col>
           <el-col :span="6"><div>
             <p>&nbsp;</p>
-            <p>更新时间：2017-02-23 14:52</p>
+            <!--<p>更新时间：2017-02-23 14:52</p>-->
           </div></el-col>
         </el-row>
       </div>
@@ -309,6 +311,7 @@
       },
       data() {
         return {
+          url: this.$store.state.lastUrl,
           options: [
           {
             value: 'A',
@@ -420,7 +423,9 @@
           input1: '',
           excel: '',
           allPerson: [],
-          person: []
+          person: [],
+          personOptions: [], //  会议选人选项
+          choosePersons: []   //  会议选择的人
         };
       },
       watch: {
@@ -462,9 +467,15 @@
       },
       created() {
         //  获取会议全部人员
-        this.$http.jsonp('http://120.55.85.65:8088/spg/admin/working/queryEmployees', {jsonp: 'jsonpCallback'}).then(function (response) {
+        this.$http.jsonp(this.url + 'spg/admin/working/queryEmployees', {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
           this.allPerson = response.data.result.participants;
+          for (let i = 0; i < this.allPerson.length; i++) {
+            for (let x = 0; x < this.allPerson[i].sysUnits.length; x++) {
+              let newPerson = this.allPerson[i].depname + '_' + this.allPerson[i].sysUnits[x].uname + '_' + this.allPerson[i].sysUnits[x].parid;
+              this.personOptions.push(newPerson);
+            }
+          }
         }).catch(function (response) {
           // 出错处理
         });
@@ -499,23 +510,23 @@
             this.postNew.push(postExam);
           }
           let params = JSON.stringify(this.postNew);
-          let success = false;
+//          let success = false;
           $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080/spg/admin/training/outofquestion',
+            url: this.url + 'spg/admin/training/outofquestion',
             contentType: 'application/json;charset=utf-8', // 设置请求头信息
             dataType: 'json',
             async: false,
             data: params,
             success: function(data) {
-              success = true;
+//              success = true;
             }
           });
-          console.log(success);
-          if (success) {
-            this.show_edit = false;
-            router.go({path: '/course'});
-          }
+//          console.log(success);
+//          if (success) {
+          this.show_edit = false;
+          router.go({path: '/course'});
+//          }
         },
         handleDownload() {
           if (this.excel.length === 0) {
@@ -544,17 +555,18 @@
           this.excel = row;
         },
         submitPerson() {
-          if (this.person.length !== 0) {
+          if (this.choosePersons.length !== 0) {
             let userCourseModels = [];
-            for (let i = 0; i < this.person.length; i++) {
+            for (let i = 0; i < this.choosePersons.length; i++) {
 //            let newPerson = this.course[0].courseid + ',' + this.person[i];
-              let newP = {courseid: this.course[0].courseid, userid: this.person[i].toString()};
+              let str = this.choosePersons[i].split('_');
+              let newP = {courseid: this.course[0].courseid, userid: str[2]};
               userCourseModels.push(newP);
             }
             let params = JSON.stringify(userCourseModels);
             $.ajax({
               type: 'POST',
-              url: 'http://localhost:8080/spg/admin/training/assigncourse',
+              url: this.url + 'spg/admin/training/assigncourse',
               contentType: 'application/json;charset=utf-8', // 设置请求头信息
               dataType: 'json',
               async: false,
@@ -578,7 +590,7 @@
           let success = false;
           $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080/spg/admin/training/delquestion',
+            url: this.url + 'spg/admin/training/delquestion',
             contentType: 'application/json;charset=utf-8', // 设置请求头信息
             dataType: 'json',
             async: false,

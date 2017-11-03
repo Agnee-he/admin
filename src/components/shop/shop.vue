@@ -2,100 +2,106 @@
 <template>
   <div class="shop">
     <el-tabs type="border-card" class="tabs" v-show="show_store_display">
-      <!--<el-tab-pane label="门店陈列">-->
-        <!--<div class="top">-->
-          <!--<div class="search_input1">-->
-            <!--<span>搜索主题：</span>-->
-            <!--<div class="el-inp">-->
-              <!--<el-input v-model="displayType" placeholder="请输入陈列主题"></el-input>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="search_input2">-->
-            <!--<span>搜索门店：</span>-->
-            <!--<div class="el-inp">-->
-              <!--<el-input v-model="displayShop" placeholder="请输入门店名称"></el-input>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="choose_date">-->
-            <!--<div class="block">-->
-              <!--<span class="demonstration">发布日期：</span>-->
-              <!--<el-date-picker-->
-                <!--v-model="displayTime"-->
-                <!--type="daterange"-->
-                <!--placeholder="选择日期范围">-->
-              <!--</el-date-picker>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="but">-->
-            <!--<el-button @click="searchDisplay"><i class="el-icon-search"></i>搜索</el-button><el-button @click="resetSearchDisplay"><img src="../../img/resetting.png" width="12px" height="12px;"/>重置</el-button><el-button @click="openNewDisplay"><i class="el-icon-plus"></i>新增陈列</el-button>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="main">-->
-          <!--<el-table-->
-            <!--ref="multipleTable"-->
-            <!--:data="display"-->
-            <!--@select="selectRow"-->
-            <!--@select-all="selectRowAll"-->
-            <!--border-->
-            <!--tooltip-effect="dark"-->
-            <!--style="width: 100%"-->
-            <!--@selection-change="handleSelectionChange">-->
-            <!--<el-table-column-->
-              <!--type="selection"-->
-              <!--width="55"-->
-              <!--align="center">-->
-            <!--</el-table-column>-->
-            <!--<el-table-column-->
-              <!--prop="displayType"-->
-              <!--label="陈列主题"-->
-              <!--width="150"-->
-              <!--align="center">-->
-            <!--</el-table-column>-->
-            <!--<el-table-column-->
-              <!--prop="startTime"-->
-              <!--label="发布日期"-->
-              <!--sortable-->
-              <!--width="200"-->
-              <!--align="center">-->
-            <!--</el-table-column>-->
-            <!--<el-table-column-->
-              <!--prop="shopName"-->
-              <!--label="门店"-->
-              <!--width="230"-->
-              <!--align="center">-->
-            <!--</el-table-column>-->
-            <!--<el-table-column-->
-              <!--prop="stars"-->
-              <!--label="陈列考评(星)"-->
-              <!--sortable-->
-              <!--width="160"-->
-              <!--align="center">-->
-            <!--</el-table-column>-->
-            <!--<el-table-column label="操作" align="center">-->
-              <!--<template scope="scope">-->
-                <!--<el-button-->
-                  <!--size="small"-->
-                  <!--@click="openCheckDisplay(scope.row)">查看</el-button>-->
-              <!--</template>-->
-            <!--</el-table-column>-->
-          <!--</el-table>-->
-          <!--<div class="but_select">-->
-            <!--<el-button @click="toggleSelection(display)">全选</el-button>-->
-            <!--<el-button @click="deleteDisplay"><i class="el-icon-delete"></i>删除</el-button>-->
-            <!--<el-button @click="handleDownload"><i class="el-icon-upload2"></i>导出</el-button>-->
-          <!--</div>-->
-          <!--<div class="paging">-->
-            <!--<div class="block">-->
-              <!--<el-pagination-->
-                <!--:current-page.sync="displayPage"-->
-                <!--:page-size="10"-->
-                <!--layout="total, prev, pager, next"-->
-                <!--:total="displayTotal">-->
-              <!--</el-pagination>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</el-tab-pane>-->
+      <el-tab-pane label="门店陈列">
+        <div class="top">
+          <div class="search_input1">
+            <span>搜索主题：</span>
+            <div class="el-inp">
+              <el-input v-model="displayType" placeholder="请输入陈列主题"></el-input>
+            </div>
+          </div>
+          <div class="search_input2">
+            <span>搜索门店：</span>
+            <div class="el-inp">
+              <el-input v-model="displayShop" placeholder="请输入门店名称"></el-input>
+            </div>
+          </div>
+          <div class="choose_date">
+            <div class="block">
+              <span class="demonstration">发布日期：</span>
+              <el-date-picker
+                v-model="displayTime"
+                type="daterange"
+                placeholder="选择日期范围">
+              </el-date-picker>
+            </div>
+          </div>
+          <div class="but">
+            <el-button @click="searchDisplay"><i class="el-icon-search"></i>搜索</el-button><el-button @click="resetSearchDisplay"><img src="../../img/resetting.png" width="12px" height="12px;"/>重置</el-button><el-button @click="openNewDisplay"><i class="el-icon-plus"></i>新增陈列</el-button>
+          </div>
+        </div>
+        <div class="main">
+          <el-table
+            ref="multipleTable"
+            :data="display"
+            @select="selectRow"
+            @select-all="selectRowAll"
+            border
+            tooltip-effect="dark"
+            style="width: 100%"
+            @selection-change="handleSelectionChange">
+            <el-table-column
+              type="selection"
+              width="55"
+              align="center">
+            </el-table-column>
+            <el-table-column
+              prop="displayName"
+              label="陈列名称"
+              width="120"
+              align="center">
+            </el-table-column>
+            <el-table-column
+              prop="displayType"
+              label="陈列主题"
+              width="100"
+              align="center">
+            </el-table-column>
+            <el-table-column
+              prop="publishTime"
+              label="发布日期"
+              sortable
+              width="180"
+              align="center">
+            </el-table-column>
+            <el-table-column
+              prop="shopName"
+              label="门店"
+              width="230"
+              align="center">
+            </el-table-column>
+            <el-table-column
+              prop="stars"
+              label="陈列考评(星)"
+              sortable
+              width="160"
+              align="center">
+            </el-table-column>
+            <el-table-column label="操作" align="center">
+              <template scope="scope">
+                <el-button
+                  size="small"
+                  @click="openCheckDisplay(scope.row)">查看</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+          <div class="but_select">
+            <el-button @click="toggleSelection(display)">全选</el-button>
+            <el-button @click="deleteDisplay"><i class="el-icon-delete"></i>删除</el-button>
+            <el-button @click="handleDownload"><i class="el-icon-upload2"></i>导出</el-button>
+          </div>
+          <div class="paging">
+            <div class="block">
+              <el-pagination
+                :current-page.sync="displayPage"
+                :page-size="10"
+                layout="total, prev, pager, next"
+                :total="displayTotal">
+              </el-pagination>
+            </div>
+          </div>
+        </div>
+      </el-tab-pane>
       <el-tab-pane label="考勤排班">
         <div class="two_btn" v-show="show_content">
           <!--<el-button class="btn1" type="primary"><i class="el-icon-edit"></i>考勤</el-button>-->
@@ -170,6 +176,15 @@
                     align="center">
                   </el-table-column>
                 </el-table>
+                <span style="font-size: 14px;">选择导出考勤时间段：</span>
+                <el-date-picker
+                  v-model="attendenceRangeDate"
+                  type="daterange"
+                  range-separator="至"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期">
+                </el-date-picker>
+                <el-button style="margin-top: 10px;" @click="pushAttendence">导出</el-button>
                 <div class="block" style="float: right;margin-top: 10px;">
                   <el-pagination
                     :current-page.sync="attendencePage"
@@ -204,7 +219,7 @@
           </div>
           <div class="banci">
             <el-collapse accordion>
-              <el-collapse-item v-for="(item, index) in banZu" :title="item.theme" :name="index">
+              <el-collapse-item v-for="(item, index) in banZu" :key="index" :title="item.theme" :name="index">
                 <div>
                   <el-row>
                     <el-col :span="2"><div>时间范围：</div></el-col>
@@ -213,7 +228,7 @@
                 </div>
                 <el-row>
                   <el-col :span="2"><div>班次：</div></el-col>
-                  <el-col v-for="(ban, index) in item.bcDetail" :span="4"><div>{{ban}}</div></el-col>
+                  <el-col v-for="(ban, index) in item.bcDetail" :key="index" :span="4"><div>{{ban}}</div></el-col>
                 </el-row>
                 <div>
                   <el-col :span="2"><div>使用门店：</div></el-col>
@@ -501,7 +516,8 @@
         banZu: [],  //  班组
         banZuDate: '', // 班组搜索时间段
         banZuPage: 1,  // 班组第几页
-        banZuTotal: 0  // 班组数量
+        banZuTotal: 0,  // 班组数量
+        attendenceRangeDate: ''  // 考勤导出时间段
       };
     },
     created() {
@@ -521,6 +537,7 @@
         '&rows=10', {jsonp: 'jsonpCallback'}).then(function (response) {
         // response.data 为服务端返回的数据
         this.display = response.data.result.rows;
+        console.log(this.display);
         this.displayTotal = response.data.result.total;
       }).catch(function () {
         // 出错处理
@@ -817,6 +834,12 @@
             message: '请选择使用门店！',
             type: 'warning'
           });
+//        } else if (this.schedule.length === 0) {
+//          // 没选店门
+//          this.$message({
+//            message: '请输入排班！',
+//            type: 'warning'
+//          });
         } else {
           let startTime = this.formatDateTime(this.schedulingdate[0]);
           let endTime = this.formatDateTime(this.schedulingdate[1]);
@@ -850,6 +873,10 @@
             }
           });
           if (success) {
+            this.$message({
+              message: '添加班组成功！',
+              type: 'success'
+            });
             this.postschedule = [];
             this.show_choose5 = false;
             router.go({path: '/shop'});
@@ -857,6 +884,7 @@
         }
       },
       openCheckDisplay(row) {
+        console.log(row.id);
       	this.$store.state.show_checkDisplay = true;
         // 查询陈列详情
         this.$http.jsonp(this.url + 'spg/admin/display/getDisplay?id=' + row.id, {jsonp: 'jsonpCallback'}).then((response) => {
@@ -973,6 +1001,7 @@
           }
         }
         let params = JSON.stringify(deleteId);
+//        console.log(params);
         $.ajax({
           type: 'POST',
           url: this.url + '/spg/admin/display/delDisplay',
@@ -996,7 +1025,7 @@
           let success = false;
           $.ajax({
             type: 'POST',
-            url: this.url + '/spg/admin/attendance/setaddress',
+            url: this.url + 'spg/admin/attendance/setaddress',
             contentType: 'application/json;charset=utf-8', // 设置请求头信息
             dataType: 'json',
             async: false,
@@ -1135,6 +1164,34 @@
               data[i].shop = shop;
             }
             this.banZu = data;
+          }).catch(function () {
+            // 出错处理
+          });
+        }
+      },
+      pushAttendence() {
+        if (this.attendenceRangeDate.length === 0) {
+          console.log('000');
+        } else {
+          let stime = this.formatDateTime(this.attendenceRangeDate[0]);
+          let etime = this.formatDateTime(this.attendenceRangeDate[1]);
+          console.log(stime, etime);
+          // 获取考勤列表
+          this.$http.jsonp(this.url + 'spg/admin/attendance/kqinfobydate?sdate=' + stime + '&edate=' + etime, {jsonp: 'jsonpCallback'}).then(function (response) {
+            // response.data 为服务端返回的数据
+            let attendance = response.data.result.result;
+            for (let i = 0; i < attendance.length; i++) {
+              attendance[i].dkdate = this.getLocalTime(attendance[i].dkdate.toString().substring(0, 10));
+            }
+            console.log(attendance);
+            require.ensure([], () => {
+              const { export_json_to_excel } = require('../../vendor/Export2Excel');
+              const tHeader = ['班次', '姓名', '考勤时间', '门店', '考勤类型', '打卡地点', '考勤结果'];
+              const filterVal = ['bctype', 'chname', 'dkdate', 'shopname', 'dktype', 'dklocation', 'result'];
+              const list = attendance;
+              const data = this.formatJson(filterVal, list);
+              export_json_to_excel(tHeader, data, stime + '至' + etime + '考勤');
+            });
           }).catch(function () {
             // 出错处理
           });

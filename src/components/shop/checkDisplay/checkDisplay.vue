@@ -33,7 +33,7 @@
       <div class="require">
         <div class="title">
           <p class="left">陈列要求：</p>
-          <p class="right">更新于： {{displayDetail.startTime}}</p>
+          <p class="right">更新于： {{displayDetail.publishTime}}</p>
         </div>
         <div class="show_img">
           <img v-for="item in displayDetail.displayStandardurls" :src="item.standardImgurl"/>
@@ -159,7 +159,7 @@
       .show_img
         img
           width 100px;
-          height 100px;
+          height 60px;
           display inline-block;
           margin-right 10px;
       .remark

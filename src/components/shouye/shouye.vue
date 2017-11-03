@@ -37,12 +37,12 @@
           <router-link to="/shop" class="shop">
             <div class="shop_icon"></div><div class="shop_word">门店</div>
           </router-link>
-          <!--<router-link to="/work" class="work">-->
-            <!--<div class="work_icon"></div><div class="work_word">工作</div>-->
-          <!--</router-link>-->
-          <!--<router-link to="/train" class="train">-->
-            <!--<div class="train_icon"></div><div class="train_word">培训</div>-->
-          <!--</router-link>-->
+          <router-link to="/work" class="work">
+            <div class="work_icon"></div><div class="work_word">工作</div>
+          </router-link>
+          <router-link to="/train" class="train">
+            <div class="train_icon"></div><div class="train_word">培训</div>
+          </router-link>
         </div>
       </div>
       <router-view></router-view>

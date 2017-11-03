@@ -57,14 +57,14 @@
               </template>
             </el-table-column>
           </el-table>
-          <div class="study_but">
-            <!--<el-button @click="toggleSelection(item.course)">全选</el-button>-->
-            <el-button @click="deleteCourse"><i class="el-icon-delete"></i>删除</el-button>
-            <el-button @click="handleDownload"><i class="el-icon-upload2"></i>导出</el-button>
-            <el-button @click="addCourse"><i class="el-icon-plus"></i>新增课程</el-button>
-          </div>
         </el-tab-pane>
       </el-tabs>
+      <div class="study_but">
+        <!--<el-button @click="toggleSelection(item.course)">全选</el-button>-->
+        <el-button @click="deleteCourse"><i class="el-icon-delete"></i>删除</el-button>
+        <el-button @click="handleDownload"><i class="el-icon-upload2"></i>导出</el-button>
+        <el-button @click="addCourse"><i class="el-icon-plus"></i>新增课程</el-button>
+      </div>
     </div>
     <course :course="oneCourse" class="course_detail" v-show="$store.state.showCourse"></course>
     <add-course class="course-detail" v-show="$store.state.show_addCourse"></add-course>
@@ -81,6 +81,7 @@
     export default {
       data() {
         return {
+          url: this.$store.state.lastUrl,
           activeName: '1',
           tableData3: [
             {
@@ -139,7 +140,7 @@
       methods: {
         getCourse() {
           //  获取所有课程
-          this.$http.jsonp('http://120.55.85.65:8088/spg/admin/training/allcourses?username=chencheng1604', {jsonp: 'jsonpCallback'}).then(function (response) {
+          this.$http.jsonp(this.url + 'spg/admin/training/allcourses?username=zxx000', {jsonp: 'jsonpCallback'}).then(function (response) {
             // response.data 为服务端返回的数据
             let allCourse = response.data.result.AllCourses;
 
@@ -174,7 +175,7 @@
         openDetail(row) {
           this.$store.state.showCourse = true;
           //  获取课程详情
-          this.$http.jsonp('http://192.168.199.143:8080/spg/admin/training/testresult?courseid=' + row.courseid, {jsonp:
+          this.$http.jsonp(this.url + 'spg/admin/training/testresult?courseid=' + row.courseid, {jsonp:
             'jsonpCallback'}).then(function (response) {
             // response.data 为服务端返回的数据
             this.oneCourse = [];
@@ -257,14 +258,18 @@
             }
           }
           let params = JSON.stringify(deleteId);
+          console.log(params);
           $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080/spg/admin/training/delcourse',
+            url: this.url + '/spg/admin/training/delcourse',
             contentType: 'application/json;charset=utf-8', // 设置请求头信息
             dataType: 'json',
             async: false,
             data: params,
             success: function(data) {
+            },
+            error: function (data) {
+              console.log(data);
             }
           });
           router.go({path: '/train'});

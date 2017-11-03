@@ -112,7 +112,7 @@
                 :file-list="fileList"
                 list-type="picture">
                 <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb,宽高比5：3。</div>
               </el-upload>
             </div>
             <!--<input type="file" @change="getFile($event)">-->
@@ -163,6 +163,7 @@
   export default {
     data() {
       return {
+        url: this.$store.state.lastUrl,
         value5: [],
         value1: '',
         radio: '标准陈列',
@@ -170,7 +171,7 @@
         textarea: '',
         input: '',
         shop: [], // 门店列表
-        shopid: [],
+        shopid: '',
         startTime: '',
         overTime: '',
         newDisplay: { //  添加陈列的整个json
@@ -184,14 +185,15 @@
         postDisplay: []
       };
     },
-//    created() {
-//      this.$http.jsonp('http://120.55.85.65:8088/spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then((response) => {
-//          // success callback
-//        this.shop = response.data.result.shopModels;
-//        }, (response) => {
-//          // error callback、
-//        });
-//    },
+    created() {
+      this.$http.jsonp(this.url + 'spg/admin/display/getShops', {jsonp: 'jsonpCallback'}).then((response) => {
+          // success callback
+        this.shop = response.data.result.shopModels;
+//        console.log(this.shop);
+        }, (response) => {
+          // error callback、
+        });
+    },
     watch: {
       startTime: {
         handler: function () {
@@ -242,24 +244,29 @@
         console.log(this.shopid);
       },
       submit() {
-        this.postDisplay = [];
+//        console.log(this.shopid);
+//        this.postDisplay = [];
+        let shopIdName = '';
         for (let x = 0; x < this.shop.length; x++) {
-          if (this.shop[x].shopid === this.shopid[0]) {
-            this.shopid[0] = this.shop[x].shopname;
+          if (this.shop[x].shopname === this.shopid) {
+//            this.shopid[0] = this.shop[x].shopname;
+            shopIdName = this.shop[x].shopid + '-' + this.shop[x].shopname;
           }
         }
-        for (let i = 0; i < this.shopid.length; i++) {
-          let dis = {shopId: this.shopid[i], displayName: this.newDisplay.displayName, displayType: this.newDisplay.displayType, startTime: this.newDisplay.startTime, overTime: this.newDisplay.overTime, displayRemarks: this.newDisplay.displayRemarks, shopName: '', displayStandard: this.newDisplay.displayStandard};
-          this.postDisplay.push(dis);
-        }
-        let shopIdName = [];
-        for (let x = 0; x < this.postDisplay.length; x++) {
-          for (let y = 0; y < this.shop.length; y++) {
-            if (this.postDisplay[x].shopId === this.shop[y].shopid) {
-              shopIdName.push(this.postDisplay[x].shopId + '-' + this.shop[y].shopname);
-            }
-          }
-        }
+//        for (let i = 0; i < this.shopid.length; i++) {
+//          let dis = {shopId: this.shopid[i], displayName: this.newDisplay.displayName, displayType: this.newDisplay.displayType, startTime: this.newDisplay.startTime, overTime: this.newDisplay.overTime, displayRemarks: this.newDisplay.displayRemarks, shopName: '', displayStandard: this.newDisplay.displayStandard};
+//          this.postDisplay.push(dis);
+//        }
+//        let shopIdName = [];
+//        for (let x = 0; x < this.postDisplay.length; x++) {
+//          for (let y = 0; y < this.shop.length; y++) {
+//            if (this.postDisplay[x].shopId === this.shop[y].shopid) {
+//              shopIdName.push(this.postDisplay[x].shopId + '-' + this.shop[y].shopname);
+//            }
+//          }
+//        }
+//        console.log(this.newDisplay);
+//        console.log(shopIdName);
         let formData3 = new FormData();
         formData3.append('displayName', this.newDisplay.displayName);
         formData3.append('displayType', this.newDisplay.displayType);
@@ -272,8 +279,9 @@
         }
         let success = false;
         let returnDate = '';
+        console.log(formData3);
         $.ajax({
-          url: 'http://localhost:8080/spg/admin/display/addDisplay',
+          url: this.url + 'spg/admin/display/addDisplay',
           type: 'POST',
           data: formData3,
           async: false,
@@ -285,6 +293,7 @@
             returnDate = returndata.returnCode;
           },
           error: function (returndata) {
+            console.log(returndata);
           }
         });
         if (success) {

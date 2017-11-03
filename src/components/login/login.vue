@@ -27,6 +27,7 @@
 
 <script>
   import router from '../../router';
+  import $ from 'jquery';
 
   export default {
     data() {
@@ -59,7 +60,7 @@
       //  this.loadAccountInfo();
     },
     methods: {
-      login() {
+      login1() {
         //  登录请求
         this.$http.jsonp(this.url + 'spg/admin/login?username=' + this.user_name + '&password=' + this.password, {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
@@ -108,6 +109,72 @@
             message: '请确认帐号密码！'
           });
         });
+      },
+      login() {
+        //  登录请求
+        let post = [];
+        post.push({username: this.user_name, password: this.password});
+        let postParams = JSON.stringify(post);
+        console.log(postParams);
+        let success = false;
+        let response;
+        $.ajax({
+          type: 'POST',
+          url: 'localhost:8080/spg/admin/login',
+          contentType: 'application/json;charset=utf-8', // 设置请求头信息
+          dataType: 'json',
+          async: false,
+          data: postParams,
+          success: function(data) {
+            success = true;
+            response = data;
+          }
+        });
+        if (success) {
+          let user = response.result;
+          let returnData = response.result.permissions.functionList;
+          if (user.location === null) {
+            sessionStorage.setItem('shopname', '总部');
+            this.$store.state.userShop = '总部';
+          } else {
+            for (let i = 0; i < this.shop.length; i++) {
+              if (user.location.shopId === this.shop[i].shopid) {
+                sessionStorage.setItem('shopname', this.shop[i].shopname);
+                this.$store.state.userShop = this.shop[i].shopname;
+              }
+            }
+          }
+          let quanxian = 0;
+          for (let i = 0; i < returnData.length; i++) {
+            if (returnData[i].functionId === 'Platform') {
+              if ((returnData[i].authId === 'Ins') || (returnData[i].authId === 'Del') || (returnData[i].authId === 'Mod') || (returnData[i].authId === 'Que')) {
+                quanxian = quanxian + 1;
+              }
+            }
+          }
+          if (quanxian === 4) {
+            sessionStorage.setItem('user', user.jobnumber);
+            this.$store.state.user = user.jobnumber;
+            this.$notify({
+              title: '成功成功',
+              message: '欢迎进入非常导购管理系统！',
+              type: 'success'
+            });
+            sessionStorage.setItem('login', '100');
+            router.push({ path: '/shouye' });
+          } else {
+            this.$notify.error({
+              title: '登录失败',
+              message: '权限不足！'
+            });
+          }
+        } else {
+          // 出错处理
+          this.$notify.error({
+            title: '登录失败',
+            message: '请确认帐号密码！'
+          });
+        }
       }
     }
   };

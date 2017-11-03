@@ -61,7 +61,6 @@
       </div>
       <div class="btn">
         <el-button type="primary" @click="submit">提交</el-button>
-        <el-button type="primary" @click="submit1">提交</el-button>
       </div>
     </el-row>
   </div>
@@ -73,6 +72,7 @@
     export default {
       data() {
         return {
+          url: this.$store.state.lastUrl,
           type: '',
           name: '',
           fileList: [],
@@ -122,7 +122,7 @@
           let success = false;
           let returnData;
           $.ajax({
-            url: 'http://localhost:8080/spg/admin/training/uploadcourseware',
+            url: this.url + 'spg/admin/training/uploadcourseware',
             type: 'POST',
             data: formData3,
             async: false,
