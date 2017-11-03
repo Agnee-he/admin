@@ -60,7 +60,7 @@
       //  this.loadAccountInfo();
     },
     methods: {
-      login1() {
+      login() {
         //  登录请求
         this.$http.jsonp(this.url + 'spg/admin/login?username=' + this.user_name + '&password=' + this.password, {jsonp: 'jsonpCallback'}).then(function (response) {
           // response.data 为服务端返回的数据
@@ -110,7 +110,7 @@
           });
         });
       },
-      login() {
+      login1() {
         //  登录请求
         let post = [];
         post.push({username: this.user_name, password: this.password});
@@ -120,11 +120,11 @@
         let response;
         $.ajax({
           type: 'POST',
-          url: 'localhost:8080/spg/admin/login',
+          url: this.url + 'spg/admin/login',
           contentType: 'application/json;charset=utf-8', // 设置请求头信息
           dataType: 'json',
           async: false,
-          data: postParams,
+          data: {username: this.user_name, password: this.password},
           success: function(data) {
             success = true;
             response = data;
