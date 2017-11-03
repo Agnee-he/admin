@@ -85,7 +85,7 @@
         <el-table-column
           align="center"
           label="操作">
-          <template scope="scope">
+          <template slot-scope="scope">
             <el-button
               size="small"
               @click="">查看</el-button>

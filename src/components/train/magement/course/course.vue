@@ -212,7 +212,7 @@
             label="权重">
           </el-table-column>
           <el-table-column align="center" label="操作">
-            <template scope="scope">
+            <template slot-scope="scope">
               <el-button
                 size="small"
                 @click="deleteExam(scope.row)">删除</el-button>

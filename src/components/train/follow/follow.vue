@@ -73,7 +73,7 @@
             show-overflow-tooltip>
           </el-table-column>
           <el-table-column align="center" width="80" label="操作">
-            <template scope="scope">
+            <template slot-scope="scope">
               <el-button
                 size="small"
                 @click="openGrade(scope.row)">查看</el-button>

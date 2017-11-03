@@ -77,7 +77,7 @@
               label="会议结束时间">
             </el-table-column>
             <el-table-column align="center" label="操作">
-              <template scope="scope">
+              <template slot-scope="scope">
                 <el-button
                   size="small"
                   @click="openCheck(scope.row)">查看</el-button>

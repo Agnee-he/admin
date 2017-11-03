@@ -46,7 +46,7 @@
               show-overflow-tooltip>
             </el-table-column>
             <el-table-column align="center" label="操作">
-              <template scope="scope">
+              <template slot-scope="scope">
                 <el-button
                   size="small"
                   @click="openDetail(scope.row)">编辑</el-button>
