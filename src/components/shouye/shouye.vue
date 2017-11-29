@@ -8,21 +8,21 @@
         <div class="right">
           <div class="mar_left">
             <div class="system">管理系统</div>
-            <div class="address">单位：{{$store.state.userShop}}</div>
+            <div class="address">单位：{{$store.state.userShop}} </div>
           </div>
           <div class="mar_right">
-            <!--<el-dropdown>-->
-              <span class="el-dropdown-link">
-                <i class="person"></i><span style="float: left;font-size: 14px;width: 150px;">{{$store.state.user}}</span><i class="down"></i>
-              </span>
-              <!--<el-dropdown-menu style="text-align: center;margin-left: -130px;" slot="dropdown">-->
-              <!--<el-dropdown-item>账户资料</el-dropdown-item>-->
-              <!--<el-dropdown-item>账户组织</el-dropdown-item>-->
-              <!--<el-dropdown-item>更改密码</el-dropdown-item>-->
-              <!--<el-dropdown-item>退出</el-dropdown-item>-->
-              <!--</el-dropdown-menu>-->
-            <!--</el-dropdown>-->
-            <i class="help"></i><i class="setting"></i>
+            <el-dropdown trigger="click">
+      <span class="el-dropdown-link">
+        用户：{{$store.state.user}}<i class="el-icon-arrow-down el-icon--right"></i>
+      </span>
+              <el-dropdown-menu slot="dropdown" style="width: 60px;text-align: center;">
+                <el-dropdown-item @click="exit">退出</el-dropdown-item>
+                <!--<el-dropdown-item>狮子头</el-dropdown-item>-->
+                <!--<el-dropdown-item>螺蛳粉</el-dropdown-item>-->
+                <!--<el-dropdown-item>双皮奶</el-dropdown-item>-->
+                <!--<el-dropdown-item>蚵仔煎</el-dropdown-item>-->
+              </el-dropdown-menu>
+            </el-dropdown>
           </div>
         </div>
       </div>
@@ -31,18 +31,55 @@
           <!--<div class="search">-->
           <!--<search></search>-->
           <!--</div>-->
-          <router-link to="/index" class="index">
-            <div class="index_icon"></div><div class="index_word">首页</div>
-          </router-link>
-          <router-link to="/shop" class="shop">
-            <div class="shop_icon"></div><div class="shop_word">门店</div>
-          </router-link>
-          <router-link to="/work" class="work">
-            <div class="work_icon"></div><div class="work_word">工作</div>
-          </router-link>
-          <router-link to="/train" class="train">
-            <div class="train_icon"></div><div class="train_word">培训</div>
-          </router-link>
+          <!--<router-link to="/index" class="index">-->
+            <!--<div class="index_icon"></div><div class="index_word">首页</div>-->
+          <!--</router-link>-->
+          <!--<router-link to="/shop" class="shop">-->
+            <!--<div class="shop_icon"></div><div class="shop_word">门店</div>-->
+          <!--</router-link>-->
+          <!--<router-link to="/work" class="work">-->
+            <!--<div class="work_icon"></div><div class="work_word">工作</div>-->
+          <!--</router-link>-->
+          <!--<router-link to="/train" class="train">-->
+            <!--<div class="train_icon"></div><div class="train_word">培训</div>-->
+          <!--</router-link>-->
+          <el-col :span="24">
+            <!--<h5>自定义颜色</h5>-->
+            <el-menu
+              default-active="/index"
+              class="el-menu-vertical-demo"
+              @open="handleOpen"
+              @close="handleClose"
+              router="true"
+              background-color="#344a5d"
+              text-color="#ffffff"
+              active-text-color="#409EFF">
+              <el-menu-item index="/index">
+                <i class="el-icon-menu"></i>
+                <span slot="title">首页</span>
+              </el-menu-item>
+              <el-submenu index="1">
+                <template slot="title">
+                  <i class="el-icon-location"></i>
+                  <span>门店</span>
+                </template>
+                <el-menu-item-group>
+                  <!--<el-menu-item index="/shop">门店</el-menu-item>-->
+                  <el-menu-item index="/display">门店陈列</el-menu-item>
+                  <el-menu-item index="/attendence">考勤排班</el-menu-item>
+                  <el-menu-item index="/address">门店位置</el-menu-item>
+                </el-menu-item-group>
+              </el-submenu>
+              <el-menu-item index="/work">
+                <i class="el-icon-setting"></i>
+                <span slot="title">工作</span>
+              </el-menu-item>
+              <el-menu-item index="/train">
+                <i class="el-icon-news"></i>
+                <span slot="title">培训</span>
+              </el-menu-item>
+            </el-menu>
+          </el-col>
         </div>
       </div>
       <router-view></router-view>
@@ -64,6 +101,15 @@
     watch: {
     },
     methods: {
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      exit() {
+        localStorage.removeItem('login');
+      }
     }
   };
 </script>
@@ -132,11 +178,10 @@
               line-height 14px;
               color #7f8c8d;
           .mar_right
-            position relative;
-            text-align center;
-            float left;
+            float right;
             margin-top 32px;
-            width 310px;
+            padding-left 100px;
+            width 210px;
             .person
               float left;
               margin-right 6px;
@@ -190,106 +235,6 @@
           height 738px;
           background #344a5d;
           font-weight 400;
-          .search
-            display block;
-            margin-top 18px;
-            height 44px;
-          .index
-            display block;
-            margin-top 22px;
-            height 44px;
-            &:hover
-              width 178px;
-              border-left 2px solid #0096ff;
-              background rgba(0,0,0,0.3);
-              color #ffffff;
-              .index_icon
-                background url("../../img/home-sel.png") no-repeat center;
-            .index_icon
-              float left;
-              margin-top 11px;
-              margin-left 24px;
-              width 22px;
-              height 22px;
-              background url("../../img/home-nor.png") no-repeat center;
-            .index_word
-              float left;
-              margin-top 11px;
-              margin-left 20px;
-              font-size 16px;
-              color #95a5a6;
-          .shop
-            display block;
-            margin-top 22px;
-            height 44px;
-            &:hover
-              width 178px;
-              border-left 2px solid #0096ff;
-              background rgba(0,0,0,0.3);
-              color #ffffff;
-              .shop_icon
-                background url("../../img/shop-sel.png") no-repeat center;
-            .shop_icon
-              float left;
-              margin-top 11px;
-              margin-left 24px;
-              width 22px;
-              height 22px;
-              background url("../../img/shop-nor.png") no-repeat center;
-            .shop_word
-              float left;
-              margin-top 11px;
-              margin-left 20px;
-              font-size 16px;
-              color #95a5a6;
-          .work
-            display block;
-            margin-top 22px;
-            height 44px;
-            &:hover
-              width 178px;
-              border-left 2px solid #0096ff;
-              background rgba(0,0,0,0.3);
-              color #ffffff;
-              .work_icon
-                background url("../../img/work-sel.png") no-repeat center;
-            .work_icon
-              float left;
-              margin-top 11px;
-              margin-left 24px;
-              width 22px;
-              height 22px;
-              background url("../../img/work-nor.png") no-repeat center;
-            .work_word
-              float left;
-              margin-top 11px;
-              margin-left 20px;
-              font-size 16px;
-              color #95a5a6;
-          .train
-            display block;
-            margin-top 22px;
-            height 44px;
-            &:hover
-              width 178px;
-              border-left 2px solid #0096ff;
-              background rgba(0,0,0,0.3);
-              color #ffffff;
-              .train_icon
-                background url("../../img/train-sel.png") no-repeat center;
-            .train_icon
-              float left;
-              margin-top 11px;
-              margin-left 24px;
-              width 22px;
-              height 22px;
-              background url("../../img/train-nor.png") no-repeat center;
-            .train_word
-              float left;
-              margin-top 11px;
-              margin-left 20px;
-              font-size 16px;
-              color #95a5a6;
         .right
           float left;
           width 1020px;
@@ -311,4 +256,6 @@
         padding: 40px 20px;
         box-sizing: border-box;
         margin-right: 20px;
+  .el-submenu .el-menu-item
+    min-width 0;
 </style>

@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Shop from '../components/shop/shop.vue';
+import DisPlay from '../components/shop/display.vue';
+import Address from '../components/shop/address.vue';
+import Attendence from '../components/shop/attendence.vue';
 import Work from '../components/work/work.vue';
 import Index from '../components/index/index.vue';
 import Train from '../components/train/train.vue';
@@ -22,31 +25,49 @@ const router = new Router({
         {
           name: 'shop',
           path: '/shop',
-          meta: { requireAuth: true },
+          meta: { requireAuth: false },
           component: Shop
+        },
+        {
+          name: 'display',
+          path: '/display',
+          meta: { requireAuth: false },
+          component: DisPlay
+        },
+        {
+          name: 'attendence',
+          path: '/attendence',
+          meta: { requireAuth: false },
+          component: Attendence
+        },
+        {
+          name: 'address',
+          path: '/address',
+          meta: { requireAuth: false },
+          component: Address
         },
         {
           name: 'work',
           path: '/work',
-          meta: { requireAuth: true },
+          meta: { requireAuth: false },
           component: Work
         },
         {
           name: 'index',
           path: '/index',
-          meta: { requireAuth: true },
+          meta: { requireAuth: false },
           component: Index
         },
         {
           name: 'train',
           path: '/train',
-          meta: { requireAuth: true },
+          meta: { requireAuth: false },
           component: Train,
           children: [
             {
               name: 'course',
               path: '/course',
-              meta: { requireAuth: true },
+              meta: { requireAuth: false },
               component: Course
             }
           ]

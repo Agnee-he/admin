@@ -137,7 +137,7 @@
               for (let i = 0; i < this.shop.length; i++) {
                 if (user.location.shopId === this.shop[i].shopid) {
                   sessionStorage.setItem('shopname', this.shop[i].shopname);
-//                  this.$store.state.userShop = this.shop[i].shopname;
+                  this.$store.state.userShop = this.shop[i].shopname;
                 }
               }
             }
@@ -151,7 +151,7 @@
             }
             if (quanxian === 4) {
               sessionStorage.setItem('user', user.jobnumber);
-//              this.$store.state.user = user.jobnumber;
+              this.$store.state.user = user.jobnumber;
               alert('登录成功');
               sessionStorage.setItem('login', '100');
               router.push({ path: '/shouye' });
